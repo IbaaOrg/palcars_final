@@ -9,8 +9,32 @@ function UserInfo() {
     const [user, setUser] = useState([]);
     const [username, setUserName] = useState("");
     const [role, setRole] = useState("");
+  const [locations, setLocations] = useState([]);
+
+ const showalllocation = async()=>{
+      const token = localStorage.getItem('token');
+      try {
+        const response = await axios.get("/showLocationsOfMyCompany", {
+          headers: {
+            "Authorization": `Bearer ${token}`
+          }
+          
+          
+        })
+        const res = response.data
 
 
+
+        if (res) {
+          setLocations(res.data.locations)
+        }
+
+      }
+      catch(e){
+
+      }
+
+    }
     const getuser = async() => {
       const token = localStorage.getItem('token');
 
@@ -45,7 +69,8 @@ function UserInfo() {
 
     useEffect(() => {
         getuser();
-        console.log(user.name)
+      showalllocation()
+
     }, []);
 
 
@@ -60,7 +85,13 @@ function UserInfo() {
           <li class="list-group-item"><b className='col text-start'>Account  :</b> <span className='col'>{user.role}</span> </li>
           <li class="list-group-item"><b className='col text-start'>Email :</b> <span className='col'> {user.email}</span> </li>
           <li class="list-group-item"><b className='col text-start'>Phone :</b> <span className='col'>{user.phone}</span> </li>
-         
+              {user.role === 'Company' ? (
+                <li class="list-group-item">
+                  <b className='col text-start'>Locations :</b>
+                  {locations.map(location => (
+                    <span className='col' key={location.id}>{location.location} , </span>))}
+                </li>
+              ) : null}
           {user.role === 'Renter' ? (
   <li class="list-group-item">
     <b className='col text-start'>Birthdate :</b> 

@@ -95,24 +95,33 @@ function CarDitails() {
               <div>
                                   <img src={car.sub_images[0].photo_car_url} alt="imgcar" width={500} height={500} className='imgcar' />
                                   <div className=' m-2 p-2  row'>
-                                <div className='col'>
-                                          <img src={car.sub_images[0].photo_car_url} alt="imgcar" className='  ' />
-                                        
+                                      {car.sub_images.length >= 2 && (
 
-                                </div>
-                                      <div className='col'>
-
-                                            <img src={car.sub_images[0].photo_car_url} alt="imgcar" className='  ' />
-                                
-
-                                      </div>
-                                      <div className='col'>
-                                          <img src={car.sub_images[0].photo_car_url} alt="imgcar" className='  ' />
+                                          <div className='col'>
+                                              <img src={car.sub_images[1].photo_car_url} alt="imgcar" className='  ' width={150} height={150} />
 
 
-                                      </div>
+                                          </div>
+                                      )}
+                                      {car.sub_images.length >= 3 && (
 
-                              </div>
+                                          <div className='col'>
+
+                                              <img src={car.sub_images[2].photo_car_url} alt="imgcar" className='  ' width={150} height={150} />
+
+
+                                          </div>
+                                      )}
+                                      {car.sub_images.length >= 4 && (
+
+                                          <div className='col'>
+                                              <img src={car.sub_images[3].photo_car_url} alt="imgcar" className='  ' width={150} height={150} />
+
+
+                                          </div>
+                                      )}
+
+                                  </div>
                                   
               </div>
                           
@@ -144,6 +153,7 @@ function CarDitails() {
                                       <li className="list-group-item">Door : {car.doors}</li>
                                       <li className="list-group-item">Fuel Type : {car.fuel_type}</li>
                                       <li className="list-group-item">Car Color : {car.car_color.color}</li>
+                                      <li className="list-group-item">Price :<span className=" text-success"> {car.prices[0].price}</span> ₪</li>
 
 
                                       

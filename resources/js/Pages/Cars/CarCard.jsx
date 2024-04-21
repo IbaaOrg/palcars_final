@@ -98,6 +98,10 @@ const CarCard = ({ item, index, toggleFavorite, favorites }) => {
 
                 </div>
 
+                <div className=' text-start'>
+                    <p className=' fs-5'><span>₪</span><b>{item.prices[0].price}</b>/day</p>
+                </div>
+
                 
                 <div className=" d-flex justify-end m-2">
                     <Link to={`/cars/${item.id}`} className="btn btn-primary px-3 ">
