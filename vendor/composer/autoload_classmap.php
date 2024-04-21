@@ -6,7 +6,10 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+<<<<<<< HEAD
     'App\\Console\\Commands\\UpdateCarStatus' => $baseDir . '/app/Console/Commands/UpdateCarStatus.php',
+=======
+>>>>>>> origin/main
     'App\\Console\\Commands\\UpdateDiscountStatus' => $baseDir . '/app/Console/Commands/UpdateDiscountStatus.php',
     'App\\Http\\Controllers\\Api\\BillController' => $baseDir . '/app/Http/Controllers/Api/BillController.php',
     'App\\Http\\Controllers\\Api\\CarColors' => $baseDir . '/app/Http/Controllers/Api/CarColors.php',
@@ -24,10 +27,17 @@ return array(
     'App\\Http\\Controllers\\Api\\PriceController' => $baseDir . '/app/Http/Controllers/Api/PriceController.php',
     'App\\Http\\Controllers\\Api\\UserController' => $baseDir . '/app/Http/Controllers/Api/UserController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
+<<<<<<< HEAD
     'App\\Http\\Controllers\\LocaleController' => $baseDir . '/app/Http/Controllers/LocaleController.php',
     'App\\Http\\Middleware\\Admin' => $baseDir . '/app/Http/Middleware/Admin.php',
     'App\\Http\\Middleware\\AdminOrCompany' => $baseDir . '/app/Http/Middleware/AdminOrCompany.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
+=======
+    'App\\Http\\Middleware\\Admin' => $baseDir . '/app/Http/Middleware/Admin.php',
+    'App\\Http\\Middleware\\AdminOrCompany' => $baseDir . '/app/Http/Middleware/AdminOrCompany.php',
+    'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
+    'App\\Http\\Middleware\\ChangeLanguage' => $baseDir . '/app/Http/Middleware/ChangeLanguage.php',
+>>>>>>> origin/main
     'App\\Http\\Middleware\\Company' => $baseDir . '/app/Http/Middleware/Company.php',
     'App\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',
     'App\\Http\\Middleware\\PreventRequestsDuringMaintenance' => $baseDir . '/app/Http/Middleware/PreventRequestsDuringMaintenance.php',
@@ -39,6 +49,7 @@ return array(
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\ValidateSignature' => $baseDir . '/app/Http/Middleware/ValidateSignature.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
+<<<<<<< HEAD
     'App\\Http\\Middleware\\setLocale' => $baseDir . '/app/Http/Middleware/setLocale.php',
     'App\\Http\\Requests\\UserRegisterRequest' => $baseDir . '/app/Http/Requests/UserRegisterRequest.php',
     'App\\Http\\Resources\\AllNotificationResource' => $baseDir . '/app/Http/Resources/AllNotificationResource.php',
@@ -46,6 +57,11 @@ return array(
     'App\\Http\\Resources\\AuthResource' => $baseDir . '/app/Http/Resources/AuthResource.php',
     'App\\Http\\Resources\\BillsOfMyCompanyResource' => $baseDir . '/app/Http/Resources/BillsOfMyCompanyResource.php',
     'App\\Http\\Resources\\BillsOfRenterResource' => $baseDir . '/app/Http/Resources/BillsOfRenterResource.php',
+=======
+    'App\\Http\\Resources\\AllNotificationResource' => $baseDir . '/app/Http/Resources/AllNotificationResource.php',
+    'App\\Http\\Resources\\AllUserResource' => $baseDir . '/app/Http/Resources/AllUserResource.php',
+    'App\\Http\\Resources\\AuthResource' => $baseDir . '/app/Http/Resources/AuthResource.php',
+>>>>>>> origin/main
     'App\\Http\\Resources\\CarColorResource' => $baseDir . '/app/Http/Resources/CarColorResource.php',
     'App\\Http\\Resources\\CarImageResource' => $baseDir . '/app/Http/Resources/CarImageResource.php',
     'App\\Http\\Resources\\CarImagesResource' => $baseDir . '/app/Http/Resources/CarImagesResource.php',
@@ -72,7 +88,10 @@ return array(
     'App\\Http\\Resources\\PriceCarResource' => $baseDir . '/app/Http/Resources/PriceCarResource.php',
     'App\\Http\\Resources\\PriceResource' => $baseDir . '/app/Http/Resources/PriceResource.php',
     'App\\Http\\Resources\\PricesCarResource' => $baseDir . '/app/Http/Resources/PricesCarResource.php',
+<<<<<<< HEAD
     'App\\Http\\Resources\\SimpleBillResource' => $baseDir . '/app/Http/Resources/SimpleBillResource.php',
+=======
+>>>>>>> origin/main
     'App\\Http\\Resources\\SimpleCarResource' => $baseDir . '/app/Http/Resources/SimpleCarResource.php',
     'App\\Http\\Resources\\SimpleCityResource' => $baseDir . '/app/Http/Resources/SimpleCityResource.php',
     'App\\Http\\Resources\\SimpleCommentResource' => $baseDir . '/app/Http/Resources/SimpleCommentResource.php',

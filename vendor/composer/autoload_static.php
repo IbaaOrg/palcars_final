@@ -561,7 +561,10 @@ class ComposerStaticInit968f73bcf5520ee401d641d0d79555ec
     );
 
     public static $classMap = array (
+<<<<<<< HEAD
         'App\\Console\\Commands\\UpdateCarStatus' => __DIR__ . '/../..' . '/app/Console/Commands/UpdateCarStatus.php',
+=======
+>>>>>>> origin/main
         'App\\Console\\Commands\\UpdateDiscountStatus' => __DIR__ . '/../..' . '/app/Console/Commands/UpdateDiscountStatus.php',
         'App\\Http\\Controllers\\Api\\BillController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/BillController.php',
         'App\\Http\\Controllers\\Api\\CarColors' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/CarColors.php',
@@ -579,10 +582,17 @@ class ComposerStaticInit968f73bcf5520ee401d641d0d79555ec
         'App\\Http\\Controllers\\Api\\PriceController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/PriceController.php',
         'App\\Http\\Controllers\\Api\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/UserController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+<<<<<<< HEAD
         'App\\Http\\Controllers\\LocaleController' => __DIR__ . '/../..' . '/app/Http/Controllers/LocaleController.php',
         'App\\Http\\Middleware\\Admin' => __DIR__ . '/../..' . '/app/Http/Middleware/Admin.php',
         'App\\Http\\Middleware\\AdminOrCompany' => __DIR__ . '/../..' . '/app/Http/Middleware/AdminOrCompany.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
+=======
+        'App\\Http\\Middleware\\Admin' => __DIR__ . '/../..' . '/app/Http/Middleware/Admin.php',
+        'App\\Http\\Middleware\\AdminOrCompany' => __DIR__ . '/../..' . '/app/Http/Middleware/AdminOrCompany.php',
+        'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
+        'App\\Http\\Middleware\\ChangeLanguage' => __DIR__ . '/../..' . '/app/Http/Middleware/ChangeLanguage.php',
+>>>>>>> origin/main
         'App\\Http\\Middleware\\Company' => __DIR__ . '/../..' . '/app/Http/Middleware/Company.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'App\\Http\\Middleware\\PreventRequestsDuringMaintenance' => __DIR__ . '/../..' . '/app/Http/Middleware/PreventRequestsDuringMaintenance.php',
@@ -594,6 +604,7 @@ class ComposerStaticInit968f73bcf5520ee401d641d0d79555ec
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\ValidateSignature' => __DIR__ . '/../..' . '/app/Http/Middleware/ValidateSignature.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+<<<<<<< HEAD
         'App\\Http\\Middleware\\setLocale' => __DIR__ . '/../..' . '/app/Http/Middleware/setLocale.php',
         'App\\Http\\Requests\\UserRegisterRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UserRegisterRequest.php',
         'App\\Http\\Resources\\AllNotificationResource' => __DIR__ . '/../..' . '/app/Http/Resources/AllNotificationResource.php',
@@ -601,6 +612,11 @@ class ComposerStaticInit968f73bcf5520ee401d641d0d79555ec
         'App\\Http\\Resources\\AuthResource' => __DIR__ . '/../..' . '/app/Http/Resources/AuthResource.php',
         'App\\Http\\Resources\\BillsOfMyCompanyResource' => __DIR__ . '/../..' . '/app/Http/Resources/BillsOfMyCompanyResource.php',
         'App\\Http\\Resources\\BillsOfRenterResource' => __DIR__ . '/../..' . '/app/Http/Resources/BillsOfRenterResource.php',
+=======
+        'App\\Http\\Resources\\AllNotificationResource' => __DIR__ . '/../..' . '/app/Http/Resources/AllNotificationResource.php',
+        'App\\Http\\Resources\\AllUserResource' => __DIR__ . '/../..' . '/app/Http/Resources/AllUserResource.php',
+        'App\\Http\\Resources\\AuthResource' => __DIR__ . '/../..' . '/app/Http/Resources/AuthResource.php',
+>>>>>>> origin/main
         'App\\Http\\Resources\\CarColorResource' => __DIR__ . '/../..' . '/app/Http/Resources/CarColorResource.php',
         'App\\Http\\Resources\\CarImageResource' => __DIR__ . '/../..' . '/app/Http/Resources/CarImageResource.php',
         'App\\Http\\Resources\\CarImagesResource' => __DIR__ . '/../..' . '/app/Http/Resources/CarImagesResource.php',
@@ -627,7 +643,10 @@ class ComposerStaticInit968f73bcf5520ee401d641d0d79555ec
         'App\\Http\\Resources\\PriceCarResource' => __DIR__ . '/../..' . '/app/Http/Resources/PriceCarResource.php',
         'App\\Http\\Resources\\PriceResource' => __DIR__ . '/../..' . '/app/Http/Resources/PriceResource.php',
         'App\\Http\\Resources\\PricesCarResource' => __DIR__ . '/../..' . '/app/Http/Resources/PricesCarResource.php',
+<<<<<<< HEAD
         'App\\Http\\Resources\\SimpleBillResource' => __DIR__ . '/../..' . '/app/Http/Resources/SimpleBillResource.php',
+=======
+>>>>>>> origin/main
         'App\\Http\\Resources\\SimpleCarResource' => __DIR__ . '/../..' . '/app/Http/Resources/SimpleCarResource.php',
         'App\\Http\\Resources\\SimpleCityResource' => __DIR__ . '/../..' . '/app/Http/Resources/SimpleCityResource.php',
         'App\\Http\\Resources\\SimpleCommentResource' => __DIR__ . '/../..' . '/app/Http/Resources/SimpleCommentResource.php',

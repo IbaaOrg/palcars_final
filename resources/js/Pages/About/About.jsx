@@ -21,6 +21,7 @@ function About() {
         <div className=' container p-3 '>
          
         <div className=''>
+        <h1>zaid</h1>
                     <h2 className='d-flex justify-center badge text-bg-primary text-wrap fs-4 p-11'>About Us</h2>
 
         </div>
