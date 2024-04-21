@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import Loading from '../../Componants/UI/Loading';
+import { useNavigate } from 'react-router-dom';
+
 function ViewProfile({id}) {
 
+  const navigate = useNavigate();
 
 
   const [loading, setLoading] = useState(true);
@@ -22,6 +25,19 @@ function ViewProfile({id}) {
       
     }
   };
+  const getCarByCompany = async () => {
+    const token = localStorage.getItem('token');
+    try {
+      const response = await axios.get(`/carsofcompany/${id}`)
+      const res = response.data
+      console.log(res)
+      navigate(`/cars?company=${id}`)
+
+
+    } catch (e) {
+      console.log(e)
+    }
+  }
   useEffect(() => {
     getUserById()
     getLocations()
@@ -102,7 +118,7 @@ function ViewProfile({id}) {
 
             </div>
             <div className='mt-4'>
-                <a href="#" class="card-link btn btn-outline-primary">All Cars</a>
+                <a href="#" class="card-link btn btn-outline-primary" onClick={getCarByCompany}>All Cars</a>
                 <a href="#" class="card-link btn btn-success">Message</a>
             </div>
             
