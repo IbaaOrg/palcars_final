@@ -1,0 +1,92 @@
+.cardMainCar {
+    width: 20% ;
+    margin: 0 10px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 3px 5px rgb(240, 240, 240);
+    transform: scale(1) ;
+    transition: all 1s ease-out;
+}
+.cardMainCar:hover {
+transform: scale(1.02);
+}
+.mainheading {
+    font-size: 30px;
+    padding: 10px;
+}
+.iconheart {
+    width: 20px;
+    height: 20px;
+}
+.carImg {
+    width: 90%;
+    margin: auto;
+    height: 130px;
+    border-radius: 5px;
+}
+.company {
+    cursor: pointer;
+}
+.border {
+        border: rgb(57, 57, 57) solid 1px;
+        margin: auto;
+        border-radius: 5px;
+    
+}
+.text-color {
+color: rgb(103, 103, 103);}
+.cardMainCar .cardicon {
+    height: 20px !important;
+    display: flex;
+    justify-content: center;
+}
+
+  
+
+@media screen and (max-width: 1200px) {
+    .cardMainCar {
+        width: 30% ;
+    }
+}
+
+@media screen and (max-width: 920px) {
+    .cardMainCar {
+        width: 45% ;
+    }
+}
+@media screen and (max-width: 800px) {
+    .cardMainCar {
+        width: 65% ;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .cardMainCar {
+        width: 70% ;
+    }
+}
+@media screen and (max-width: 380px) {
+    .cardMainCar {
+        width: 75% ;
+    }
+}
+.cardMainCar h2 {
+    justify-content: space-between;
+}
+
+.cardMainCar .icon {
+    width: 20px !important;
+    height: 20px !important;
+}
+.cardicon span{
+    padding: 0 5px;
+}
+.mainnocar {
+    width: 70%;
+    height: 200px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    margin-top: 20px;
+}

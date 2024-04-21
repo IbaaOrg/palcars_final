@@ -1,0 +1,22 @@
+.bodyforget {
+height: 100vh;
+}
+.formFroget {
+    width: 400px;
+    height: 220px;
+    box-shadow: 2px 2px 5px 3px #147eefd3; /* Change the color and opacity as needed */
+    padding: 20px 40px;
+    border-radius: 10px;
+
+}
+.password-input-container {
+    position: relative;
+}
+
+.icon-container {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
