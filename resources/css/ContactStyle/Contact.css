@@ -1,0 +1,27 @@
+.Mainheaading {
+    font-size: 40px;
+    font-weight: 600;
+    padding: 15px ;
+}
+.maincontct {
+    height: 300px;
+}
+.minor {
+    background-color: #f6f6f6;
+    height: 300px;
+    width: 90%;
+    margin: auto;
+}
+.iconhover {
+    background-color: #0d6efd;
+    color: white; 
+}
+.iconhover:hover {
+    background-color: white;
+    color: #0d6efd;
+}
+.background-minor{
+    background-color: #0d6efd;
+width: 100%;
+
+}

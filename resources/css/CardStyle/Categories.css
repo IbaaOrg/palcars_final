@@ -1,0 +1,50 @@
+.categories {
+    border-radius: 30px;
+    width: 90%;
+    height: 550px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    
+  }
+.mySwiperC .swiper {
+    height: 270px;
+}
+.mySwiperC .swiper-slide{
+    background-position: end;
+    background-size: cover;
+    width: 350px;
+    height: 350px;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+ .categories img {
+    height: 180px !important;
+    position: relative !important;
+  transform: translateX(0px) !important;
+  transition: transform 0.5s ease !important;
+
+}
+ .categories img:hover {
+    transform: translateX(-40px) !important;
+
+}
+ .categories h3:hover{
+    text-decoration: underline !important;
+    color: #0d6efd !important;
+}
+ .mySwiperC .swiper-button-prev, .swiper-button-next{
+    color: #0d6efd !important;
+    border-radius: 50%;
+    padding: 30px;
+    font-weight: 300;
+    width: 5px;
+    height: 5px;
+    position: relative;
+  }
+  
+  .mySwiperC .swiper-button-prev {
+    top: -150px;
+}
+
+

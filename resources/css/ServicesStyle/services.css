@@ -1,0 +1,53 @@
+
+  .container .cards {
+    position: relative;
+    max-width : 300px;
+    height : 140px;  
+    background-color : #fff;
+    margin : 30px 10px;
+    padding : 30px 15px ;
+    display : flex;
+    flex-direction : column;
+    box-shadow: 2px 2px 5px 3px #86bffdd3; /* Change the color and opacity as needed */
+    transition : 0.3s ease-in-out;
+    border-radius : 15px;
+  }
+  .container .cards:hover {
+    height : 220px;    
+  }
+  
+  
+  .container .cards .image {
+    position : relative;
+    width : 260px;
+    height : 300px;
+    top : -40%;
+    left: 3px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px 3px #86bffdd3; 
+    z-index : 1;
+  }
+  
+  .container .cards .content {
+    position : relative;
+    top : -110px;
+    padding : 10px 15px 0px;
+    color : #111;
+    text-align : center;
+    visibility : hidden;
+    opacity : 0;
+    transition : 0.3s ease-in-out;
+      
+  }
+  
+  .container .cards:hover .content {
+     margin-top : 30px;
+     visibility : visible;
+     opacity : 1;
+     transition-delay: 0.2s;
+    
+  }
