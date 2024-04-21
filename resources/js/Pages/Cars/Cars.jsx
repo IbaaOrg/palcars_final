@@ -107,6 +107,7 @@ function Cars() {
 {loading ? (
                 <Loading />
                ) : (
+                
                 data.map((item, index) => (
                     <CarCard
                         key={item.id}
