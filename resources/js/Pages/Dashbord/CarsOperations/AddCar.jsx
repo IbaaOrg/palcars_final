@@ -569,6 +569,7 @@ useEffect(() => {
             {colors&&(
            
                       <select class="select-input mt-4" onChange={ setcolorid}>
+                        <option  >Chose Color</option>
 
                 {colors.map(color=> (
                   <option key={color.id} value={color.id} id={color.id} >{color.color}</option>

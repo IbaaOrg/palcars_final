@@ -53,7 +53,14 @@ import ViewCar from "./Pages/Dashbord/CarsOperations/ViewCar";
 import FilteredCars from "./Pages/Cars/FilteredCars";
 import CarCard from "./Pages/Cars/CarCard";
 import Bill from "./Pages/Bill/Bill";
+<<<<<<< HEAD
 import CarsCompany from "./Pages/Cars/CarsCompany";
+=======
+import LocationsDashbord from "./Pages/Dashbord/LocationsDashbord";
+import Reviews from "./Pages/Profile/Reviews";
+import DiscountsDashbord from "./Pages/Dashbord/DiscountsDashbord";
+
+>>>>>>> 32ea696d371aead4cbfdae66468ca80c6176e666
 const App = () => {
     const { language } = useTranslateContext();
 
@@ -110,6 +117,8 @@ const App = () => {
 
                     <Route path={"information"} element={<UserInfo />} />
                     <Route path={"booking"} element={<Booking />} />
+                    <Route path={"reviews"} element={<Reviews/>} />
+
 
                     <Route path={"messages"} element={<Messages />} />
                     <Route path={"Faverate"} element={<Faverate />} />
@@ -144,6 +153,7 @@ const App = () => {
                         path={"ExpensesDashbord"}
                         element={<ExpensesDashbord />}
                     />
+<<<<<<< HEAD
                     <Route path={"addvehical"} element={<AddCar />}></Route>
                     <Route
                         path={"VehiclesDashbord/editvehical/:id"}
@@ -153,6 +163,26 @@ const App = () => {
                         path={"VehiclesDashbord/viewvehical/:id"}
                         element={<ViewCar />}
                     />
+=======
+                    <Route 
+                    path={"DiscountsDashbord"} 
+                    element={<DiscountsDashbord />} 
+                    />
+
+                    <Route
+                        path={"LocationDashbord"}
+                        element={<LocationsDashbord />}
+                    />
+                    <Route path={"addvehical"} element={<AddCar />} >
+
+
+                        
+
+                    </Route>
+                    <Route path={"VehiclesDashbord/editvehical/:id"} element={<EditCar />} />
+                    <Route path={"VehiclesDashbord/viewvehical/:id"} element={<ViewCar/>} />
+
+>>>>>>> 32ea696d371aead4cbfdae66468ca80c6176e666
                 </Route>
                 <Route path={"/password_reset"} element={<ResetPassword />} />
 

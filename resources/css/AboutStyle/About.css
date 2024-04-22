@@ -88,3 +88,10 @@ object-fit: cover;
 }.content{
     position: absolute;
 }
+
+.aboutmain {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}

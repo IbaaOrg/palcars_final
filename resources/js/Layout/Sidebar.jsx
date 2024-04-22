@@ -70,6 +70,14 @@ function Sidebar() {
                   <i className='bi bi-cash-coin fs-4 me-2'></i>
                   <span className='fs-5'>Deals</span>
               </NavLink>
+              <NavLink to={"LocationDashbord"} className='main-btn  list-group-item list-group-item-action py-2'>
+                  <i class="bi bi-geo-alt fs-4 me-2"></i>
+                  <span className='fs-5'>Locations</span>
+              </NavLink>
+              <NavLink to={"DiscountsDashbord"} className='main-btn  list-group-item list-group-item-action py-2'>
+                  <i class="bi bi-percent fs-4 me-2"></i>
+                  <span className='fs-5'>Discounts</span>
+              </NavLink>
         </div>
     </div>
   )

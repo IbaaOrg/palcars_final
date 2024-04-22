@@ -5,8 +5,9 @@ import logout from './../../NetWorking/logout';
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Loading from '../../Componants/UI/Loading';
-
-
+import homeimg from '../../../../public/image/backprofile.jpg'
+import '../../../css/app.css'
+//import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBBtn, MDBTypography } from 'mdb-react-ui-kit';
 
 
 function ProfileRental() {
@@ -76,40 +77,49 @@ function ProfileRental() {
       ) : (
 
           <div className="row">
-            <div className="col-2 ">
-              <div className='d-flex justify-center'>
-                {user && (
+            <div className="profile">
+              <div className="profileRight">
+                <div className="profileRightTop">
+                  <div className="profileCover">
+                    <img
+                      className="profileCoverImg"
+                      src={homeimg}
+                      alt=""
+                    />
+                    {user && (
 
-                  <img src={user.photo_user} className='w-50 h-50 rounded-circle' />
-                )}
+                      
+                    <img
+                      className="profileUserImg"
+                      src={user.photo_user}
+                      alt=""
+                    />
+                    )}
+                  </div>
+                  <div className="profileInfo">
+                    <h4 className="profileInfoName">{user.name}</h4>
+                    <span className="profileInfoDesc">{user.email}</span>
+                  </div>
+                </div>
+                
+                <div className="row profilebuttons">
+                  <NavLink className=' list-group-item col' to={"information"}>Information</NavLink>
+                  <NavLink className=' list-group-item col' to={"booking"}>Booking</NavLink>
+                  <NavLink className=' list-group-item col' to={"messages"}>Messages</NavLink>
+                  <NavLink className=' list-group-item col' to={"Faverate"}>Faverate</NavLink>
+                  <NavLink className=' list-group-item col' to={"reviews"}>Reviews</NavLink>
+                  <NavLink className=' list-group-item col' to="editprofile">Edit Profile</NavLink>
+
+
+
+                </div>
               </div>
-
-              <div className='p-3'>
-
-                <button type="button" class="btn btn-outline-danger" onClick={out}>Logout</button>
-              </div>
-
-              <div className='p-3'>
-                <nav className=' list-group'>
-
-
-
-                  <NavLink className=' list-group-item' to={"information"}>Information</NavLink>
-                  <NavLink className=' list-group-item' to={"booking"}>Booking</NavLink>
-                  <NavLink className=' list-group-item' to={"messages"}>Messages</NavLink>
-                  <NavLink className=' list-group-item' to={"Faverate"}>Faverate</NavLink>
-
-
-
-
-
-                </nav>
-
-              </div>
-
             </div>
 
-            <div className="col-10  mt-16">
+         
+           
+
+            <div className=" mt-16">
               <Outlet />
             </div>
           </div>

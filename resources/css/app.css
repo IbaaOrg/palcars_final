@@ -38,7 +38,7 @@
 .view{
     padding: 0 !important;
     margin: 0 !important;
-    background-color: #F0F8FF;
+    background-color: #f3f3f3;
 }
 
 .scroll-to-top {
@@ -202,6 +202,7 @@ html::-webkit-scrollbar-track{
 }
 .cardmain{
         padding: 20px;
+        margin-top: 10px !important;
             background-color: #f1f1f1;
             border: 1px solid #ddd;
             border-radius: 5px;
@@ -320,6 +321,7 @@ border-radius: 8px;
 .selected {
     color: #f1d609f0;
 }
+<<<<<<< HEAD
 .billing-label {
     width: 100%;
     margin: auto;
@@ -327,4 +329,80 @@ border-radius: 8px;
     flex-direction: column;
     border-radius: 15px;
     padding: 10px;
+=======
+
+
+
+
+.profile {
+    display: flex;
+}
+
+.profileRight {
+    flex: 9;
+}
+
+.profileCover {
+    height: 320px;
+    position: relative;
+    margin: 0;
+
+}
+
+.profileCoverImg {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+
+}
+
+.profileUserImg {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 150px;
+    border: 3px solid white;
+}
+
+.profileInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.profileInfoName {
+    font-size: 24px;
+}
+
+.profileInfoDesc {
+    font-weight: 300;
+}
+
+.profileRightBottom {
+    display: flex;
+}
+
+.profilebuttons{
+    background-color: #ebebeb;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 10px;
+    text-align: center;
+}
+.profilebuttons a:hover{
+    background-color: white !important;
+        border-radius: 5px !important;
+        color: black !important;
+}
+.profilebuttons a:focus {
+    background-color: white !important;
+    border-radius: 5px !important;
+    color: black !important;
+>>>>>>> 32ea696d371aead4cbfdae66468ca80c6176e666
 }

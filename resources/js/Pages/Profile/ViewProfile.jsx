@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import Loading from '../../Componants/UI/Loading';
+<<<<<<< HEAD
 import { Link } from 'react-router-dom';
+=======
+import { useNavigate } from 'react-router-dom';
+
+>>>>>>> 32ea696d371aead4cbfdae66468ca80c6176e666
 function ViewProfile({id}) {
 
-  console.log("id view profile")
-  console.log(id)
-  console.log(`/user/${id}`)
+  const navigate = useNavigate();
+
 
   const [loading, setLoading] = useState(true);
 
@@ -14,12 +18,9 @@ function ViewProfile({id}) {
   const [user , setUser] = useState(null)
 
   const getUserById = async () => {
-    console.log("get User By Id ")
 
-    console.log(id)
     try {
       const response = await axios.get(`/user/${id}`);
-      console.log(response.data) ;
       setUser(response.data.data)
       setLoading(false)
     } catch (error) {
@@ -28,9 +29,56 @@ function ViewProfile({id}) {
       
     }
   };
+  const getCarByCompany = async () => {
+    const token = localStorage.getItem('token');
+    try {
+      const response = await axios.get(`/carsofcompany/${id}`)
+      const res = response.data
+      console.log(res)
+      navigate(`/cars?company=${id}`)
+
+
+    } catch (e) {
+      console.log(e)
+    }
+  }
   useEffect(() => {
     getUserById()
+    getLocations()
   }, []);
+  const [locations, setLocations] = useState([]);
+
+
+  const getLocations = async () => {
+
+    try {
+      const response = await axios.get(`/showAllLocations`);
+      const processedLocations = [];
+
+      const userid = id
+      // Iterate through the locations array using a for loop
+      for (let i = 0; i < response.data.data.length; i++) {
+
+        if (response.data.data[i].ownerCompany.id === id) {
+
+          //console.log(response.data.data[i])
+          processedLocations.push(response.data.data[i]); // 
+        }
+        //const location = locations[i];
+
+        // Process each location object here
+      }
+      //console.log(processedLocations)
+      setLocations(processedLocations);
+
+
+    } catch (error) {
+      // Handle error
+      console.error('Error fetching user data:', error);
+
+    }
+
+  }
 
   return (
     <div>
@@ -60,10 +108,25 @@ function ViewProfile({id}) {
             <div class="card-text text-start">
               <p>Email :  {user.email}</p>
                 <p>Phone : {user.phone}</p>
+                <p>Locations :</p>
+                {locations && (<>
+
+                  {locations.map(l => (
+                    <div className='d-flex ' key={l.id}>
+                      <p> {l.location}</p>
+                      <p> {l.type}</p>
+                    </div>
+
+                  ))}
+                </>)}
 
             </div>
             <div className='mt-4'>
+<<<<<<< HEAD
                 <Link to={`/carofcompany/${id}`} class="card-link btn btn-outline-primary">All Cars</Link>
+=======
+                <a href="#" class="card-link btn btn-outline-primary" onClick={getCarByCompany}>All Cars</a>
+>>>>>>> 32ea696d371aead4cbfdae66468ca80c6176e666
                 <a href="#" class="card-link btn btn-success">Message</a>
             </div>
             
