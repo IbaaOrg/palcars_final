@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import Loading from '../../Componants/UI/Loading';
-<<<<<<< HEAD
 import { Link } from 'react-router-dom';
-=======
-import { useNavigate } from 'react-router-dom';
-
->>>>>>> 32ea696d371aead4cbfdae66468ca80c6176e666
 function ViewProfile({id}) {
 
   const navigate = useNavigate();
@@ -122,11 +117,7 @@ function ViewProfile({id}) {
 
             </div>
             <div className='mt-4'>
-<<<<<<< HEAD
                 <Link to={`/carofcompany/${id}`} class="card-link btn btn-outline-primary">All Cars</Link>
-=======
-                <a href="#" class="card-link btn btn-outline-primary" onClick={getCarByCompany}>All Cars</a>
->>>>>>> 32ea696d371aead4cbfdae66468ca80c6176e666
                 <a href="#" class="card-link btn btn-success">Message</a>
             </div>
             
