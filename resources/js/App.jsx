@@ -48,6 +48,7 @@ import CarCard from "./Pages/Cars/CarCard";
 import Bill from "./Pages/Bill/Bill";
 import LocationsDashbord from "./Pages/Dashbord/LocationsDashbord";
 import Reviews from "./Pages/Profile/Reviews";
+import DiscountsDashbord from "./Pages/Dashbord/DiscountsDashbord";
 
 const App = () => {
     const { language } = useTranslateContext();
@@ -146,11 +147,19 @@ const App = () => {
                         path={"ExpensesDashbord"}
                         element={<ExpensesDashbord />}
                     />
+                    <Route 
+                    path={"DiscountsDashbord"} 
+                    element={<DiscountsDashbord />} 
+                    />
+
                     <Route
                         path={"LocationDashbord"}
                         element={<LocationsDashbord />}
                     />
                     <Route path={"addvehical"} element={<AddCar />} >
+
+
+                        
 
                     </Route>
                     <Route path={"VehiclesDashbord/editvehical/:id"} element={<EditCar />} />

@@ -19,29 +19,7 @@ function VehiclesDashbord() {
 
 
  useEffect(() => {
-     //setLoading(false)
-    /*  const token = localStorage.getItem("token")
     
-
-try{
-    const response = axios.get('/carsuser',{
-        headers: {
-            "Authorization": `Bearer ${token}`
-        }
-    })
-
-    const res = response.data
-
-
-   
-    console.log(response)
-    
-       // setData(res);
-
-}catch(error) {
-
-    console.error('Error fetching data:', error);
-} */
      try {
          const token = localStorage.getItem("token");
 
@@ -80,9 +58,9 @@ try{
             const res = response.data
             if (res.status === true) {
                
-                console.log("Deleted Car")
                 setMessage("Deleted Car")
-                console.log(res)
+                window.location.reload()
+
                 //window.location.reload()
 
                 //console.log(res.data.id)
