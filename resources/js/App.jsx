@@ -47,6 +47,7 @@ import FilteredCars from './Pages/Cars/FilteredCars';
 import CarCard from "./Pages/Cars/CarCard";
 import Bill from "./Pages/Bill/Bill";
 import LocationsDashbord from "./Pages/Dashbord/LocationsDashbord";
+import Reviews from "./Pages/Profile/Reviews";
 
 const App = () => {
     const { language } = useTranslateContext();
@@ -106,6 +107,8 @@ const App = () => {
 
                     <Route path={"information"} element={<UserInfo />} />
                     <Route path={"booking"} element={<Booking />} />
+                    <Route path={"reviews"} element={<Reviews/>} />
+
 
                     <Route path={"messages"} element={<Messages />} />
                     <Route path={"Faverate"} element={<Faverate />} />

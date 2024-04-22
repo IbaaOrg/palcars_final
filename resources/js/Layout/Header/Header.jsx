@@ -17,30 +17,16 @@ import axios from "axios";
 
 import Login from "../../Auth/Login/Login";
 import SignUp from "../../Auth/Login/SignUp";
+import logout from './../../NetWorking/logout';
 
 import { data } from "autoprefixer";
 import { TranslateContext } from "../../Context/Translate";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function Header({ islogined }) {
     const { changeLanguage, translates } = useContext(TranslateContext);
-    /*  
-     const [user,setUser]=useState(null)
-     setUser(useUser()) ;
-    console.log("user")
-    console.log(user) 
+  const navigator = useNavigate()
 
-
-//    const user = useUser();
-
-      const user = useUser();
-    
-console.log("user")
-    console.log(user)
-     
-//const [useUser ,setUseUser] = useState(null)
-
-    
-    const [role, setRole] = useState(""); */
 
     const [role, setRole] = useState("");
     const [username, setUserName] = useState("");
@@ -174,6 +160,18 @@ console.log("user")
     const [openlogin, setOpenlogin] = useState(false);
     const [opensignup, setOpensignup] = useState(false);
     const [showprofile, setShowprofile] = useState(false);
+
+
+    const out = async () => {
+        await logout((out) => {
+
+            navigator("/")
+
+            window.location.reload()
+
+        })
+        }
+
 
     return (
         <div class="d-flex  justify-content-around">
@@ -411,6 +409,7 @@ console.log("user")
                                     )}
                                 </NavLink>
                                 {user && <p className="   fw-bold">{user.name}</p>}
+
                                 {role === "Company" ? (
                                     <NavLink
                                         to="/dashbord"
@@ -422,6 +421,8 @@ console.log("user")
                                 ) : (
                                     <div></div>
                                 )}
+                                <button type="button" class="btn btn-outline-danger" onClick={out} > Logout</button>
+
                             </>
                         ) : (
                             <>
