@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('phone');
+            $table->string('address');
             $table->decimal('amount',10,2);
+            $table->foreignId('city_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('car_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('method_id')->constrained()->onUpdate('cascade')->onDelete('cascade');

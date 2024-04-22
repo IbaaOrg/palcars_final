@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Notifications\createComment;
 use App\Http\Resources\CommentResource;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Resources\CommentCarResource;
 use Illuminate\Support\Facades\Notification;
 
 class CommentController extends Controller
@@ -109,5 +110,17 @@ return $this->success(new CommentResource($comment));
         return $this->fail('comment not found',404);
 
 
+    }
+    public function getMyComments(Request $request){
+        $userComments=Comment::where('user_id',$request->user()->id)->get();
+        return $this->success(CommentCarResource::collection($userComments));
+    }
+    public function getAllcomentsOfMyCar(Request $request){
+        $user=$request->user();
+        $user->load('cars.comments');
+        $allUserCarComments = $user->cars->flatMap(function ($car) {
+            return $car->comments;
+        });
+        return $this->success(CommentCarResource::collection($allUserCarComments));
     }
 }

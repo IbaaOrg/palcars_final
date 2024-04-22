@@ -50,7 +50,7 @@ console.log("user")
     const [goTo, setGoTo] = useState("");
     const getCountNotification = async () => {
         const token = localStorage.getItem("token");
-        if (token) {
+        if (token && countUnreadNotification) {
             try {
                 const response = await axios.get("/countNotifications", {
                     headers: {

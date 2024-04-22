@@ -6,13 +6,13 @@ import axios from "axios";
 import "../../../css/PasswordStyle/forget.css";
 import { BiShowAlt } from "react-icons/bi";
 import { IoEyeOffOutline } from "react-icons/io5";
-import { ToastContainer, Bounce, Zoom, toast } from 'react-toastify';
-import '../../../css/PasswordStyle/forget.css';
+import { ToastContainer, Bounce, Zoom, toast } from "react-toastify";
 
 function ResetPassword() {
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
     const location = useLocation();
-    const[visibale,setVisible]=useState(false);
+    const [visibale, setVisible] = useState(false);
     const searchParams = new URLSearchParams(location.search);
     const email = searchParams.get("email");
 
@@ -37,8 +37,9 @@ function ResetPassword() {
     const reset = async (e) => {
         e.preventDefault();
         try {
+            setLoading(true);
             const response = await axios.post("/password_reset", newPassword);
-            if(response){
+            if (response) {
                 toast.success(response.data, {
                     position: "top-center",
                     autoClose: 5000,
@@ -51,9 +52,9 @@ function ResetPassword() {
                     transition: Zoom,
                 });
             }
+            setLoading(false);
             navigate("/login");
         } catch (error) {
-            console.log(error)
             toast.error(error.response.data.error, {
                 position: "top-center",
                 autoClose: 5000,
@@ -64,8 +65,8 @@ function ResetPassword() {
                 progress: undefined,
                 theme: "light",
                 transition: Zoom,
-            });    
-         }
+            });
+        }
     };
     return (
         <div className="bodyforget d-flex flex-column justify-content-center align-items-center">
@@ -87,20 +88,26 @@ function ResetPassword() {
                                 New Password
                             </label>
                             <div className="password-input-container">
-                            <input
-                                type={visibale?'text':'password'}
-                                id={"newPassword"}
-                                name="password"
-                                className="form-control"
-                                onChange={set}
-                            />
-                            <div className="p-2 icon-container">
-                            {visibale?<BiShowAlt onClick={()=>setVisible(false)} />:<IoEyeOffOutline onClick={()=>setVisible(true)}/>}
+                                <input
+                                    type={visibale ? "text" : "password"}
+                                    id={"newPassword"}
+                                    name="password"
+                                    className="form-control"
+                                    onChange={set}
+                                />
+                                <div className="p-2 icon-container">
+                                    {visibale ? (
+                                        <BiShowAlt
+                                            onClick={() => setVisible(false)}
+                                        />
+                                    ) : (
+                                        <IoEyeOffOutline
+                                            onClick={() => setVisible(true)}
+                                        />
+                                    )}
+                                </div>
                             </div>
-                           
 
-                            </div>
-                           
                             <input
                                 type="text"
                                 id={"Email"}
@@ -120,8 +127,9 @@ function ResetPassword() {
                     <div className=" d-flex justify-content-center">
                         <input
                             type="submit"
-                            value={"reset password"}
+                            value={loading ? "Loading..." : "reset password"}
                             className="btn btn-primary"
+                            disabled={loading}
                         />
                     </div>
                 </form>

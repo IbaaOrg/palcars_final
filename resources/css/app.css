@@ -306,9 +306,9 @@ html::-webkit-scrollbar-track{
     margin: auto;
 border-radius: 8px;
 }
-.imgcar {
+.imgcarbill {
     border: solid 2px rgb(226, 226, 226);
-    box-shadow: 1px 1px 1px 2px #4795e9b9;
+    box-shadow: 1px 1px 1px 3px #4fa1f9b9;
     width: 200px;
     height: 160px;
     border-radius: 10px;
@@ -319,4 +319,12 @@ border-radius: 8px;
 }
 .selected {
     color: #f1d609f0;
+}
+.billing-label {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    padding: 10px;
 }

@@ -7,6 +7,9 @@ import Loading from '../../Componants/UI/Loading';
 import CarFilter from '../../Layout/Filter/CarFilter';
 import CommentView from '../../Layout/Comments/CommentView';
 import CommetInput from '../../Layout/Comments/CommetInput';
+import { ToastContainer, Bounce, Zoom, toast } from 'react-toastify';
+import '../../../css/PasswordStyle/forget.css';
+import axios from 'axios';
 
 function CarDitails() {
     const { id } = useParams(); // This will give you the value of "id" from the URL
@@ -77,13 +80,27 @@ function CarDitails() {
     const token = localStorage.getItem("token")
 
     if(token){
-    navigator(`/bill/${id}`)
+        // getUserById
+    navigator(`/bill/${id}`,{ state : { car } })
     }else {
+        toast.error('you must have account to rent car', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Zoom,
+        });  
         navigator('/login');
+     
     }
    }
   return (
     <div>
+
           {loading ?(
             <Loading className=" d-flex justify-items-center align-items-center"/>
 
@@ -210,6 +227,8 @@ function CarDitails() {
     )
          
           }
+                              <ToastContainer />
+
     </div>
   
     

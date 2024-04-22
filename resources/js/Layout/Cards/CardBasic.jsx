@@ -163,12 +163,7 @@ function CardBasic({ title }) {
         dropoffDate,
         dropoffTime
     ) => {
-        console.log(pickup);
-        console.log(dropoff);
-        console.log(pickupDate);
-        console.log(pickupTime);
-        console.log(dropoffDate);
-        console.log(dropoffTime);
+      
 
         setLoading(true);
         if (pickup !== "" || dropoff !== "") {
@@ -424,7 +419,7 @@ function CardBasic({ title }) {
                         type="date"
                         class="form-control"
                         id="endDate"
-                        min={todayDate()}
+                        min={pickupDate} 
                         onChange={DropoffDate}
 
                     />

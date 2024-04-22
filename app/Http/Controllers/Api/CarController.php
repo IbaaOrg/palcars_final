@@ -307,6 +307,7 @@ foreach ($notifications as $notification) {
             DB::table('car_images')->where('car_id', $car->id)->delete();
             DB::table('comments')->where('car_id', $car->id)->delete();
             DB::table('cars')->where('id', $car->id)->delete();
+            DB::table('prices')->where('car_id', $car->id)->delete();
             return $this->success('successfully deleted');
         }
         return $this->fail('car not found',404);

@@ -3,10 +3,10 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
-use App\Http\Resources\SimpleBillResource;
+use App\Http\Resources\SimpleMethodResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class BillsOfRenterResource extends JsonResource
+class SimpleMethodResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,8 +17,8 @@ class BillsOfRenterResource extends JsonResource
     {
         return [
             'id'=> $this->id,
-            'renter_Name'=>$this->name,
-            'bills'=>SimpleBillResource::collection($this->bills),
+            'method'=>$this->method,
+    
 
         ];
         return parent::toArray($request);

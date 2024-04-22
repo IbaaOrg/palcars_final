@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import Loading from '../../Componants/UI/Loading';
+import { Link } from 'react-router-dom';
 function ViewProfile({id}) {
 
   console.log("id view profile")
@@ -62,7 +63,7 @@ function ViewProfile({id}) {
 
             </div>
             <div className='mt-4'>
-                <a href="#" class="card-link btn btn-outline-primary">All Cars</a>
+                <Link to={`/carofcompany/${id}`} class="card-link btn btn-outline-primary">All Cars</Link>
                 <a href="#" class="card-link btn btn-success">Message</a>
             </div>
             
