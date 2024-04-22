@@ -321,15 +321,6 @@ border-radius: 8px;
 .selected {
     color: #f1d609f0;
 }
-<<<<<<< HEAD
-.billing-label {
-    width: 100%;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    border-radius: 15px;
-    padding: 10px;
-=======
 
 
 
@@ -404,5 +395,4 @@ border-radius: 8px;
     background-color: white !important;
     border-radius: 5px !important;
     color: black !important;
->>>>>>> 32ea696d371aead4cbfdae66468ca80c6176e666
 }
