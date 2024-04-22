@@ -196,7 +196,7 @@ root.render(
         </UserContextProvider>
     </React.StrictMode>
 );
-
+/* 
 import React, { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import Dashbord from "./Pages/Dashbord/Dashbord";
@@ -381,3 +381,4 @@ root.render(
         </UserContextProvider>
     </React.StrictMode>
 );
+ */
