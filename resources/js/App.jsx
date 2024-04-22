@@ -54,6 +54,7 @@ import FilteredCars from "./Pages/Cars/FilteredCars";
 import CarCard from "./Pages/Cars/CarCard";
 import Bill from "./Pages/Bill/Bill";
 import CarsCompany from "./Pages/Cars/CarsCompany";
+import Reviews from './Pages/Profile/Reviews';
 const App = () => {
     const { language } = useTranslateContext();
 
