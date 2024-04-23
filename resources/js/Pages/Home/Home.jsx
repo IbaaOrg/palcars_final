@@ -131,6 +131,9 @@ function Home() {
                     <CardBasic />
 
                 </div>
+                <div>
+                    Offers
+                </div>
                 <div className='container'>
                     <Services />
                 </div>
