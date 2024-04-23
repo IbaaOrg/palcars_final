@@ -3,7 +3,6 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
-use App\Http\Resources\CarReource;
 use App\Http\Resources\CarResource;
 use App\Http\Resources\OwnerResource;
 use App\Http\Resources\CommentResource;
@@ -28,7 +27,7 @@ class SimpleDiscountResource extends JsonResource
             'type'=>$this->type,
             'value'=>$this->value,
             'expired_date'=>$this->expired_date,
-            'car_id'=>new CarReource($this->car),
+            'car_id'=>$this->car_id,
             'created_at'=>$this->created_at->format('Y-m-d H:i:s'),
             'updated_at'=>$this->updated_at->format('Y-m-d H:i:s'),            
 
