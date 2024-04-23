@@ -413,7 +413,7 @@ function Header({ islogined }) {
                                 {role === "Company" ? (
                                     <NavLink
                                         to="/dashbord"
-                                        class="btn  dashbord ml-5 "
+                                        class="btn btn-primary dashbord ml-5 "
                                     >
                                         {" "}
                                         Dashbord

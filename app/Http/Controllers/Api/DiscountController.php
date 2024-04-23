@@ -11,6 +11,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\SimpleDiscountResource;
+use App\Http\Resources\DiscountCarResource;
+
 
 class DiscountController extends Controller
 {
@@ -18,9 +20,11 @@ class DiscountController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $data=Discount::all();
+        return $this->success(SimpleDiscountResource::collection($data));
+       
     }
 
     /**
@@ -32,7 +36,7 @@ class DiscountController extends Controller
             'note'=>'required',
             'type'=>'required|in:percentage,fixed',
             'value' =>$request->type==='percentage'? 'required|numeric|min:0|max:100':'required|numeric|min:0',
-            'expired_date' => 'required|date_format:Y-m-d H:i:s|after:+1 hour',
+            'expired_date' => 'required|date_format:Y-m-d\TH:i|after:+1 hour',
             'car_id'=>'required|exists:cars,id'  ,
         ],[
           'type.in'=> 'The type must be either percentage or fixed.',

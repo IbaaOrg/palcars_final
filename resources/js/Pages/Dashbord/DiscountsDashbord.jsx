@@ -15,11 +15,13 @@ function DiscountsDashbord() {
     "type": null,
     "value": null,
     "expired_date": null,
+
   })
 
   const set = (e) => {
     form.current = { ...form.current, [e.target.name]: e.target.value }
     console.log({ ...form.current, [e.target.name]: e.target.value })
+    console.log(carid)
   }
 
   //
@@ -66,7 +68,6 @@ function DiscountsDashbord() {
 
 
   useEffect(() => {
-    console.log(data)
     try {
       const token = localStorage.getItem("token");
 
@@ -77,7 +78,6 @@ function DiscountsDashbord() {
       })
         .then(response => {
           const res = response.data;
-          console.log(res);
           setData(res.data.cars);
         })
         .catch(error => {
@@ -120,11 +120,11 @@ function DiscountsDashbord() {
         
           <div class="col-md-12">
             <label for="car_id" class="form-label">Car</label>
-            <select id="car_id" name="car_id" class="form-select" onChange={set}>
+            <select id="car_id" name="car_id" class="form-select" onChange={(e)=>{setCarId(e.target.value)}}>
               <option selected>Choose Car Number</option>
               {data.map(data => (
 
-                <option key={data.id}>{data.id} </option>
+                <option key={data.id} value={data.id}>{data.car_number} </option>
 
               )
               
