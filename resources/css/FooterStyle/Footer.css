@@ -1,0 +1,40 @@
+* {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+p {
+    margin: 10px;
+    color: rgb(51, 51, 51);
+    line-height: 1.5;
+    /* تغيير تخطيط النص بحيث يكون هناك مسافة إضافية بين الأسطر (1.5 مرة الارتفاع الأصلي) */
+    text-align: center;
+    /* توسيط النص داخل العنصر */
+
+}
+
+h4 {
+    margin-top: 10px;
+    text-align: start;
+    /* توسيط النص داخل العنصر */
+
+}
+
+h6 {
+    margin-top: 20px;
+    text-align: start;
+    /* توسيط النص داخل العنصر */
+
+}
+
+.subdiv2 {
+    margin: 10px;
+}
+
+.custom-line {
+    border: none;
+    /* Remove the default border */
+    border-top: 2px solid #333;
+    /* Add a custom top border with a specified color (#333) */
+    margin: 20px 0;
+    /* Add some margin above and below the line */
+}

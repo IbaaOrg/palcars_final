@@ -1,0 +1,405 @@
+/* .sidebar{
+    width: 220px;
+} */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.rtl {
+    direction: rtl;
+}
+
+/* LTR styles */
+.ltr {
+    direction: ltr;
+}
+.main-btn:focus {
+    background-color: #3563E9;
+    color: white;
+    border-radius: 10px;
+}
+
+.main-btn:hover {
+    background-color: #3563E9;
+    color: white;
+    border-radius: 10px;
+}
+
+.toggle-btn{
+    background-color:white !important;
+        color: #3563E9 !important;
+        border-radius: 10px !important;
+}
+
+.Home{
+    width: 100%;
+    padding: 0;
+}
+.view{
+    padding: 0 !important;
+    margin: 0 !important;
+    background-color: #f3f3f3;
+}
+
+.scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 99;
+}
+
+.scroll-to-top button {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border: none;
+    outline: none;
+    background-color: #007bff;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.scroll-to-top button:hover {
+    background-color: #0056b3;
+}
+.Addvehicle{
+    color: #0056b3;
+}
+
+.ulprofile
+ {
+  width: 100%;
+}
+
+.liprofile {
+    border: 1px solid gray;
+    /* خط أفقي رمادي لكل عنصر */
+    color: gray;
+    /* لون النص رمادي */
+    margin: 10px;
+    /* هامش من اليسار */
+    padding: 5px 0;
+    /* هامش داخلي للعناصر */
+    transition: color 0.3s;
+
+    border-radius:10px;
+    /* تأثير تدرجي لتغيير لون النص */
+}
+
+.liprofile:hover {
+    color: blue;
+    border: 1px solid blue;
+    /* تغيير لون النص عند التحويم */
+}
+.addcar {
+    color: green;
+}
+
+.addcar:hover{
+    color: #F0F8FF;
+}
+.car img{
+    border-radius: 10px;
+}
+.car {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: center;
+    padding: 20px;
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.imgcar {
+    width: 100%;
+    
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+
+.car .info {
+    flex: 1;
+}
+
+.car h3 {
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.car h4 {
+    margin-top: 10px;
+    font-weight: 500;
+}
+
+.carcard{
+    border-radius: 10px;
+    width: 200px;
+    height: 120px;
+}
+.nocar {
+    height: 100vh;
+}
+
+.reviewcount{
+    background-color: rgb(0, 25, 185);
+    color: #ddd;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.reviews{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.commentsbox{
+    border:1px solid rgb(131, 131, 131) ;
+    border-radius: 10px;
+    padding: 10px;
+    width: 98%;
+    margin: auto;
+}
+
+.commentbtn{
+    background-color: #3563E9;
+    color: white;
+    
+}
+.commentbtn:hover {
+    background-color: white;
+    color: #3563E9;
+    border: 1px solid #3563E9 ;
+}
+.commentinput{
+    border: 1px solid rgb(131, 131, 131) !important;
+}
+.card-title-details{
+    font-size: 24px;
+}
+html::-webkit-scrollbar{
+    width: 8px;
+  
+}
+html::-webkit-scrollbar-thumb{
+    background-color: #007bff;
+}
+html::-webkit-scrollbar-thumb:hover{
+    background-color: #0371e7;
+}
+
+html::-webkit-scrollbar-track{
+    background-color: rgb(216, 216, 216);
+}
+.cardmain{
+        padding: 20px;
+        margin-top: 10px !important;
+            background-color: #f1f1f1;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+}
+.loading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chatinput{
+    display: flex;
+    justify-content: center;
+    align-items: end !important;
+}
+.autocomplete-list p {
+    margin: 0;
+    text-align: start;
+    font-weight: 500;
+
+}
+.mainlist {
+    position: relative;
+}
+.autocomplete-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    width: 97% !important;
+    max-height: 180px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    overflow-y: auto;
+    position: absolute;
+    
+}
+.autocomplete-list li {
+    width: 100%;
+    font-weight: 700;
+    padding: 5px 10px;;
+    border-bottom: 1px solid #e8e8e8; 
+  }
+  .autocomplete-list li:hover {
+    background-color: #007bff;
+    color: white;;
+    border-radius: 5px;
+  }
+  .autocomplete-list li:hover p {
+    color: white !important;
+  }
+  .autocomplete-list::-webkit-scrollbar {
+    display: none; 
+  }
+  .autocomplete-list::-webkit-scrollbar{
+    width: 5px;
+  
+}
+  .autocomplete-list::-webkit-scrollbar-thumb{
+    background-color: #007bff;
+}
+
+  .autocomplete-list::-webkit-scrollbar-track{
+    background-color: rgb(216, 216, 216);
+}
+.autocomplete-list {
+    scrollbar-width: thin; 
+}
+
+.image-preview-container {
+    display: flex;
+    /* Arrange previews horizontally */
+    flex-wrap: wrap;
+    /* Allow wrapping if space is limited */
+    margin: 10px 0;
+}
+
+.image-preview-container img {
+    width: 100px;
+    /* Adjust image width as desired */
+    height: 100px;
+    /* Adjust image height as desired */
+    margin: 5px;
+    object-fit: cover;
+    /* Maintain aspect ratio and crop if needed */
+}
+.billinfo {
+    width: 90%;
+    margin: auto;
+}
+.billing-body {
+    padding: 40px 0;
+}
+.billpay {
+    width: 90%;
+    margin: auto;
+border-radius: 8px;
+}
+.imgcarbill {
+    border: solid 2px rgb(226, 226, 226);
+    box-shadow: 1px 1px 1px 3px #4fa1f9b9;
+    width: 200px;
+    height: 160px;
+    border-radius: 10px;
+}
+.carname {
+    font-size: 30px;
+    font-weight: 600;
+}
+.selected {
+    color: #f1d609f0;
+}
+.billing-label {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.profile {
+    display: flex;
+}
+
+.profileRight {
+    flex: 9;
+}
+
+.profileCover {
+    height: 320px;
+    position: relative;
+    margin: 0;
+
+}
+
+.profileCoverImg {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+
+}
+
+.profileUserImg {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 150px;
+    border: 3px solid white;
+}
+
+.profileInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.profileInfoName {
+    font-size: 24px;
+}
+
+.profileInfoDesc {
+    font-weight: 300;
+}
+
+.profileRightBottom {
+    display: flex;
+}
+
+.profilebuttons {
+    background-color: #ebebeb;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.profilebuttons a:hover {
+    background-color: white !important;
+    border-radius: 5px !important;
+    color: black !important;
+}
+
+.profilebuttons a:focus {
+    background-color: white !important;
+    border-radius: 5px !important;
+    color: black !important;
+}
