@@ -92,12 +92,12 @@ const CarsCompany = () => {
     <>
     <ToastContainer/>
     <div className="d-flex flex-column justify-content-center align-items-center pt-5">
-    <img src={company.photo_user} alt="" className='imgUser'/>
+    <img src={company.photo_user} alt="" className='imgUser '/>
     <p className='d-flex gap-3 justify-content-start align-items-start fw-bold pt-2 w-15'> <MdHomeWork size={25} />{company.name} Company  
 </p>
-<p className='d-flex gap-3 justify-content-start align-items-start fw-bold w-15'><MdAttachEmail size={25} />{company.email} 
+<p className='d-flex gap-3 justify-content-start align-items-start fw-bold w-15 pl-3'><MdAttachEmail size={25} />{company.email} 
  </p>
-    <p className='d-flex gap-3 justify-content-start align-items-start fw-bold  pb-3 phone'><BsFillTelephoneFill size={25} />{company.phone} 
+    <p className='d-flex gap-3 justify-content-start align-items-start fw-bold  pb-3 phone pl-5'><BsFillTelephoneFill size={25} />{company.phone} 
 </p>
   
     <div className="d-flex flex-column justify-content-center align-items-center  bg-slate-100 w-100">

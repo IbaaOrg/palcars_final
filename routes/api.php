@@ -139,7 +139,8 @@ Route::middleware('auth:sanctum','company')->post('/discounts/update/{id}',[Disc
 Route::middleware('auth:sanctum','renterorcompany')->get('/getdiscounts/{id}',[CarController::class,'discountsOfCar']);
 //index all discounts
 Route::get('/showalldiscounts',[DiscountController::class,'index']);
-
+//discounts as company 
+Route::middleware('auth:sanctum','company')->get('/getMyDiscounts',[DiscountController::class,'getMyDiscounts']);
 //show all cities
 Route::get('/showallcities',[CityController::class,'index']);
 //add city 

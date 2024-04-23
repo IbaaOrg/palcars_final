@@ -58,6 +58,7 @@ import Reviews from './Pages/Profile/Reviews';
 import DiscountsDashbord from "./Pages/Dashbord/DiscountsDashbord";
 import LocationDashbord from "./Pages/Dashbord/LocationsDashbord";
 import Discounts from "./Pages/Discounts/Discounts";
+import NotesDashboard from './Pages/Dashbord/NotesDashboard';
 
 
 
@@ -148,6 +149,10 @@ const App = () => {
                         element={<EmployeeDashbord />}
                     />
                     <Route path={"ChatsDashbord"} element={<ChatsDashbord />} />
+                    <Route
+                        path={"NotesDashboard"}
+                        element={<NotesDashboard/>}
+                    />
                     <Route
                         path={"AccessDashbord"}
                         element={<AccessDashbord />}

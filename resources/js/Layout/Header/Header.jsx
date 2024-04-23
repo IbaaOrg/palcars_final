@@ -36,7 +36,7 @@ function Header({ islogined }) {
     const [goTo, setGoTo] = useState("");
     const getCountNotification = async () => {
         const token = localStorage.getItem("token");
-        if (token && countUnreadNotification) {
+        if (token ) {
             try {
                 const response = await axios.get("/countNotifications", {
                     headers: {

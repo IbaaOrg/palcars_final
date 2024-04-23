@@ -30,7 +30,7 @@ class DiscountCarResource extends JsonResource
         ];
         if ($this->discounts) {
             // Include comments only if the relationship is not null
-            $data['discounts'] = DiscountResource::collection($this->discounts);
+            $data['discounts'] = SimpleDiscountResource::collection($this->discounts);
         }
         return $data;
         return parent::toArray($request);

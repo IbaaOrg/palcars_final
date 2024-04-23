@@ -9,7 +9,11 @@
 .imgUser {
     width: 200px;
     height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 50%;
+    border: 1px solid rgb(122, 122, 122);
 }
 .phone {
     width: 13%;

@@ -172,5 +172,13 @@ class DiscountController extends Controller
        
         return $this->fail('discount not found',404);
     }
-   
+    public function getMyDiscounts(Request $request){
+        $user = $request->user();
+        $user->load('cars.discounts');
+    
+        $allUserCarDiscounts = $user->cars->flatMap(function ($car) {
+            return $car->discounts;
+        });
+        return $this->success(SimpleDiscountResource::collection($allUserCarDiscounts));
+    }
 }
