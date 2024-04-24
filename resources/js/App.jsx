@@ -61,6 +61,7 @@ import DiscountsDashbord from "./Pages/Dashbord/DiscountsDashbord";
 import LocationDashbord from "./Pages/Dashbord/LocationsDashbord";
 import Discounts from "./Pages/Discounts/Discounts";
 import NotesDashboard from './Pages/Dashbord/NotesDashboard';
+import AllDiscounts from "./Pages/Dashbord/AllDiscounts";
 
 
 
@@ -176,8 +177,10 @@ const App = () => {
                     />
                     <Route
                         path={"DiscountsDashbord"}
-                        element={<DiscountsDashbord/>}
+                        element={<AllDiscounts/>}
                     />
+                    <Route path={"addDiscount"} element={<DiscountsDashbord/>}></Route>
+
                     <Route path={"addvehical"} element={<AddCar />}></Route>
                     <Route
                         path={"VehiclesDashbord/editvehical/:id"}

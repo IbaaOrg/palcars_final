@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import CarCard from './../Cars/CarCard';
 
 function Discounts() {
  const [data,setDate] = useState(null)
@@ -30,32 +31,9 @@ function Discounts() {
         }
     }
 
-/*     const getCarById = async () => {
-        if(carid){
 
-            const allcars = [];
-
-        for(let i=0;i<2 ; i++){
-            const id = carid[i].car_id
-
-            try {
-                const response = await axios.get(`/cars/${id}`);
-                allcars.push({
-                    car: response.data.data[i]
-                });
-            } catch (error) {
-                // Handle error
-                console.error('Error fetching user data:', error);
-    
-            }
-        }
-            setCars(allcars)
-
-        }
-    }; */
     useEffect(() => {
         get_all_discounts();
-       //getCarById()
         console.log(data)
 
 
@@ -66,24 +44,30 @@ function Discounts() {
 
   
       <div className="container d-flex flex-wrap justify-evenly">
-        {data.map(d=>(
+          
+         {data.map(d=>(
             <div className="card w-80 m-5 p-1" key={d.id}>
                 <div >
                     <h3 class="badge text-bg-danger fs-5"></h3>
+                    <div className=" card-body ">
+                         <div className=" card-header fs-4" >{d.car.model}</div>
+                        <img className=" h-52" src={d.car.sub_images[0].photo_car_url}/>
+                    </div>
 
                 <div className=" card-header fs-4">{d.note}</div>
-                
+
                 </div>
                 <div class="alert alert-warning" role="alert">
                     Expired Date : {d.expired_date}
                 </div>
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger fs-5">
-                    {d.value}{d.type == "percentage" ? ("%") : ("₪")}
+                    {d.value}{d.type == "percentage" ? ("%") : ("₪")} OFF
                     <span class="visually-hidden">unread messages</span>
                 </span>
+                <button className="btn btn-danger">Show More Details </button>
 
         </div>
-        ))}
+        ))} 
 
     </div> 
      )}

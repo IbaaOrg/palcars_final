@@ -1,10 +1,33 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Loading from '../../Componants/UI/Loading';
+import Discounts from './../Discounts/Discounts';
+import { NavLink, Outlet } from 'react-router-dom'
 
 function AllDiscounts() {
         const [loading, setLoading] = useState(false);
+    const [discounts, setDiscounts] = useState([]);
 
+        useEffect(() => {
+    
+         const token = localStorage.getItem("token");
+
+         axios.get('/getMyDiscounts', {
+             headers: {
+                 "Authorization": `Bearer ${token}`
+             }
+         })
+             .then(response => {
+                 const res = response.data;
+                 console.log(res);
+                 setDiscounts(res.data);
+             })
+             .catch(error => {
+                 console.error('Error fetching data:', error);
+             });
+
+  
+  }, []); 
   return (
       <div>{
           loading ? (
@@ -14,8 +37,8 @@ function AllDiscounts() {
               <div className="container text-center  p-10">
                   <div className="row">
                       <div className="col">
-                          <h1 className='fs-1'>Vehicles List</h1>
-                          <p className=''>Your all vehicles are listed bellow</p>
+                          <h1 className='fs-1'>Discounts List</h1>
+                              <p className=''>Your all Discounts are listed bellow</p>
                       </div>
                       <div className="col ">
                           <form class="d-flex" role="search">
@@ -27,7 +50,7 @@ function AllDiscounts() {
                           <button type="button" class="btn btn-light">Filter</button>
 
                           <button type="button" class="btn btn-primary Addvehicle" >
-                              <NavLink to="/dashbord/addvehical">Add vehicle</NavLink>
+                                  <NavLink to="/dashbord/addDiscount">Add Discount</NavLink>
                           </button>
 
                       </div>
@@ -37,59 +60,47 @@ function AllDiscounts() {
                       <table class="table">
                           <thead>
                               <tr>
-                                  <th scope="col">Car Number</th>
-                                  <th scope="col">Make</th>
-                                  <th scope="col">model</th>
+                                  <th scope="col">Title</th>
+                                  <th scope="col">Expired Date</th>
+                                  <th scope="col">Type</th>
 
-                                  <th scope="col">catrgory</th>
-                                  <th scope="col">description</th>
-                                  <th scope="col">year</th>
-                                  <th scope="col">seats</th>
-                                  <th scope="col">doors</th>
-                                  <th scope="col">bags</th>
-                                  <th scope="col">fuel_type</th>
-                                  <th scope="col">fuel_full</th>
-                                  <th scope="col">operation</th>
+                                  <th scope="col">Value</th>
+                                  <th scope="col">Car</th>
+                                      <th scope="col">Oprations</th>
+
+                                
 
 
                               </tr>
                           </thead>
+                          {discounts&&(
                           <tbody>
 
-                              {data.map(data => (
+                              {discounts.map(data => (
                                   <tr key={data.id}>
-                                      <td>{data.car_number}</td>
-                                      <td>{data.make}</td>
-                                      <td>{data.model}</td>
-                                      <td>{data.catrgory}</td>
-                                      <td>{data.description}</td>
-                                      <td>{data.year}</td>
-                                      <td>{data.seats}</td>
-                                      <td>{data.doors}</td>
-                                      <td>{data.bags}</td>
-                                      <td>{data.fuel_type}</td>
-                                      <td>{data.fuel_full}</td>
+                                      <td>{data.note}</td>
+
+                                      <td>{data.expired_date}</td>
+                                      <td>{data.type}</td>
+                                      <td>{data.value}</td>
+                                      <td>{data.car.car_number}</td>
+                                     
 
                                       <td className=' p-1'>
-                                          <NavLink to={`viewvehical/${data.id}`} className='btn btn-success'>View</NavLink>
-                                          <NavLink to={`editvehical/${data.id}`} className='btn btn-primary'>Update</NavLink>
-                                          <button id={data.id} onClick={deleteVehical} className='btn btn-danger'>Delete</button>
+                                          <button  className='btn btn-success'>View</button>
+                                          <button  className='btn btn-primary'>Update</button>
+                                          <button id={data.id} className='btn btn-danger'>Delete</button>
 
 
                                       </td>
 
-                                      {/* Add more table cells for other car attributes */}
                                   </tr>
                               ))}
-                          </tbody>
+                          </tbody>)}
                       </table>
 
-                  </div>
-                  {message && (
-                      <div class="alert alert-danger" role="alert">
-                          {message}
-                      </div>
-                  )}
+                  </div> 
+             
               </div>
 
 
