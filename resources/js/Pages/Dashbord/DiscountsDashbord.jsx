@@ -92,7 +92,7 @@ function DiscountsDashbord() {
 
 
   return (
-    <div className='  container'>
+    <div className='  mainrenternote'>
       <div className='card p-2 mt-2'> 
       
         <form class="row g-3">

@@ -6,14 +6,14 @@ import { useNavigate } from 'react-router-dom';
 const NotesDashboard = () => {
   const navigate=useNavigate();
   const tospecificuser=()=>{
-    navigate('/specificrenter')
+    navigate('/dashbord/NotesDashboard/specificrenter')
   }
   const toAllUser=()=>{
-    navigate('/allusers')
+    navigate('/dashbord/NotesDashboard/allusers')
   }
   return (
-    <div className='  container '>
-    <div className='card p-2   notesmain'> 
+    <div className='  mainrenternote'>
+    <div className='card px-5 py-3 notesmain'> 
     
       <form class="row g-3">
         <div class="d-flex flex-column justify-contetnt-center align-items-center cardnote " onClick={tospecificuser}>

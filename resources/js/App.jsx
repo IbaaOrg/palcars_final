@@ -32,6 +32,8 @@ import Faverate from "./Pages/Profile/Faverate";
 import NotFound from "./Layout/Errors/NotFound";
 import AddCar from "./Pages/Dashbord/CarsOperations/AddCar";
 import EditCar from "./Pages/Dashbord/CarsOperations/EditCar";
+import RenterNote from "./Pages/Dashbord/RenterNote";
+import AllRenterNotes from "./Pages/Dashbord/AllRenterNotes";
 import ProtectedRoute from "./Componants/ProtectedRoute";
 import Login from "./Auth/Login/Login";
 import SignUp from "./Auth/Login/SignUp";
@@ -152,6 +154,13 @@ const App = () => {
                     <Route
                         path={"NotesDashboard"}
                         element={<NotesDashboard/>}
+                    />
+                    <Route
+                    path={"NotesDashboard/specificrenter"}
+                    element={<RenterNote/>}/>
+                         <Route
+                    path={"NotesDashboard/allusers"}
+                    element={<AllRenterNotes/>}
                     />
                     <Route
                         path={"AccessDashbord"}
