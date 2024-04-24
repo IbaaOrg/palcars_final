@@ -13,6 +13,38 @@
 .ltr {
     direction: ltr;
 }
+.notesmain {
+    margin-top: 30px;
+    height: 600px;
+    display: flex ;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.cardnote {
+    height: 300px;
+    margin: 0 auto;
+    width: 30%;
+    border: #007bff solid 1px ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    font-weight: 600;
+    border-radius: 18px;
+    box-shadow: 5px 5px 5px 5px #8ec3fb65;
+    transform: scale(1);
+    transition: all 1s ease;
+}
+.cardnote:hover {
+    transform: scale(1.04);
+}
+@media  screen and (max-width: 650px) {
+    .cardnote{
+        height: 200px;
+        margin: 10px auto;
+    width: 60%;
+    }
+}
 .main-btn:focus {
     background-color: #3563E9;
     color: white;
