@@ -1,10 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Button } from 'react-bootstrap';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 
 function DiscountsDashbord() {
   const [data, setData] = useState([]);
   const [done, setDone] = useState(null)
   const [carid, setCarId] = useState(null)
+  const navigate = useNavigate();
 
   
   const activevalue =()=>{
@@ -49,8 +51,10 @@ function DiscountsDashbord() {
       const res = response.data
       if (res.status === true) {
         //setDone(res.data)
-        console.log("added descount")
+        navigate("/dashbord/DiscountsDashbord");
 
+        console.log("added descount")
+        
         console.log(res.data)
         //console.log(res.data.id)
 
