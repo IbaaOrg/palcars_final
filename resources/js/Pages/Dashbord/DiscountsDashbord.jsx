@@ -52,6 +52,8 @@ function DiscountsDashbord() {
         console.log("added descount")
 
         console.log(res.data)
+        navigator('/DiscountsDashbord')
+ 
         //console.log(res.data.id)
 
       

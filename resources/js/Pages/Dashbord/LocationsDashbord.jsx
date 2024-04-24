@@ -163,7 +163,7 @@ getuser()
         setLocationId2(selectedOption)
     }
   return (
-      <div className='  container'>
+      <div className='  mainlocation'>
           <div className='card p-2'> 
           {citys && (  
             <div className=' d-flex justify-around'>
@@ -175,7 +175,7 @@ getuser()
 
          
 
-                          <label for="select" className=' mr-3'>Pick Up </label>
+                          <label for="select" className=' mr-3'> {!showdropoff?'Pick up and Dropoff':'Pick up'} </label>
 
                   <select class="select-input m-4" id='select' onChange={setlocation}>
 

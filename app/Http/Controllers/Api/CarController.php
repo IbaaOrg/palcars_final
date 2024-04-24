@@ -145,11 +145,7 @@ return $this->fail("these location doesn't have any car",404);
      */
     public function store(Request $request){
         //
-        if($request->fuel_type==='electricity'){
-            $fuel_full='nullable';
-        }else{ 
-            $fuel_full='required|numeric|min:0|max:1000';
-        }
+     
         $validator=Validator::make($request->all(), [
             'car_number'=> 'required|unique:cars,car_number|regex:/^[A-Z]{1,2}-[0-9]{4,5}-[A-Z]{1}$/u',
             'make'=>'required|string|max:255',
@@ -161,10 +157,14 @@ return $this->fail("these location doesn't have any car",404);
             'doors'=>'required|string|in:2,3,4',
             'bags'=>'nullable|integer|min:1|max:8', 
             'fuel_type'=>'required|string|in:gas,diesel,electricity',
-            'fuel_full'=>$fuel_full,
             'steering'=>'required|string|in:Automatic,Manual',
             'color_id'=>'required|exists:colors,id'        
         ]);
+        if ($request->fuel_type === 'electricity') {
+            $rules['fuel_full'] = 'nullable';
+        } else {
+            $rules['fuel_full'] = 'required|numeric|min:0|max:1000';
+        }
         if ($validator->fails()) {
             
             $errors = $validator->errors()->first();
@@ -180,8 +180,15 @@ return $this->fail("these location doesn't have any car",404);
         'doors'=>$request->doors,];
         isset($request->description) ? $data['description'] = $request->description : null;
         isset($request->bags) ? $data['bags'] = $request->bags : null;
-isset($request->fuel_full) ? $data['fuel_full'] = $request->fuel_full : null;
         $data['fuel_type']=$request->fuel_type;
+
+        
+        if ($request->fuel_type === 'electricity') {
+            $data['fuel_full'] = null; // Set fuel_full to null if fuel_type is electricity
+        } else {
+            $data['fuel_full'] = $request->fuel_full; // Assign the provided value if fuel_type is not electricity
+        }
+        
         $data['steering']=$request->steering;
         $data['user_id']=$request->user()->id;
         $data['color_id']=$request->color_id;

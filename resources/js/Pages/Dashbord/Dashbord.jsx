@@ -19,7 +19,7 @@ function Dashbord() {
 
         </div>
         }
-        <div className='col view'>
+        <div className='col-10 view'>
           <Outlet/>
         </div>
     </div>
