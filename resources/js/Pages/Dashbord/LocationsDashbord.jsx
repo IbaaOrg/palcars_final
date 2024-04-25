@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function LocationsDashbord() {
+    const navigate=useNavigate();
 const [citys , setCitys] = useState(null)
     const [user, setUser] = useState(null)
     const [locationid, setLocationId] = useState(null)
@@ -83,7 +85,8 @@ const addlocation = async () =>{
 
         if (res.status === true) {
             setSeccsses(true)
-
+            setLocationname('');
+            navigate('/dashbord/LocationDashbord')
         }
 
         }

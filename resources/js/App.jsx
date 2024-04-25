@@ -62,6 +62,9 @@ import LocationDashbord from "./Pages/Dashbord/LocationsDashbord";
 import Discounts from "./Pages/Discounts/Discounts";
 import NotesDashboard from './Pages/Dashbord/NotesDashboard';
 import AllDiscounts from "./Pages/Dashbord/AllDiscounts";
+import AllLocations from "./Pages/Dashbord/AllLocations";
+import { MdAddLocation } from "react-icons/md";
+import LocationsDashbord from "./Pages/Dashbord/LocationsDashbord";
 
 
 
@@ -173,8 +176,10 @@ const App = () => {
                     />
                     <Route
                         path={"LocationDashbord"}
-                        element={<LocationDashbord/>}
+                        element={<AllLocations/>}
                     />
+                    <Route path={"addLocation"}
+                    element={<LocationsDashbord/>}/>
                     <Route
                         path={"DiscountsDashbord"}
                         element={<AllDiscounts/>}

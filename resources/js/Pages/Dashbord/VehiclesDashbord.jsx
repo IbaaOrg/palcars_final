@@ -25,7 +25,6 @@ function VehiclesDashbord() {
         alert(`delete car No ${clickedId}`)
        
         try {
-            console.log(token)
             var response = await axios.delete(`cars/${clickedId}`, {
                 headers: {
                     "Authorization": `Bearer ${token}`

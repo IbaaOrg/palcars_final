@@ -3,11 +3,28 @@ import React, { useEffect, useState } from 'react'
 import Loading from '../../Componants/UI/Loading';
 import Discounts from './../Discounts/Discounts';
 import { NavLink, Outlet } from 'react-router-dom'
+import axios from 'axios';
 
 function AllDiscounts() {
         const [loading, setLoading] = useState(false);
     const [discounts, setDiscounts] = useState([]);
+    const [deleted,setDeleted]=useState(null);
+    const deleteDiscount=(e)=>{
+        e.preventDefault();
+        const id=e.target.id;
+        const token=localStorage.getItem('token');
+        setDeleted('Delete Discount ...');
+        alert(`delete Discount No ${id}`)
 
+        const response=axios.delete(`discounts/${id}`,{
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        if(response.data.status === true){
+            setDeleted('Done')
+        }
+    }
         useEffect(() => {
     
          const token = localStorage.getItem("token");
@@ -27,7 +44,7 @@ function AllDiscounts() {
              });
 
   
-  }, []); 
+  }, [deleted]); 
   return (
       <div>{
           loading ? (
@@ -86,10 +103,10 @@ function AllDiscounts() {
                                       <td>{data.car.car_number}</td>
                                      
 
-                                      <td className=' p-1'>
+                                      <td className=' p-1 d-flex justify-content-center gap-2'>
                                           <button  className='btn btn-success'>View</button>
                                           <button  className='btn btn-primary'>Update</button>
-                                          <button id={data.id} className='btn btn-danger'>Delete</button>
+                                          <button id={data.id} className='btn btn-danger' onClick={deleteDiscount}>Delete</button>
 
 
                                       </td>
@@ -100,7 +117,16 @@ function AllDiscounts() {
                       </table>
 
                   </div> 
-             
+                  {deleted==='Deleted Car ...' && (
+                                <div class="alert alert-danger" role="alert">
+                                    {deleted}
+                                </div>
+                            )}
+                                {deleted ==='Done' && (
+                                <div class="alert alert-success" role="alert">
+                                    {deleted}
+                                </div>
+                            )}
               </div>
 
 

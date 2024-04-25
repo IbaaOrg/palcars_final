@@ -4,7 +4,9 @@ import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 
 function DiscountsDashbord() {
   const [data, setData] = useState([]);
-  const [done, setDone] = useState(null)
+  const [done, setDone] = useState(false)
+  const [error, setError] = useState(null)
+  const [load, setLoad] = useState(false)
   const [carid, setCarId] = useState(null)
   const navigate = useNavigate();
 
@@ -42,7 +44,7 @@ function DiscountsDashbord() {
 
 
     try {
-
+      setLoad(true);
       var response = await axios.post("/discounts", formData , {
         headers: {
           "Authorization": `Bearer ${token}`
@@ -50,7 +52,7 @@ function DiscountsDashbord() {
       })
       const res = response.data
       if (res.status === true) {
-        //setDone(res.data)
+        setDone(true)
         navigate("/dashbord/DiscountsDashbord");
 
         //console.log(res.data.id)
@@ -60,8 +62,10 @@ function DiscountsDashbord() {
       }
 
     } catch (e) {
-      console.log(e.response.data.msg)
+      setError(e.response.data.msg)
       //alert(e.response.data.msg)
+    }finally{
+      setLoad(false)
     }
 
 
@@ -134,10 +138,15 @@ function DiscountsDashbord() {
             </select>
           </div>
          
-        
+        {done&&(<div className='alert alert-success mt-2 '>
+          information is valid
+        </div>)}
+        {error&&(<div className='alert alert-danger mt-2 '>
+          {error}
+        </div>)}
           <div class="col-12 d-flex justify-end">
           
-            <button class="btn btn-primary m-1" onClick={addDiscount}>Save Changes</button>
+            <button class="btn btn-primary m-1" onClick={addDiscount}>{load?'Loading...':'Save Changes'}</button>
 
           </div>
         </form>

@@ -505,7 +505,7 @@ useEffect(() => {
                 )}
                 {done && (
                     <div class="alert alert-success mt-3" role="alert">
-                        {error}
+                        {done}
                     </div>
                 )}
  <div className=' mt-4 d-flex justify-content-end'>
