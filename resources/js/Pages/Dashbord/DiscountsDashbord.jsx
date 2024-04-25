@@ -53,13 +53,6 @@ function DiscountsDashbord() {
         //setDone(res.data)
         navigate("/dashbord/DiscountsDashbord");
 
-        
-<<<<<<< HEAD
-=======
-        console.log(res.data)
-        navigator('/DiscountsDashbord')
- 
->>>>>>> f3e2edb196d70cc426549efb090c6c17bf7bae23
         //console.log(res.data.id)
 
       
