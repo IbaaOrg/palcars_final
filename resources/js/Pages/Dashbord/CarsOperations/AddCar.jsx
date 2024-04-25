@@ -17,7 +17,12 @@ function AddCar() {
 
   const [next, setNext] = useState(false)
   const [id, setId] = useState(null)
-const [price,setPrice]=useState(0);
+  const [price,setPrice]=useState(0);
+  const [errorImage,setErrorImage]=useState('');
+  const [loadImage,setLoadImage]=useState(false);
+  const [errorPrice,setErrorPrice]=useState('');
+  const [loadPrice,setLoadPrice]=useState(false);
+  const[success,setSuccess]=useState(false);
 
  
 
@@ -27,9 +32,8 @@ const [price,setPrice]=useState(0);
   for (let year = currentYear; year >= 1900; year--) {
     years.push(year);
   }
-
-  const numbers = [2, 4, 5, 6, 8,];
-  const numbersDoors = [2, 3, 4];
+  const numbers = [ 1 ,2, 4, 5, 7, 8, 9, 10,20];
+  const numbersDoors = [2,4,5];
   const numbersBags = [1, 2, 3, 4, 5, 6, 7, 8];
 const pickuplocations=[];
 
@@ -63,10 +67,10 @@ const pickuplocations=[];
     "car_number": null,
     "make": null,
     "model": null,
-    "year": null,
-    "seats": null,
-    "doors": null,
-    "bags": null,
+    "year": '2024',
+    "seats": '2',
+    "doors": '2',
+    "bags": '1',
     "catrgory": null,
     "fuel_type": null,
     "fuel_full": null, 
@@ -89,7 +93,7 @@ const pickuplocations=[];
 
 
   const [selectedImages, setSelectedImages] = useState([]);
-
+const[alert,setAlert]=useState(false);
   const addcar = async (e) => {
     e.preventDefault();
     setError(null);
@@ -129,8 +133,7 @@ const pickuplocations=[];
         setId(res.data.id);
       }
     } catch (e) {
-      console.log(e.response.data);
-      setError(e.response.data.message);
+      setError(e.response.data.msg);
     }finally{
       setLoading(false);
     }
@@ -151,90 +154,25 @@ const pickuplocations=[];
     };
     reader.onerror = (error) => {
         // Handle FileReader errors
-        console.error('Error reading file:', error);
+        setErrorImage('Error reading file:', error);
     };
     reader.readAsDataURL(selectedFile);
 };
-
-
-  // const addImage = async (e) => {
-  //   e.preventDefault()
-
-  //   const formData1 = new FormData()
-  //   formData1.append("photo", selectedImages )
-  //   formData1.append("car_id", id)
-
-  //   const formData2 = new FormData()
-  //   formData2.append("price", Number(form1.price))
-  //   formData2.append("car_id", id)
-
-  //   try {
-
-  //     var response = await axios.post("/carimage", formData1, {
-  //       headers: {
-  //         "Authorization": `Bearer ${token}`
-  //       }
-  //     })
-      
-  //     const res = response.data
-      
-  //     if (res.status === true) {
-  //       console.log("image")
-       
-  //       console.log(res.data)
-  //       //console.log(res.data.id)
-
-        
-
-  //     }
-
-  //   } catch (e) {
-  //     console.log(e.response.data.msg)
-  //     //alert(e.response.data.msg)
-     
-  //   }
-  //   try {
-
-  //     var response = await axios.post("/prices", formData2, {
-  //       headers: {
-  //         "Authorization": `Bearer ${token}`
-  //       }
-  //     })
-
-  //     const res = response.data
-
-  //     if (res.status === true) {
-  //       console.log("image")
-  //       navigate("/dashbord/VehiclesDashbord")
-  //       console.log(res.data)
-  //       //console.log(res.data.id)
-
-
-
-  //     }
-
-  //   } catch (e) {
-  //     console.log("img error")
-
-  //     console.log(e.response.data.msg)
-  //     //alert(e.response.data.msg)
-
-  //   }
-
-
-    
-  // }
-
   const addImage = async (e) => {
     e.preventDefault();
-  
+    // Check if any images are selected
+    if (selectedImages.length === 0) {
+      setErrorImage('Please select at least one image.');
+      return; // Prevent form submission
+    }
     try {
       for (const image of selectedImages) {
         const formData1 = new FormData();
         formData1.append("photo", image);
         formData1.append("car_id", id);
-  
-        const response = await axios.post("/carimage", formData1, {
+  try{
+    setLoadImage(true);
+            const response = await axios.post("/carimage", formData1, {
           headers: {
             "Authorization": `Bearer ${token}`
           }
@@ -243,33 +181,40 @@ const pickuplocations=[];
         const res = response.data;
   
         if (res.status === true) {
-          console.log("Image uploaded successfully");
-          console.log(res.data);
+          const formData2=new FormData();
+          formData2.append('price',price);
+          formData2.append('car_id',id);
+          try {
+      
+           const res= await axios.post(`/prices`,formData2,{
+              headers: {
+                "Authorization": `Bearer ${token}`
+              }
+            });
+            navigate("/dashbord/VehiclesDashbord");
+            setSuccess(true);
+
+          }catch(error){
+            setErrorImage(error.response.data.msg)
+
+          }finally{
+            setLoadImage(false);
+            
+          }
         }
+      }catch(e){
+        setErrorImage(e.response.data.msg);
+      }
       }
 
 
   
       // After uploading all images, navigate to the next step
-      navigate("/dashbord/VehiclesDashbord");
     } catch (error) {
-      console.log("Error uploading image:", error.response.data.msg);
+      setErrorImage("Error uploading image:", error.response.data.msg);
       // Handle error here
     }
-    const formData2=new FormData();
-    formData2.append('price',price);
-    formData2.append('car_id',id);
-    try {
-
-     const res= await axios.post(`/prices`,formData2,{
-        headers: {
-          "Authorization": `Bearer ${token}`
-        }
-      });
-      console.log(res)
-    }catch(error){
-
-    }
+   
   };
   
 const getColors = async() => {
@@ -280,13 +225,11 @@ const getColors = async() => {
 const res = response.data
   setColors(res.data)
 
-    console.log(res.data)
 
 
 
 
 }catch (e) {
-  console.log(e)
   //alert(e.response.data.msg)
  
 }
@@ -302,25 +245,30 @@ useEffect(() => {
   };
   const set = (e) => {
     form.current = { ...form.current, [e.target.name]: e.target.value }
-    console.log({ ...form.current, [e.target.name]: e.target.value })
   }
 
 
   const set1 = (e) => {
     setPrice(e.target.value)
   }
-  const handleChangeImages = (event) => {
-    const newImages = Array.from(event.target.files);
-    if (newImages.length > 4) {
-      alert('You can only select up to 4 images.');
-      return; // Prevent exceeding the limit
-    }
-    setSelectedImages(newImages);
-  };
+
+    const handleChangeImages = (event) => {
+      const newImages = Array.from(event.target.files);
+      if (selectedImages.length + newImages.length > 4) {
+        setAlert(true);
+        return; // Prevent exceeding the limit
+      }
+      setSelectedImages([...selectedImages, ...newImages]); // Concatenate arrays
+    };
+
 
   return (
     <div className='row p-4'>
-
+      {alert && (
+       <div className='alert alert-danger'>
+        you can only inert 4 images
+        </div>
+      )}
      {next?(
      
    
@@ -337,10 +285,23 @@ useEffect(() => {
 
               <input class="form-control" type="text" id="price" name="price" placeholder='Price ₪' onChange={set1}/>
             
-            
-
+            {errorImage&&(
+                 <div class="alert alert-danger mt-2" role="alert">
+                 {errorImage}
+             </div>
+            )}
+             {errorPrice&&(
+                 <div class="alert alert-danger mt-2" role="alert">
+                 {errorPrice}
+             </div>
+            )}
+            {success&&(
+               <div class="alert alert-success mt-2" role="alert">
+               {'Information is valid'}
+           </div>
+            )}
               <div className=' mt-4 d-flex justify-content-end'>
-                <button type='submit' className="btn border border-success btn-success " >Done</button>
+                <button type='submit' className="btn border border-success btn-success " >{loadImage?'Loading...':'Done'}</button>
 
 
                 {/* <input type="submit" class="btn border border-success btn-success addcar" value="Add Car" />  */}
@@ -352,7 +313,7 @@ useEffect(() => {
   
           <div className="image-preview-container">
             {selectedImages.length > 0 ? (
-              selectedImages.map((image, index) => ( // Limit previews to 4
+              selectedImages.map((image, index) => (
                 <img key={index} src={URL.createObjectURL(image)} alt={`Preview ${index + 1}`} />
               ))
             ) : (
@@ -536,14 +497,23 @@ useEffect(() => {
 
           
           <div className=' text-success'> {done} </div>
-          <div className=' text-danger'> {error} </div>
-
+          {/* <div className=' text-danger'> {error} </div> */}
+          {error && (
+                    <div class="alert alert-danger mt-3" role="alert">
+                        {error}
+                    </div>
+                )}
+                {done && (
+                    <div class="alert alert-success mt-3" role="alert">
+                        {error}
+                    </div>
+                )}
  <div className=' mt-4 d-flex justify-content-end'>
                   <button type='submit' className="btn border border-success btn-success "  >{loading?'loading...':'Next'}</button>
                         
                     
             {/* <input type="submit" class="btn border border-success btn-success addcar" value="Add Car" />  */}
-
+          
           </div>
           {/* Repeat the above FormGroup for each input field */}
          

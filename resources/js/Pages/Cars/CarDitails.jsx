@@ -111,11 +111,11 @@ function CarDitails() {
               <div className="car col m-2 mb-3 ">
               <div>
                                   <img src={car.sub_images[0].photo_car_url} alt="imgcar" width={500} height={500} className='imgcar' />
-                                  <div className=' m-2 p-2  row'>
+                                  <div className='mt-4  row'>
                                       {car.sub_images.length >= 2 && (
 
                                           <div className='col'>
-                                              <img src={car.sub_images[1].photo_car_url} alt="imgcar" className='  ' width={150} height={150} />
+                                              <img src={car.sub_images[1].photo_car_url} alt="imgcar" className=' imgdetials '  />
 
 
                                           </div>
@@ -124,7 +124,7 @@ function CarDitails() {
 
                                           <div className='col'>
 
-                                              <img src={car.sub_images[2].photo_car_url} alt="imgcar" className='  ' width={150} height={150} />
+                                              <img src={car.sub_images[2].photo_car_url} alt="imgcar" className='  imgdetials'  />
 
 
                                           </div>
@@ -132,7 +132,7 @@ function CarDitails() {
                                       {car.sub_images.length >= 4 && (
 
                                           <div className='col'>
-                                              <img src={car.sub_images[3].photo_car_url} alt="imgcar" className='  ' width={150} height={150} />
+                                              <img src={car.sub_images[3].photo_car_url} alt="imgcar" className=' imgdetials '  />
 
 
                                           </div>

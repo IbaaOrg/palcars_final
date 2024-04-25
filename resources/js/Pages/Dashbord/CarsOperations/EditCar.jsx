@@ -42,8 +42,8 @@ function EditCar() {
     years.push(year);
   }
 
-  const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  const numbersDoors = [2, 3, 4];
+  const numbers = [ 1,2, 4, 5, 7, 8, 9, 10,20];
+  const numbersDoors = [2,4,5];
   const numbersBags = [1, 2, 3, 4, 5, 6, 7, 8];
 
   const [error, setError] = useState(null)
@@ -125,8 +125,6 @@ function EditCar() {
         setDone(res.data)
         console.log("added car")
         navigate("/dashbord/VehiclesDashbord")
-        console.log(res.data)
-        //console.log(res.data.id)
 
         
         setId(res.data.id)
@@ -134,8 +132,6 @@ function EditCar() {
       }
 
     } catch (e) {
-      console.log(e)
-      //alert(e.response.data.msg)
       setError(e)
     }
 
@@ -205,8 +201,6 @@ function EditCar() {
       const res = response.data
       setColors(res.data)
 
-      console.log(res.data)
-
 
 
 
@@ -217,26 +211,6 @@ function EditCar() {
     }
   }
 
-   /*  const form = useRef({
-      "car_number": carforcompany.car_number,
-      "make": carforcompany.make,
-      "model": carforcompany.model,
-      "year": carforcompany.year,
-      "seats": carforcompany.seats,
-      "doors": carforcompany.doors,
-      "bags": carforcompany.bags,
-      "catrgory": carforcompany.catrgory,
-      "fuel_type": carforcompany.fuel_type,
-      "steering": carforcompany.steering,
-      "fuel_full": carforcompany.fuel_full,
-      "color_id": carforcompany.car_color.id,
-  
-  
-  
-  
-  
-    }) */
-  
 
   useEffect(() => {
     getColors();
@@ -246,7 +220,6 @@ function EditCar() {
   const setcolorid = (event) => {
     const selectedId = parseInt(event.target.value);
     const selectedOption = colors.find((option) => option.id === selectedId);
-    //setSelectedOption();
     setColor(selectedOption); // Convert to number
     console.log(selectedOption)
   };
@@ -299,10 +272,10 @@ function EditCar() {
                 </FormGroup>
                 {/* SUV,Hatchback,Sedan,Convertible,Crossover,Station Wagon,Minivan,Pickup trucks */}
                 <FormGroup className='col'>
-                  <FormLabel>description</FormLabel>
+                  <FormLabel>Description</FormLabel>
                   <div class="form-floating">
                     <textarea class="form-control" placeholder="Leave a comment here" onChange={(e) => { setDescription(e.target.value) }} value={description}  name="description" id="description"></textarea>
-                    <label for="floatingTextarea">description</label>
+                    <label for="floatingTextarea">Description</label>
                   </div>            </FormGroup>
 
 
@@ -311,7 +284,7 @@ function EditCar() {
 
               <div className='row mt-3'>
                 <FormGroup className='col'>
-                  <FormLabel>year</FormLabel>
+                  <FormLabel>Year</FormLabel>
                   <FormControl as="select" onChange={(e) => { setYear(e.target.value) }} name="year" value={year} id="year">
                     {years.map((year, index) => (
                       <option key={index} value={year}>
@@ -378,7 +351,7 @@ function EditCar() {
                 </div>
                 {/* gas,diesel,electricity */}
                 <div className='col'>
-                  <label for="select" className=' mr-3'>fuel type</label>
+                  <label for="select" className=' mr-3'>Fuel Type</label>
 
                   <select class="select-input " onChange={(e) => { setFuel_type(e.target.value) }} name="fuel_type" value={fuel_type} id="fuel_type">
                     <option value="" class="dropdown-item" href="#">Select fuel type</option>
@@ -453,11 +426,11 @@ function EditCar() {
           
 
 
-              <div className=' text-success'> {done} </div>
-              <div className=' text-danger'> {error} </div>
+              {done&&(<div className='alert alert-success mt-2'> {done} </div>)}
+              {error&&(<div className='alert alert-danger mt-2'> {error} </div>)}
 
               <div className=' mt-4 d-flex justify-content-end'>
-                  <button type='submit' className="btn border border-success btn-success " >Edit Car</button>
+                  <button type='submit' className="btn border border-success btn-success " >Save Car</button>
 
 
                 {/* <input type="submit" class="btn border border-success btn-success addcar" value="Add Car" />  */}

@@ -11,7 +11,7 @@ function Sidebar() {
         setIsListOpen(!isListOpen);
     };
   return (
-    <div className='bg-white sidebar p-2'>
+    <div className='bg-white sidebar p-2 sidebarMain'>
 
         <hr className='text-dark'/>
         <div className='list-group list-group-flush pt-2'>
