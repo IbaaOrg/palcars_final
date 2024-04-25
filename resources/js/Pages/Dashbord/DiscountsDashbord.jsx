@@ -53,9 +53,7 @@ function DiscountsDashbord() {
         //setDone(res.data)
         navigate("/dashbord/DiscountsDashbord");
 
-        console.log("added descount")
         
-        console.log(res.data)
         //console.log(res.data.id)
 
       
@@ -83,6 +81,7 @@ function DiscountsDashbord() {
         .then(response => {
           const res = response.data;
           setData(res.data.cars);
+
         })
         .catch(error => {
           console.error('Error fetching data:', error);
@@ -128,7 +127,7 @@ function DiscountsDashbord() {
               <option selected>Choose Car Number</option>
               {data.map(data => (
 
-                <option key={data.id} value={data.id}>{data.car_number} </option>
+                <option key={data.id} value={data.id}>{data.car_number} - {data.model}  </option>
 
               )
               
