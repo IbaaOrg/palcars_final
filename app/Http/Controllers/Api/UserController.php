@@ -28,7 +28,11 @@ class UserController extends Controller
 {
     
     use ResponseTrait;
-    
+     public function count(Request $request)
+    {
+        $count = User::count();
+        return  $this->success( $count);
+    }
     public function infouser(Request $request) {
         return $this->success(new UserInfoResource($request->user()));
     }

@@ -58,6 +58,8 @@ Route::group([
 {
 	
 });
+Route::get('/userscount', [UserController::class,'count']);
+
 Route::get('/authuser',[UserController::class,'authuser']);
 //register by any user
 Route::post('/register',[UserController::class,'register']);
