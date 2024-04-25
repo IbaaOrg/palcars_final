@@ -13,6 +13,11 @@
 .ltr {
     direction: ltr;
 }
+textarea {
+    resize: none;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+}
 .notesmain {
     margin-top: 50%;
     width: 90%;
@@ -52,6 +57,11 @@
     margin: auto;
     margin-top: 8%;
 }
+.mainlocation {
+    width: 90%;
+    margin: auto;
+    margin-top: 15%; 
+}
 .main-btn:focus {
     background-color: #3563E9;
     color: white;
@@ -75,8 +85,7 @@
     padding: 0;
 }
 .view{
-    padding: 0 !important;
-    margin: 0 !important;
+  
     background-color: #f3f3f3;
 }
 

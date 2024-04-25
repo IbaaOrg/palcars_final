@@ -11,7 +11,8 @@ function AddCar() {
 
   const [type,setType] = useState(null)
   const [colors, setColors] = useState(null)
-  const [color, setColor] = useState(null)
+  const [color, setColor] = useState('')
+  const[loading,setLoading]=useState(false);
   const navigate = useNavigate();
 
   const [next, setNext] = useState(false)
@@ -68,7 +69,7 @@ const pickuplocations=[];
     "bags": null,
     "catrgory": null,
     "fuel_type": null,
-    "fuel_full":null,
+    "fuel_full": null, 
     "steering": null,
     "color_id":null
     
@@ -81,48 +82,6 @@ const pickuplocations=[];
   const token = localStorage.getItem("token")
   const nextToAddimage = async() => {
     
-/*     e.preventDefault()
-    setError(null)
-    setDone(null)
-    const formData = new FormData()
-    formData.append("car_number", form.current.car_number)
-    formData.append("make", form.current.make)
-    formData.append("model", form.current.model)
-
-    formData.append("year", form.current.year)
-    formData.append("seats", form.current.seats)
-    formData.append("doors", form.current.doors)
-    formData.append("bags", form.current.bags)
-    formData.append("catrgory", form.current.catrgory)
-    formData.append("fuel_type", type)
-    formData.append("color_id", form.current.color_id)
-
-    formData.append("steering", form.current.steering)
-
-    try {
-
-      var response = await axios.post("/addcar", formData, {
-        headers: {
-          "Authorization": `Bearer ${token}`
-        }
-      })
-      console.log(response)
-      const res = response.data
-      console.log(res.data)
-      if (res.status === true) {
-        setDone(res.data)
-        console.log(res.data)
-        setNext(true)
-
-
-      }
-
-    } catch (e) {
-      console.log(e.response.data.msg)
-      //alert(e.response.data.msg)
-      setError(e.response.data.msg)
-    }
- */
 
   }
 
@@ -132,56 +91,51 @@ const pickuplocations=[];
   const [selectedImages, setSelectedImages] = useState([]);
 
   const addcar = async (e) => {
-     e.preventDefault()
-    setError(null)
-    setDone(null)
-    const formData = new FormData()
-    formData.append("car_number", form.current.car_number)
-      formData.append("make", form.current.make)
-    formData.append("model", form.current.model)
-
-      formData.append("year", form.current.year)
-      formData.append("seats", form.current.seats)
-      formData.append("doors", form.current.doors)
-      formData.append("bags", form.current.bags)
-      formData.append("catrgory", form.current.catrgory)
-      formData.append("fuel_type", type)
-      formData.append("fuel_full", form.current.fuel_full)
-    formData.append("color_id", form.current.color_id)
-    formData.append("fuel_full", form.current.fuel_full)
-
-    formData.append("color_id", color.id)
-
-      formData.append("steering", form.current.steering)
-
+    e.preventDefault();
+    setError(null);
+    setDone(null);
+    
+    const formData = new FormData();
+    formData.append("car_number", form.current.car_number);
+    formData.append("make", form.current.make);
+    formData.append("model", form.current.model);
+    formData.append("year", form.current.year);
+    formData.append("seats", form.current.seats);
+    formData.append("doors", form.current.doors);
+    formData.append("bags", form.current.bags);
+    formData.append("catrgory", form.current.catrgory);
+    formData.append("fuel_type", type);
+    
+    // Conditionally append fuel_full only when fuel_type is not electricity
+    if (type !== 'electricity' && form.current.fuel_full !== null) {
+      formData.append("fuel_full", form.current.fuel_full);
+    }
+    
+    formData.append("color_id", color);
+    formData.append("steering", form.current.steering);
+    
     try {
-
-      var response = await axios.post("/addcar", formData, {
+      setLoading('true')
+      const response = await axios.post("/addcar", formData, {
         headers: {
           "Authorization": `Bearer ${token}`
         }
-      })
-      const res = response.data
+      });
+      
+      const res = response.data;
       if (res.status === true) {
-        setDone(res.data)
-        console.log("added car")
-
-        console.log(res.data)
-        //console.log(res.data.id)
-
-        setNext(true)
-        setId(res.data.id)
-        
+        setDone(res.data);
+        setNext(true);
+        setId(res.data.id);
       }
-
     } catch (e) {
-      console.log(e.response.data.msg)
-      //alert(e.response.data.msg)
-      setError(e.response.data.msg)
+      console.log(e.response.data);
+      setError(e.response.data.message);
+    }finally{
+      setLoading(false);
     }
- 
- 
-  }
+  };
+  
 
 
   const [preview, setPreview] = useState(null);
@@ -344,11 +298,7 @@ useEffect(() => {
  
 }, []);
   const setcolorid = (event) => {
-    const selectedId = parseInt(event.target.value);
-    const selectedOption = colors.find((option) => option.id === selectedId);
-    //setSelectedOption();
-    setColor(selectedOption); // Convert to number
-    console.log(selectedOption)
+  setColor(event.target.value);
   };
   const set = (e) => {
     form.current = { ...form.current, [e.target.name]: e.target.value }
@@ -434,8 +384,8 @@ useEffect(() => {
             </FormGroup>
 
             <FormGroup className='col'>
-              <FormLabel>Make</FormLabel>
-              <FormControl type="text" placeholder="Enter Make" onChange={set} name="make" id="make"/>
+              <FormLabel>Manufacturing Company</FormLabel>
+              <FormControl type="text" placeholder="Enter Company name" onChange={set} name="make" id="make"/>
             </FormGroup>
           </div>
           <div className='row mt-3'>
@@ -557,7 +507,7 @@ useEffect(() => {
 
             
             <FormGroup className=' d-flex'>
-              <FormLabel className='col-3'>Fuel Full</FormLabel>
+              <FormLabel className='col-3' for="fuel_full">Fuel Full</FormLabel>
               <FormControl type="text" placeholder="Enter fuel full" onChange={set} name="fuel_full" id="fuel_full" />
             </FormGroup>
  )}
@@ -569,7 +519,7 @@ useEffect(() => {
             {colors&&(
            
                       <select class="select-input mt-4" onChange={ setcolorid}>
-                        <option  >Chose Color</option>
+                        <option  >Choose Color</option>
 
                 {colors.map(color=> (
                   <option key={color.id} value={color.id} id={color.id} >{color.color}</option>
@@ -589,7 +539,7 @@ useEffect(() => {
           <div className=' text-danger'> {error} </div>
 
  <div className=' mt-4 d-flex justify-content-end'>
-                  <button type='submit' className="btn border border-success btn-success "  >Next</button>
+                  <button type='submit' className="btn border border-success btn-success "  >{loading?'loading...':'Next'}</button>
                         
                     
             {/* <input type="submit" class="btn border border-success btn-success addcar" value="Add Car" />  */}
