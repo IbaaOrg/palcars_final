@@ -35,6 +35,8 @@ import 'swiper/css/navigation';
 
 import { Autoplay, EffectCoverflow, Pagination, Navigation } from 'swiper/modules';
 import Services from './../../Layout/Cards/Services';
+import { Link } from 'react-router-dom';
+import Loading from './../../Componants/UI/Loading';
 
 function Home() {
 
@@ -49,15 +51,55 @@ function Home() {
     
     const [location, setLocation] = useState('');
     const [city, setCity] = useState('');
+    const [citycount, setCityCount] = useState(0);
 
+
+    const [loading, setILoading] = useState(true);
 
     const [iscompany, setIscompany] = useState(false);
     const progressCircle = useRef(null);
     const progressContent = useRef(null);
+
+    const [data, setDate] = useState(null)
+  
+
+
+    const get_all_discounts = async () => {
+        const allCarsId = [];
+
+        try {
+            const response = await axios.get(`/showalldiscounts`);
+            const data = response.data.data;
+            setDate(data);
+            setILoading(false)
+           
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+
+    useEffect(() => {
+        get_all_discounts();
+    }, []);
+
     const onAutoplayTimeLeft = (s, time, progress) => {
         progressCircle.current.style.setProperty('--progress', 1 - progress);
         progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
     };
+    //showallcities
+    const getcitycount = async () => {
+        try {
+            const response = await axios.get(`/showallcities`, {
+
+            });
+            const data = response.data;
+            setCityCount(data.data.length);
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     const getusercount = async () => {
         try {
@@ -73,6 +115,7 @@ function Home() {
     }
     useEffect(() => {
         getusercount();
+        getcitycount();
 
     }, []);
 
@@ -126,15 +169,7 @@ function Home() {
                         </SwiperSlide>   <SwiperSlide>
                             <img src={Ads5} alt="slide_image" />
                         </SwiperSlide>
-                        {/*  <SwiperSlide>
-              <img src={image3} alt="slide_image" />
-            </SwiperSlide>
-          <SwiperSlide>
-              <img src={imghome} alt="slide_image" />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img src={imghome} alt="slide_image" />
-            </SwiperSlide> */}
+                      
                         <div className="autoplay-progress" slot="container-end">
                             <svg viewBox="0 0 48 48" ref={progressCircle}>
                                 <circle cx="24" cy="24" r="20"></circle>
@@ -157,16 +192,76 @@ function Home() {
                     <CardBasic />
 
                 </div>
-                <div>
-                    Offers
+                
+                <div className=" offers ">
+                {loading?(
+                        <div className=" d-flex justify-center align-middle">
+
+                    <Loading />
+                    </div>
+                ):(
+<>
+                    <h1 className="text-center fs-3 bg-danger text-white">Special offers</h1>
+                    <div className=" container ">
+                        <div className="">
+                            <Swiper
+                               
+                                modules={[Navigation, Pagination]}
+                                slidesPerView={3}
+                                spaceBetween={7}
+                                navigation={true}
+                                loop={true}
+                                pagination={{
+                                    clickable: true,
+                                }}
+                                className=" mySwiperC"
+                            >
+                            {data&&(
+                                <div className="swiper-wrapper">
+                                    {data.map((d) => (
+                                        <SwiperSlide key={d.id}>
+                                           <div className="card shadow ">
+                                                <div className="row">
+                                                    <div className="col d-flex justify-center align-middle">
+                                                        <img src={d.car.sub_images[0].photo_car_url}  className=""/>
+                                                    </div>
+                                                    <div className="col">
+                                                        <h1 className="card-header">{d.note}</h1>
+                                                        
+                                                        <div class="alert alert-warning" role="alert">
+                                                            {d.expired_date}
+                                                        </div>
+                                                        <div class="alert alert-danger" role="alert">
+                                                            {d.value}{d.type == "percentage" ? ("%") : ("₪")} OFF
+                                                        </div>
+                                                    </div>
+                                                   
+
+                                                </div>
+                                                
+                                           </div>
+                                        </SwiperSlide>
+                                    ))}
+                                </div>
+                                )}
+                            </Swiper>
+                            <div className='d-flex justify-content-center align-items-center'>
+                                <Link className="btn btn-primary rounded m-5" to="/discounts">View All Deals</Link>
+                            </div>
+                        </div>
+
+                    </div>
+                            </>
+                )}
+                    
                 </div>
-                <div className="counter">
+                <div className="counter " >
                     <ScroolTrigger onEnter={() => { setCounterOn(true) }} onExit={() => { setCounterOn(false) }}>
                         {counterOn &&
-                            <div className=" container p-1 d-flex justify-around">
+                            <div className=" container p-1 d-flex  justify-around">
 
 
-                                <div className=" card p-4 ">
+                                <div className=" card p-4 shadow">
                                     <div className="fs-1  p-3">
 
                                         <CountUp start={0} end={userCount} duration={2} delay={0} className="  " />
@@ -187,7 +282,7 @@ function Home() {
                                 <div className=" card p-4 ">
                                     <div className="fs-1  p-3">
 
-                                        <CountUp start={0} end={userCount} duration={2} delay={0} className="  " />
+                                        <CountUp start={0} end={citycount} duration={2} delay={0} className="  " />
                                         +
                                     </div>
                                     <h1 className="fs-3">Citys</h1>

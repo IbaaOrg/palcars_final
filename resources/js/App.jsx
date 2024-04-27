@@ -62,13 +62,10 @@ import LocationDashbord from "./Pages/Dashbord/LocationsDashbord";
 import Discounts from "./Pages/Discounts/Discounts";
 import NotesDashboard from './Pages/Dashbord/NotesDashboard';
 import AllDiscounts from "./Pages/Dashbord/AllDiscounts";
-<<<<<<< HEAD
 import City from "./Pages/Citys/City";
-=======
 import AllLocations from "./Pages/Dashbord/AllLocations";
 import { MdAddLocation } from "react-icons/md";
 import LocationsDashbord from "./Pages/Dashbord/LocationsDashbord";
->>>>>>> fadf95efabcd282e741d85da951a440caa9a4520
 
 
 
