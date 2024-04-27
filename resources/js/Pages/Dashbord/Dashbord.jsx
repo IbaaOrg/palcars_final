@@ -14,7 +14,7 @@ function Dashbord() {
     <div className='row'>
        {toggle &&
 
-        <div className='col-2 bg-white vh-100'>
+        <div className='col-2 bg-white sidebarMain'>
                   <Sidebar />
 
         </div>

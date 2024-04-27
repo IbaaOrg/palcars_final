@@ -46,6 +46,7 @@ const Bill = () => {
     const [arrayCity, setArrayCity] = useState([]);
     const [filteredCity, setFilteredCity] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [ownerUser,setOwnerUser]=useState(car.owneruser.id);
     function todayDate() {
         const today = new Date();
         const year = today.getFullYear();
@@ -62,14 +63,14 @@ const Bill = () => {
     const pickuplocations = [];
 
     const getPickup = async () => {
-        const res = await axios.get("/alllocationpickup");
-        setArrayPickup(await res.data.data);
+        const res = await axios.get(`/alllocationpickup/${ownerUser}`);
+        setArrayPickup(await res.data.data.locations);
     };
     const dropofflocations = [];
 
     const getDropoff = async () => {
-        const res = await axios.get("/alllocationdropoff");
-        setArrayDropoff(await res.data.data);
+        const res = await axios.get(`/alllocationdropoff/${ownerUser}`);
+        setArrayDropoff(await res.data.data.locations);
     };
     const getCities = async () => {
         const res = await axios.get("/showallcities");
@@ -112,6 +113,7 @@ const Bill = () => {
         setFilteredCity(cities);
     }, [city, arrayCity]);
     useEffect(() => {
+        console.log(car)
         if (car && car.prices) {
             setPrice(car.prices[car.prices.length - 1].price);
             setPriceAfterDiscount(
@@ -201,6 +203,7 @@ const Bill = () => {
                         },
                     }
                 );
+                console.log(response)
                 setLoading(false);
             } catch (error) {
                 toast.error(error.response.data.msg, {

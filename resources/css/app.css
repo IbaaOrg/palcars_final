@@ -18,6 +18,10 @@ textarea {
     border: 1px solid #dee2e6;
     border-radius: 10px;
 }
+.sidebarMain {
+    min-height: 100vh;
+    background-color: white;
+}
 .notesmain {
     margin-top: 50%;
     width: 90%;
@@ -79,7 +83,10 @@ textarea {
         color: #3563E9 !important;
         border-radius: 10px !important;
 }
-
+.tablewidth {
+    width: 100%;
+    margin: auto;
+}
 .Home{
     width: 100%;
     padding: 0;
@@ -173,6 +180,10 @@ textarea {
     object-fit: cover;
     border-radius: 5px;
     margin-right: 20px;
+}
+.imgdetials {
+    width: calc(100% / 3);
+    height: 200px;
 }
 
 .car .info {
@@ -335,9 +346,10 @@ html::-webkit-scrollbar-track{
 }
 
 .image-preview-container img {
-    width: 100px;
+    width: 300px;
     /* Adjust image width as desired */
-    height: 100px;
+    height: 200px;
+    border-radius: 5px;
     /* Adjust image height as desired */
     margin: 5px;
     object-fit: cover;

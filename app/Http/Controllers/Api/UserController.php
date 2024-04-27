@@ -350,4 +350,8 @@ class UserController extends Controller
            return $request->user();
 
     }
+    public function getRenters(Request $request){
+        $renterUsers = User::where('role', 'renter')->get();
+        return $this->success(AllUserResource::collection($renterUsers));
+    }
 }

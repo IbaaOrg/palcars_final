@@ -176,11 +176,11 @@ function SignUpRenter() {
                         {errors}
                     </div>
                 )}
-                {!error && errors && (
+                {/* {!error && errors && (
                     <div class="alert alert-danger" role="alert">
                         {error}
                     </div>
-                )}
+                )} */}
                 {error && errors && (
                     <div class="alert alert-danger" role="alert">
                         {error}
