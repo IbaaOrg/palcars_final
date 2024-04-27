@@ -451,3 +451,14 @@ border-radius: 8px;
     border-radius: 5px !important;
     color: black !important;
 }
+
+.notaskshow{
+    background-image: url(../../public/image/no-task1.png);
+    background-size:300px;
+        /* or contain, or specify dimensions */
+        background-position: center;
+        /* or specify position */
+        background-repeat: no-repeat;
+        /* or repeat, repeat-x, repeat-y */
+    height: 80vh;
+}

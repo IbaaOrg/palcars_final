@@ -62,6 +62,7 @@ import LocationDashbord from "./Pages/Dashbord/LocationsDashbord";
 import Discounts from "./Pages/Discounts/Discounts";
 import NotesDashboard from './Pages/Dashbord/NotesDashboard';
 import AllDiscounts from "./Pages/Dashbord/AllDiscounts";
+import City from "./Pages/Citys/City";
 
 
 
@@ -95,6 +96,7 @@ const App = () => {
                         </ProtectedRouteCompany>
                     }
                 />
+                <Route path={"/city"} element={<City/>} />
 
                 <Route path={"/role"} element={<Role />} />
                 <Route path={"/about"} element={<About />} />
