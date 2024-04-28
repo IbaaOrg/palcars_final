@@ -27,6 +27,7 @@ class SimpleCarResource extends JsonResource
             'catrgory'=>$this->catrgory,
             'year'=>$this->year,  
             'status'=>$this->status,
+            'owner'=>new OwnerResource($this->ownerUser),
             'sub_images'=>CarImageResource::collection($this->images),
             'prices'=>PriceCarResource::collection($this->prices),
             'reviews'=>SimpleCommentResource::collection($this->comments),

@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use App\Models\Location;
+use App\Models\Bill;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Location;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 
 class City extends Model
@@ -15,6 +16,9 @@ class City extends Model
    
     public function locations(){
         return $this->hasMany(Location::class);
+    }
+    public function bills(){
+        return $this->hasMany(Bill::class);
     }
     
 }

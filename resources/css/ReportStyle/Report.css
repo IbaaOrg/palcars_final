@@ -1,0 +1,7 @@
+.mainReport {
+    border-radius: 10px;
+    width: 80%;
+    margin: auto;
+    border: 1px solid rgb(0, 98, 255);
+    box-shadow: 2px 2px 3px 3px rgba(75, 167, 248, 0.668);
+}

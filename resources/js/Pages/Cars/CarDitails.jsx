@@ -57,18 +57,6 @@ function CarDitails() {
         getUserById()
 
     }, [id]);
- 
-  
-
-    /*   try {
-        const response = await axios.get('/cars');
-        const data = response.data;
-        onSuccess(data)
-        console.log(data);
-    } catch (error) {
-        console.error(error);
-    } */
-
 
     const appendComment = (comment) => {
         console.log("append car details")
@@ -76,7 +64,7 @@ function CarDitails() {
         console.log(comment)
         setComments([ ...comments,comment])
     }
-   const openBill=()=>{
+    const openBill=()=>{
     const token = localStorage.getItem("token")
 
     if(token){

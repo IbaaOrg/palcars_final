@@ -116,28 +116,37 @@ $dropOffLocationUsers = User::whereHas('locations', function ($query) use ($drop
     $query->where('location', $dropOffLocationName);
 })
 ->get();
+// Retrieve user IDs associated with the pickup location
+$pickupLocationUserIds = $pickupLocationUsers->pluck('id')->toArray();
 
-// Combine the user IDs
-$userIds = $pickupLocationUsers->pluck('id')->merge($dropOffLocationUsers->pluck('id'))->unique();
+// Retrieve user IDs associated with the drop-off location
+$dropOffLocationUserIds = $dropOffLocationUsers->pluck('id')->toArray();
 
-// Retrieve cars associated with these users
-$allCars = Car::whereIn('user_id', $userIds)
+// Merge and unique user IDs
+$userIds = array_unique(array_merge($pickupLocationUserIds, $dropOffLocationUserIds));
+
+// Retrieve cars associated with these user IDs=
+$availableCars = Car::whereIn('user_id', $userIds)
     ->whereDoesntHave('bills', function ($query) use ($request) {
         $query->where(function ($query) use ($request) {
             $query->where('start_date', '<=', $request->end_date)
                 ->where('end_date', '>=', $request->start_date)
-                ->where(function ($query) use ($request) {
+                ->orWhere(function ($query) use ($request) {
                     $query->where('start_time', '<=', $request->end_time)
                         ->where('end_time', '>=', $request->start_time);
-                })
-                ->where('status', 'rented');
-        });
+                });
+        })
+        ->orWhere(function ($query) use ($request) {
+            $query->where('start_date', '>=', $request->start_date)
+                ->where('end_date', '<=', $request->end_date);
+        })
+        ->where('status', 'rented'); // Exclude cars that are currently rented
     })
+    ->where('status', 'unrented') // Include only cars that are marked as "unrented"
     ->get();
-
-if($allCars){
-return $this->success(CarResource::collection($allCars));
-}
+    if ($availableCars->isNotEmpty()) {
+        return $this->success(CarResource::collection($availableCars));
+    }
 return $this->fail("these location doesn't have any car",404);
 }
     /**

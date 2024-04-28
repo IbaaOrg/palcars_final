@@ -151,9 +151,6 @@ function CardBasic({ title }) {
             setFinalPickupValue(pickup);
         }
 
-        setInputDropoffValue("");
-        setInputPickupValue("");
-        setInputPickupDropoffValue("");
     };
     const getCars = async (
         pickup,

@@ -104,16 +104,17 @@ function ViewProfile({id}) {
               <p>Email :  {user.email}</p>
                 <p>Phone : {user.phone}</p>
                 <p>Locations :</p>
-                {locations && (<>
+                <div className="overflow-auto"> {locations && (<>
 
-                  {locations.map(l => (
-                    <div className='d-flex ' key={l.id}>
-                      <p> {l.location}</p>
-                      <p> {l.type}</p>
-                    </div>
+{locations.map(l => (
+  <div className='d-flex ' key={l.id}>
+    <p> {l.location}</p>
+    <p> {l.type}</p>
+  </div>
 
-                  ))}
-                </>)}
+))}
+</>)}</div>
+               
 
             </div>
             <div className='mt-4'>
