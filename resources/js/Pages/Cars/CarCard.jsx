@@ -63,7 +63,7 @@ const CarCard = ({ item, index, toggleFavorite, favorites }) => {
                             width={30}
                             height={30}
                             alt="User"
-                            className=" card-link rounded"
+                            className=" card-link rounded border"
                                                     
                                                                      />
                     </div>

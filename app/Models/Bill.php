@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Car;
+use App\Models\City;
 use App\Models\User;
 use App\Models\Method;
 use App\Models\Discount;
@@ -46,6 +47,10 @@ class Bill extends Model
 
     public function dropoff_location(){
       return $this->belongsTo(Location::class);
+    }
+    public function city(){
+      return $this->belongsTo(City::class);
+
     }
 }
 

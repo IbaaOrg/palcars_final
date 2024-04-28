@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import imgpaypal from "../../../../public/image/paypal.png";
 import imgbank from "../../../../public/image/bank.png";
 import imgvisa from "../../../../public/image/visa.png";
@@ -10,7 +10,53 @@ import { A11y } from "swiper/modules";
 import { UserContext } from "../../Context/User";
 import { ToastContainer, toast } from "react-toastify";
 import { Bounce, Zoom } from "react-toastify";
+import DialogTitle from "@mui/material/DialogTitle";
+import Dialog from "@mui/material/Dialog";
+import { height, margin, padding, width } from "@mui/system";
 const Bill = () => {
+    const [openDialog, handleDisplay] = React.useState(false);
+    const[resultBill,setResultBill]=useState('');
+    const handleClose = () => {
+       handleDisplay(false);
+    };
+ 
+    const openDialogBox = () => {
+       handleDisplay(true);
+    };
+  
+    // Define your custom styles
+const dialogStyle = {
+    width:"80%",
+    height:"300px",
+  };
+    const buttonStyle = {
+       width: "10rem",
+       fontsize: "1.5rem",
+       height: "2rem",
+       padding: "5px",
+       borderRadius: "10px",
+       backgroundColor: "green",
+       color: "White",
+       border: "2px solid yellow",
+    };
+    const divStyle = {
+       display: "flex",
+       felxDirection: "row",
+       position: "absolute",
+       right: "0px",
+       bottom: "0px",
+    //    paddingTop: "3rem",
+    };
+    const confirmButtonStyle = {
+       width: "5rem",
+       height: "2rem",
+       fontsize: "1rem",
+       backgroundColor: "#0d6efd",
+       color: "white",
+       margin: "40px 5px 10px",
+       borderRadius: "5px",
+       border: "1px solid white",
+    };
     const { id } = useParams();
     const [price, setPrice] = useState("");
     const [priceAfterDiscount, setPriceAfterDiscount] = useState("");
@@ -47,6 +93,10 @@ const Bill = () => {
     const [filteredCity, setFilteredCity] = useState([]);
     const [loading, setLoading] = useState(false);
     const [ownerUser,setOwnerUser]=useState(car.owneruser.id);
+    const [step2,setStep2]=useState(false);
+    const [step3,setStep3]=useState(false);
+    const [step4,setStep4]=useState(false);
+    const navigate=useNavigate();
     function todayDate() {
         const today = new Date();
         const year = today.getFullYear();
@@ -113,7 +163,6 @@ const Bill = () => {
         setFilteredCity(cities);
     }, [city, arrayCity]);
     useEffect(() => {
-        console.log(car)
         if (car && car.prices) {
             setPrice(car.prices[car.prices.length - 1].price);
             setPriceAfterDiscount(
@@ -121,6 +170,7 @@ const Bill = () => {
             );
         }
     });
+   
 
     arrayPickup.map((location) => {
         pickuplocations.push(location.location);
@@ -203,7 +253,8 @@ const Bill = () => {
                         },
                     }
                 );
-                console.log(response)
+                setResultBill(response.data.data);
+                openDialogBox();
                 setLoading(false);
             } catch (error) {
                 toast.error(error.response.data.msg, {
@@ -221,7 +272,18 @@ const Bill = () => {
             }
         }
     };
-
+    const navigateToReport=()=>{
+        navigate('/report',{state:{resultBill}});
+    }
+    const NextStep2=()=>{
+        setStep2(true);
+    }
+    const NextStep3=()=>{
+        setStep3(true);
+    }
+    const NextStep4=()=>{
+        setStep4(true);
+    }
     return (
         <>
             <ToastContainer />
@@ -337,6 +399,8 @@ const Bill = () => {
                                 </div>
                             </div>
                         </div>
+                        <input type="submit" value={"Next Step"} onClick={NextStep2} className="btn btn-primary"/>
+
                     </div>
                     <div className="col-12 col-md-4 bg-white rounded  my-5 px-5 py-4">
                         <h2 className="fw-bold px-2">Rental Summary</h2>
@@ -399,7 +463,7 @@ const Bill = () => {
                         </div>
                     </div>
                 </div>
-                <div className="  billpay mt-2 bg-white px-5 py-3">
+                {step2&&<div className="  billpay mt-2 bg-white px-5 py-3">
                     <h2 className="fw-bold fs-5 py-2">Rental Info</h2>
                     <div className="d-flex justify-content-between text-slate-400">
                         <span>Please enter your rental date</span>
@@ -588,9 +652,11 @@ const Bill = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                    <input type="submit" value={"Next Step"} onClick={NextStep3} className="btn btn-primary"/>
 
-                <div className="  billpay mt-5 bg-white px-5 py-3">
+                </div>}
+
+              {step3&&<div className="  billpay mt-5 bg-white px-5 py-3">
                     <h2 className="fw-bold fs-5 py-2">Payment Method</h2>
                     <div className="d-flex justify-content-between text-slate-400">
                         <span>Please enter your payment method</span>
@@ -777,8 +843,11 @@ const Bill = () => {
                             )}
                         </label>
                     </div>
+                    <input type="submit" value={"Next Step"} onClick={NextStep4} className="btn btn-primary"/>
+
                 </div>
-                <div className="billpay mt-5 bg-white px-5 py-3">
+}
+                {step4&&<div className="billpay mt-5 bg-white px-5 py-3">
                     <h2 className="fw-bold fs-5 py-2">Confirmation</h2>
                     <div className="d-flex justify-content-between text-slate-400">
                         <span>Just check . and your renatl is ready</span>
@@ -797,8 +866,24 @@ const Bill = () => {
                             onClick={handelValues}
                         />
                     </div>
-                </div>
+                </div>}
+                
             </div>
+            <Dialog onClose = {handleClose} open = {openDialog}>
+            <DialogTitle style = {{  padding: "40px 40px 10px" }}> Confirm Dialog </DialogTitle>
+            <h3 style = {{ marginTop: "-10px", padding: "20px 40px 30px" ,fontSize:"20px"}}>
+                  Are you sure to check this bill? {" "}
+            </h3>
+            <br></br>
+            <div style = {divStyle}>
+               <button style = {confirmButtonStyle} onClick = {navigateToReport}>
+                  Confirm
+               </button>
+               <button style = {confirmButtonStyle} onClick = {handleClose}>
+                  Cancel
+               </button>
+            </div>
+         </Dialog>
         </>
     );
 };

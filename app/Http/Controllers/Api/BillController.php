@@ -49,8 +49,20 @@ $dropoffLocationIds = $dropofflocations_ids->pluck('id')->toArray();
             'start_date' => 'required|date_format:Y-m-d|after_or_equal:'. now()->format('Y-m-d'),
             'start_time' => 'required|date_format:H:i'.($request->input('start_date')===now()->format('Y-m-d')?'|after_or_equal:'.$currentTime:''),
             'end_date' => 'required|date_format:Y-m-d|after_or_equal:start_date',
-            'end_time' => 'required|date_format:H:i|after:start_time',
-            'method_id' => 'required|exists:methods,id',
+            'end_time' => [
+                'required',
+                'date_format:H:i',
+                function ($attribute, $value, $fail) use ($request) {
+                    // Parse start and end times using Carbon
+                    $startTime = Carbon::parse($request->start_date . ' ' . $request->start_time);
+                    $endTime = Carbon::parse($request->end_date . ' ' . $value);
+                    
+                    // Check if end time is before start time or on the same time
+                    if ($endTime->lte($startTime)) {
+                        $fail('The end time must be after the start time.');
+                    }
+                },
+            ],            'method_id' => 'required|exists:methods,id',
             'discount_id' => 'nullable|exists:discounts,id',
          
         ],[
@@ -100,7 +112,7 @@ $dropoffLocationIds = $dropofflocations_ids->pluck('id')->toArray();
         $bill = Bill::create([
             'name'=>$request->name,
             'phone'=>$request->phone,
-            'address'=>$request->phone,
+            'address'=>$request->address,
             'city_id'=>$request->city_id,
             'user_id' => $request->user()->id,
             'amount' => $amount,
