@@ -88,12 +88,21 @@ function Home() {
 
 
     const get_all_discounts = async () => {
-        const allCarsId = [];
 
         try {
             const response = await axios.get(`/showalldiscounts`);
             const data = response.data.data;
-            setDate(data);
+            const lastMonth = new Date();
+            //lastMonth.setMonth(lastMonth.getMonth() - 1);
+
+            const filteredData = data.filter(discount => {
+                const expiredDate = new Date(discount.expired_date);
+                return expiredDate > lastMonth;
+            });
+            console.log(filteredData)
+            console.log(data)
+
+            setDate(filteredData);
             setILoading(false)
            
         } catch (error) {
