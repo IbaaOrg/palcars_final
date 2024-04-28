@@ -103,7 +103,7 @@ function Cars() {
     };
 
     return (
-        <div className="d-flex flex-wrap justify-evenly bg-slate-100 w-100  " >
+        <div className="d-flex flex-wrap justify-evenly bg-slate-200 w-100  " >
 {loading ? (
                 <Loading />
                ) : (

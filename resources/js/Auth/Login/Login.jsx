@@ -1,6 +1,6 @@
 import React, { useState, useRef, useContext } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-
+import loginimage from '../../../../public/image/undraw_Login_re_4vu2__1_-removebg-preview.png'
 import axios from "axios";
 import { BiShowAlt } from "react-icons/bi";
 import { IoEyeOffOutline } from "react-icons/io5";
@@ -74,6 +74,9 @@ function Login(props) {
 
     return (
         <div class="d-flex justify-content-around cont">
+        <div>
+                <img src={loginimage} className="w-100"/>
+        </div>
             <div class="form-container m-2">
                 <div class="social-buttons">
                     <button class="social-button apple" onClick={byGoogle}>
