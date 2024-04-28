@@ -55,7 +55,6 @@ function DiscountsDashbord() {
         setDone(true)
         navigate("/dashbord/DiscountsDashbord");
 
-        //console.log(res.data.id)
 
       
 

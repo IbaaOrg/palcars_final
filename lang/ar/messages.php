@@ -89,5 +89,6 @@ return [
     'dropoffdate'=>' تاريخ التسليم ',
     'dropofftime'=>' وقت التسليم',
     'SignUpWithGoogle'=>'إنشاء حساب بواسطة جوجل',
+    'Specialoffers'=>'عروض مميزة'
 ];
 ?>

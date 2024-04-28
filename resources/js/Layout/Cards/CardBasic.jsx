@@ -230,7 +230,7 @@ function CardBasic({ title }) {
     //   $minTime= `${hours}:${minutes}`;
     // }
     return (
-        <div className=" container cardmain">
+        <div className=" container cardmain shadow">
             {/* <div>{arraypickup[0].location.location}</div> */}
             <form class="row g-3">
                 {!toggle ? (
