@@ -261,9 +261,9 @@ html::-webkit-scrollbar-track{
 }
 .cardmain{
         padding: 20px;
-        margin-top: 10px !important;
+       /*  margin-top: 10px !important; */
             background-color: #f1f1f1;
-            border: 1px solid #ddd;
+            border: 1px solid #cacaca;
             border-radius: 5px;
             margin-bottom: 20px;
 }

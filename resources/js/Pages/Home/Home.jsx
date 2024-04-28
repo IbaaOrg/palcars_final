@@ -11,7 +11,8 @@ import Ads5 from '../../../../public/image/Ads5.jpg'
 import map from '../../../../public/image/map.png'
 //import $ from 'jquery';
 //import 'maphilight';
-
+import moment from 'moment';
+import Timer from '../../Componants/UI/Timer'
 import CountUp from 'react-countup'
 import ScroolTrigger from 'react-scroll-trigger'
 
@@ -37,8 +38,30 @@ import { Autoplay, EffectCoverflow, Pagination, Navigation } from 'swiper/module
 import Services from './../../Layout/Cards/Services';
 import { Link } from 'react-router-dom';
 import Loading from './../../Componants/UI/Loading';
+import { TranslateContext } from "../../Context/Translate";
 
 function Home() {
+
+    const [remainingTime, setRemainingTime] = useState(moment.duration());
+    const targetDate = '2024-12-31T23:59:59'
+    useEffect(() => {
+        const interval = setInterval(() => {
+            const now = moment();
+            const target = moment(targetDate);
+            const diff = moment.duration(target.diff(now));
+            setRemainingTime(diff);
+
+            if (diff.asSeconds() <= 0) {
+                clearInterval(interval);
+            }
+        }, 1000);
+
+        return () => clearInterval(interval);
+    }, [targetDate]);
+
+
+
+    const { changeLanguage, translates } = useContext(TranslateContext);
 
     const [counterOn, setCounterOn] = useState(false)
 
@@ -116,9 +139,12 @@ function Home() {
     useEffect(() => {
         getusercount();
         getcitycount();
+        console.log(data)
 
     }, []);
-
+    const Translate = async (e) => {
+        changeLanguage(e);
+    };
     return (
         <>
             <ScrollToTopButton />
@@ -201,14 +227,14 @@ function Home() {
                     </div>
                 ):(
 <>
-                    <h1 className="text-center fs-3 bg-danger text-white">Special offers</h1>
+                                <h1 className="text-center fs-3 m-2">Special offers</h1>
                     <div className=" container ">
                         <div className="">
                             <Swiper
                                
                                 modules={[Navigation, Pagination]}
                                 slidesPerView={3}
-                                spaceBetween={7}
+                                spaceBetween={15}
                                 navigation={true}
                                 loop={true}
                                 pagination={{
@@ -220,19 +246,18 @@ function Home() {
                                 <div className="swiper-wrapper">
                                     {data.map((d) => (
                                         <SwiperSlide key={d.id}>
-                                           <div className="card shadow ">
+                                           <div className="card shadow p-1">
                                                 <div className="row">
                                                     <div className="col d-flex justify-center align-middle">
-                                                        <img src={d.car.sub_images[0].photo_car_url}  className=""/>
+                                                        <img src={d.car.sub_images[0].photo_car_url}  className=" "/>
                                                     </div>
-                                                    <div className="col">
-                                                        <h1 className="card-header">{d.note}</h1>
-                                                        
-                                                        <div class="alert alert-warning" role="alert">
-                                                            {d.expired_date}
-                                                        </div>
-                                                        <div class="alert alert-danger" role="alert">
-                                                            {d.value}{d.type == "percentage" ? ("%") : ("₪")} OFF
+                                                    <div className="col ">
+                                                        <h1 className="card-header text-center">{d.note}</h1>
+                                                        <Timer targetDate={d.expired_date}/>
+                                                        <h1 className="old-price">50</h1>
+                                                       
+                                                        <div class=" text-red-700 text-center" role="alert">
+                                                           You Save {d.value}{d.type == "percentage" ? ("%") : ("₪")} 
                                                         </div>
                                                     </div>
                                                    
@@ -256,6 +281,7 @@ function Home() {
                     
                 </div>
                 <div className="counter " >
+                    <h1 className=" fs-3 text-center m-2">Site statistics</h1>
                     <ScroolTrigger onEnter={() => { setCounterOn(true) }} onExit={() => { setCounterOn(false) }}>
                         {counterOn &&
                             <div className=" container p-1 d-flex  justify-around">
@@ -297,11 +323,12 @@ function Home() {
                 <div className="row divdesmap">
                     <div className="container d-flex justify-center col ">
                         <div className="card p-4 m-2 shadow desmap d-flex justify-center align-middle">
-                            <h1>Map of palestine</h1>
-                            <p>
+                            <h1 className=" text-center fs-5">Map of palestine</h1>
+                            <p className='text-left'>
                                 Welcome to the PalCars map
                                 On this map, click on the city you want to know about the companies available in this city. For example, when you click on the city of Hebron, the companies available in Hebron are displayed.
                             </p>
+                           
 
                         </div>
 

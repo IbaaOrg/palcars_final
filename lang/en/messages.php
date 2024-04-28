@@ -92,6 +92,8 @@ return [
     'pickuptime'=>'Pick Up Time',
     'dropoffdate'=>'Drop Off Date',
     'dropofftime'=>'Drop Off Time',
-    'SignUpWithGoogle'=>'Sign Up With Google'
+    'SignUpWithGoogle'=>'Sign Up With Google',
+    'Specialoffers'=>'Special offers'
+
 ];
 ?>
