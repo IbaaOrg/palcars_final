@@ -300,7 +300,7 @@ function Home() {
                                     <div className="fs-1  p-3">
 
                                         <CountUp start={0} end={userCount} duration={2} delay={0} className="  " />
-                                        +
+                                        
                                     </div>
                                     <h1 className="fs-3">Users</h1>
 
@@ -309,7 +309,7 @@ function Home() {
                                     <div className="fs-1  p-3">
 
                                         <CountUp start={0} end={userCount} duration={2} delay={0} className="  " />
-                                        +
+                                        
                                     </div>
                                     <h1 className="fs-3">Rented</h1>
 
@@ -318,7 +318,7 @@ function Home() {
                                     <div className="fs-1  p-3">
 
                                         <CountUp start={0} end={citycount} duration={2} delay={0} className="  " />
-                                        +
+                                        
                                     </div>
                                     <h1 className="fs-3">Citys</h1>
 
