@@ -85,7 +85,7 @@ const App = () => {
                 <Route path={"/register"} element={<SignUp />} />
                 <Route path={"/registerRenter"} element={<SignUpRenter />} />
 
-                <Route path={"/cars"} element={<Cars />} />
+                <Route path={"/cars"} element={<faverateContextProvider><Cars /></faverateContextProvider>} />
                 <Route path={"/cars/:id"} element={<CarDitails />} />
                 <Route path={"/test"} element={<CarCard/>}></Route>
                 <Route path={"/contact"} element={<Contact/>} />
@@ -108,7 +108,7 @@ const App = () => {
                     <Route path={"booking"} element={<Booking />} />
 
                     <Route path={"messages"} element={<Messages />} />
-                    <Route path={"Faverate"} element={<Faverate />} />
+                    <Route path={"Faverate"} element={<faverateContextProvider><Faverate /></faverateContextProvider>} />
                     <Route path={"editprofile"} element={<EditProfile />} />
                 </Route>
 
