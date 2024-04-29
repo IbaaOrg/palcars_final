@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import '../../../css/app.css'
 function City() {
     const searchParams = new URLSearchParams(location.search);
-    const city = searchParams.get("city");
+    const cityname = searchParams.get("city");
 
     const [companys,setCompanys]= useState([])
     const [nothing, setNothing] = useState(false)
@@ -14,21 +14,29 @@ function City() {
 
             });
             const data = response.data;
-            const citysarray=[];
-            for(let i =0 ; i<data.data.length ; i++){
-                if(data.data[i].city.city === city){
+            console.log(data.data)
+            const citysarray = [];
+            let foundCity = false;
+
+            for (let i = 0; i < data.data.length; i++) {
+                if (data.data[i].city.city === cityname) {
+
                     citysarray.push({
-                        owner: data.data[i].ownerCompany
-
-                    })
-
-                   // console.log(data.data[i].ownerCompany);
-                }
-                else{
-                    setNothing(true)
+                        owner: data.data[i].ownerCompany,
+                        location: data.data[i]
+                    });
+                    foundCity = true;
                 }
             }
-            setCompanys(citysarray)
+
+            if (foundCity) {
+                console.log(citysarray);
+                setCompanys(citysarray);
+                setNothing(false);
+            } else {
+                setCompanys([]);
+                setNothing(true);
+            }
            // console.log(data.data);
 
         } catch (error) {
@@ -60,6 +68,14 @@ function City() {
                                       <div className="card-body">
                                           <div className="card-header">
                                               {company.owner.name}
+
+                                          </div>
+                                          <div>
+                                          Location : 
+                                              {company.location.location}<br/>
+                                              {company.location.type}
+
+
                                           </div>
                                       </div>
                                   </div>
