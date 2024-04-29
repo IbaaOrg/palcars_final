@@ -61,14 +61,17 @@ function Booking() {
   return (
     loading?<Loading/>:(
     <div className='d-flex flex-column align-items-center mainBooking'>
-      <h3 className='fw-bold fs-4 py-3 '>My Booking</h3>
+      {user.role==="Renter"?<h3 className='fw-bold fs-4 py-3 '>My Booking</h3>:<h3 className='fw-bold fs-4 py-3 '>Booking from us</h3>}
       {bookings.map((item, index) => (
   <div key={item.id} id={item.id} className='minorBooking d-flex flex-wrap border py-2 px-4 m-3 d-flex align-items-center justify-content-between gap-5 w-50' onClick={handelBooking}>
     <span>Booking <span className='text-primary fw-bold'>#{index + 1}</span></span>
-    <p>
+    {user.role==='Renter'?<p>
       <span className="text-primary fw-bold">From : </span>
       {item.car.owner ? item.car.owner.name : 'Unknown Owner'} Company
-    </p>
+    </p>:<p>
+    <span className="text-primary fw-bold">From : </span>
+    {item.user_id.name ? item.user_id.name : 'Unknown Owner'} 
+  </p>}
     <span>
       <span className="text-primary fw-bold">Total Price : </span>
       {Math.round(item.amount)} ₪

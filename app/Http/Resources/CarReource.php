@@ -28,6 +28,8 @@ class CarReource extends JsonResource
             'year'=>$this->year,  
             'status'=>$this->status,
             'sub_images'=>CarImageResource::collection($this->images),
+            'Owner_Of_Car' => new OwnerResource($this->ownerUser),
+
            
         ];
         

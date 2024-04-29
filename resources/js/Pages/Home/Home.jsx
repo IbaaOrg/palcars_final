@@ -9,37 +9,27 @@ import Ads3 from '../../../../public/image/Ads3.jpg'
 import Ads4 from '../../../../public/image/Ads4.jpg'
 import Ads5 from '../../../../public/image/Ads5.jpg'
 import map from '../../../../public/image/map.png'
-//import $ from 'jquery';
-//import 'maphilight';
 import moment from 'moment';
 import Timer from '../../Componants/UI/Timer'
 import CountUp from 'react-countup'
 import ScroolTrigger from 'react-scroll-trigger'
-
-//import imghome from '../../../../public/image/homepage1.png'
-
 import '../../../css/HomeStyle/Home.css';
-
 import ScrollToTopButton from '../../Layout/ScrollToTopButton';
 import CardBasic from '../../Layout/Cards/CardBasic';
 import { useContext } from 'react';
 import { UserContext } from '../../Context/User';
 import CategoriesCar from './../Cars/CategoriesCar';
 import { useRef } from 'react';
-
 import { Swiper, SwiperSlide } from 'swiper/react';
-
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-
 import { Autoplay, EffectCoverflow, Pagination, Navigation } from 'swiper/modules';
 import Services from './../../Layout/Cards/Services';
 import { Link } from 'react-router-dom';
 import Loading from './../../Componants/UI/Loading';
 import { TranslateContext } from "../../Context/Translate";
-
 function Home() {
 
     const [remainingTime, setRemainingTime] = useState(moment.duration());
@@ -225,7 +215,6 @@ function Home() {
                 </div>
                 <div className=" d-flex justify-content-around mx-5">
                     <CardBasic />
-
                 </div>
                 
                 <div className=" offers ">
@@ -280,7 +269,7 @@ function Home() {
                                 )}
                             </Swiper>
                             <div className='d-flex justify-content-center align-items-center'>
-                                <Link className="btn btn-primary rounded m-5" to="/discounts">View All Deals</Link>
+                                <Link className="btn btn-primary rounded my-5" to="/discounts">View All Deals</Link>
                             </div>
                         </div>
 
@@ -290,7 +279,7 @@ function Home() {
                     
                 </div>
                 <div className="counter " >
-                    <h1 className=" fs-3 text-center m-2">Site statistics</h1>
+                    <h1 className=" fs-3 text-center my-2">Site statistics</h1>
                     <ScroolTrigger onEnter={() => { setCounterOn(true) }} onExit={() => { setCounterOn(false) }}>
                         {counterOn &&
                             <div className=" container p-1 d-flex  justify-around">
@@ -299,8 +288,8 @@ function Home() {
                                 <div className=" card p-4 shadow">
                                     <div className="fs-1  p-3">
 
-                                        <CountUp start={0} end={userCount} duration={2} delay={0} className="  " />
-                                        +
+                                        <CountUp start={0} end={userCount} duration={2} delay={1} className="  " />
+                                        
                                     </div>
                                     <h1 className="fs-3">Users</h1>
 
@@ -308,8 +297,8 @@ function Home() {
                                 <div className=" card p-4 ">
                                     <div className="fs-1  p-3">
 
-                                        <CountUp start={0} end={userCount} duration={2} delay={0} className="  " />
-                                        +
+                                        <CountUp start={0} end={userCount} duration={2} delay={1} className="  " />
+                                      
                                     </div>
                                     <h1 className="fs-3">Rented</h1>
 
@@ -317,8 +306,8 @@ function Home() {
                                 <div className=" card p-4 ">
                                     <div className="fs-1  p-3">
 
-                                        <CountUp start={0} end={citycount} duration={2} delay={0} className="  " />
-                                        +
+                                        <CountUp start={0} end={citycount} duration={2} delay={1} className="  " />
+                                        
                                     </div>
                                     <h1 className="fs-3">Citys</h1>
 
@@ -329,7 +318,7 @@ function Home() {
 
                     </ScroolTrigger>
                 </div>
-                <div className="row divdesmap">
+                <div className="d-flex divdesmap">
                     <div className="container d-flex justify-center col ">
                         <div className="card p-4 m-2 shadow desmap d-flex justify-center align-middle">
                             <h1 className=" text-center fs-5">Map of palestine</h1>

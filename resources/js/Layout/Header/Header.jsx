@@ -22,6 +22,7 @@ import logout from './../../NetWorking/logout';
 import { data } from "autoprefixer";
 import { TranslateContext } from "../../Context/Translate";
 import { useLocation, useNavigate } from "react-router-dom";
+import { IoIosArrowDown } from "react-icons/io";
 
 function Header({ islogined }) {
     const { changeLanguage, translates } = useContext(TranslateContext);
@@ -34,6 +35,7 @@ function Header({ islogined }) {
     const [countUnreadNotification, setCountUnreadNotification] = useState(0);
     const [notifications, setNotifications] = useState([]);
     const [goTo, setGoTo] = useState("");
+    const[showList,setShowList]=useState(false);
     const getCountNotification = async () => {
         const token = localStorage.getItem("token");
         if (token ) {
@@ -46,10 +48,7 @@ function Header({ islogined }) {
                 const { unread_count } = await response.data.data; // Assuming response structure is { data: { unread_count: ... } }
                 setCountUnreadNotification(unread_count);
             } catch (error) {
-                console.error(
-                    "Error fetching count of unread notifications:",
-                    error
-                );
+                
             }
         }
     };
@@ -171,7 +170,9 @@ function Header({ islogined }) {
 
         })
         }
-
+const toggleList=()=>{
+    setShowList(!showList);
+}
 
     return (
         <div class="d-flex  justify-content-around">
@@ -408,8 +409,31 @@ function Header({ islogined }) {
                                         />
                                     )}
                                 </NavLink>
-                                {user && <p className="   fw-bold">{user.name}</p>}
+                                <div class="nav-item dropdown d-flex align-items-center justify-content-center translate">
+                            <Link
+                                class="nav-link text-black text-capitalize d-flex align-items-center"
+                                href="#"
+                                role="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
 
+                            >
+                                {user&&user.name}
+                                <IoIosArrowDown size={30} className="px-2"/>
+
+                            </Link>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <span
+                                        class="dropdown-item"
+                                        data-lang="ar"
+                                        onClick={(e) => (navigator('/profile'))}
+                                    >
+                                        {"My Profile"}
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
                                 {role === "Company" ? (
                                     <NavLink
                                         to="/dashbord"
