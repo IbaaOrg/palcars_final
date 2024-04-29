@@ -3,8 +3,8 @@ import '../../../css/AboutStyle/About.css'
 import videoSource from '../../../../public/image/bgabout1.mp4'; // Local video (replace with your video filename)
 import man from '../../../../public/image/man.jpg'
 import woman from '../../../../public/image/woman.jpg'
-import about from '../../../../public/image/undraw_navigator_a479.png'
-import valus from '../../../../public/image/undraw_Stock_prices_re_js33.png'
+import about from '../../../../public/image/undraw_navigator_a479 (1).png'
+import valus from '../../../../public/image/undraw_Stock_prices_re_js33 (1).png'
 
 
 

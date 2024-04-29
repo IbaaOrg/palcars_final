@@ -16,6 +16,8 @@ import { FaStarOfLife } from "react-icons/fa";
 import { getAuth, updatePassword } from "firebase/auth";
 import { BiShowAlt } from "react-icons/bi";
 import { IoEyeOffOutline } from "react-icons/io5";
+import loginimage from '../../../../public/image/undraw_undraw_undraw_undraw_sign_up_ln1s_-1-_s4bc_-1-_ee41__1__3xti-removebg-preview.png'
+
 function SignUpRenter() {
     const { translates } = useContext(TranslateContext);
     const navigate = useNavigate();
@@ -139,6 +141,9 @@ function SignUpRenter() {
 
     return (
         <div class="d-flex justify-content-around cont">
+            <div>
+                <img src={loginimage} className="w-100" />
+            </div>
             <div class="form-container  m-2">
                 <div class="social-buttons">
                     <button class="social-button apple" onClick={byGoogle}>
