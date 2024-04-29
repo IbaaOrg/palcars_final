@@ -105,10 +105,10 @@ class User extends AuthenticatableUser implements Authenticatable
     {
         return $this->hasMany(Notification::class, 'receiver_id');
     }
-    /*public function bills()
+    public function bills()
     {
         return $this->hasMany(Bill::class);
-    }*/
+    }
     // //all rentals
     // public function rentals()
     // {

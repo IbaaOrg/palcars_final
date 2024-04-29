@@ -28,7 +28,11 @@ class UserController extends Controller
 {
     
     use ResponseTrait;
-    
+     public function count(Request $request)
+    {
+        $count = User::count();
+        return  $this->success( $count);
+    }
     public function infouser(Request $request) {
         return $this->success(new UserInfoResource($request->user()));
     }
@@ -345,5 +349,9 @@ class UserController extends Controller
         return $this->Success(new AllUserResource($user));
            return $request->user();
 
+    }
+    public function getRenters(Request $request){
+        $renterUsers = User::where('role', 'renter')->get();
+        return $this->success(AllUserResource::collection($renterUsers));
     }
 }

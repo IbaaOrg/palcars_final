@@ -1,0 +1,32 @@
+.countdown-timer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.timer-item {
+    margin: 0 10px;
+    font-size: 16px;
+    color: #333;
+    background-color: #333;
+    border-radius: 5px;
+    color: white;
+    padding: 5px;
+}
+
+.timer-label {
+    font-size: 12px;
+    color: #666;
+}
+
+.item {
+    margin: 5px;
+    /* Adjust margin as needed */
+    background-color: #f9f9f9;
+    padding: 10px;
+}

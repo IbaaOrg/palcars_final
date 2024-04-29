@@ -17,30 +17,17 @@ import axios from "axios";
 
 import Login from "../../Auth/Login/Login";
 import SignUp from "../../Auth/Login/SignUp";
+import logout from './../../NetWorking/logout';
 
 import { data } from "autoprefixer";
 import { TranslateContext } from "../../Context/Translate";
+import { useLocation, useNavigate } from "react-router-dom";
+import { IoIosArrowDown } from "react-icons/io";
 
 function Header({ islogined }) {
     const { changeLanguage, translates } = useContext(TranslateContext);
-    /*  
-     const [user,setUser]=useState(null)
-     setUser(useUser()) ;
-    console.log("user")
-    console.log(user) 
+  const navigator = useNavigate()
 
-
-//    const user = useUser();
-
-      const user = useUser();
-    
-console.log("user")
-    console.log(user)
-     
-//const [useUser ,setUseUser] = useState(null)
-
-    
-    const [role, setRole] = useState(""); */
 
     const [role, setRole] = useState("");
     const [username, setUserName] = useState("");
@@ -48,9 +35,10 @@ console.log("user")
     const [countUnreadNotification, setCountUnreadNotification] = useState(0);
     const [notifications, setNotifications] = useState([]);
     const [goTo, setGoTo] = useState("");
+    const[showList,setShowList]=useState(false);
     const getCountNotification = async () => {
         const token = localStorage.getItem("token");
-        if (token) {
+        if (token ) {
             try {
                 const response = await axios.get("/countNotifications", {
                     headers: {
@@ -60,10 +48,7 @@ console.log("user")
                 const { unread_count } = await response.data.data; // Assuming response structure is { data: { unread_count: ... } }
                 setCountUnreadNotification(unread_count);
             } catch (error) {
-                console.error(
-                    "Error fetching count of unread notifications:",
-                    error
-                );
+                
             }
         }
     };
@@ -174,6 +159,20 @@ console.log("user")
     const [openlogin, setOpenlogin] = useState(false);
     const [opensignup, setOpensignup] = useState(false);
     const [showprofile, setShowprofile] = useState(false);
+
+
+    const out = async () => {
+        await logout((out) => {
+
+            navigator("/")
+
+            window.location.reload()
+
+        })
+        }
+const toggleList=()=>{
+    setShowList(!showList);
+}
 
     return (
         <div class="d-flex  justify-content-around">
@@ -410,11 +409,35 @@ console.log("user")
                                         />
                                     )}
                                 </NavLink>
-                                {user && <p className="   fw-bold">{user.name}</p>}
+                                <div class="nav-item dropdown d-flex align-items-center justify-content-center translate">
+                            <Link
+                                class="nav-link text-black text-capitalize d-flex align-items-center"
+                                href="#"
+                                role="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+
+                            >
+                                {user&&user.name}
+                                <IoIosArrowDown size={30} className="px-2"/>
+
+                            </Link>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <span
+                                        class="dropdown-item"
+                                        data-lang="ar"
+                                        onClick={(e) => (navigator('/profile'))}
+                                    >
+                                        {"My Profile"}
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
                                 {role === "Company" ? (
                                     <NavLink
                                         to="/dashbord"
-                                        class="btn  dashbord ml-5 "
+                                        class="btn btn-primary dashbord ml-5 "
                                     >
                                         {" "}
                                         Dashbord
@@ -422,6 +445,8 @@ console.log("user")
                                 ) : (
                                     <div></div>
                                 )}
+                                <button type="button" class="btn btn-outline-danger" onClick={out} > Logout</button>
+
                             </>
                         ) : (
                             <>

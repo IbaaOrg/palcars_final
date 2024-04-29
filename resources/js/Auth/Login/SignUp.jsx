@@ -14,20 +14,19 @@ import { IoCamera } from "react-icons/io5";
 import { doc } from "firebase/firestore";
 import { BiShowAlt } from "react-icons/bi";
 import { IoEyeOffOutline } from "react-icons/io5";
+import loginimage from '../../../../public/image/undraw_undraw_undraw_undraw_sign_up_ln1s_-1-_s4bc_-1-_ee41__1__3xti-removebg-preview.png'
+
 function SignUp() {
     const { translates } = useContext(TranslateContext);
     const navigate = useNavigate();
     const [errors, setErrors] = useState(null);
     const [role, setRole] = useState("Company");
-
     const [error, setError] = useState(null);
-
     const [seccsses, setSeccsses] = useState(null);
-
     const [preview, setPreview] = useState(null);
     const [previewd, setPreviewd] = useState(null);
-    const[visibale,setVisible]=useState(false);
-
+    const [visibale, setVisible] = useState(false);
+    const [loading, setLoading] = useState(false);
     const file = useRef(null);
     const filed = useRef(null);
 
@@ -67,7 +66,7 @@ function SignUp() {
         };
         reader.readAsDataURL(file.current);
     };
-   
+
     const set = (e) => {
         form.current = { ...form.current, [e.target.name]: e.target.value };
     };
@@ -82,7 +81,6 @@ function SignUp() {
 
     const reg = async (e) => {
         e.preventDefault();
-
         const validatedata = await validate();
         setError(null);
 
@@ -92,10 +90,11 @@ function SignUp() {
         formData.append("email", form.current.email);
         formData.append("password", form.current.password);
         formData.append("phone", form.current.phone);
-        formData.append("description",form.current.description);
+        formData.append("description", form.current.description);
         if (file.current) {
             formData.append("photo_user", file.current);
         }
+        setLoading(true);
 
         await Signup(
             formData,
@@ -112,6 +111,7 @@ function SignUp() {
                 setError(msg);
             }
         );
+        setLoading(false);
     };
 
     // const handleDirectionChange=()=>{
@@ -121,32 +121,35 @@ function SignUp() {
     //     }
     // }
     // Function to detect direction change
-function handleDirectionChange(event) {
-    const direction = event.target.dir;
-    const cardImgLabel = document.querySelector('.cardImg label');
-  
-    // Check if direction changed to RTL
-    if (direction === 'rtl') {
-      // Apply adjusted styles for RTL
-      cardImgLabel.style.right = '70px';
-      cardImgLabel.style.left = 'auto';
-    } else {
-      // Apply default styles for LTR
-      cardImgLabel.style.left = '70px';
-      cardImgLabel.style.right = 'auto';
+    function handleDirectionChange(event) {
+        const direction = event.target.dir;
+        const cardImgLabel = document.querySelector(".cardImg label");
+
+        // Check if direction changed to RTL
+        if (direction === "rtl") {
+            // Apply adjusted styles for RTL
+            cardImgLabel.style.right = "70px";
+            cardImgLabel.style.left = "auto";
+        } else {
+            // Apply default styles for LTR
+            cardImgLabel.style.left = "70px";
+            cardImgLabel.style.right = "auto";
+        }
     }
-  }
-  
-  // Listen for direction change event
-  document.addEventListener('DOMContentLoaded', () => {
-    // Initial setup based on default direction
-    handleDirectionChange({ target: document.documentElement });
-  
-    // Listen for direction change
-    document.addEventListener('dirchange', handleDirectionChange);
-  });
+
+    // Listen for direction change event
+    document.addEventListener("DOMContentLoaded", () => {
+        // Initial setup based on default direction
+        handleDirectionChange({ target: document.documentElement });
+
+        // Listen for direction change
+        document.addEventListener("dirchange", handleDirectionChange);
+    });
     return (
         <div class="d-flex justify-content-around cont">
+            <div>
+                <img src={loginimage} className="w-100" />
+            </div>
             <div class="form-container  m-2">
                 <div class="social-buttons">
                     <button class="social-button apple" onClick={byGoogle}>
@@ -198,9 +201,11 @@ function handleDirectionChange(event) {
                     <div className="row">
                         <div class="form-group col">
                             <div className="d-flex">
-                            <label for="email">{translates.Email}</label>
-                            <FaStarOfLife size={5} className='text-danger'/>
-
+                                <label for="email">{translates.Email}</label>
+                                <FaStarOfLife
+                                    size={5}
+                                    className="text-danger"
+                                />
                             </div>
                             <input
                                 required
@@ -212,7 +217,10 @@ function handleDirectionChange(event) {
                             />
                         </div>
                         <div class="form-group col">
-                            <label for="name">{translates.FullName}<span className=' text-red-600'>  *</span></label>
+                            <label for="name">
+                                {translates.FullName}
+                                <span className=" text-red-600"> *</span>
+                            </label>
                             <input
                                 required=""
                                 onChange={set}
@@ -226,10 +234,12 @@ function handleDirectionChange(event) {
                     <div className="row">
                         <div class="form-group col">
                             <div className="d-flex">
-                            <label for="phone">{translates.Phone}</label>
+                                <label for="phone">{translates.Phone}</label>
 
-                            <FaStarOfLife size={5} className='text-danger'/>
-
+                                <FaStarOfLife
+                                    size={5}
+                                    className="text-danger"
+                                />
                             </div>
                             <input
                                 required=""
@@ -242,25 +252,35 @@ function handleDirectionChange(event) {
                         </div>
                         <div class="form-group col">
                             <div className="d-flex">
-                            <label for="password">{translates.Password}</label>
-                            <FaStarOfLife size={5} className='text-danger'/>
-
+                                <label for="password">
+                                    {translates.Password}
+                                </label>
+                                <FaStarOfLife
+                                    size={5}
+                                    className="text-danger"
+                                />
                             </div>
-                               <div className="password-input-container">
-                            <input
-                                type={visibale?'text':'password'}
-                                required=""
-                                id={"password"}
-                                name="password"
-                                placeholder={translates.Enteryourpassword}
-                                className="form-control"
-                                onChange={set}
-                            />
-                            <div className="p-2 icon-container">
-                            {visibale?<BiShowAlt onClick={()=>setVisible(false)} />:<IoEyeOffOutline onClick={()=>setVisible(true)}/>}
-                            </div>
-                           
-
+                            <div className="password-input-container">
+                                <input
+                                    type={visibale ? "text" : "password"}
+                                    required=""
+                                    id={"password"}
+                                    name="password"
+                                    placeholder={translates.Enteryourpassword}
+                                    className="form-control"
+                                    onChange={set}
+                                />
+                                <div className="p-2 icon-container">
+                                    {visibale ? (
+                                        <BiShowAlt
+                                            onClick={() => setVisible(false)}
+                                        />
+                                    ) : (
+                                        <IoEyeOffOutline
+                                            onClick={() => setVisible(true)}
+                                        />
+                                    )}
+                                </div>
                             </div>
                             {/*  {errors.password &&
                                 <div class=" text-red-600 mt-1">
@@ -271,7 +291,10 @@ function handleDirectionChange(event) {
                     </div>
                     <div className="row">
                         <div class="form-group col ">
-                            <label for="photo">{translates.PhotoUser}<span className=' text-red-600'>  *</span></label>
+                            <label for="photo">
+                                {translates.PhotoUser}
+                                <span className=" text-red-600"> *</span>
+                            </label>
                             <div className="cardImg" id={"photo"}>
                                 <img
                                     id="user-img"
@@ -292,19 +315,23 @@ function handleDirectionChange(event) {
                         </div>
                         <div class="form-group col ">
                             <label for="text">{translates.description}</label>
-                            <textarea name="description" id="text" cols="3" rows="4" width={"20px"} className="border border-black rounded p-2" placeholder={translates.enter} onChange={set}></textarea>
+                            <textarea
+                                name="description"
+                                id="text"
+                                rows="4"
+                                className="border border-black rounded p-2 desc"
+                                placeholder={translates.enter}
+                                onChange={set}
+                            ></textarea>
                         </div>
                     </div>
-
-                 
-                    
-                    
 
                     <hr />
                     <input
                         type="submit"
                         class="form-submit-btn"
-                        value="Sign Up"
+                        value={loading ? "Loading..." : "Sign Up"}
+                        disabled={loading}
                     />
                 </form>
             </div>

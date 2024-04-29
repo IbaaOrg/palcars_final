@@ -3,6 +3,11 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
+use App\Http\Resources\CityResource;
+use App\Http\Resources\LocationResource;
+use App\Http\Resources\SimpleCarResource;
+use App\Http\Resources\SimpleUserResource;
+use App\Http\Resources\SimpleMethodResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class SimpleBillResource extends JsonResource
@@ -18,11 +23,16 @@ class SimpleBillResource extends JsonResource
         // Make sure $this->resource is an instance of a single model
         return [
             'id' => $this->id,
-            'user_id' => $this->user_id,
+            'user_id' => new SimpleUserResource($this->user),
+            'phone'=>$this->phone,
+            'address'=>$this->address,
+            'city'=>new CityResource($this->city),
             'amount'=>$this->amount,
-            'car_id'=>$this->car_id,
-            'method_id'=>$this->method_id,
-            'discount_id'=>$this->discount_id,
+            'car'=>new SimpleCarResource($this->car),
+            'method'=>new SimpleMethodResource($this->method),
+            'amount'=>$this->amount,
+            'pickup_location'=>new LocationResource($this->pickup_location),
+            'dropoff_location'=>new LocationResource($this->dropoff_location),
             'start_date' => $this->start_date,
             'end_date' => $this->end_date,
             'start_time' => $this->start_time,

@@ -13,6 +13,59 @@
 .ltr {
     direction: ltr;
 }
+textarea {
+    resize: none;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+}
+.sidebarMain {
+    min-height: 100vh;
+    background-color: white;
+}
+.notesmain {
+    margin-top: 50%;
+    width: 90%;
+    margin: auto;
+    min-height: 400px;
+    display: flex ;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.cardnote {
+    min-height: 210px;
+    margin: 0 auto;
+    width: 30%;
+    border: #007bff solid 1px ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    font-weight: 600;
+    border-radius: 18px;
+    box-shadow: 5px 5px 5px 5px #8ec3fb65;
+    transform: scale(1);
+    transition: all 1s ease;
+}
+.cardnote:hover {
+    transform: scale(1.04);
+}
+@media  screen and (max-width: 650px) {
+    .cardnote{
+        height: 200px;
+        margin: 10px auto;
+    width: 60%;
+    }
+}
+.mainrenternote {
+    width: 90%;
+    margin: auto;
+    margin-top: 8%;
+}
+.mainlocation {
+    width: 90%;
+    margin: auto;
+    margin-top: 15%; 
+}
 .main-btn:focus {
     background-color: #3563E9;
     color: white;
@@ -30,15 +83,17 @@
         color: #3563E9 !important;
         border-radius: 10px !important;
 }
-
+.tablewidth {
+    width: 100%;
+    margin: auto;
+}
 .Home{
     width: 100%;
     padding: 0;
 }
 .view{
-    padding: 0 !important;
-    margin: 0 !important;
-    background-color: #F0F8FF;
+  
+    background-color: #f3f3f3;
 }
 
 .scroll-to-top {
@@ -126,6 +181,10 @@
     border-radius: 5px;
     margin-right: 20px;
 }
+.imgdetials {
+    width: calc(100% / 3);
+    height: 200px;
+}
 
 .car .info {
     flex: 1;
@@ -202,8 +261,9 @@ html::-webkit-scrollbar-track{
 }
 .cardmain{
         padding: 20px;
+       /*  margin-top: 10px !important; */
             background-color: #f1f1f1;
-            border: 1px solid #ddd;
+            border: 1px solid #cacaca;
             border-radius: 5px;
             margin-bottom: 20px;
 }
@@ -286,9 +346,10 @@ html::-webkit-scrollbar-track{
 }
 
 .image-preview-container img {
-    width: 100px;
+    width: 300px;
     /* Adjust image width as desired */
-    height: 100px;
+    height: 200px;
+    border-radius: 5px;
     /* Adjust image height as desired */
     margin: 5px;
     object-fit: cover;
@@ -306,9 +367,9 @@ html::-webkit-scrollbar-track{
     margin: auto;
 border-radius: 8px;
 }
-.imgcar {
+.imgcarbill {
     border: solid 2px rgb(226, 226, 226);
-    box-shadow: 1px 1px 1px 2px #4795e9b9;
+    box-shadow: 1px 1px 1px 3px #4fa1f9b9;
     width: 200px;
     height: 160px;
     border-radius: 10px;
@@ -319,4 +380,97 @@ border-radius: 8px;
 }
 .selected {
     color: #f1d609f0;
+}
+.billing-label {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.profile {
+    display: flex;
+}
+
+.profileRight {
+    flex: 9;
+}
+
+.profileCover {
+    height: 320px;
+    position: relative;
+    margin: 0;
+
+}
+
+.profileCoverImg {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+
+}
+
+.profileUserImg {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 150px;
+    border: 3px solid white;
+}
+
+.profileInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.profileInfoName {
+    font-size: 24px;
+}
+
+.profileInfoDesc {
+    font-weight: 300;
+}
+
+.profileRightBottom {
+    display: flex;
+}
+
+.profilebuttons {
+    background-color: #ebebeb;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.profilebuttons a:hover {
+    background-color: white !important;
+    border-radius: 5px !important;
+    color: black !important;
+}
+
+.profilebuttons a:focus {
+    background-color: white !important;
+    border-radius: 5px !important;
+    color: black !important;
+}
+
+.notaskshow{
+    background-image: url(../../public/image/undraw_No_data_re_kwbl.png);
+    background-size:300px;
+        /* or contain, or specify dimensions */
+        background-position: center;
+        /* or specify position */
+        background-repeat: no-repeat;
+        /* or repeat, repeat-x, repeat-y */
+    height: 80vh;
 }

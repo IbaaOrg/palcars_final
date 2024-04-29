@@ -17,31 +17,42 @@ function VehiclesDashbord() {
     const [user, setUser] = useState([]);
     const [loading, setLoading] = useState(false);
 
+    const deleteVehical =async(e)=>{
+        e.preventDefault();
+        const token = localStorage.getItem("token")
+        const clickedId = e.target.id; // Get ID from the clicked button
+        setMessage('Deleted Car ...')
+        alert(`delete car No ${clickedId}`)
+       
+        try {
+            var response = await axios.delete(`cars/${clickedId}`, {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            })
+            const res = response.data
+            if (res.status === true) {
+               
+                setMessage("Done")
 
- useEffect(() => {
-     //setLoading(false)
-    /*  const token = localStorage.getItem("token")
-    
+                //window.location.reload()
 
-try{
-    const response = axios.get('/carsuser',{
-        headers: {
-            "Authorization": `Bearer ${token}`
+                //console.log(res.data.id)
+
+               
+
+            }
+
+        } catch (e) {
+            console.log(e)
+            //alert(e.response.data.msg)
+          
         }
-    })
-
-    const res = response.data
 
 
-   
-    console.log(response)
+    }
+ useEffect(() => {
     
-       // setData(res);
-
-}catch(error) {
-
-    console.error('Error fetching data:', error);
-} */
      try {
          const token = localStorage.getItem("token");
 
@@ -62,43 +73,9 @@ try{
      } catch (error) {
          console.error('Error fetching data:', error);
      }
-  }, []); 
+  }, [message]); 
     // /cars/{id}   post
-    const deleteVehical =async()=>{
-        const token = localStorage.getItem("token")
-        const clickedId = event.target.id; // Get ID from the clicked button
-
-        alert(`delete car No ${clickedId}`)
-       
-        try {
-            console.log(token)
-            var response = await axios.delete(`cars/${clickedId}`, {
-                headers: {
-                    "Authorization": `Bearer ${token}`
-                }
-            })
-            const res = response.data
-            if (res.status === true) {
-               
-                console.log("Deleted Car")
-                setMessage("Deleted Car")
-                console.log(res)
-                //window.location.reload()
-
-                //console.log(res.data.id)
-
-               
-
-            }
-
-        } catch (e) {
-            console.log(e)
-            //alert(e.response.data.msg)
-          
-        }
-
-
-    }
+ 
     return (
         <div>{
             loading ? (
@@ -127,8 +104,8 @@ try{
                     </div>
                     
                 </div>
-                <div>
-                    <table class="table">
+                <div className='tablewidth '>
+                    <table className='table'>
                         <thead>
                             <tr>
                                 <th scope="col">Car Number</th>
@@ -179,8 +156,13 @@ try{
                     </table>
                            
                 </div>
-                        {message && (
+                        {message==='Deleted Car ...' && (
                                 <div class="alert alert-danger" role="alert">
+                                    {message}
+                                </div>
+                            )}
+                                {message==='Done' && (
+                                <div class="alert alert-success" role="alert">
                                     {message}
                                 </div>
                             )}

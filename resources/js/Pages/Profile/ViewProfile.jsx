@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import Loading from '../../Componants/UI/Loading';
-import { useNavigate } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
 function ViewProfile({id}) {
 
   const navigate = useNavigate();
@@ -105,20 +104,21 @@ function ViewProfile({id}) {
               <p>Email :  {user.email}</p>
                 <p>Phone : {user.phone}</p>
                 <p>Locations :</p>
-                {locations && (<>
+                <div className="overflow-auto"> {locations && (<>
 
-                  {locations.map(l => (
-                    <div className='d-flex ' key={l.id}>
-                      <p> {l.location}</p>
-                      <p> {l.type}</p>
-                    </div>
+{locations.map(l => (
+  <div className='d-flex ' key={l.id}>
+    <p> {l.location}</p>
+    <p> {l.type}</p>
+  </div>
 
-                  ))}
-                </>)}
+))}
+</>)}</div>
+               
 
             </div>
             <div className='mt-4'>
-                <a href="#" class="card-link btn btn-outline-primary" onClick={getCarByCompany}>All Cars</a>
+                <Link to={`/carofcompany/${id}`} class="card-link btn btn-outline-primary">All Cars</Link>
                 <a href="#" class="card-link btn btn-success">Message</a>
             </div>
             

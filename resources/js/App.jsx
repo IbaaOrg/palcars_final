@@ -7,7 +7,14 @@ import Nav from "./Layout/Nav";
 import Header from "./Layout/Header/Header";
 import Home from "./Pages/Home/Home";
 
-import { BrowserRouter, Route, Routes, Link, Outlet, useLocation } from "react-router-dom";
+import {
+    BrowserRouter,
+    Route,
+    Routes,
+    Link,
+    Outlet,
+    useLocation,
+} from "react-router-dom";
 import About from "./Pages/About/About";
 import Cars from "./Pages/Cars/Cars";
 import { ToastContainer } from "react-toastify";
@@ -25,6 +32,8 @@ import Faverate from "./Pages/Profile/Faverate";
 import NotFound from "./Layout/Errors/NotFound";
 import AddCar from "./Pages/Dashbord/CarsOperations/AddCar";
 import EditCar from "./Pages/Dashbord/CarsOperations/EditCar";
+import RenterNote from "./Pages/Dashbord/RenterNote";
+import AllRenterNotes from "./Pages/Dashbord/AllRenterNotes";
 import ProtectedRoute from "./Componants/ProtectedRoute";
 import Login from "./Auth/Login/Login";
 import SignUp from "./Auth/Login/SignUp";
@@ -39,20 +48,32 @@ import CarDitails from "./Pages/Cars/CarDitails";
 import TranslateContextProvider from "./Context/Translate";
 import AddImage from "./Pages/Dashbord/CarsOperations/AddImage";
 import { useTranslateContext } from "./Context/Translate";
-import '../css/app.css'
+import "../css/app.css";
 import SignUpRenter from "./Auth/Login/SignUpRenter";
 import UserContextProvider from "./Context/User";
 import ViewCar from "./Pages/Dashbord/CarsOperations/ViewCar";
-import FilteredCars from './Pages/Cars/FilteredCars';
+import FilteredCars from "./Pages/Cars/FilteredCars";
 import CarCard from "./Pages/Cars/CarCard";
 import Bill from "./Pages/Bill/Bill";
+import CarsCompany from "./Pages/Cars/CarsCompany";
+import Reviews from './Pages/Profile/Reviews';
+import DiscountsDashbord from "./Pages/Dashbord/DiscountsDashbord";
+import LocationDashbord from "./Pages/Dashbord/LocationsDashbord";
+import Discounts from "./Pages/Discounts/Discounts";
+import NotesDashboard from './Pages/Dashbord/NotesDashboard';
+import AllDiscounts from "./Pages/Dashbord/AllDiscounts";
+import City from "./Pages/Citys/City";
+import AllLocations from "./Pages/Dashbord/AllLocations";
+import { MdAddLocation } from "react-icons/md";
 import LocationsDashbord from "./Pages/Dashbord/LocationsDashbord";
+import Report from "./Pages/Bill/Report";
 
+//LocationDashbord
 const App = () => {
     const { language } = useTranslateContext();
 
     const [islogined, setIslogined] = useState(false);
-   const location= useLocation();
+    const location = useLocation();
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -61,12 +82,12 @@ const App = () => {
         }
     }, []);
     const showHeaderFooter =
-    location.pathname !== "/role" &&
-    location.pathname !== "/password_reset" &&
-    location.pathname !== "/forgetpassword";
+        location.pathname !== "/role" &&
+        location.pathname !== "/password_reset" &&
+        location.pathname !== "/forgetpassword";
     return (
         <div className={language === "ar" ? "rtl " : "ltr"}>
-          { showHeaderFooter &&<Header islogined={islogined} />}
+            {showHeaderFooter && <Header islogined={islogined} />}
 
             <Routes>
                 <Route
@@ -77,22 +98,26 @@ const App = () => {
                         </ProtectedRouteCompany>
                     }
                 />
+                <Route path={"/city"} element={<City/>} />
+
                 <Route path={"/role"} element={<Role />} />
                 <Route path={"/about"} element={<About />} />
-                <Route path={"/bill/:id"} element={<Bill/> }/>
-              
+                <Route path={"/bill/:id"} element={<Bill />} />
                 <Route path={"/login"} element={<Login />} />
                 <Route path={"/register"} element={<SignUp />} />
                 <Route path={"/registerRenter"} element={<SignUpRenter />} />
 
-                <Route path={"/cars"} element={<faverateContextProvider><Cars /></faverateContextProvider>} />
-                <Route path={"/cars/:id"} element={<CarDitails />} />
-                <Route path={"/test"} element={<CarCard/>}></Route>
-                <Route path={"/contact"} element={<Contact/>} />
-                <Route   path={"/filteredcar"}
-                        element={<FilteredCars/>}>
-                    </Route>
 
+                <Route path={"/cars"} element={<faverateContextProvider><Cars /></faverateContextProvider>} />
+
+                <Route path={"/carofcompany/:id"} element={<CarsCompany/>}/>
+                <Route path={"/cars"} element={<Cars />} />
+                <Route path={"/cars/:id"} element={<CarDitails />} />
+                <Route path={"/test"} element={<CarCard />}></Route>
+                <Route path={"/contact"} element={<Contact />} />
+                <Route path={"/discounts"} element={<Discounts/>} />
+                <Route path={"/filteredcar"} element={<FilteredCars />}></Route>
+                <Route path={"/report"} element={<Report />}></Route>
                 <Route
                     path={"/profile"}
                     element={
@@ -101,11 +126,12 @@ const App = () => {
                         </ProtectedRoute>
                     }
                 >
-                    
                     <Route path={""} element={<UserInfo />} />
 
                     <Route path={"information"} element={<UserInfo />} />
                     <Route path={"booking"} element={<Booking />} />
+                    <Route path={"reviews"} element={<Reviews/>} />
+
 
                     <Route path={"messages"} element={<Messages />} />
                     <Route path={"Faverate"} element={<faverateContextProvider><Faverate /></faverateContextProvider>} />
@@ -126,15 +152,23 @@ const App = () => {
                     <Route
                         path={"VehiclesDashbord"}
                         element={<VehiclesDashbord />}
-                    >
-
-
-                    </Route>
+                    ></Route>
                     <Route
                         path={"EmployeeDashbord"}
                         element={<EmployeeDashbord />}
                     />
                     <Route path={"ChatsDashbord"} element={<ChatsDashbord />} />
+                    <Route
+                        path={"NotesDashboard"}
+                        element={<NotesDashboard/>}
+                    />
+                    <Route
+                    path={"NotesDashboard/specificrenter"}
+                    element={<RenterNote/>}/>
+                         <Route
+                    path={"NotesDashboard/allusers"}
+                    element={<AllRenterNotes/>}
+                    />
                     <Route
                         path={"AccessDashbord"}
                         element={<AccessDashbord />}
@@ -145,22 +179,33 @@ const App = () => {
                     />
                     <Route
                         path={"LocationDashbord"}
-                        element={<LocationsDashbord />}
+                        element={<AllLocations/>}
                     />
-                    <Route path={"addvehical"} element={<AddCar />} >
+                    <Route path={"addLocation"}
+                    element={<LocationsDashbord/>}/>
+                    <Route
+                        path={"DiscountsDashbord"}
+                        element={<AllDiscounts/>}
+                    />
+                    <Route path={"addDiscount"} element={<DiscountsDashbord/>}></Route>
 
-                    </Route>
-                    <Route path={"VehiclesDashbord/editvehical/:id"} element={<EditCar />} />
-                    <Route path={"VehiclesDashbord/viewvehical/:id"} element={<ViewCar/>} />
-
+                    <Route path={"addvehical"} element={<AddCar />}></Route>
+                    <Route
+                        path={"VehiclesDashbord/editvehical/:id"}
+                        element={<EditCar />}
+                    />
+                    <Route
+                        path={"VehiclesDashbord/viewvehical/:id"}
+                        element={<ViewCar />}
+                    />
                 </Route>
                 <Route path={"/password_reset"} element={<ResetPassword />} />
 
                 <Route path={"/notfound"} element={<NotFound />} />
                 <Route path={"/forgetpassword"} element={<ForgetPassword />} />
             </Routes>
-            { showHeaderFooter &&<Footer />}
-            </div>  
+            {showHeaderFooter && <Footer />}
+        </div>
     );
 };
 
@@ -169,15 +214,13 @@ const root = createRoot(contenter);
 
 root.render(
     <React.StrictMode>
-                <ToastContainer />
-
-        <TranslateContextProvider>
-            <UserContextProvider>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
+        <ToastContainer />
+        <UserContextProvider>
+            <TranslateContextProvider>
+                <BrowserRouter>
+                    <App />
+                </BrowserRouter>
+            </TranslateContextProvider>
         </UserContextProvider>
-        </TranslateContextProvider>
-        
     </React.StrictMode>
 );

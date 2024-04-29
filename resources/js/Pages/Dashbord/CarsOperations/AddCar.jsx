@@ -11,12 +11,18 @@ function AddCar() {
 
   const [type,setType] = useState(null)
   const [colors, setColors] = useState(null)
-  const [color, setColor] = useState(null)
+  const [color, setColor] = useState('')
+  const[loading,setLoading]=useState(false);
   const navigate = useNavigate();
 
   const [next, setNext] = useState(false)
   const [id, setId] = useState(null)
-const [price,setPrice]=useState(0);
+  const [price,setPrice]=useState(0);
+  const [errorImage,setErrorImage]=useState('');
+  const [loadImage,setLoadImage]=useState(false);
+  const [errorPrice,setErrorPrice]=useState('');
+  const [loadPrice,setLoadPrice]=useState(false);
+  const[success,setSuccess]=useState(false);
 
  
 
@@ -26,9 +32,8 @@ const [price,setPrice]=useState(0);
   for (let year = currentYear; year >= 1900; year--) {
     years.push(year);
   }
-
-  const numbers = [2, 4, 5, 6, 8,];
-  const numbersDoors = [2, 3, 4];
+  const numbers = [ 1 ,2, 4, 5, 7, 8, 9, 10,20];
+  const numbersDoors = [2,4,5];
   const numbersBags = [1, 2, 3, 4, 5, 6, 7, 8];
 const pickuplocations=[];
 
@@ -62,13 +67,13 @@ const pickuplocations=[];
     "car_number": null,
     "make": null,
     "model": null,
-    "year": null,
-    "seats": null,
-    "doors": null,
-    "bags": null,
+    "year": '2024',
+    "seats": '2',
+    "doors": '2',
+    "bags": '1',
     "catrgory": null,
     "fuel_type": null,
-    "fuel_full":null,
+    "fuel_full": null, 
     "steering": null,
     "color_id":null
     
@@ -81,48 +86,6 @@ const pickuplocations=[];
   const token = localStorage.getItem("token")
   const nextToAddimage = async() => {
     
-/*     e.preventDefault()
-    setError(null)
-    setDone(null)
-    const formData = new FormData()
-    formData.append("car_number", form.current.car_number)
-    formData.append("make", form.current.make)
-    formData.append("model", form.current.model)
-
-    formData.append("year", form.current.year)
-    formData.append("seats", form.current.seats)
-    formData.append("doors", form.current.doors)
-    formData.append("bags", form.current.bags)
-    formData.append("catrgory", form.current.catrgory)
-    formData.append("fuel_type", type)
-    formData.append("color_id", form.current.color_id)
-
-    formData.append("steering", form.current.steering)
-
-    try {
-
-      var response = await axios.post("/addcar", formData, {
-        headers: {
-          "Authorization": `Bearer ${token}`
-        }
-      })
-      console.log(response)
-      const res = response.data
-      console.log(res.data)
-      if (res.status === true) {
-        setDone(res.data)
-        console.log(res.data)
-        setNext(true)
-
-
-      }
-
-    } catch (e) {
-      console.log(e.response.data.msg)
-      //alert(e.response.data.msg)
-      setError(e.response.data.msg)
-    }
- */
 
   }
 
@@ -130,58 +93,52 @@ const pickuplocations=[];
 
 
   const [selectedImages, setSelectedImages] = useState([]);
-
+const[alert,setAlert]=useState(false);
   const addcar = async (e) => {
-     e.preventDefault()
-    setError(null)
-    setDone(null)
-    const formData = new FormData()
-    formData.append("car_number", form.current.car_number)
-      formData.append("make", form.current.make)
-    formData.append("model", form.current.model)
-
-      formData.append("year", form.current.year)
-      formData.append("seats", form.current.seats)
-      formData.append("doors", form.current.doors)
-      formData.append("bags", form.current.bags)
-      formData.append("catrgory", form.current.catrgory)
-      formData.append("fuel_type", type)
-      formData.append("fuel_full", form.current.fuel_full)
-    formData.append("color_id", form.current.color_id)
-    formData.append("fuel_full", form.current.fuel_full)
-
-    formData.append("color_id", color.id)
-
-      formData.append("steering", form.current.steering)
-
+    e.preventDefault();
+    setError(null);
+    setDone(null);
+    
+    const formData = new FormData();
+    formData.append("car_number", form.current.car_number);
+    formData.append("make", form.current.make);
+    formData.append("model", form.current.model);
+    formData.append("year", form.current.year);
+    formData.append("seats", form.current.seats);
+    formData.append("doors", form.current.doors);
+    formData.append("bags", form.current.bags);
+    formData.append("catrgory", form.current.catrgory);
+    formData.append("fuel_type", type);
+    
+    // Conditionally append fuel_full only when fuel_type is not electricity
+    if (type !== 'electricity' && form.current.fuel_full !== null) {
+      formData.append("fuel_full", form.current.fuel_full);
+    }
+    
+    formData.append("color_id", color);
+    formData.append("steering", form.current.steering);
+    
     try {
-
-      var response = await axios.post("/addcar", formData, {
+      setLoading('true')
+      const response = await axios.post("/addcar", formData, {
         headers: {
           "Authorization": `Bearer ${token}`
         }
-      })
-      const res = response.data
+      });
+      
+      const res = response.data;
       if (res.status === true) {
-        setDone(res.data)
-        console.log("added car")
-
-        console.log(res.data)
-        //console.log(res.data.id)
-
-        setNext(true)
-        setId(res.data.id)
-        
+        setDone(res.data);
+        setNext(true);
+        setId(res.data.id);
       }
-
     } catch (e) {
-      console.log(e.response.data.msg)
-      //alert(e.response.data.msg)
-      setError(e.response.data.msg)
+      setError(e.response.data.msg);
+    }finally{
+      setLoading(false);
     }
- 
- 
-  }
+  };
+  
 
 
   const [preview, setPreview] = useState(null);
@@ -197,90 +154,25 @@ const pickuplocations=[];
     };
     reader.onerror = (error) => {
         // Handle FileReader errors
-        console.error('Error reading file:', error);
+        setErrorImage('Error reading file:', error);
     };
     reader.readAsDataURL(selectedFile);
 };
-
-
-  // const addImage = async (e) => {
-  //   e.preventDefault()
-
-  //   const formData1 = new FormData()
-  //   formData1.append("photo", selectedImages )
-  //   formData1.append("car_id", id)
-
-  //   const formData2 = new FormData()
-  //   formData2.append("price", Number(form1.price))
-  //   formData2.append("car_id", id)
-
-  //   try {
-
-  //     var response = await axios.post("/carimage", formData1, {
-  //       headers: {
-  //         "Authorization": `Bearer ${token}`
-  //       }
-  //     })
-      
-  //     const res = response.data
-      
-  //     if (res.status === true) {
-  //       console.log("image")
-       
-  //       console.log(res.data)
-  //       //console.log(res.data.id)
-
-        
-
-  //     }
-
-  //   } catch (e) {
-  //     console.log(e.response.data.msg)
-  //     //alert(e.response.data.msg)
-     
-  //   }
-  //   try {
-
-  //     var response = await axios.post("/prices", formData2, {
-  //       headers: {
-  //         "Authorization": `Bearer ${token}`
-  //       }
-  //     })
-
-  //     const res = response.data
-
-  //     if (res.status === true) {
-  //       console.log("image")
-  //       navigate("/dashbord/VehiclesDashbord")
-  //       console.log(res.data)
-  //       //console.log(res.data.id)
-
-
-
-  //     }
-
-  //   } catch (e) {
-  //     console.log("img error")
-
-  //     console.log(e.response.data.msg)
-  //     //alert(e.response.data.msg)
-
-  //   }
-
-
-    
-  // }
-
   const addImage = async (e) => {
     e.preventDefault();
-  
+    // Check if any images are selected
+    if (selectedImages.length === 0) {
+      setErrorImage('Please select at least one image.');
+      return; // Prevent form submission
+    }
     try {
       for (const image of selectedImages) {
         const formData1 = new FormData();
         formData1.append("photo", image);
         formData1.append("car_id", id);
-  
-        const response = await axios.post("/carimage", formData1, {
+  try{
+    setLoadImage(true);
+            const response = await axios.post("/carimage", formData1, {
           headers: {
             "Authorization": `Bearer ${token}`
           }
@@ -289,33 +181,40 @@ const pickuplocations=[];
         const res = response.data;
   
         if (res.status === true) {
-          console.log("Image uploaded successfully");
-          console.log(res.data);
+          const formData2=new FormData();
+          formData2.append('price',price);
+          formData2.append('car_id',id);
+          try {
+      
+           const res= await axios.post(`/prices`,formData2,{
+              headers: {
+                "Authorization": `Bearer ${token}`
+              }
+            });
+            navigate("/dashbord/VehiclesDashbord");
+            setSuccess(true);
+
+          }catch(error){
+            setErrorImage(error.response.data.msg)
+
+          }finally{
+            setLoadImage(false);
+            
+          }
         }
+      }catch(e){
+        setErrorImage(e.response.data.msg);
+      }
       }
 
 
   
       // After uploading all images, navigate to the next step
-      navigate("/dashbord/VehiclesDashbord");
     } catch (error) {
-      console.log("Error uploading image:", error.response.data.msg);
+      setErrorImage("Error uploading image:", error.response.data.msg);
       // Handle error here
     }
-    const formData2=new FormData();
-    formData2.append('price',price);
-    formData2.append('car_id',id);
-    try {
-
-     const res= await axios.post(`/prices`,formData2,{
-        headers: {
-          "Authorization": `Bearer ${token}`
-        }
-      });
-      console.log(res)
-    }catch(error){
-
-    }
+   
   };
   
 const getColors = async() => {
@@ -326,13 +225,11 @@ const getColors = async() => {
 const res = response.data
   setColors(res.data)
 
-    console.log(res.data)
 
 
 
 
 }catch (e) {
-  console.log(e)
   //alert(e.response.data.msg)
  
 }
@@ -344,33 +241,34 @@ useEffect(() => {
  
 }, []);
   const setcolorid = (event) => {
-    const selectedId = parseInt(event.target.value);
-    const selectedOption = colors.find((option) => option.id === selectedId);
-    //setSelectedOption();
-    setColor(selectedOption); // Convert to number
-    console.log(selectedOption)
+  setColor(event.target.value);
   };
   const set = (e) => {
     form.current = { ...form.current, [e.target.name]: e.target.value }
-    console.log({ ...form.current, [e.target.name]: e.target.value })
   }
 
 
   const set1 = (e) => {
     setPrice(e.target.value)
   }
-  const handleChangeImages = (event) => {
-    const newImages = Array.from(event.target.files);
-    if (newImages.length > 4) {
-      alert('You can only select up to 4 images.');
-      return; // Prevent exceeding the limit
-    }
-    setSelectedImages(newImages);
-  };
+
+    const handleChangeImages = (event) => {
+      const newImages = Array.from(event.target.files);
+      if (selectedImages.length + newImages.length > 4) {
+        setAlert(true);
+        return; // Prevent exceeding the limit
+      }
+      setSelectedImages([...selectedImages, ...newImages]); // Concatenate arrays
+    };
+
 
   return (
     <div className='row p-4'>
-
+      {alert && (
+       <div className='alert alert-danger'>
+        you can only inert 4 images
+        </div>
+      )}
      {next?(
      
    
@@ -387,10 +285,23 @@ useEffect(() => {
 
               <input class="form-control" type="text" id="price" name="price" placeholder='Price ₪' onChange={set1}/>
             
-            
-
+            {errorImage&&(
+                 <div class="alert alert-danger mt-2" role="alert">
+                 {errorImage}
+             </div>
+            )}
+             {errorPrice&&(
+                 <div class="alert alert-danger mt-2" role="alert">
+                 {errorPrice}
+             </div>
+            )}
+            {success&&(
+               <div class="alert alert-success mt-2" role="alert">
+               {'Information is valid'}
+           </div>
+            )}
               <div className=' mt-4 d-flex justify-content-end'>
-                <button type='submit' className="btn border border-success btn-success " >Done</button>
+                <button type='submit' className="btn border border-success btn-success " >{loadImage?'Loading...':'Done'}</button>
 
 
                 {/* <input type="submit" class="btn border border-success btn-success addcar" value="Add Car" />  */}
@@ -402,7 +313,7 @@ useEffect(() => {
   
           <div className="image-preview-container">
             {selectedImages.length > 0 ? (
-              selectedImages.map((image, index) => ( // Limit previews to 4
+              selectedImages.map((image, index) => (
                 <img key={index} src={URL.createObjectURL(image)} alt={`Preview ${index + 1}`} />
               ))
             ) : (
@@ -434,8 +345,8 @@ useEffect(() => {
             </FormGroup>
 
             <FormGroup className='col'>
-              <FormLabel>Make</FormLabel>
-              <FormControl type="text" placeholder="Enter Make" onChange={set} name="make" id="make"/>
+              <FormLabel>Manufacturing Company</FormLabel>
+              <FormControl type="text" placeholder="Enter Company name" onChange={set} name="make" id="make"/>
             </FormGroup>
           </div>
           <div className='row mt-3'>
@@ -557,7 +468,7 @@ useEffect(() => {
 
             
             <FormGroup className=' d-flex'>
-              <FormLabel className='col-3'>Fuel Full</FormLabel>
+              <FormLabel className='col-3' for="fuel_full">Fuel Full</FormLabel>
               <FormControl type="text" placeholder="Enter fuel full" onChange={set} name="fuel_full" id="fuel_full" />
             </FormGroup>
  )}
@@ -569,7 +480,7 @@ useEffect(() => {
             {colors&&(
            
                       <select class="select-input mt-4" onChange={ setcolorid}>
-                        <option  >Chose Color</option>
+                        <option  >Choose Color</option>
 
                 {colors.map(color=> (
                   <option key={color.id} value={color.id} id={color.id} >{color.color}</option>
@@ -586,14 +497,23 @@ useEffect(() => {
 
           
           <div className=' text-success'> {done} </div>
-          <div className=' text-danger'> {error} </div>
-
+          {/* <div className=' text-danger'> {error} </div> */}
+          {error && (
+                    <div class="alert alert-danger mt-3" role="alert">
+                        {error}
+                    </div>
+                )}
+                {done && (
+                    <div class="alert alert-success mt-3" role="alert">
+                        {done}
+                    </div>
+                )}
  <div className=' mt-4 d-flex justify-content-end'>
-                  <button type='submit' className="btn border border-success btn-success "  >Next</button>
+                  <button type='submit' className="btn border border-success btn-success "  >{loading?'loading...':'Next'}</button>
                         
                     
             {/* <input type="submit" class="btn border border-success btn-success addcar" value="Add Car" />  */}
-
+          
           </div>
           {/* Repeat the above FormGroup for each input field */}
          

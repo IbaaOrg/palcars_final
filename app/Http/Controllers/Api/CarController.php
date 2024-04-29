@@ -116,28 +116,37 @@ $dropOffLocationUsers = User::whereHas('locations', function ($query) use ($drop
     $query->where('location', $dropOffLocationName);
 })
 ->get();
+// Retrieve user IDs associated with the pickup location
+$pickupLocationUserIds = $pickupLocationUsers->pluck('id')->toArray();
 
-// Combine the user IDs
-$userIds = $pickupLocationUsers->pluck('id')->merge($dropOffLocationUsers->pluck('id'))->unique();
+// Retrieve user IDs associated with the drop-off location
+$dropOffLocationUserIds = $dropOffLocationUsers->pluck('id')->toArray();
 
-// Retrieve cars associated with these users
-$allCars = Car::whereIn('user_id', $userIds)
+// Merge and unique user IDs
+$userIds = array_unique(array_merge($pickupLocationUserIds, $dropOffLocationUserIds));
+
+// Retrieve cars associated with these user IDs=
+$availableCars = Car::whereIn('user_id', $userIds)
     ->whereDoesntHave('bills', function ($query) use ($request) {
         $query->where(function ($query) use ($request) {
             $query->where('start_date', '<=', $request->end_date)
                 ->where('end_date', '>=', $request->start_date)
-                ->where(function ($query) use ($request) {
+                ->orWhere(function ($query) use ($request) {
                     $query->where('start_time', '<=', $request->end_time)
                         ->where('end_time', '>=', $request->start_time);
-                })
-                ->where('status', 'rented');
-        });
+                });
+        })
+        ->orWhere(function ($query) use ($request) {
+            $query->where('start_date', '>=', $request->start_date)
+                ->where('end_date', '<=', $request->end_date);
+        })
+        ->where('status', 'rented'); // Exclude cars that are currently rented
     })
+    ->where('status', 'unrented') // Include only cars that are marked as "unrented"
     ->get();
-
-if($allCars){
-return $this->success(CarResource::collection($allCars));
-}
+    if ($availableCars->isNotEmpty()) {
+        return $this->success(CarResource::collection($availableCars));
+    }
 return $this->fail("these location doesn't have any car",404);
 }
     /**
@@ -145,11 +154,7 @@ return $this->fail("these location doesn't have any car",404);
      */
     public function store(Request $request){
         //
-        if($request->fuel_type==='electricity'){
-            $fuel_full='nullable';
-        }else{ 
-            $fuel_full='required|numeric|min:0|max:1000';
-        }
+     
         $validator=Validator::make($request->all(), [
             'car_number'=> 'required|unique:cars,car_number|regex:/^[A-Z]{1,2}-[0-9]{4,5}-[A-Z]{1}$/u',
             'make'=>'required|string|max:255',
@@ -161,10 +166,14 @@ return $this->fail("these location doesn't have any car",404);
             'doors'=>'required|string|in:2,3,4',
             'bags'=>'nullable|integer|min:1|max:8', 
             'fuel_type'=>'required|string|in:gas,diesel,electricity',
-            'fuel_full'=>$fuel_full,
             'steering'=>'required|string|in:Automatic,Manual',
             'color_id'=>'required|exists:colors,id'        
         ]);
+        if ($request->fuel_type === 'electricity') {
+            $rules['fuel_full'] = 'nullable';
+        } else {
+            $rules['fuel_full'] = 'required|numeric|min:0|max:1000';
+        }
         if ($validator->fails()) {
             
             $errors = $validator->errors()->first();
@@ -180,8 +189,15 @@ return $this->fail("these location doesn't have any car",404);
         'doors'=>$request->doors,];
         isset($request->description) ? $data['description'] = $request->description : null;
         isset($request->bags) ? $data['bags'] = $request->bags : null;
-isset($request->fuel_full) ? $data['fuel_full'] = $request->fuel_full : null;
         $data['fuel_type']=$request->fuel_type;
+
+        
+        if ($request->fuel_type === 'electricity') {
+            $data['fuel_full'] = null; // Set fuel_full to null if fuel_type is electricity
+        } else {
+            $data['fuel_full'] = $request->fuel_full; // Assign the provided value if fuel_type is not electricity
+        }
+        
         $data['steering']=$request->steering;
         $data['user_id']=$request->user()->id;
         $data['color_id']=$request->color_id;
@@ -307,6 +323,7 @@ foreach ($notifications as $notification) {
             DB::table('car_images')->where('car_id', $car->id)->delete();
             DB::table('comments')->where('car_id', $car->id)->delete();
             DB::table('cars')->where('id', $car->id)->delete();
+            DB::table('prices')->where('car_id', $car->id)->delete();
             return $this->success('successfully deleted');
         }
         return $this->fail('car not found',404);

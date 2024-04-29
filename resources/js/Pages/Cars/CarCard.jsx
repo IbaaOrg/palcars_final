@@ -63,7 +63,7 @@ const CarCard = ({ item, index, toggleFavorite, favorites }) => {
                             width={30}
                             height={30}
                             alt="User"
-                            className=" card-link rounded"
+                            className=" card-link rounded border"
                                                     
                                                                      />
                     </div>
@@ -99,7 +99,7 @@ const CarCard = ({ item, index, toggleFavorite, favorites }) => {
                 </div>
 
                 <div className=' text-start'>
-                    <p className=' fs-5'><span>₪</span><b>{item.prices[0].price}</b>/day</p>
+                    <p className=' fs-5'><span>₪</span><b>{item.prices?.[0]?.price}</b>/day</p>
                 </div>
 
                 

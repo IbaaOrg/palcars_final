@@ -38,17 +38,36 @@ $dropoffLocationIds = $dropofflocations_ids->pluck('id')->toArray();
 
         // Validate the request data
         $validate = Validator::make($request->all(), [
+            'name'=>'required',
+            'phone' => 'required|numeric|regex:/^05[0-9]{8}$/',
+            'address'=>'required',
+            'city_id'=>'required|exists:cities,id',
             'user_id' => 'exists:users,id',
             'car_id' => 'required|exists:cars,id',
-            'method_id' => 'required|exists:methods,id',
-            'discount_id' => 'nullable|exists:discounts,id',
             'pickup_location_id'=>['required',  Rule::in($pickupLocationIds), ],
             'dropoff_location_id'=>['required', Rule::in($dropoffLocationIds),],
             'start_date' => 'required|date_format:Y-m-d|after_or_equal:'. now()->format('Y-m-d'),
             'start_time' => 'required|date_format:H:i'.($request->input('start_date')===now()->format('Y-m-d')?'|after_or_equal:'.$currentTime:''),
             'end_date' => 'required|date_format:Y-m-d|after_or_equal:start_date',
-            'end_time' => 'required|date_format:H:i|after:start_time',
+            'end_time' => [
+                'required',
+                'date_format:H:i',
+                function ($attribute, $value, $fail) use ($request) {
+                    // Parse start and end times using Carbon
+                    $startTime = Carbon::parse($request->start_date . ' ' . $request->start_time);
+                    $endTime = Carbon::parse($request->end_date . ' ' . $value);
+                    
+                    // Check if end time is before start time or on the same time
+                    if ($endTime->lte($startTime)) {
+                        $fail('The end time must be after the start time.');
+                    }
+                },
+            ],            'method_id' => 'required|exists:methods,id',
+            'discount_id' => 'nullable|exists:discounts,id',
          
+        ],[
+            'phone.regex'=>'The phone number must contain 10 digits start with (05)',
+
         ]);
     
         if ($validate->fails()) {
@@ -91,6 +110,10 @@ $dropoffLocationIds = $dropofflocations_ids->pluck('id')->toArray();
 
         // Create a new bill record
         $bill = Bill::create([
+            'name'=>$request->name,
+            'phone'=>$request->phone,
+            'address'=>$request->address,
+            'city_id'=>$request->city_id,
             'user_id' => $request->user()->id,
             'amount' => $amount,
             'car_id' => $request->car_id,
@@ -119,16 +142,25 @@ $dropoffLocationIds = $dropofflocations_ids->pluck('id')->toArray();
     }
 
     public function allBillsOfMyCompany(){
-        $user = Auth::user();
-        $bills = Bill::where('user_id', $user->id)->get();
-        return $this->success(BillsOfMyCompanyResource::collection($bills));
+        $user=auth()->user();
+        $myCars=$user->cars;
+        foreach ($myCars as $car) {
+            $bills=$car->bills()->get();
+
+        }
+
+        return $this->success(SimpleBillResource::collection($bills));
     }
     
-    
-    public function allBillsOfRenter(){
-        $user=Auth::user();
-        $bills = Bill::where('user_id', $user->id)->get();
-        return $this->success(BillsOfRenterResource::collection($bills));
+    public function allBillsOfRenter() {
+        $userId = auth()->id(); // Get the ID of the currently authenticated user
+
+        // Retrieve all bills created by the user
+        $bills = Bill::where('user_id', $userId)->get();
+        if($bills->isEmpty())
+        return $this->fail('no bill found for this user',404);
+
+        return $this->success(SimpleBillResource::collection($bills));
     }
 
     /**

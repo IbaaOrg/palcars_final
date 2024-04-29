@@ -7,6 +7,9 @@ import Loading from '../../Componants/UI/Loading';
 import CarFilter from '../../Layout/Filter/CarFilter';
 import CommentView from '../../Layout/Comments/CommentView';
 import CommetInput from '../../Layout/Comments/CommetInput';
+import { ToastContainer, Bounce, Zoom, toast } from 'react-toastify';
+import '../../../css/PasswordStyle/forget.css';
+import axios from 'axios';
 
 function CarDitails() {
     const { id } = useParams(); // This will give you the value of "id" from the URL
@@ -54,18 +57,6 @@ function CarDitails() {
         getUserById()
 
     }, [id]);
- 
-  
-
-    /*   try {
-        const response = await axios.get('/cars');
-        const data = response.data;
-        onSuccess(data)
-        console.log(data);
-    } catch (error) {
-        console.error(error);
-    } */
-
 
     const appendComment = (comment) => {
         console.log("append car details")
@@ -73,17 +64,31 @@ function CarDitails() {
         console.log(comment)
         setComments([ ...comments,comment])
     }
-   const openBill=()=>{
+    const openBill=()=>{
     const token = localStorage.getItem("token")
 
     if(token){
-    navigator(`/bill/${id}`)
+        // getUserById
+    navigator(`/bill/${id}`,{ state : { car } })
     }else {
+        toast.error('you must have account to rent car', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Zoom,
+        });  
         navigator('/login');
+     
     }
    }
   return (
     <div>
+
           {loading ?(
             <Loading className=" d-flex justify-items-center align-items-center"/>
 
@@ -94,11 +99,11 @@ function CarDitails() {
               <div className="car col m-2 mb-3 ">
               <div>
                                   <img src={car.sub_images[0].photo_car_url} alt="imgcar" width={500} height={500} className='imgcar' />
-                                  <div className=' m-2 p-2  row'>
+                                  <div className='mt-4  row'>
                                       {car.sub_images.length >= 2 && (
 
                                           <div className='col'>
-                                              <img src={car.sub_images[1].photo_car_url} alt="imgcar" className='  ' width={150} height={150} />
+                                              <img src={car.sub_images[1].photo_car_url} alt="imgcar" className=' imgdetials '  />
 
 
                                           </div>
@@ -107,7 +112,7 @@ function CarDitails() {
 
                                           <div className='col'>
 
-                                              <img src={car.sub_images[2].photo_car_url} alt="imgcar" className='  ' width={150} height={150} />
+                                              <img src={car.sub_images[2].photo_car_url} alt="imgcar" className='  imgdetials'  />
 
 
                                           </div>
@@ -115,7 +120,7 @@ function CarDitails() {
                                       {car.sub_images.length >= 4 && (
 
                                           <div className='col'>
-                                              <img src={car.sub_images[3].photo_car_url} alt="imgcar" className='  ' width={150} height={150} />
+                                              <img src={car.sub_images[3].photo_car_url} alt="imgcar" className=' imgdetials '  />
 
 
                                           </div>
@@ -220,6 +225,8 @@ function CarDitails() {
     )
          
           }
+                              <ToastContainer />
+
     </div>
   
     

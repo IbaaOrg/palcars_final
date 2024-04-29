@@ -11,7 +11,7 @@ function Sidebar() {
         setIsListOpen(!isListOpen);
     };
   return (
-    <div className='bg-white sidebar p-2'>
+    <div className='bg-white sidebar p-2 sidebarMain'>
 
         <hr className='text-dark'/>
         <div className='list-group list-group-flush pt-2'>
@@ -66,17 +66,25 @@ function Sidebar() {
                   <i className='bi bi-cash-coin fs-4 me-2'></i>
                   <span className='fs-5'>Expenses</span>
               </NavLink>
-              <NavLink to={"ExpensesDashbord"} className='main-btn  list-group-item list-group-item-action py-2'>
+             {/*  <NavLink to={"ExpensesDashbord"} className='main-btn  list-group-item list-group-item-action py-2'>
                   <i className='bi bi-cash-coin fs-4 me-2'></i>
                   <span className='fs-5'>Deals</span>
-              </NavLink>
+              </NavLink> */}
               <NavLink to={"LocationDashbord"} className='main-btn  list-group-item list-group-item-action py-2'>
                   <i class="bi bi-geo-alt fs-4 me-2"></i>
                   <span className='fs-5'>Locations</span>
               </NavLink>
+              <NavLink to={"DiscountsDashbord"} className='main-btn  list-group-item list-group-item-action py-2'>
+                  <i class="bi bi-percent fs-4 me-2"></i>
+                  <span className='fs-5'>Discounts</span>
+              </NavLink>
+              <NavLink to={"NotesDashboard"} className='main-btn  list-group-item list-group-item-action py-2'>
+                    <i class="bi bi-journal-medical  fs-4 me-2"></i>
+                    <span className='fs-5'>Notes</span>
+              </NavLink>
         </div>
     </div>
-  )
+)
 }
 
 export default Sidebar

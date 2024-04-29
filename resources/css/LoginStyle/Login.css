@@ -163,7 +163,7 @@
       
    
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
 }
 
@@ -235,6 +235,7 @@
 }
 .drivingImg {
     position: relative;
+
 }
 .drivingImg img {
     width: 160px;
@@ -242,8 +243,11 @@
     cursor: pointer;
     object-fit: cover;
     border-radius: 5px;
+    border: 1px solid black;
 }
-
+.desc {
+    width: 100%;
+}
 .drivingImg label {
     position: absolute;
     top: 0;

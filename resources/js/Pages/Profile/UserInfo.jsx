@@ -100,7 +100,6 @@ function UserInfo() {
 ) : null}
 
         </ul>
-        <NavLink to="editprofile" className='btn btn-danger'>Edit Profile</NavLink>
       </div>
 )}
 

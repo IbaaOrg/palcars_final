@@ -16,13 +16,15 @@ import { FaStarOfLife } from "react-icons/fa";
 import { getAuth, updatePassword } from "firebase/auth";
 import { BiShowAlt } from "react-icons/bi";
 import { IoEyeOffOutline } from "react-icons/io5";
+import loginimage from '../../../../public/image/undraw_undraw_undraw_undraw_sign_up_ln1s_-1-_s4bc_-1-_ee41__1__3xti-removebg-preview.png'
+
 function SignUpRenter() {
     const { translates } = useContext(TranslateContext);
     const navigate = useNavigate();
     const [errors, setErrors] = useState(null);
     const [role, setRole] = useState("Renter");
-    const[visibale,setVisible]=useState(false);
-
+    const [visibale, setVisible] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
     const [seccsses, setSeccsses] = useState(null);
@@ -32,8 +34,6 @@ function SignUpRenter() {
 
     const file = useRef(null);
     const filed = useRef(null);
-
- 
 
     const form = useRef({
         email: null,
@@ -93,15 +93,12 @@ function SignUpRenter() {
     };
 
     const byGoogle = async () => {
-        const res= await signInWithPopup(auth, google);
-        if(res){
-            console.log(res)
-            localStorage.setItem('token',res.user.accessToken);
+        const res = await signInWithPopup(auth, google);
+        if (res) {
+            console.log(res);
+            localStorage.setItem("token", res.user.accessToken);
         }
-        if(localStorage.getItem('token'))
-            navigate("/profile");
-           
-
+        if (localStorage.getItem("token")) navigate("/profile");
     };
 
     const reg = async (e) => {
@@ -109,7 +106,6 @@ function SignUpRenter() {
 
         const validatedata = await validate();
         setError(null);
-
         const formData = new FormData();
         formData.append("name", form.current.name);
         formData.append("role", role);
@@ -123,6 +119,7 @@ function SignUpRenter() {
         if (file.current) {
             formData.append("photo_user", file.current);
         }
+        setLoading(true);
 
         await Signup(
             formData,
@@ -139,11 +136,14 @@ function SignUpRenter() {
                 setError(msg);
             }
         );
+        setLoading(false);
     };
-
 
     return (
         <div class="d-flex justify-content-around cont">
+            <div>
+                <img src={loginimage} className="w-100" />
+            </div>
             <div class="form-container  m-2">
                 <div class="social-buttons">
                     <button class="social-button apple" onClick={byGoogle}>
@@ -181,11 +181,11 @@ function SignUpRenter() {
                         {errors}
                     </div>
                 )}
-                {!error && errors && (
+                {/* {!error && errors && (
                     <div class="alert alert-danger" role="alert">
                         {error}
                     </div>
-                )}
+                )} */}
                 {error && errors && (
                     <div class="alert alert-danger" role="alert">
                         {error}
@@ -194,9 +194,12 @@ function SignUpRenter() {
                 <form class="form" onSubmit={reg}>
                     <div className="row">
                         <div class="form-group col">
-                            <div className="d-flex"> 
-                            <label for="email">{translates.Email}</label>
-                            <FaStarOfLife size={5} className='text-danger'/>
+                            <div className="d-flex">
+                                <label for="email">{translates.Email}</label>
+                                <FaStarOfLife
+                                    size={5}
+                                    className="text-danger"
+                                />
                             </div>
                             <input
                                 required
@@ -209,8 +212,11 @@ function SignUpRenter() {
                         </div>
                         <div class="form-group col">
                             <div className="d-flex">
-                            <label for="name">{translates.FullName}</label>
-                            <FaStarOfLife size={5} className='text-danger'/>
+                                <label for="name">{translates.FullName}</label>
+                                <FaStarOfLife
+                                    size={5}
+                                    className="text-danger"
+                                />
                             </div>
                             <input
                                 required=""
@@ -225,8 +231,11 @@ function SignUpRenter() {
                     <div className="row">
                         <div class="form-group col">
                             <div className="d-flex">
-                            <label for="phone">{translates.Phone}</label>
-                            <FaStarOfLife size={5} className='text-danger'/>
+                                <label for="phone">{translates.Phone}</label>
+                                <FaStarOfLife
+                                    size={5}
+                                    className="text-danger"
+                                />
                             </div>
                             <input
                                 required=""
@@ -239,25 +248,35 @@ function SignUpRenter() {
                         </div>
                         <div class="form-group col">
                             <div className="d-flex">
-                            <label for="password">{translates.Password}</label>
-                            <FaStarOfLife size={5} className='text-danger'/>
-
+                                <label for="password">
+                                    {translates.Password}
+                                </label>
+                                <FaStarOfLife
+                                    size={5}
+                                    className="text-danger"
+                                />
                             </div>
                             <div className="password-input-container">
-                            <input
-                                type={visibale?'text':'password'}
-                                required=""
-                                id={"password"}
-                                name="password"
-                                placeholder={translates.Enteryourpassword}
-                                className="form-control"
-                                onChange={set}
-                            />
-                            <div className="p-2 icon-container">
-                            {visibale?<BiShowAlt onClick={()=>setVisible(false)} />:<IoEyeOffOutline onClick={()=>setVisible(true)}/>}
-                            </div>
-                           
-
+                                <input
+                                    type={visibale ? "text" : "password"}
+                                    required=""
+                                    id={"password"}
+                                    name="password"
+                                    placeholder={translates.Enteryourpassword}
+                                    className="form-control"
+                                    onChange={set}
+                                />
+                                <div className="p-2 icon-container">
+                                    {visibale ? (
+                                        <BiShowAlt
+                                            onClick={() => setVisible(false)}
+                                        />
+                                    ) : (
+                                        <IoEyeOffOutline
+                                            onClick={() => setVisible(true)}
+                                        />
+                                    )}
+                                </div>
                             </div>
                             {/*  {errors.password &&
                                 <div class=" text-red-600 mt-1">
@@ -268,7 +287,10 @@ function SignUpRenter() {
                     </div>
                     <div className="row">
                         <div class="form-group col ">
-                            <label for="password">{translates.PhotoUser}<span className=' text-red-600'>  *</span></label>
+                            <label for="password">
+                                {translates.PhotoUser}
+                                <span className=" text-red-600"> *</span>
+                            </label>
                             <div className="cardImg">
                                 <img
                                     id="user-img"
@@ -287,32 +309,26 @@ function SignUpRenter() {
                                 />
                             </div>
                         </div>
-             
+
                         <div className=" form-group select-container col">
-                          
                             <div class="form-group col ">
                                 <div className="d-flex">
-                                     <label for="password">
-                                    {translates.PhotoDrivinglicense}
-                                </label>
-                                <FaStarOfLife size={5} className='text-danger'/>
-
-                                </div>
-                               
-                                <div className="drivingImg">
-                                    <img
-                                        id="driving-img"
-                                        src={previewd}
-                                        height="80"
-                                        width="120"
-                                        className="border border-black"
+                                    <label for="password">
+                                        {translates.PhotoDrivinglicense}
+                                    </label>
+                                    <FaStarOfLife
+                                        size={5}
+                                        className="text-danger"
                                     />
+                                </div>
+
+                                <div className="drivingImg">
+                                    <img id="driving-img" src={previewd} />
 
                                     <label htmlFor="driving-path">
                                         <IoCamera size={20} />
-
                                     </label>
-                        
+
                                     <input
                                         name={"photo_drivinglicense"}
                                         type={"file"}
@@ -321,35 +337,31 @@ function SignUpRenter() {
                                         className="form-control-file form-control "
                                     />
                                 </div>
-
-                                <div className="col"></div>
                             </div>
-
                         </div>
                     </div>
 
                     <div>
                         <div className="d-flex">
-                            <label for="birthdate">{translates.Birthdate}</label>
-                            <FaStarOfLife size={5} className='text-danger'/>
-
+                            <label for="birthdate">
+                                {translates.Birthdate}
+                            </label>
+                            <FaStarOfLife size={5} className="text-danger" />
                         </div>
                         <input
                             type="date"
                             name="birthdate"
                             onChange={set}
                             className="form-control"
-                            
-                        />             
+                        />
                     </div>
-                    
-                    
 
                     <hr />
                     <input
                         type="submit"
                         class="form-submit-btn"
-                        value="Sign Up"
+                        value={loading ? "loading..." : "Sign Up"}
+                        disabled={loading}
                     />
                 </form>
             </div>

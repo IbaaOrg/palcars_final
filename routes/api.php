@@ -58,6 +58,8 @@ Route::group([
 {
 	
 });
+Route::get('/userscount', [UserController::class,'count']);
+
 Route::get('/authuser',[UserController::class,'authuser']);
 //register by any user
 Route::post('/register',[UserController::class,'register']);
@@ -137,6 +139,10 @@ Route::middleware('auth:sanctum','company')->delete('/discounts/{id}',[DiscountC
 Route::middleware('auth:sanctum','company')->post('/discounts/update/{id}',[DiscountController::class,'update']);
 //get dicount of chosen car
 Route::middleware('auth:sanctum','renterorcompany')->get('/getdiscounts/{id}',[CarController::class,'discountsOfCar']);
+//index all discounts
+Route::get('/showalldiscounts',[DiscountController::class,'index']);
+//discounts as company 
+Route::middleware('auth:sanctum','company')->get('/getMyDiscounts',[DiscountController::class,'getMyDiscounts']);
 //show all cities
 Route::get('/showallcities',[CityController::class,'index']);
 //add city 
@@ -203,13 +209,15 @@ Route::middleware('auth:sanctum','renterorcompany')->get('/showBill/{id}',[BillC
 Route::middleware('auth:sanctum','renter')->post('/updateBill/{id}',[BillController::class,'update']);
 Route::middleware('auth:sanctum','renter')->delete('/destroyBill/{id}',[BillController::class,'destroy']);
 Route::middleware('auth:sanctum','company')->get('/showAllBillsOfMyCompany',[BillController::class,'allBillsOfMyCompany']);
-Route::middleware('auth:sanctum','renter')->get('/showAllBillsOfRenter',[BillController::class,'allBillsOfRenter']);
+Route::middleware('auth:sanctum','renter')->get('/allBillsOfRenter',[BillController::class,'allBillsOfRenter']);
 
 Route::middleware('auth:sanctum')->get('/allNotifications',[NotificationController::class,'allNotifications']);
 Route::middleware('auth:sanctum')->get('/notes/{id}',[NotificationController::class,'show']);
 Route::post('/local', [LocaleController::class, 'local']);
 Route::middleware('auth:sanctum')->get('/markallread',[NotificationController::class,'marksAllRead']);
-
+Route::middleware('auth:sanctum','renter')->get('/getMyComments',[CommentController::class,'getMyComments']);
+Route::middleware('auth:sanctum','company')->get('/getAllcomentsOfMyCar',[CommentController::class,'getAllcomentsOfMyCar']);
+Route::middleware('auth:sanctum','company')->get('/getAllrenterUsers',[UserController::class,'getRenters']);
 //Route::get('stripe',[BillController::class,'stripe']);
 //Route::post('stripe',[BillController::class,'stripePost'])->name('stripe.post');
 
