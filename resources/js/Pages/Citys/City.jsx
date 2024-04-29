@@ -17,14 +17,18 @@ function City() {
             console.log(data.data)
             const citysarray = [];
             let foundCity = false;
+            const companiesSet = new Set(); // To store unique company IDs
 
             for (let i = 0; i < data.data.length; i++) {
-                if (data.data[i].city.city === cityname) {
+                const companyID = data.data[i].ownerCompany.id;
+
+                if (data.data[i].city.city === cityname && !companiesSet.has(companyID)) {
 
                     citysarray.push({
-                        owner: data.data[i].ownerCompany,
-                        location: data.data[i]
+                        owner: data.data[i].ownerCompany
                     });
+                    companiesSet.add(companyID);
+
                     foundCity = true;
                 }
             }
@@ -70,13 +74,13 @@ function City() {
                                               {company.owner.name}
 
                                           </div>
-                                          <div>
+                                       {/*    <div>
                                           Location : 
                                               {company.location.location}<br/>
                                               {company.location.type}
 
 
-                                          </div>
+                                          </div> */}
                                       </div>
                                   </div>
                               ))}
