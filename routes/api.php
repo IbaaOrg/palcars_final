@@ -115,7 +115,7 @@ Route::middleware('auth:sanctum','renter')->delete('/comments/{id}',[CommentCont
 //update comment
 Route::middleware('auth:sanctum','renter')->post('/comments/update/{id}',[CommentController::class,'update']);
 //all comments of each car
-Route::middleware('auth:sanctum','renterorcompany')->get('/getReviewes/{id}',[CarController::class,'reviews']);
+Route::get('/getReviewes/{id}',[CarController::class,'reviews']);
 //add to favorite list
 Route::middleware('auth:sanctum','renter')->post('/favorites',[FavoriteController::class,'store']);
 //remove one item
@@ -163,7 +163,7 @@ Route::get('/showAllLocations',[LocationController::class,'index']);
 //show alll my location as company 
 Route::middleware('auth:sanctum','company')->get('/showLocationsOfMyCompany',[LocationController::class,'allLocationsOfMyCompany']);
 //show all location of  chosen company   
-Route::middleware('auth:sanctum','renter')->get('/showLocationsOfCompany/{id}',[LocationController::class,'allLocationsOfCompany']);
+Route::get('/showLocationsOfCompany/{id}',[LocationController::class,'allLocationsOfCompany']);
 //show all location in chosen city
 Route::get('/allLocationsInCity/{id}',[LocationController::class,'allLocationsInCity']);
 Route::get('/alllocationpickup',[LocationController::class,'allLocationPickup']);

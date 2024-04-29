@@ -12,16 +12,16 @@ function Contact() {
   return (
     <div className=' d-flex flex-column justify-centent-center align-items-center'>
       <div className='bg-white '><h2 className='Mainheaading text-primary text-center'>Contact Us</h2>
-      <div className="d-flex flex-wrap justify-content-center  gap-5 maincontct mt-5">
-      <div className='d-flex flex-column align-items-center'><GrInstagram size={50}/>
-      <Link className='fw-bold mt-4 text-primary text-decoration-underline' to={"https://www.instagram.com/palcars.ps?igsh=MTFnODQ3b2tnb2xwcA=="} >Palcars.ps</Link>
+      <div className="d-flex flex-wrap  justify-content-center  gap-5 maincontct mt-5">
+      <div className='d-flex flex-column align-items-center'><GrInstagram size={45}/>
+      <Link className='fw-bold mt-4 ' to={"https://www.instagram.com/palcars.ps?igsh=MTFnODQ3b2tnb2xwcA=="} >Palcars.ps</Link>
 </div>
-      <div className='d-flex flex-column align-items-center'><FaSquareFacebook size={50}/>
-      <Link className='fw-bold mt-4  text-primary text-decoration-underline'>Palcars</Link>
+      <div className='d-flex flex-column align-items-center'><FaSquareFacebook size={51}/>
+      <Link className='fw-bold mt-4  '>Palcars</Link>
 
 </div>
-      <div className='d-flex flex-column align-items-center'><ImLinkedin size={50}/>
-      <Link className='fw-bold mt-4  text-primary text-decoration-underline'>Palcars Company</Link>
+      <div className='d-flex flex-column align-items-center'><ImLinkedin size={45}/>
+      <Link className='fw-bold mt-4  '>Palcars Company</Link>
 
 </div>
       </div>

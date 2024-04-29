@@ -145,7 +145,7 @@ $dropoffLocationIds = $dropofflocations_ids->pluck('id')->toArray();
         $user=auth()->user();
         $myCars=$user->cars;
         foreach ($myCars as $car) {
-            $bills=$car->bills()->get();
+            $bills=$car->bills()->orderBy("end_date","ASC")->get();
 
         }
 
@@ -156,7 +156,7 @@ $dropoffLocationIds = $dropofflocations_ids->pluck('id')->toArray();
         $userId = auth()->id(); // Get the ID of the currently authenticated user
 
         // Retrieve all bills created by the user
-        $bills = Bill::where('user_id', $userId)->get();
+        $bills = Bill::where('user_id', $userId)->orderBy("end_date","ASC")->get();
         if($bills->isEmpty())
         return $this->fail('no bill found for this user',404);
 
