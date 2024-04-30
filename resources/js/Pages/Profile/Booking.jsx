@@ -71,7 +71,7 @@ function Booking() {
     loading?<Loading/>:(
     <div className='d-flex flex-column align-items-center mainBooking'>
       {user.role==="Renter"?<h3 className='fw-bold fs-4 py-3 '>My Booking</h3>:<h3 className='fw-bold fs-4 py-3 '>Booking from my company</h3>}
-      {Object.entries(bookingByMonth).map(([monthYearKey, bookings]) => (
+      {bookings.length>0?Object.entries(bookingByMonth).map(([monthYearKey, bookings]) => (
   <div key={monthYearKey}>
     <h3 className='fs-5'>In <span className='fw-bold'>{monthYearKey}</span></h3>
     {bookings.map((item, index) => (
@@ -94,7 +94,7 @@ function Booking() {
         </span>
       </div>
     ))}</div>
-))}
+)):user.role==="Renter"?<div className=' py-3'>You didn't Book any car</div>:<div className=' py-3' >Your cars currently have no Bookings.</div>}
     </div>
     )
   )

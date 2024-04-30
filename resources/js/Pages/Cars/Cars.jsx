@@ -103,7 +103,280 @@ function Cars() {
     };
 
     return (
-        <div className="d-flex flex-wrap justify-evenly bg-slate-200 w-100  " >
+        <div className="d-flex bg-slate-200 w-100">
+            <div className="col-2 bg-white d-flex flex-column p-3">
+                <div>
+                    <h3 className="text-muted">Type</h3>
+                    <div 
+            > 
+                <div 
+                
+                > 
+                    <div 
+                      
+                    > 
+                        <input 
+                            type="radio"
+                            id="SUV"
+                            value="SUV"
+                         name="type"
+                            
+                        /> 
+                        <label 
+                            htmlFor="SUV"
+                           
+                        > 
+                            SUV 
+                        </label> 
+                    </div> 
+  
+                    <div 
+                       
+                    > 
+                        <input 
+                            type="radio"
+                            id="Hatchback"
+                            value="Hatchback"
+                            name="type"
+
+                         
+                        /> 
+                        <label 
+                            htmlFor="Hatchback"
+                           
+                        > 
+                            Hatchback 
+                        </label> 
+                        </div>
+                        <div 
+                       
+                       > 
+                           <input 
+                               type="radio"
+                               id="Sedan"
+                               value="Sedan"
+                               name="type"
+
+                            
+                           /> 
+                           <label 
+                               htmlFor="Sedan"
+                              
+                           > 
+                               Sedan 
+                           </label> 
+                           </div>
+                           <div 
+                       
+                       > 
+                           <input 
+                               type="radio"
+                               id="Convertible"
+                               value="Convertible"
+                               name="type"
+
+                            
+                           /> 
+                           <label 
+                               htmlFor="Convertible"
+                              
+                           > 
+                               Convertible 
+                           </label> 
+                           </div>
+                           <div 
+                       
+                       > 
+                           <input 
+                               type="radio"
+                               id="Cressover"
+                               value="Cressover"
+                               name="type"
+
+                            
+                           /> 
+                           <label 
+                               htmlFor="Cressover"
+                              
+                           > 
+                               Cressover 
+                           </label> 
+                           </div>
+                           <div 
+                       
+                       > 
+                           <input 
+                               type="radio"
+                               id="Minivan"
+                               value="Minivan"
+                               name="type"
+   
+                            
+                           /> 
+                           <label 
+                               htmlFor="Minivan"
+                              
+                           > 
+                               Minivan 
+                           </label> 
+                           </div>
+                           <div 
+                       
+                       > 
+                           <input 
+                               type="radio"
+                               id="StationWagon"
+                               value="StationWagon"
+                               name="type"
+
+                            
+                           /> 
+                           <label 
+                               htmlFor="StationWagon"
+                              
+                           > 
+                               Station Wagon 
+                           </label> 
+                           </div>
+                           <div 
+                       
+                       > 
+                           <input 
+                               type="radio"
+                               id="                               Pickup Trucks 
+                               "
+                               value="                               Pickup Trucks 
+                               "
+                               name="type"
+
+                            
+                           /> 
+                           <label 
+                               htmlFor="                               Pickup Trucks 
+                               "
+                              
+                           > 
+                               Pickup Trucks 
+                           </label> 
+                           </div>
+                        </div>
+                        </div>
+                </div>
+                <hr />
+                <div>
+                <h3 className="text-muted">Capacity</h3>
+                <div 
+                
+                > 
+                    <div 
+                    for="capacity"
+                    > 
+                        <input 
+                            type="radio"
+                            id="seate2"
+                            value="2"
+                            name="capacity"
+                        /> 
+                        <label 
+                            htmlFor="seate2"
+                           
+                        > 
+                            2 Person 
+                        </label> 
+                        </div> 
+                        <div 
+                      
+                    > 
+                        <input 
+                            type="radio"
+                            id="seate4"
+                            value="4"
+                            name="capacity"
+ 
+                        /> 
+                        <label 
+                            htmlFor="seate4"
+
+                        > 
+                            4 Person 
+                        </label> 
+                        </div> 
+                        <div 
+                      
+                    > 
+                        <input 
+                            type="radio"
+                            id="seate5"
+                            value="5"
+                            name="capacity"
+ 
+                        /> 
+                        <label 
+                            htmlFor="seate5"
+                           
+                        > 
+                            5 Person 
+                        </label> 
+                        </div> 
+                        <div 
+                      
+                    > 
+                        <input 
+                            type="radio"
+                            id="seate7"
+                            value="7"
+                            name="capacity"
+
+                        /> 
+                        <label 
+                            htmlFor="seate7"
+                           
+                        > 
+                            7 Person 
+                        </label> 
+                        </div> 
+                        <div 
+                      
+                      > 
+                          <input 
+                              type="radio"
+                              id="seate8"
+                              value="8"
+                              name="capacity"
+ 
+                          /> 
+                          <label 
+                              htmlFor="seate8"
+                             
+                          > 
+                              8 Person 
+                          </label> 
+                          </div> 
+                          <div 
+                      
+                      > 
+                          <input 
+                              type="radio"
+                              id="seate9"
+                              name="capacity"
+                              value="9"
+                              
+                          /> 
+                          <label 
+                              htmlFor="seate9"
+                             
+                          > 
+                              More than 8 Person 
+                          </label> 
+                          </div>  
+                        </div> 
+                </div>
+                <hr />
+                <div>
+                    <h3 className="text-muted">Price</h3>
+                </div>
+            </div>
+        <div className="d-flex flex-wrap justify-evenly bg-slate-200 col-10  " >
 {loading ? (
                 <Loading />
                ) : (
@@ -122,7 +395,7 @@ function Cars() {
             )} 
          
             </div>
-            
+           </div> 
     );
 }
 

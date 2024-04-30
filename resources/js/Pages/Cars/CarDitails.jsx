@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "../../../css/app.css";
 import "../../../css/Commentstye/Comments.css";
-
+import { TiDelete } from "react-icons/ti";
 import Loading from "../../Componants/UI/Loading";
 import CarFilter from "../../Layout/Filter/CarFilter";
 import CommentView from "../../Layout/Comments/CommentView";
@@ -10,12 +10,16 @@ import CommetInput from "../../Layout/Comments/CommetInput";
 import { ToastContainer, Bounce, Zoom, toast } from "react-toastify";
 import "../../../css/PasswordStyle/forget.css";
 import axios from "axios";
-
+import RatingC from "../../Layout/Comments/RatingC";
+import "../../../css/Commentstye/Rating.css";
+import ResetPassword from "./../../Auth/Login/ResetPassword";
 function CarDitails() {
     const { id } = useParams(); // This will give you the value of "id" from the URL
     const [loading, setLoading] = useState(true);
     const [view, setView] = useState(null);
     const [car, setCar] = useState(null);
+    const [rate, setRate] = useState(null);
+    const [deleted, setDeleted] = useState(null);
     const navigator = useNavigate();
     const getUserById = async () => {
         try {
@@ -32,23 +36,22 @@ function CarDitails() {
 
     const getComments = async () => {
         const token = localStorage.getItem("token");
-            try {
-                const response = await axios.get(`/getReviewes/${id}`);
-                const data = response.data;
-                setComments(data.data.comments);
-            } catch (error) {
-                console.error(error);
-            }
-            if(!token){
-                setView("please login or register account to write Comment");
-            }
-        
+        try {
+            const response = await axios.get(`/getReviewes/${id}`);
+            const data = response.data;
+            setComments(data.data.comments);
+        } catch (error) {
+            console.error(error);
+        }
+        if (!token) {
+            setView("please login or register account to write Comment");
+        }
     };
 
     useEffect(() => {
         getComments();
         getUserById();
-    }, [id]);
+    }, [id, deleted]);
 
     const appendComment = (comment) => {
         console.log("append car details");
@@ -76,6 +79,17 @@ function CarDitails() {
             });
             navigator("/login");
         }
+    };
+    const deleteComment = async (id) => {
+        const token = localStorage.getItem("token");
+        try {
+            const response = await axios.delete(`comments/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            setDeleted(response.data.data);
+        } catch (e) {}
     };
     return (
         <div>
@@ -135,23 +149,25 @@ function CarDitails() {
                         </div>
                         <div className="card mb-3  col m-2">
                             <div className="card-body">
-                                <div className="row d-flex justify-content-between">
-                                    <h5 className="card-title-details col font-bold ">
+                                <div className=" d-flex justify-content-between">
+                                    <h5 className="card-title-details  font-bold ">
                                         {car.make}
                                     </h5>
-                                    <h5 className="card-title-details col">
-                                        {car.model}
+                                    <h5 className="card-title-details ">
+                                        Model : {car.model}
                                     </h5>
 
-                                    <i class="bi bi-heart col justify-end"></i>
+                                    <i class="bi bi-heart  justify-end"></i>
+                                </div>
+                                <div className="d-flex align-items-center gap-5">
+                                    <h6 className="card-subtitle  my-2 text-muted col-4">
+                                        Reviewer
+                                    </h6>
+                                    <h6 className="card-text  my-2 col-4 px-5">
+                                        Owner : {car.owneruser.name}
+                                    </h6>
                                 </div>
 
-                                <h6 className="card-subtitle mb-2 text-muted">
-                                    Reviewer
-                                </h6>
-                                <p className="card-text">
-                                    Owner : {car.owneruser.name}
-                                </p>
                                 <ul className="list-group list-group-flush">
                                     <li className="list-group-item">
                                         Car Number : {car.car_number}
@@ -192,7 +208,7 @@ function CarDitails() {
                                   </div> */}
                                 <button
                                     type="button"
-                                    className="btn commentbtn"
+                                    className="btn commentbtn mx-3"
                                     onClick={openBill}
                                 >
                                     Rent Now
@@ -207,12 +223,15 @@ function CarDitails() {
                                 {comments.length}
                             </span>
                         </h1>
-                        <div className="">
+                        <div className=" reviewsBox">
                             <p className=" text-red-700 fs-4">{view}</p>
-                            {comments.length>0?comments.map((comment, index) => (
-                                <div className={"comment "} key={index}>
-                                    <div className="row comment_user">
-                                        <div className="col-2 comment_user_img">
+                            {comments.length > 0 ? (
+                                comments.map((comment, index) => (
+                                    <div
+                                        className=" d-flex justify-content-between align-items-center py-2 gap-3"
+                                        key={index}
+                                    >
+                                        <div className="user_img d-flex justify-content-center align-items-center">
                                             <img
                                                 src={
                                                     comment.owner_of_comment
@@ -222,11 +241,30 @@ function CarDitails() {
                                                 className={"comment__avatar"}
                                             />
                                         </div>
-                                        <div className="col-10 comment_body">
-                                            <h4 className={"comment__author "}>
-                                                {comment.owner_of_comment.name}
-                                            </h4>
-                                            <p>{comment.rate}</p>
+                                        <div className=" comment_body">
+                                            <div className="d-flex justify-content-between">
+                                                <h4
+                                                    className={
+                                                        "comment__author "
+                                                    }
+                                                >
+                                                    {
+                                                        comment.owner_of_comment
+                                                            .name
+                                                    }{" "}
+                                                    comment :
+                                                </h4>
+                                                <TiDelete
+                                                    size={30}
+                                                    className="DeleteBtn"
+                                                    onClick={() =>
+                                                        deleteComment(
+                                                            comment.id
+                                                        )
+                                                    }
+                                                />
+                                            </div>
+
                                             <div
                                                 className={"comment__content "}
                                             >
@@ -234,21 +272,52 @@ function CarDitails() {
                                                     {comment.comment}
                                                 </p>
                                             </div>
+                                            <div className="timeago">
+                                                <p
+                                                    className={
+                                                        "comment__text_timeago"
+                                                    }
+                                                >
+                                                    {comment.timeago}
+                                                </p>
+                                            </div>
                                         </div>
-                                        <div className="timeago">
-                                            <p
-                                                className={
-                                                    "comment__text_timeago"
-                                                }
-                                            >
-                                                {comment.timeago}
-                                            </p>
-                                        </div>
+                                        <div className="d-flex gap-2 py-3 comment_rating">
+                                            <h2> rating : </h2>
+                                            <div className="d-flex">
+                                                {[...Array(5)].map(
+                                                    (_, index) => {
+                                                        return (
+                                                            <span
+                                                                key={index}
+                                                                className={`${
+                                                                    index + 1 <=
+                                                                    comment.rating
+                                                                        ? "selected"
+                                                                        : ""
+                                                                } fs-5 fw-bold mx-1`}
+                                                            >
+                                                                &#9733;
+                                                            </span>
+                                                        );
+                                                    }
+                                                )}
+                                            </div>
+                                        </div>{" "}
                                     </div>
-                                </div>
-                            )):<p className="py-2 fs-4">No Comments on this car</p>}
+                                ))
+                            ) : (
+                                <p className="py-2 fs-4">
+                                    No Comments on this car
+                                </p>
+                            )}
                         </div>
-                        {!view&&<CommetInput id={id} appendComment={appendComment} />}
+                        {!view && (
+                            <CommetInput
+                                id={id}
+                                appendComment={appendComment}
+                            />
+                        )}
                     </div>
                 </div>
             )}

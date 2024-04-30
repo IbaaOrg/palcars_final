@@ -8,6 +8,7 @@ use App\Models\Color;
 use App\Models\Price;
 use App\Models\Location;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Http\Traits\ResponseTrait;
 use Illuminate\Support\Facades\DB;
 use App\Http\Resources\CarResource;
@@ -345,14 +346,34 @@ foreach ($notifications as $notification) {
         }
         return $this->success(new PricesCarResource($car));
     }
-    public function reviews(Request $request,String $id){
-        $car=Car::find($id);
-        $car->reviews=$car->reviews;
-        if (!$car) {
+    public function reviews(Request $request, String $id)
+{
+    $car = Car::find($id);
+
+    // Check if the car exists
+    if (!$car) {
         return $this->fail('Car not found', 404);
     }
-        return $this->success(new CommentOfCarResource($car));
-    }
+
+    // Load the comments associated with the car
+    $comments = $car->comments()->get();
+
+    // Sort the comments based on the timeago attribute
+    $sortedComments = $comments->sortByDesc(function ($comment) {
+        // Parse the timeago string into a timestamp
+        $timeAgoTimestamp = Carbon::parse($comment->created_at)->timestamp;
+
+        // Return the timestamp to sort the comments
+        return $timeAgoTimestamp;
+    });
+
+    // Assign the sorted comments back to the car object
+    $car->comments = $sortedComments;
+
+    // Return the car object with the sorted comments
+    return $this->success(new CommentOfCarResource($car));
+}
+
     public function discountsOfCar(Request $request,String $id){
         $car=Car::find($id);
         $car->discounts=$car->discounts;
