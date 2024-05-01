@@ -1,4 +1,4 @@
-    import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import image from "../../../../public/image/usericon.png";
 import axios from "axios";
 import get_all_cars from "../../NetWorking/get_all_cars";
@@ -14,19 +14,21 @@ import CarCard from "./CarCard";
 function Cars() {
     const searchParams = new URLSearchParams(location.search);
     const category = searchParams.get("category");
-
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
     const [car_id, setCar_id] = useState(null);
- 
+    const [favorites, setFavorites] = useState([]);
+    const [color,setColor]=useState('black')
+
+    useEffect(() => {
+        getCars();
+    }, []);
 
     const getCars = async () => {
         if (category) {
             await get_all_cars(
                 (data) => {
-                    setData(data.data); //rerender
-                    console.log(data);
-
+                    setData(data.data);
                     setLoading(false);
                 },
                 (error) => {
@@ -37,8 +39,7 @@ function Cars() {
         } else {
             await get_all_cars(
                 (data) => {
-                    setData(data.data); //rerender
-                    console.log(data);
+                    setData(data.data);
                     setLoading(false);
                 },
                 (error) => {
@@ -48,81 +49,74 @@ function Cars() {
             );
         }
     };
-    {
-        /*                     <img key={imgs.id} src={data.sub_images[0].photo_car_url} width={200} height={100} alt='car image' />*/
-    }
-    //code run after component render[ready]
-    useEffect(() => {
-        getCars();
-    }, []);
-    const [favorites, setFavorites] = useState(
-        // Initialize favorites array with false for each car (not favorited)
-        data.map(() => false)
-    );
-
-    const addFaverate = async () => {
-        console.log("car_id");
-        console.log(car_id);
-
+    const toggleFavorite = async (car_id) => {
         const token = localStorage.getItem("token");
         try {
-            const response = await axios.post("/favorites", car_id, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            const data = response.data;
-            console.log(data.data);
-
-            console.log(data.data);
-        } catch (error) {
-            console.error(error);
+            const isFavorite = favorites.some((favorite) => favorite.car_id === car_id);
+            if (isFavorite) {
+                await axios.delete(`/favorites/${car_id}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    }
+                });
+                setColor('red');
+                setFavorites(favorites.filter((favorite) => favorite.car_id !== car_id));
+                toast.success("Removed from favorites", {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                });
+            } else {
+                const response = await axios.post(
+                    `/favorites`,
+                    { car_id: car_id },
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
+                setFavorites([...favorites, response.data.data]);
+                setColor('black')
+                toast.success("Added to Favorites", {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                });
+            }
+        } catch (e) {
+            console.error("Error toggling favorite:", e);
         }
     };
-
-    const toggleFavorite = async (index, car_id) => {
-        setFavorites((prevFavorites) => {
-            const updatedFavorites = [...prevFavorites];
-            updatedFavorites[index] = !prevFavorites[index];
-            /*   console.log("car_id")
-      console.log(car_id) */
-            toast.success("adding to Fevarte", {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "dark",
-            });
-            setCar_id(car_id);
-            addFaverate(car_id);
-            return updatedFavorites;
-        });
-    };
-
+    
+    
     return (
-        <div className="d-flex flex-wrap justify-evenly bg-slate-200 w-100  " >
-{loading ? (
+        <div className="d-flex flex-wrap justify-evenly bg-slate-200 w-100  ">
+            {loading ? (
                 <Loading />
-               ) : (
-                
+            ) : (
                 data.map((item, index) => (
                     <CarCard
                         key={item.id}
                         item={item}
                         index={index}
-                        toggleFavorite={toggleFavorite}
+                        toggleFavorite={() => toggleFavorite(item.id)}
                         favorites={favorites}
-                   
-                                            />
+                        color={color}
+                    />
                 ))
-                
-            )} 
-         
-            </div>
-            
+            )}
+        </div>
     );
 }
 
