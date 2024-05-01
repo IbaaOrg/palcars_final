@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import '../../../css/app.css'
+import { MdHomeWork } from "react-icons/md";
+import { BsFillTelephoneFill } from "react-icons/bs";
+import { MdAttachEmail } from "react-icons/md";
+import { NavLink } from 'react-router-dom';
+
 function City() {
     const searchParams = new URLSearchParams(location.search);
     const cityname = searchParams.get("city");
@@ -64,24 +69,30 @@ function City() {
           ):(
             <>
                       {companys && (
-                          <div className=" d-flex justify-around">
+                          <div className=" d-flex justify-around m-4">
                               {companys.map(company => (
 
                                   <div key={company.id} className="card shadow p-3">
-                                      <img src={company.owner.photo_user} className="h-20 w-20 rounded-circle d-flex justify-end " />
+                                      {/* <img src={company.owner.photo_user} className="h-20 w-20 rounded-circle d-flex justify-end " />
                                       <div className="card-body">
                                           <div className="card-header">
                                               {company.owner.name}
 
                                           </div>
-                                       {/*    <div>
+                                          <div>
                                           Location : 
                                               {company.location.location}<br/>
-                                              {company.location.type}
+                                              {company.location.typ
+                                          </div> 
+                                      </div> */}
 
-
-                                          </div> */}
-                                      </div>
+                                      <div className="d-flex flex-column justify-content-center align-items-center pt-5">
+                                          <img src={company.owner.photo_user} alt="" className=' w-40' />
+                                          <p className='d-flex gap-3 justify-content-start align-items-center fw-bold pt-2 w-15'> <i class="bi bi-house-door-fill fs-2"></i>{company.owner.name} Company
+                                          </p>
+                                         
+                                          </div>
+                                      <NavLink to={`/carofcompany/${company.owner.id}`} className="btn btn-outline-primary">Show Profile</NavLink>
                                   </div>
                               ))}
                           </div>

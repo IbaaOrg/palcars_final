@@ -103,8 +103,26 @@ function Cars() {
     const types= ['SUV', 'Hatchback','Sedan','Convertible','Cressover','Minivan','Station Wagon','Pickup Trucks'];
     const seats=[2,4,5,7,8,'more than 8']
     return (
-        <div className="d-flex bg-slate-200 w-100">
-            <div className="col-2 bg-white d-flex flex-column p-3">
+        <div className=" bg-slate-200 w-100">
+
+            <div className=" row  bg-slate-100">
+                <h1 className="col text-center fs-2"><i class="bi bi-funnel"></i></h1>
+                <button className="col btn btn-dark m-1">All</button>
+                <button className="col btn btn-outline-dark m-1">SUV</button>
+                <button className="col btn btn-outline-dark m-1">Hatchback</button>
+                <button className="col btn btn-outline-dark m-1">Sedan</button>
+                <button className="col btn btn-outline-dark m-1">Convertible</button>
+                <button className="col btn btn-outline-dark m-1">Cressover</button>
+                <button className="col btn btn-outline-dark m-1">Minivan</button>
+                <button className="col btn btn-outline-dark m-1">StationWagon</button>
+                <button className="col btn btn-outline-dark m-1">Pickup Trucks</button>
+
+
+
+            </div>
+
+        
+            {/* <div className="col-2 bg-white d-flex flex-column p-3">
                 <div>
                     <h3 className="text-muted">Type</h3>
                     <div>
@@ -164,11 +182,15 @@ function Cars() {
                     <input type="range" max={2000}/>
                     </div>
                 </div>
-            </div>
-            <div className="d-flex flex-wrap justify-evenly bg-slate-200 col-10  ">
-                {loading ? (
-                    <Loading />
-                ) : (
+            </div> */}
+           
+        <div className="d-flex flex-wrap justify-evenly bg-slate-200 col-10  " >
+{loading ? (
+                <Loading />
+               ) : (
+                
+              
+
                     data.map((item, index) => (
                         <CarCard
                             key={item.id}
@@ -176,9 +198,15 @@ function Cars() {
                             index={index}
                             toggleFavorite={toggleFavorite}
                             favorites={favorites}
-                        />
+                    
+                                                />
                     ))
-                )}
+                
+
+                
+                
+            )} 
+         
             </div>
         </div>
     );
