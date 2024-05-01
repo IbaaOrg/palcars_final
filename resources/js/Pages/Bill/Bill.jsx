@@ -10,8 +10,10 @@ import { A11y } from "swiper/modules";
 import { UserContext } from "../../Context/User";
 import { ToastContainer, toast } from "react-toastify";
 import { Bounce, Zoom } from "react-toastify";
-import DialogTitle from "@mui/material/DialogTitle";
+import DialogTitle from '@mui/material/DialogTitle';
+//import { DialogTitle } from ".mui/material";
 import Dialog from "@mui/material/Dialog";
+//import { Dialog } from ".mui/material";
 import { height, margin, padding, width } from "@mui/system";
 const Bill = () => {
     const [openDialog, handleDisplay] = React.useState(false);
@@ -779,7 +781,7 @@ const dialogStyle = {
                         </label>
                         <label
                             className="col d-flex flex-column bg-slate-100  rounded px-3"
-                            htmlFor="creditcard"
+                            htmlFor="paypal"
                         >
                             <div className="d-flex">
                                 <input

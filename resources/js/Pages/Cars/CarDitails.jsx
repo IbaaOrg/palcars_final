@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "../../../css/app.css";
 import "../../../css/Commentstye/Comments.css";
@@ -13,6 +13,7 @@ import axios from "axios";
 import RatingC from "../../Layout/Comments/RatingC";
 import "../../../css/Commentstye/Rating.css";
 import ResetPassword from "./../../Auth/Login/ResetPassword";
+import { UserContext } from "../../Context/User";
 function CarDitails() {
     const { id } = useParams(); // This will give you the value of "id" from the URL
     const [loading, setLoading] = useState(true);
@@ -20,6 +21,7 @@ function CarDitails() {
     const [car, setCar] = useState(null);
     const [rate, setRate] = useState(null);
     const [deleted, setDeleted] = useState(null);
+    const {user}=useContext(UserContext);
     const navigator = useNavigate();
     const getUserById = async () => {
         try {
@@ -254,15 +256,15 @@ function CarDitails() {
                                                     }{" "}
                                                     comment :
                                                 </h4>
-                                                <TiDelete
+                                               {comment.owner_of_comment.name===user.name &&(<TiDelete
                                                     size={30}
                                                     className="DeleteBtn"
                                                     onClick={() =>
                                                         deleteComment(
                                                             comment.id
                                                         )
-                                                    }
-                                                />
+                                                    } 
+                                                />)}
                                             </div>
 
                                             <div
