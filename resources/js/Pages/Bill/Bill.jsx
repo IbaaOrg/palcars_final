@@ -96,6 +96,7 @@ const dialogStyle = {
     const [step2,setStep2]=useState(false);
     const [step3,setStep3]=useState(false);
     const [step4,setStep4]=useState(false);
+    const[totalPrice,setTotalPrice]=useState(0);
     const navigate=useNavigate();
     function todayDate() {
         const today = new Date();
@@ -284,12 +285,30 @@ const dialogStyle = {
     const NextStep4=()=>{
         setStep4(true);
     }
+    useEffect(()=>{
+        const [startYear, startMonth, startDay] = startDate.split('-').map(Number);
+    const [startHour, startMinute] = startTime.split(':').map(Number);
+    const startDateObj = new Date(startYear, startMonth - 1, startDay, startHour, startMinute);
+
+    // Parse end date and time
+    const [endYear, endMonth, endDay] = endDate.split('-').map(Number);
+    const [endHour, endMinute] = endTime.split(':').map(Number);
+    const endDateObj = new Date(endYear, endMonth - 1, endDay, endHour, endMinute);
+
+    // Calculate milliseconds between start and end date-time
+    const timeDiffInMillis = endDateObj.getTime() - startDateObj.getTime();
+
+    // Convert milliseconds to hours
+    const hours = timeDiffInMillis / (1000 * 60 * 60);
+
+    setTotalPrice(car.prices[0].price_per_hour*Math.round(hours));
+    },[startDate,startTime,endDate,endTime])
     return (
         <>
             <ToastContainer />
             <div className="d-flex flex-column  bg-slate-100  w-100 ">
                 <div className="d-flex flex-wrap  justify-content-between billinfo">
-                    <div className="col-12 col-md-7 bg-white rounded py-3 px-5 my-5">
+                    <div className="col-12 col-md-7 bg-white rounded py-3 px-5 mt-5 mb-3">
                         <h2 className="fw-bold fs-5 py-2">Billing Info</h2>
                         <div className="d-flex justify-content-between text-slate-400">
                             <span>Please enter your billing info</span>
@@ -402,7 +421,7 @@ const dialogStyle = {
                         <input type="submit" value={"Next Step"} onClick={NextStep2} className="btn btn-primary"/>
 
                     </div>
-                    <div className="col-12 col-md-4 bg-white rounded  my-5 px-5 py-4">
+                    <div className="col-12 col-md-4 bg-white rounded  mt-5 mb-3 px-5 py-4">
                         <h2 className="fw-bold px-2">Rental Summary</h2>
                         <p className="text-start">{car.description}</p>
                         <div className="d-flex gap-2 flex-wrap">
@@ -441,7 +460,7 @@ const dialogStyle = {
                             {price === priceAfterDiscount ? (
                                 <>
                                     <p>Price per day : {price}₪</p>
-                                    <p>Total price: {priceAfterDiscount} ₪</p>
+                                    <p>Total price: {totalPrice?totalPrice:0} ₪</p>
                                 </>
                             ) : (
                                 <>
@@ -463,7 +482,7 @@ const dialogStyle = {
                         </div>
                     </div>
                 </div>
-                {step2&&<div className="  billpay mt-2 bg-white px-5 py-3">
+                {step2&&<div className="  billpay  mt-4 mb-4 bg-white px-5 py-3">
                     <h2 className="fw-bold fs-5 py-2">Rental Info</h2>
                     <div className="d-flex justify-content-between text-slate-400">
                         <span>Please enter your rental date</span>
@@ -656,7 +675,7 @@ const dialogStyle = {
 
                 </div>}
 
-              {step3&&<div className="  billpay mt-5 bg-white px-5 py-3">
+              {step3&&<div className="  billpay mt-4 mb-4 bg-white px-5 py-3">
                     <h2 className="fw-bold fs-5 py-2">Payment Method</h2>
                     <div className="d-flex justify-content-between text-slate-400">
                         <span>Please enter your payment method</span>
@@ -847,7 +866,7 @@ const dialogStyle = {
 
                 </div>
 }
-                {step4&&<div className="billpay mt-5 bg-white px-5 py-3">
+                {step4&&<div className="billpay mt-4 mb-4 bg-white px-5 py-3">
                     <h2 className="fw-bold fs-5 py-2">Confirmation</h2>
                     <div className="d-flex justify-content-between text-slate-400">
                         <span>Just check . and your renatl is ready</span>

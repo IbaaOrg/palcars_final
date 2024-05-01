@@ -278,8 +278,8 @@ function Home() {
                 )}
                     
                 </div>
-                <div className="counter " >
-                    <h1 className=" fs-3 text-center my-2">Site statistics</h1>
+                <div className="counter py-5" >
+                    <h1 className=" fs-3 text-center mb-4">Site statistics</h1>
                     <ScroolTrigger onEnter={() => { setCounterOn(true) }} onExit={() => { setCounterOn(false) }}>
                         {counterOn &&
                             <div className=" container p-1 d-flex  justify-around">
@@ -288,8 +288,8 @@ function Home() {
                                 <div className=" card p-4 shadow">
                                     <div className="fs-1  p-3">
 
-                                        <CountUp start={0} end={userCount} duration={2} delay={0} className="  " />
-                                        +
+                                        <CountUp start={0} end={userCount} duration={2} delay={1} className="  " />
+                                        
                                     </div>
                                     <h1 className="fs-3">Users</h1>
 
@@ -297,8 +297,8 @@ function Home() {
                                 <div className=" card p-4 shadow">
                                     <div className="fs-1  p-3">
 
-                                        <CountUp start={0} end={userCount} duration={2} delay={0} className="  " />
-                                        +
+                                        <CountUp start={0} end={userCount} duration={2} delay={1} className="  " />
+                                        
                                     </div>
                                     <h1 className="fs-3">Rented</h1>
 
@@ -306,8 +306,8 @@ function Home() {
                                 <div className=" card p-4 shadow">
                                     <div className="fs-1  p-3">
 
-                                        <CountUp start={0} end={citycount} duration={2} delay={0} className="  " />
-                                        +
+                                        <CountUp start={0} end={citycount} duration={2} delay={1} className="  " />
+                                        
                                     </div>
                                     <h1 className="fs-3">Citys</h1>
 
@@ -318,7 +318,7 @@ function Home() {
 
                     </ScroolTrigger>
                 </div>
-                <div className="d-flex divdesmap">
+                <div className="d-flex divdesmap py-5">
                     <div className="container d-flex justify-center col ">
                         <div className="card p-4 m-2 shadow desmap d-flex justify-center align-middle">
                             <h1 className=" text-center fs-5">Map of palestine</h1>
@@ -339,7 +339,7 @@ function Home() {
                         <img src={map} usemap="#image-map" />
 
                         <map name="image-map">
-                                <area className="map-highlight" target="" alt="الخليل" title="Hebron" href={`city?city=${city}`} onClick={(e)=>setCity(e.target.title)} coords="242,451,228,449,217,450,206,452,196,447,192,438,184,443,176,446,167,442,160,433,158,422,149,418,144,411,140,398,142,389,147,384,143,376,138,369,141,362,143,351,150,344,157,338,165,350,172,346,180,349,185,354,193,362,200,364,203,373,210,372,213,366,218,375,228,378,236,380,237,387,232,397,237,403,243,404,246,409,247,424,246,435,245,442" shape="poly" />
+                                <area className="map-highlight " target="" alt="الخليل" title="Hebron" href={`city?city=${city}`} onClick={(e)=>setCity(e.target.title)} coords="242,451,228,449,217,450,206,452,196,447,192,438,184,443,176,446,167,442,160,433,158,422,149,418,144,411,140,398,142,389,147,384,143,376,138,369,141,362,143,351,150,344,157,338,165,350,172,346,180,349,185,354,193,362,200,364,203,373,210,372,213,366,218,375,228,378,236,380,237,387,232,397,237,403,243,404,246,409,247,424,246,435,245,442" shape="poly" />
                             <area target="" alt="quds" title="Quds" href={`city?city=${city}`} onClick={(e)=>setCity(e.target.title)} coords="159,337,166,333,175,331,181,328,189,323,198,320,209,319,225,316,241,322,253,327,245,306,251,295,265,291,280,291,283,301,281,312,278,323,273,335,271,340,263,343,258,352,255,363,253,369,249,382,250,396,248,405,240,403,235,392,240,385,231,377,219,376,214,366,209,371,200,365,183,349,176,346,167,345,162,341" shape="poly" />
                             <area target="" alt="ramalla" title="Ramalla" href={`city?city=${city}`} onClick={(e)=>setCity(e.target.title)} coords="249,320,244,306,250,294,249,282,237,282,227,279,214,278,198,277,184,281,179,284,178,293,186,294,184,305,181,315,183,322,204,315,222,312,232,316,239,318" shape="poly" />
                             <area target="" alt="nablus" title="Nablus" href={`city?city=${city}`} onClick={(e)=>setCity(e.target.title)} coords="280,288,278,280,284,272,282,261,276,252,282,237,283,219,280,199,268,201,258,195,252,198,247,208,237,210,236,217,232,223,223,222,213,222,201,221,201,228,202,236,198,241,193,246,186,252,183,256,173,264,170,270,173,275,182,280,195,276,212,273,217,277,230,278,245,278,248,282,251,288,262,286,272,286" shape="poly" />

@@ -32,7 +32,7 @@ function AddCar() {
   for (let year = currentYear; year >= 1900; year--) {
     years.push(year);
   }
-  const numbers = [ 1 ,2, 4, 5, 7, 8, 9, 10,20];
+  const numbers = [ 2, 4, 5, 7, 8, 9, 10,20];
   const numbersDoors = [2,4,5];
   const numbersBags = [1, 2, 3, 4, 5, 6, 7, 8];
 const pickuplocations=[];

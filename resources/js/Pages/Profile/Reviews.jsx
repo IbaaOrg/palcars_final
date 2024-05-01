@@ -47,8 +47,8 @@ navigate(`/cars/${id}`)
   return (
     loading?<Loading/>:(
     <div className='d-flex flex-column align-items-center mainBooking'>
-    {user.role==="Renter"?<h3 className='fw-bold fs-4 py-3 '>My Comments</h3>:<h3 className='fw-bold fs-4 py-3 '>Comments on our cars</h3>}
-    {comments.map((item, index) => (
+    {user.role==="Renter"?<h3 className='fw-bold fs-4 py-3 '>My Comments</h3>:<h3 className='fw-bold fs-4 py-3 '>Comments on my cars</h3>}
+    {comments.length>0 ?comments.map((item, index) => (
 <div key={item.id} id={item.car.id} className='minorBooking d-flex flex-wrap border py-2 px-4 m-3 d-flex align-items-center justify-content-between gap-5 ' onClick={handelTo}>
   <span>Comment <span className='text-primary fw-bold'>#{index + 1}</span></span>
  {user.role === "Renter"?<> 
@@ -75,7 +75,8 @@ navigate(`/cars/${id}`)
     {item.timeago}
   </span>
 </div>
-))}
+)): user.role==="Renter"?<div className=' py-3'>You didn't add comment</div>:<div className=' py-3' >Your cars currently have no comments.</div>
+}
   </div>
     )
     

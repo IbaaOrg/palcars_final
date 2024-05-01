@@ -14,6 +14,7 @@ const CarsCompany = () => {
     const[cars,setCars]=useState([]);
     const [car_id, setCar_id] = useState(null);
     const[loading,setLoading]=useState(false);
+    const [locations,setLocations]=useState([]);
     const [favorites, setFavorites] = useState(
         // Initialize favorites array with false for each car (not favorited)
        ''
@@ -25,7 +26,6 @@ const CarsCompany = () => {
             setLoading(true);
         const response=await axios.get(`/carsofcompany/${id}`);
         setCompany(response.data.data);
-        console.log(response.data.data)
         setCars(response.data.data.cars)
         setLoading(false);
         }catch(error){
@@ -43,6 +43,10 @@ const CarsCompany = () => {
             setLoading(false);
   
         }
+    }
+    const getLocations=async()=>{
+        const response =await axios.get(`showLocationsOfCompany/${id}`)
+        setLocations(await response.data.data.locations)
     }
     const addFaverate = async () => {
         console.log("car_id");
@@ -85,8 +89,10 @@ const CarsCompany = () => {
             return updatedFavorites;
         });
     };
+
     useEffect(()=>{
         getCarsOfCompany();
+        getLocations();
     },[id])
   return (
     <>
@@ -99,8 +105,19 @@ const CarsCompany = () => {
  </p>
     <p className='d-flex gap-3 justify-content-start align-items-start fw-bold  pb-3 phone pl-5'><BsFillTelephoneFill size={25} />{company.phone} 
 </p>
-  
-    <div className="d-flex flex-column justify-content-center align-items-center  bg-slate-100 w-100">
+<div className="d-flex flex-column justify-content-center align-items-center w-100  bg-slate-100">
+        <h2 className='mainheadingCompany'>All Locations Of this company</h2>
+  <div className=" d-flex flex-wrap justify-content-center align-items-center gap-3  w-100 p-5">
+    {locations&&locations.map((item)=>(
+        <div key={item.id} className='bg-white p-2 rounded w-25'>
+            <p>{item.location}</p>
+            <p className='text-primary fw-bold'>{item.type}</p>
+            <p>in {item.city.city} city</p>
+        </div>
+    ))}
+  </div>
+  </div>
+    <div className="d-flex flex-column justify-content-center align-items-center w-100">
         <h2 className='mainheadingCompany'>All Cars Of this company</h2>
         <div className="d-flex flex-wrap justify-evenly w-100  " >
             {loading?<Loading/>:(

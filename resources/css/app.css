@@ -474,3 +474,12 @@ border-radius: 8px;
         /* or repeat, repeat-x, repeat-y */
     height: 80vh;
 }
+
+.caricon{
+    font-size: 60px;
+        transition: transform 0.3s ease;
+}
+
+.caricondiv:hover {
+    transform: scale(1.1);
+        /* Increase the scale factor as needed */}
