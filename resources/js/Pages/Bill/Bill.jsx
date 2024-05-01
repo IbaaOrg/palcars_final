@@ -779,7 +779,7 @@ const dialogStyle = {
                         </label>
                         <label
                             className="col d-flex flex-column bg-slate-100  rounded px-3"
-                            htmlFor="creditcard"
+                            htmlFor="paypal"
                         >
                             <div className="d-flex">
                                 <input

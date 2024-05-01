@@ -105,7 +105,7 @@ function Cars() {
     return (
         <div className=" bg-slate-200 w-100">
 
-            <div className=" row  bg-slate-100">
+            <div className=" d-flex  bg-white">
                 <h1 className="col text-center fs-2"><i class="bi bi-funnel"></i></h1>
                 <button className="col btn btn-dark m-1">All</button>
                 <button className="col btn btn-outline-dark m-1">SUV</button>
@@ -116,9 +116,6 @@ function Cars() {
                 <button className="col btn btn-outline-dark m-1">Minivan</button>
                 <button className="col btn btn-outline-dark m-1">StationWagon</button>
                 <button className="col btn btn-outline-dark m-1">Pickup Trucks</button>
-
-
-
             </div>
 
         
@@ -184,7 +181,7 @@ function Cars() {
                 </div>
             </div> */}
            
-        <div className="d-flex flex-wrap justify-evenly bg-slate-200 col-10  " >
+        <div className="d-flex flex-wrap justify-evenly bg-slate-200 col-12  " >
 {loading ? (
                 <Loading />
                ) : (

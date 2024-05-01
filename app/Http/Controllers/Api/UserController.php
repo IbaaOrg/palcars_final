@@ -192,11 +192,9 @@ class UserController extends Controller
     
         // Prepare data for update
         $data = [
-            'name' => $request->input('name', $user->name),
-            'email' => $request->input('email', $user->email),
-            'phone' => $request->input('phone', $user->phone),
-            'birthdate' => $request->input('birthdate', $user->birthdate),
-            'active' => $request->input('active', $user->active), // Only set if the logged-in user is an admin
+            'name' => $request->input('name') ?? $user->name,
+            'phone' => $request->input('phone') ?? $user->phone,
+            'password' => $request->input('password') ?? $user->password,
         ];
     
         // Process photo_user
