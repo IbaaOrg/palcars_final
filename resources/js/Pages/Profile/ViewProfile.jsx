@@ -39,42 +39,8 @@ function ViewProfile({id}) {
   }
   useEffect(() => {
     getUserById()
-    getLocations()
   }, []);
-  const [locations, setLocations] = useState([]);
-
-
-  const getLocations = async () => {
-
-    try {
-      const response = await axios.get(`/showAllLocations`);
-      const processedLocations = [];
-
-      const userid = id
-      // Iterate through the locations array using a for loop
-      for (let i = 0; i < response.data.data.length; i++) {
-
-        if (response.data.data[i].ownerCompany.id === id) {
-
-          //console.log(response.data.data[i])
-          processedLocations.push(response.data.data[i]); // 
-        }
-        //const location = locations[i];
-
-        // Process each location object here
-      }
-      //console.log(processedLocations)
-      setLocations(processedLocations);
-
-
-    } catch (error) {
-      // Handle error
-      console.error('Error fetching user data:', error);
-
-    }
-
-  }
-
+ 
   return (
     <div>
       <div className='card w-120 bg-white'>
@@ -88,37 +54,23 @@ function ViewProfile({id}) {
                   <img src={user.photo_user} width={50} height={50} alt="User" className=' card-link rounded' />
 
             </div>
-                <div className='col-4 text-start d-flex align-items-center'>
-                  <h5 class="card-title ">{user.name}</h5>
+                <div className='col-8 text-start d-flex align-items-center'>
+                  <h5 class="card-title ">{user.name} <span className='card-subtitle mb-2 text-body-secondary'>Company</span></h5>
 
                 </div>
-                <div className='col-4'></div>
 
 
           </div>
          
 
          
-            <h6 class="card-subtitle mb-2 text-body-secondary m-2">Company</h6>
             <div class="card-text text-start">
               <p>Email :  {user.email}</p>
                 <p>Phone : {user.phone}</p>
-                <p>Locations :</p>
-                <div className="overflow-auto"> {locations && (<>
-
-{locations.map(l => (
-  <div className='d-flex ' key={l.id}>
-    <p> {l.location}</p>
-    <p> {l.type}</p>
-  </div>
-
-))}
-</>)}</div>
-               
 
             </div>
             <div className='mt-4'>
-                <Link to={`/carofcompany/${id}`} class="card-link btn btn-outline-primary">All Cars</Link>
+                <Link to={`/carofcompany/${id}`} class="card-link btn btn-outline-primary">Profile</Link>
                 <a href="#" class="card-link btn btn-success">Message</a>
             </div>
             

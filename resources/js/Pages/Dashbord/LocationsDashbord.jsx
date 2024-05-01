@@ -181,7 +181,7 @@ getuser()
                           <label for="select" className=' mr-3'> {!showdropoff?'Pick up and Dropoff':'Pick up'} </label>
 
                   <select class="select-input m-4" id='select' onChange={setlocation}>
-
+                            <option>Choose City..</option>
                       {citys.map(city => (
                           <option key={city.id} value={city.id} id={city.id} >{city.city}</option>
 

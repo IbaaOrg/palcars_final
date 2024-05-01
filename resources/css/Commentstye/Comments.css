@@ -9,6 +9,7 @@
 
 }
 
+
 .comment-input {
     margin-top: 20px;
 }
@@ -19,6 +20,7 @@
     margin-right: 10px;
     border: #4267b2;
     border-radius: 5px;
+    width: 100%;
 }
 
 .comment-input button {
@@ -32,6 +34,9 @@
 .comment-input button:hover {
     background-color: #3b5998;
 }
+.commentInput {
+    border: 1px solid rgb(131, 131, 131) !important;
+}
 
 /* Comment.module.css */
 .comment {
@@ -39,20 +44,21 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-   
-    margin: 5px;
+    width: 100%;
 }
 .comment_user{
-    width: 70%;
+    width: 100%;
 }
 .comment_user_img{
 display: flex;
     justify-content: center;
+    align-items: center;
+   
 }
 .comment__avatar {
   
-    width: 40px;
-    height: 40px;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
 }
 
@@ -61,16 +67,27 @@ display: flex;
     justify-content: start;
     margin-left: 10px;
 }
-
+.user_img {
+    width: 15%;
+}
 .comment__author {
     font-weight: bold;
     justify-content: start;
     margin: 0;
 }
 .comment_body{
+    width: 70%;
     padding: 10px;
     background-color: #eaeaea;
     border-radius: 20px;
+}
+.DeleteBtn:hover {
+    cursor: pointer;
+}
+.comment_rating {
+    width: 25%;
+    display: flex;
+    justify-content: center;
 }
 .comment__text {
     margin-top: 10px;

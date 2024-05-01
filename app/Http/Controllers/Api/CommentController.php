@@ -112,7 +112,7 @@ return $this->success(new CommentResource($comment));
 
     }
     public function getMyComments(Request $request){
-        $userComments=Comment::where('user_id',$request->user()->id)->get();
+        $userComments=Comment::where('user_id',$request->user()->id)->orderBy("created_at","DESC")->get();
         return $this->success(CommentCarResource::collection($userComments));
     }
     public function getAllcomentsOfMyCar(Request $request){
@@ -121,6 +121,8 @@ return $this->success(new CommentResource($comment));
         $allUserCarComments = $user->cars->flatMap(function ($car) {
             return $car->comments;
         });
+        $allUserCarComments = $allUserCarComments->sortByDesc('created_at');
+
         return $this->success(CommentCarResource::collection($allUserCarComments));
     }
 }

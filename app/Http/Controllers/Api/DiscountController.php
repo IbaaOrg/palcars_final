@@ -23,6 +23,8 @@ class DiscountController extends Controller
     public function index(Request $request)
     {
         $data=Discount::all();
+        $data = $data->sortBy('expired_date');
+
         return $this->success(SimpleDiscountResource::collection($data));
        
     }
