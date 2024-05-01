@@ -1,11 +1,13 @@
+// UserContext.js
 import { createContext, useState, useContext, useEffect } from "react";
 import axios from "axios";
+
 export const UserContext = createContext();
 
 const UserContextProvider = ({ children }) => {
     const [user, setUser] = useState({});
 
-    const getuser = async () => {
+    const getUser = async () => {
         const token = localStorage.getItem("token");
         if (token) {
             try {
@@ -20,16 +22,24 @@ const UserContextProvider = ({ children }) => {
             console.log("Token not found in local storage");
         }
     };
+
+    const updateUser = (newUserData) => {
+        setUser(newUserData);
+    };
+
     useEffect(() => {
-        getuser();
+        getUser();
     }, []);
+
     return (
-        <UserContext.Provider value={{ getuser, user }}>
+        <UserContext.Provider value={{ user, updateUser }}>
             {children}
         </UserContext.Provider>
     );
 };
+
 export default UserContextProvider;
+
 export const useUserContext = () => {
     return useContext(UserContext);
 };
