@@ -56,6 +56,7 @@ function HomeDashbord() {
   return (
     <div>
       <div className='row p-4 m-2'>
+      
         <div className='col rounded bg-red-300 m-2 position-relative caricondiv'>
           <i className="bi bi-car-front-fill m-1 caricon text-red-900 position-absolute top-0 end-0"></i>
           <div className="fs-1 text-red-900 text-center">{data}</div>
