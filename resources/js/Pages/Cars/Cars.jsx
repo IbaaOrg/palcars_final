@@ -105,7 +105,7 @@ function Cars() {
     return (
         <div className=" bg-slate-200 w-100">
 
-            <div className=" d-flex  bg-white">
+            <div className=" d-flex  bg-slate-100">
                 <h1 className="col text-center fs-2"><i class="bi bi-funnel"></i></h1>
                 <button className="col btn btn-dark m-1">All</button>
                 <button className="col btn btn-outline-dark m-1">SUV</button>
