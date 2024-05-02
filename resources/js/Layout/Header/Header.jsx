@@ -24,6 +24,7 @@ import { TranslateContext } from "../../Context/Translate";
 import { useLocation, useNavigate } from "react-router-dom";
 import { IoIosArrowDown } from "react-icons/io";
 import { UserContext } from "../../Context/User";
+import { Nav } from "react-bootstrap";
 
 function Header({ islogined }) {
     const { changeLanguage, translates } = useContext(TranslateContext);
@@ -202,12 +203,12 @@ const toggleList=()=>{
                                 </li>
                             </ul>
                         </div>
-                        {user&&<div className="d-flex  d-flex align-items-center justify-content-center border rounded-circle p-2">
+                        {islogined&&user&&user.role==="Renter"&&(<NavLink to="FavoriteList" className="d-flex  d-flex align-items-center justify-content-center border rounded-circle p-2">
                         <FaHeart size={20} className="text-black"/>
 
-                        </div>}
+                        </NavLink>)}
                         <div className=" d-flex mx-2 ">
-                            {user && (
+                            {islogined && (
                                 <div className="nav-item dropdown">
                                     <a
                                         className="nav-link text-black"

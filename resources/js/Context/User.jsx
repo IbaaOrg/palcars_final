@@ -6,7 +6,6 @@ export const UserContext = createContext();
 
 const UserContextProvider = ({ children }) => {
     const [user, setUser] = useState({});
-
     const getUser = async () => {
         const token = localStorage.getItem("token");
         if (token) {
@@ -16,7 +15,8 @@ const UserContextProvider = ({ children }) => {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                if (response.data.status === true) setUser(response.data.data);
+                if (response.data.status === true) 
+                setUser(response.data.data);
             } catch (e) {}
         } else {
             console.log("Token not found in local storage");

@@ -91,10 +91,6 @@ const CarsCompany = () => {
             console.error("Error toggling favorite:", e);
         }
     };
-    
-  
-   
-
     useEffect(()=>{
         getCarsOfCompany();
         getLocations();
@@ -129,10 +125,10 @@ const CarsCompany = () => {
                 cars.map((item,index)=>(
                     <CarCard
                     key={item.id}
-                    item={item}
+                 item={item}
                     index={index}
                     toggleFavorite={() => toggleFavorite(item.id)}
-                    favoriteList={favoriteListgit}
+                    favoriteList={favoriteList}
                     />
                 ))
             )}
