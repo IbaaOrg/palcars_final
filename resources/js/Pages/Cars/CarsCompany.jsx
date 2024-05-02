@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import  axios  from 'axios';
 import {Zoom, toast, ToastContainer } from 'react-toastify';
@@ -7,17 +7,17 @@ import CarCard from './CarCard';
 import { MdHomeWork } from "react-icons/md";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { MdAttachEmail } from "react-icons/md";
+import { FavoriteContext } from '../../Context/Favorite';
 
 const CarsCompany = () => {
     const {id}=useParams();
+    const {favoriteList,setFavoriteList}=useContext(FavoriteContext);
     const[company,setCompany]=useState({});
     const[cars,setCars]=useState([]);
     const [car_id, setCar_id] = useState(null);
     const[loading,setLoading]=useState(false);
     const [locations,setLocations]=useState([]);
-    const [favorites, setFavorites] = useState(
-        []
-    );
+    
     const [data, setData] = useState([]);
 
     const getCarsOfCompany=async()=>{
@@ -48,38 +48,34 @@ const CarsCompany = () => {
         setLocations(await response.data.data.locations)
     }
     const toggleFavorite = async (car_id) => {
-        const token = localStorage.getItem("token");
         try {
-            const isFavorite = favorites.some((favorite) => favorite.car_id === car_id);
-            if (isFavorite) {
-                await axios.delete(`/favorites/${car_id}`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
+            const isFavorite=favoriteList.some((favorite)=>favorite.car.id===car_id);
+            const token=localStorage.getItem('token');
+            if(isFavorite){
+               await axois.delete(`/favorites/${car_id}`,{
+                headers:{
+                    Authorization: `Bearer ${token}`
+               }})
+               setFavoriteList(favoriteList.filter((favorite)=>favorite.car.id !== car_id))
+               toast.success("Removed from favorites", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+            }else {
+                const response =await axoit.post(`/favorites`,{
+                    car_id : car_id
+                },{
+                    headers:{
+                        Autorization : `Bearer ${token}`
                     }
-                });
-                setFavorites(favorites.filter((favorite) => favorite.car_id !== car_id));
-                toast.success("Removed from favorites", {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "dark",
-                });
-            } else {
-                const response = await axios.post(
-                    `/favorites`,
-                    { car_id: car_id },
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                        },
-                    }
-                );
-                setFavorites([...favorites, response.data.data]);
-        
+                })
+                setFavoriteList([...favoriteList,await response.data.data])
                 toast.success("Added to Favorites", {
                     position: "top-right",
                     autoClose: 5000,
@@ -136,7 +132,7 @@ const CarsCompany = () => {
                     item={item}
                     index={index}
                     toggleFavorite={() => toggleFavorite(item.id)}
-                    favorites={favorites}
+                    favoriteList={favoriteListgit}
                     />
                 ))
             )}

@@ -11,14 +11,13 @@ import { faHeart, faHeartBroken } from "@fortawesome/free-solid-svg-icons";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CarCard from "./CarCard";
+import { FavoriteContext } from "../../Context/Favorite";
 function Cars() {
+    const {favoriteList,setFavoriteList}=useContext(FavoriteContext);
     const searchParams = new URLSearchParams(location.search);
     const category = searchParams.get("category");
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
-    const [car_id, setCar_id] = useState(null);
-    const [favorites, setFavorites] = useState([]);
-    const [color,setColor]=useState('black')
 
     useEffect(() => {
         getCars();
@@ -50,17 +49,17 @@ function Cars() {
         }
     };
     const toggleFavorite = async (car_id) => {
+        console.log(car_id)
         const token = localStorage.getItem("token");
         try {
-            const isFavorite = favorites.some((favorite) => favorite.car_id === car_id);
+            const isFavorite=favoriteList.some((favorite)=>favorite.car.id === car_id)
             if (isFavorite) {
                 await axios.delete(`/favorites/${car_id}`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     }
                 });
-                setColor('red');
-                setFavorites(favorites.filter((favorite) => favorite.car_id !== car_id));
+                setFavoriteList(favoriteList.filter((favorite) => favorite.car.id !== car_id));
                 toast.success("Removed from favorites", {
                     position: "top-right",
                     autoClose: 5000,
@@ -81,8 +80,7 @@ function Cars() {
                         },
                     }
                 );
-                setFavorites([...favorites, response.data.data]);
-                setColor('black')
+                setFavoriteList([...favoriteList,await response.data.data]);
                 toast.success("Added to Favorites", {
                     position: "top-right",
                     autoClose: 5000,
@@ -111,8 +109,7 @@ function Cars() {
                         item={item}
                         index={index}
                         toggleFavorite={() => toggleFavorite(item.id)}
-                        favorites={favorites}
-                        color={color}
+                        favoriteList={favoriteList}
                     />
                 ))
             )}
