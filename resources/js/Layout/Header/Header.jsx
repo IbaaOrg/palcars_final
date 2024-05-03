@@ -23,15 +23,15 @@ import { data } from "autoprefixer";
 import { TranslateContext } from "../../Context/Translate";
 import { useLocation, useNavigate } from "react-router-dom";
 import { IoIosArrowDown } from "react-icons/io";
+import { UserContext } from "../../Context/User";
 
 function Header({ islogined }) {
     const { changeLanguage, translates } = useContext(TranslateContext);
   const navigator = useNavigate()
 
-
-    const [role, setRole] = useState("");
-    const [username, setUserName] = useState("");
-    const [user, setUser] = useState(null);
+  const {user}=useContext(UserContext);
+    const [role, setRole] = useState(user.role);
+    const [username, setUserName] = useState(user.name);
     const [countUnreadNotification, setCountUnreadNotification] = useState(0);
     const [notifications, setNotifications] = useState([]);
     const [goTo, setGoTo] = useState("");
@@ -69,30 +69,7 @@ function Header({ islogined }) {
             }
         }
     };
-    const getuser = async () => {
-        const token = localStorage.getItem("token");
-
-        if (token) {
-            try {
-                const response = await axios.get("/user", {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
-                const res = response.data;
-                if (res) {
-                    setRole(res.data.role);
-                    setUserName(res.data.username);
-                    setUser(res.data);
-                    console.log(res);
-                }
-            } catch (e) {
-                console.log(e);
-            }
-        } else {
-            console.log("Token not found in local storage");
-        }
-    };
+  
     const Translate = async (e) => {
         changeLanguage(e);
     };
@@ -109,7 +86,6 @@ function Header({ islogined }) {
         console.log(res);
     };
     useEffect(() => {
-        getuser();
         getCountNotification();
         getNotifications();
     }, []);

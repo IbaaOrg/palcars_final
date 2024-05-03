@@ -483,3 +483,21 @@ border-radius: 8px;
 .caricondiv:hover {
     transform: scale(1.1);
         /* Increase the scale factor as needed */}
+
+
+                  .user-list {
+                      list-style-type: none;
+                      padding: 0;
+                  }
+        
+                  .user-list-item {
+                     
+                      padding: 10px;
+                      border-bottom: 1px solid #ccc;
+                  }
+        
+                
+        
+                  .user-name {
+                      font-weight: bold;
+                  }

@@ -16,8 +16,7 @@ const CarsCompany = () => {
     const[loading,setLoading]=useState(false);
     const [locations,setLocations]=useState([]);
     const [favorites, setFavorites] = useState(
-        // Initialize favorites array with false for each car (not favorited)
-       ''
+        []
     );
     const [data, setData] = useState([]);
 
@@ -48,47 +47,57 @@ const CarsCompany = () => {
         const response =await axios.get(`showLocationsOfCompany/${id}`)
         setLocations(await response.data.data.locations)
     }
-    const addFaverate = async () => {
-        console.log("car_id");
-        console.log(car_id);
-
+    const toggleFavorite = async (car_id) => {
         const token = localStorage.getItem("token");
         try {
-            const response = await axios.post("/favorites", car_id, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            setData(response.data);
-            console.log(data.data);
-
-            console.log(data.data);
-        } catch (error) {
-            console.error(error);
+            const isFavorite = favorites.some((favorite) => favorite.car_id === car_id);
+            if (isFavorite) {
+                await axios.delete(`/favorites/${car_id}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    }
+                });
+                setFavorites(favorites.filter((favorite) => favorite.car_id !== car_id));
+                toast.success("Removed from favorites", {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                });
+            } else {
+                const response = await axios.post(
+                    `/favorites`,
+                    { car_id: car_id },
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
+                setFavorites([...favorites, response.data.data]);
+        
+                toast.success("Added to Favorites", {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                });
+            }
+        } catch (e) {
+            console.error("Error toggling favorite:", e);
         }
     };
-
-    const toggleFavorite = async (index, car_id) => {
-        setFavorites((prevFavorites) => {
-            const updatedFavorites = [...prevFavorites];
-            updatedFavorites[index] = !prevFavorites[index];
-            /*   console.log("car_id")
-      console.log(car_id) */
-            toast.success("adding to Fevarte", {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "dark",
-            });
-            setCar_id(car_id);
-            addFaverate(car_id);
-            return updatedFavorites;
-        });
-    };
+    
+  
+   
 
     useEffect(()=>{
         getCarsOfCompany();
@@ -126,7 +135,7 @@ const CarsCompany = () => {
                     key={item.id}
                     item={item}
                     index={index}
-                    toggleFavorite={toggleFavorite}
+                    toggleFavorite={() => toggleFavorite(item.id)}
                     favorites={favorites}
                     />
                 ))

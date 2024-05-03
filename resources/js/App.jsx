@@ -108,7 +108,6 @@ const App = () => {
                 <Route path={"/registerRenter"} element={<SignUpRenter />} />
 
 
-                <Route path={"/cars"} element={<faverateContextProvider><Cars /></faverateContextProvider>} />
 
                 <Route path={"/carofcompany/:id"} element={<CarsCompany/>}/>
                 <Route path={"/cars"} element={<Cars />} />

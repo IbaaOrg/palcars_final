@@ -70,9 +70,8 @@ class FavoriteController extends Controller
     public function destroy(string $id)
     {
         //
-        $car=Favorite::find($id);
-        if($car){
-            $car->delete();
+        $favoriteCar = Favorite::where('car_id', $id)->delete();
+        if($favoriteCar){
             return $this->success('successfully deleted');
         }
 
