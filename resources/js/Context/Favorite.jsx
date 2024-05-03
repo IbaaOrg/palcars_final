@@ -1,13 +1,26 @@
 // FavoriteContext.js
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import axios from 'axios';
+export const FavoriteContext = createContext();
 
-const FavoriteContext = createContext();
-
-export const FavoriteContextProvider = ({ children }) => {
-
-
+ const FavoriteContextProvider = ({ children }) => {
+    const [favoriteList,setFavoriteList]=useState([]);
+    const getFavoriteList=async ()=>{
+        const token= localStorage.getItem('token');
+      if(token){  const response=await axios.get(`/favorites`,{
+            headers: {
+                Authorization : `Bearer ${token}`
+            }
+        })
+        console.log(response.data.data)
+        setFavoriteList(response.data.data)
+    }
+    }
+    useEffect(()=>{
+        getFavoriteList();
+    },[favoriteList.length])
   return (
-    <FavoriteContext.Provider value={{ favorites, toggleFavorite }}>
+    <FavoriteContext.Provider value={{ favoriteList,setFavoriteList }}>
       {children}
     </FavoriteContext.Provider>
   );

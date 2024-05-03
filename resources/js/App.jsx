@@ -51,22 +51,24 @@ import { useTranslateContext } from "./Context/Translate";
 import "../css/app.css";
 import SignUpRenter from "./Auth/Login/SignUpRenter";
 import UserContextProvider from "./Context/User";
+import FavoriteContextProvider from "./Context/Favorite";
 import ViewCar from "./Pages/Dashbord/CarsOperations/ViewCar";
 import FilteredCars from "./Pages/Cars/FilteredCars";
 import CarCard from "./Pages/Cars/CarCard";
 import Bill from "./Pages/Bill/Bill";
 import CarsCompany from "./Pages/Cars/CarsCompany";
-import Reviews from './Pages/Profile/Reviews';
+import Reviews from "./Pages/Profile/Reviews";
 import DiscountsDashbord from "./Pages/Dashbord/DiscountsDashbord";
 import LocationDashbord from "./Pages/Dashbord/LocationsDashbord";
 import Discounts from "./Pages/Discounts/Discounts";
-import NotesDashboard from './Pages/Dashbord/NotesDashboard';
+import NotesDashboard from "./Pages/Dashbord/NotesDashboard";
 import AllDiscounts from "./Pages/Dashbord/AllDiscounts";
 import City from "./Pages/Citys/City";
 import AllLocations from "./Pages/Dashbord/AllLocations";
 import { MdAddLocation } from "react-icons/md";
 import LocationsDashbord from "./Pages/Dashbord/LocationsDashbord";
 import Report from "./Pages/Bill/Report";
+import Favorites from './Pages/Profile/Favorites';
 
 //LocationDashbord
 const App = () => {
@@ -98,24 +100,44 @@ const App = () => {
                         </ProtectedRouteCompany>
                     }
                 />
-                <Route path={"/city"} element={<City/>} />
+                <Route path={"/city"} element={<City />} />
 
                 <Route path={"/role"} element={<Role />} />
                 <Route path={"/about"} element={<About />} />
                 <Route path={"/bill/:id"} element={<Bill />} />
                 <Route path={"/login"} element={<Login />} />
                 <Route path={"/register"} element={<SignUp />} />
+                <Route path={"/favoritelist"} element={<FavoriteContextProvider><Favorites/></FavoriteContextProvider>} />
                 <Route path={"/registerRenter"} element={<SignUpRenter />} />
 
-
-
-                <Route path={"/carofcompany/:id"} element={<CarsCompany/>}/>
-                <Route path={"/cars"} element={<Cars />} />
+                <Route
+                    path={"/carofcompany/:id"}
+                    element={
+                        <FavoriteContextProvider>
+                            <CarsCompany />
+                        </FavoriteContextProvider>
+                    }
+                />
+                <Route
+                    path={"/cars"}
+                    element={
+                        <FavoriteContextProvider>
+                            <Cars />
+                        </FavoriteContextProvider>
+                    }
+                />
                 <Route path={"/cars/:id"} element={<CarDitails />} />
                 <Route path={"/test"} element={<CarCard />}></Route>
                 <Route path={"/contact"} element={<Contact />} />
-                <Route path={"/discounts"} element={<Discounts/>} />
-                <Route path={"/filteredcar"} element={<FilteredCars />}></Route>
+                <Route path={"/discounts"} element={<Discounts />} />
+                <Route
+                    path={"/filteredcar"}
+                    element={
+                        <FavoriteContextProvider>
+                            <FilteredCars />
+                        </FavoriteContextProvider>
+                    }
+                ></Route>
                 <Route path={"/report"} element={<Report />}></Route>
                 <Route
                     path={"/profile"}
@@ -129,11 +151,10 @@ const App = () => {
 
                     <Route path={"information"} element={<UserInfo />} />
                     <Route path={"booking"} element={<Booking />} />
-                    <Route path={"reviews"} element={<Reviews/>} />
-
+                    <Route path={"reviews"} element={<Reviews />} />
 
                     <Route path={"messages"} element={<Messages />} />
-                    <Route path={"Faverate"} element={<faverateContextProvider><Faverate /></faverateContextProvider>} />
+                    <Route path={"Faverate"} element={<Faverate />} />
                     <Route path={"editprofile"} element={<EditProfile />} />
                 </Route>
 
@@ -159,14 +180,15 @@ const App = () => {
                     <Route path={"ChatsDashbord"} element={<ChatsDashbord />} />
                     <Route
                         path={"NotesDashboard"}
-                        element={<NotesDashboard/>}
+                        element={<NotesDashboard />}
                     />
                     <Route
-                    path={"NotesDashboard/specificrenter"}
-                    element={<RenterNote/>}/>
-                         <Route
-                    path={"NotesDashboard/allusers"}
-                    element={<AllRenterNotes/>}
+                        path={"NotesDashboard/specificrenter"}
+                        element={<RenterNote />}
+                    />
+                    <Route
+                        path={"NotesDashboard/allusers"}
+                        element={<AllRenterNotes />}
                     />
                     <Route
                         path={"AccessDashbord"}
@@ -178,15 +200,20 @@ const App = () => {
                     />
                     <Route
                         path={"LocationDashbord"}
-                        element={<AllLocations/>}
+                        element={<AllLocations />}
                     />
-                    <Route path={"addLocation"}
-                    element={<LocationsDashbord/>}/>
+                    <Route
+                        path={"addLocation"}
+                        element={<LocationsDashbord />}
+                    />
                     <Route
                         path={"DiscountsDashbord"}
-                        element={<AllDiscounts/>}
+                        element={<AllDiscounts />}
                     />
-                    <Route path={"addDiscount"} element={<DiscountsDashbord/>}></Route>
+                    <Route
+                        path={"addDiscount"}
+                        element={<DiscountsDashbord />}
+                    ></Route>
 
                     <Route path={"addvehical"} element={<AddCar />}></Route>
                     <Route

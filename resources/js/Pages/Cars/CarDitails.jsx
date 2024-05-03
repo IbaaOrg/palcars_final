@@ -14,6 +14,9 @@ import RatingC from "../../Layout/Comments/RatingC";
 import "../../../css/Commentstye/Rating.css";
 import ResetPassword from "./../../Auth/Login/ResetPassword";
 import { UserContext } from "../../Context/User";
+import { IoCloseCircleOutline } from "react-icons/io5";
+
+
 function CarDitails() {
     const { id } = useParams(); // This will give you the value of "id" from the URL
     const [loading, setLoading] = useState(true);
@@ -256,15 +259,16 @@ function CarDitails() {
                                                     }{" "}
                                                     comment :
                                                 </h4>
-                                               {comment.owner_of_comment.name===user.name &&(<TiDelete
-                                                    size={30}
-                                                    className="DeleteBtn"
-                                                    onClick={() =>
-                                                        deleteComment(
-                                                            comment.id
-                                                        )
-                                                    } 
-                                                />)}
+                                               {comment.owner_of_comment.name===user.name &&(
+                                                           <IoCloseCircleOutline  size={30}
+                                                           className="DeleteBtn"
+                                                           onClick={() =>
+                                                               deleteComment(
+                                                                   comment.id
+                                                               )
+                                                           } />
+
+                                               )}
                                             </div>
 
                                             <div

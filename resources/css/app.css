@@ -483,6 +483,7 @@ border-radius: 8px;
 .caricondiv:hover {
     transform: scale(1.1);
         /* Increase the scale factor as needed */}
+<<<<<<< HEAD
 
 
                   .user-list {
@@ -501,3 +502,20 @@ border-radius: 8px;
                   .user-name {
                       font-weight: bold;
                   }
+=======
+.card-favorite {
+    box-shadow: 2px 2px 4px 3px #d7d7d776;
+    width: 40%;
+}
+.card-favorite:hover {
+    transform: scale(1.03);
+}
+.imgFavorite {
+    width: 160px;
+    height: 90px;;
+}
+.imgFavorite img {
+    width: 100%;
+    height: 100%;
+}
+>>>>>>> eb28de0c4867743da45a7fc5d1704a45d3074424
