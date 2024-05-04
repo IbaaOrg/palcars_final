@@ -1,9 +1,9 @@
 /* .sidebar{
     width: 220px;
 } */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 .rtl {
     direction: rtl;
@@ -478,6 +478,12 @@ border-radius: 8px;
 .caricon{
     font-size: 60px;
         transition: transform 0.3s ease;
+}
+.iconFilter {
+    width: 5%;
+}
+.iconFilter:hover {
+    color: #007bff;
 }
 
 .caricondiv:hover {
