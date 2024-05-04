@@ -72,7 +72,7 @@ Route::post('/password_forget',[UserController::class,'forgetPassword']);
 //when you want reset your password
 Route::post('/password_reset',[UserController::class,'resetPassword']);
 //information of all users
-Route::middleware('auth:sanctum','admin')->get('/users',[UserController::class,'index']);
+Route::get('/users',[UserController::class,'index']);
 //information of one user???
 Route::get('/user/{id}',[UserController::class,'show']);
 //delete one user

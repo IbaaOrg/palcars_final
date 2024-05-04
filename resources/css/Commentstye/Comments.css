@@ -83,6 +83,7 @@ display: flex;
 }
 .DeleteBtn:hover {
     cursor: pointer;
+    color:#1778f2;
 }
 .comment_rating {
     width: 25%;

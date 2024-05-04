@@ -23,15 +23,16 @@ import { data } from "autoprefixer";
 import { TranslateContext } from "../../Context/Translate";
 import { useLocation, useNavigate } from "react-router-dom";
 import { IoIosArrowDown } from "react-icons/io";
+import { UserContext } from "../../Context/User";
+import { Nav } from "react-bootstrap";
 
 function Header({ islogined }) {
     const { changeLanguage, translates } = useContext(TranslateContext);
   const navigator = useNavigate()
 
-
-    const [role, setRole] = useState("");
-    const [username, setUserName] = useState("");
-    const [user, setUser] = useState(null);
+  const {user}=useContext(UserContext);
+    const [role, setRole] = useState(user.role);
+    const [username, setUserName] = useState(user.name);
     const [countUnreadNotification, setCountUnreadNotification] = useState(0);
     const [notifications, setNotifications] = useState([]);
     const [goTo, setGoTo] = useState("");
@@ -69,30 +70,7 @@ function Header({ islogined }) {
             }
         }
     };
-    const getuser = async () => {
-        const token = localStorage.getItem("token");
-
-        if (token) {
-            try {
-                const response = await axios.get("/user", {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
-                const res = response.data;
-                if (res) {
-                    setRole(res.data.role);
-                    setUserName(res.data.username);
-                    setUser(res.data);
-                    console.log(res);
-                }
-            } catch (e) {
-                console.log(e);
-            }
-        } else {
-            console.log("Token not found in local storage");
-        }
-    };
+  
     const Translate = async (e) => {
         changeLanguage(e);
     };
@@ -109,7 +87,6 @@ function Header({ islogined }) {
         console.log(res);
     };
     useEffect(() => {
-        getuser();
         getCountNotification();
         getNotifications();
     }, []);
@@ -226,12 +203,12 @@ const toggleList=()=>{
                                 </li>
                             </ul>
                         </div>
-                        {user&&<div className="d-flex  d-flex align-items-center justify-content-center border rounded-circle p-2">
+                        {islogined&&user&&user.role==="Renter"&&(<NavLink to="FavoriteList" className="d-flex  d-flex align-items-center justify-content-center border rounded-circle p-2">
                         <FaHeart size={20} className="text-black"/>
 
-                        </div>}
+                        </NavLink>)}
                         <div className=" d-flex mx-2 ">
-                            {user && (
+                            {islogined && (
                                 <div className="nav-item dropdown">
                                     <a
                                         className="nav-link text-black"

@@ -2,7 +2,6 @@ import {React,  useEffect,useContext, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Cars from '../Cars/Cars';
-import faverateContext from '../../Context/Faverate.jsx';
 import CarCard from '../Cars/CarCard.jsx';
 import { data } from 'jquery';
 import "../../../css/LoadingStyle/Loading.css";

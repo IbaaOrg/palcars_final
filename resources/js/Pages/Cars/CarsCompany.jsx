@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import  axios  from 'axios';
 import {Zoom, toast, ToastContainer } from 'react-toastify';
@@ -7,18 +7,17 @@ import CarCard from './CarCard';
 import { MdHomeWork } from "react-icons/md";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { MdAttachEmail } from "react-icons/md";
+import { FavoriteContext } from '../../Context/Favorite';
 
 const CarsCompany = () => {
     const {id}=useParams();
+    const {favoriteList,setFavoriteList}=useContext(FavoriteContext);
     const[company,setCompany]=useState({});
     const[cars,setCars]=useState([]);
     const [car_id, setCar_id] = useState(null);
     const[loading,setLoading]=useState(false);
     const [locations,setLocations]=useState([]);
-    const [favorites, setFavorites] = useState(
-        // Initialize favorites array with false for each car (not favorited)
-       ''
-    );
+    
     const [data, setData] = useState([]);
 
     const getCarsOfCompany=async()=>{
@@ -48,33 +47,17 @@ const CarsCompany = () => {
         const response =await axios.get(`showLocationsOfCompany/${id}`)
         setLocations(await response.data.data.locations)
     }
-    const addFaverate = async () => {
-        console.log("car_id");
-        console.log(car_id);
-
-        const token = localStorage.getItem("token");
+    const toggleFavorite = async (car_id) => {
         try {
-            const response = await axios.post("/favorites", car_id, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            setData(response.data);
-            console.log(data.data);
-
-            console.log(data.data);
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
-    const toggleFavorite = async (index, car_id) => {
-        setFavorites((prevFavorites) => {
-            const updatedFavorites = [...prevFavorites];
-            updatedFavorites[index] = !prevFavorites[index];
-            /*   console.log("car_id")
-      console.log(car_id) */
-            toast.success("adding to Fevarte", {
+            const isFavorite=favoriteList.some((favorite)=>favorite.car.id===car_id);
+            const token=localStorage.getItem('token');
+            if(isFavorite){
+               await axois.delete(`/favorites/${car_id}`,{
+                headers:{
+                    Authorization: `Bearer ${token}`
+               }})
+               setFavoriteList(favoriteList.filter((favorite)=>favorite.car.id !== car_id))
+               toast.success("Removed from favorites", {
                 position: "top-right",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -84,12 +67,30 @@ const CarsCompany = () => {
                 progress: undefined,
                 theme: "dark",
             });
-            setCar_id(car_id);
-            addFaverate(car_id);
-            return updatedFavorites;
-        });
+            }else {
+                const response =await axoit.post(`/favorites`,{
+                    car_id : car_id
+                },{
+                    headers:{
+                        Autorization : `Bearer ${token}`
+                    }
+                })
+                setFavoriteList([...favoriteList,await response.data.data])
+                toast.success("Added to Favorites", {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                });
+            }
+        } catch (e) {
+            console.error("Error toggling favorite:", e);
+        }
     };
-
     useEffect(()=>{
         getCarsOfCompany();
         getLocations();
@@ -124,10 +125,10 @@ const CarsCompany = () => {
                 cars.map((item,index)=>(
                     <CarCard
                     key={item.id}
-                    item={item}
+                 item={item}
                     index={index}
-                    toggleFavorite={toggleFavorite}
-                    favorites={favorites}
+                    toggleFavorite={() => toggleFavorite(item.id)}
+                    favoriteList={favoriteList}
                     />
                 ))
             )}

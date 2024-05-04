@@ -1,9 +1,9 @@
 /* .sidebar{
     width: 220px;
 } */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 .rtl {
     direction: rtl;
@@ -479,7 +479,31 @@ border-radius: 8px;
     font-size: 60px;
         transition: transform 0.3s ease;
 }
+.iconFilter {
+    width: 5%;
+}
+.iconFilter:hover {
+    color: #007bff;
+}
 
 .caricondiv:hover {
     transform: scale(1.1);
         /* Increase the scale factor as needed */}
+
+
+                  .user-list {
+                      list-style-type: none;
+                      padding: 0;
+                  }
+        
+                  .user-list-item {
+                     
+                      padding: 10px;
+                      border-bottom: 1px solid #ccc;
+                  }
+        
+                
+        
+                  .user-name {
+                      font-weight: bold;
+                  }

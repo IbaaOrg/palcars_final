@@ -3,10 +3,11 @@ import { UserContext } from "./../../Context/User";
 import { TbPhotoEdit } from "react-icons/tb";
 import "../../../css/ProfileStyle/Profile.css";
 import { CiEdit } from "react-icons/ci";
-
+import { ToastContainer, Bounce, Zoom, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; // Import the CSS file
+import { doc } from "firebase/firestore";
 function EditProfile() {
-  const { user } = useContext(UserContext);
-
+  const { user, updateUser } = useContext(UserContext);
   const [showInputEditName ,setShowInputEditName]=useState(false);
   const [showInputEditPhone ,setShowInputEditPhone]=useState(false);
   const [showInputEditPassword ,setShowInputEditPassword]=useState(false);
@@ -52,6 +53,7 @@ function EditProfile() {
   form.current={...form.current,[e.target.name]:e.target.value}
  }
  const updateProfile=async(e)=>{
+  e.preventDefault();
   const token=localStorage.getItem('token')
   const formData = new FormData();
   if(form.current.name)
@@ -65,17 +67,42 @@ function EditProfile() {
 }  if (fileD.current) {
   formData.append("photo_drivinglicense", fileD.current);
 }
-const response=await axios.post(`users/${user.id}`,formData,{
+try {const response=await axios.post(`users/${user.id}`,formData,{
+  headers: {
+    Authorization: `Bearer ${token}`
+  }
+
+})
+const responseUser=await axios.get(`user`,{
   headers: {
     Authorization: `Bearer ${token}`
   }
 })
-console.log(response.data)
+updateUser(responseUser.data.data);
+toast.success('Your Changes are save', {
+  position: "top-center",
+  autoClose: 5000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  theme: "light",
+  transition: Bounce,
+  });
+  document.getElementById('exampleFormControlInput2').value="";
+  document.getElementById('exampleFormControlInput3').value="";
+  document.getElementById('exampleFormControlInput4').value="";
+}catch(e){
 
- }
+}
+}
 
   return (
+    
     <div>
+      
+      <ToastContainer/>
       <form>
         <div class="mb-3">
           <label htmlFor="" className="py-2">User Photo</label>
@@ -152,6 +179,7 @@ console.log(response.data)
         </div>
         <input type="submit" className="btn btn-primary" value={"Save Changes"} onClick={updateProfile}/>
       </form>
+ 
     </div>
   );
 }

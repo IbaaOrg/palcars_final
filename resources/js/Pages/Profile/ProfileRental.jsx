@@ -1,4 +1,4 @@
-import React, { useState, useEffect }from 'react'
+import React, { useState, useEffect, useContext }from 'react'
 import usericon from '../../../../public/image/usericon.png'
 import { NavLink, Outlet } from 'react-router-dom'
 import logout from './../../NetWorking/logout';
@@ -7,52 +7,21 @@ import axios from 'axios';
 import Loading from '../../Componants/UI/Loading';
 import homeimg from '../../../../public/image/backprofile.jpg'
 import '../../../css/app.css'
+import { UserContext } from '../../Context/User';
 //import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBBtn, MDBTypography } from 'mdb-react-ui-kit';
 
 
 function ProfileRental() {
   const [loading, setLoading] = useState(true);
-
-  const [user,setUser] = useState([]);
+  const {user}=useContext(UserContext)
   const [username, setUserName] = useState("");
   const [role, setRole] = useState("");
   
 
 
 
-    async function getuser() {
-      const token = localStorage.getItem('token');
+  
 
-      if (token) {
-
-        try {
-          const response = await axios.get("/user", {
-            headers: {
-              "Authorization": `Bearer ${token}`
-            }
-          })
-
-          const res = response.data
-         
-          if (res.status === true) {
-            setRole(res.data.role)
-            setUser(res.data)
-            setLoading(false)
-          }
- 
-
-        } catch (e) {
-          console.log(e)
-
-        }
-
-      } else {
-        console.log('Token not found in local storage');
-      }
-    }
-  useEffect( () => {
-     getuser();
-  }, []);
   const navigator = useNavigate()
 
   const out = async () => {
@@ -72,9 +41,7 @@ function ProfileRental() {
     
    
     <div className="container text-center  p-10"> 
-    {loading ? (
-        <Loading/>
-      ) : (
+   
 
           <div className="row">
             <div className="profile">
@@ -124,8 +91,6 @@ function ProfileRental() {
               <Outlet />
             </div>
           </div>
-
-      )}
     
     </div>
   )
