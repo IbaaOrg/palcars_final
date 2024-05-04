@@ -118,7 +118,9 @@ modelValue     );
         setModelValue(e.target.value)
         getCars(categoryValue,minPrice,maxPrice,fuelType,steeringValue,personsValue,makeValue,e.target.value)
     }
-
+    const Reset=()=>{
+        getCars('',0,2000,'','','','','')
+    }
     const toggleShowDrop=()=>{
         setShow(!show)
     }
@@ -179,7 +181,7 @@ modelValue     );
        
             <div className="d-flex flex-wrap justify-evenly bg-slate-100 w-100  ">
                 <div className="col-5 col-md-2 bg-white p-3">
-                <div className="d-flex justify-content-center btn btn-primary align-items-center"> <span className="fs-5 ">Filter</span> <TbFilterSearch size={40}/></div>
+                <div className="d-flex justify-content-center btn btn-primary align-items-center" onClick={Reset}> <span className="fs-5 ">Reset To all cars</span> <TbFilterSearch size={40}/></div>
                 <div className="pt-3 d-flex align-items-center">
                 <span className="text-muted  fs-5 px-1">Make:</span>
  
