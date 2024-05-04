@@ -153,15 +153,11 @@ class UserController extends Controller
     public function index(Request $request)
     {
         //
-        $user=Auth::user();
-        if ($user) {
+       
             // User is authenticated
             return $this->success(AllUserResource::collection(User::all()));
 
-        } else {
-            // User is not authenticated
-            return response()->json(['message' => 'Unauthenticated'], 401);
-        }
+       
     }
 
     /**
