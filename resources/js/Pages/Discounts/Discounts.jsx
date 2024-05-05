@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import CarCard from './../Cars/CarCard';
+import { useNavigate } from 'react-router-dom';
 
 function Discounts() {
  const [data,setDate] = useState(null)
     const [carid, setCarID] = useState(null)
     const [cars, setCars] = useState(null)
-
+    const navigate=useNavigate();
     
 
     const get_all_discounts = async () => {
@@ -14,7 +15,13 @@ function Discounts() {
         try {
             const response = await axios.get(`/showalldiscounts`);
             const data = response.data.data;
-            setDate(data);
+            const now = new Date();
+            const filteredData=data.filter(discount => {
+                const expiredDate=new Date(discount.expired_date);
+                return expiredDate>=now;
+            }
+            )
+            setDate(filteredData);
            // setCarID(data.data);
 
            for(let i=0 ; i< data.length ; i++){
@@ -30,7 +37,9 @@ function Discounts() {
             console.error(error);
         }
     }
-
+    const navigateToDetails=(car_id)=>{
+        navigate(`/cars/${car_id}`)
+    }
 
     useEffect(() => {
         get_all_discounts();
@@ -64,7 +73,7 @@ function Discounts() {
                     {d.value}{d.type == "percentage" ? ("%") : ("₪")} OFF
                     <span class="visually-hidden">unread messages</span>
                 </span>
-                <button className="btn btn-danger">Show More Details </button>
+                <button className="btn btn-danger" onClick={()=>navigateToDetails(d.car.id)}>Show More Details </button>
 
         </div>
         ))} 

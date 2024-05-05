@@ -79,7 +79,10 @@ function VehiclesDashbord() {
     return (
         <div>{
             loading ? (
+                <div className=" d-flex justify-center align-middle">
+
                 <Loading/>
+                </div>
             ) : (
 
             <div className="container text-center  p-10">

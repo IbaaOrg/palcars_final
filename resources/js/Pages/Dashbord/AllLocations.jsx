@@ -49,7 +49,10 @@ function AllLocations() {
     return (
         <div>
             {loading ? (
+                                        <div className=" d-flex justify-center align-middle">
+
                 <Loading />
+                </div>
             ) : (
                 <div className="container text-center  p-10">
                     <div className="row">

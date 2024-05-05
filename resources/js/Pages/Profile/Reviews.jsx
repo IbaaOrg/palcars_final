@@ -45,7 +45,8 @@ const id=e.target.id;
 navigate(`/cars/${id}`)
 }
   return (
-    loading?<Loading/>:(
+    loading?(                        <div className=" d-flex justify-center align-middle">
+    <Loading/></div>):(
     <div className='d-flex flex-column align-items-center mainBooking'>
     {user.role==="Renter"?<h3 className='fw-bold fs-4 py-3 '>My Comments</h3>:<h3 className='fw-bold fs-4 py-3 '>Comments on my cars</h3>}
     {comments.length>0 ?comments.map((item, index) => (

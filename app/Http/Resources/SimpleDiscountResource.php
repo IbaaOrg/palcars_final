@@ -10,6 +10,7 @@ use App\Http\Resources\CommentResource;
 use App\Http\Resources\CarColorResource;
 use App\Http\Resources\PriceCarResource;
 use App\Http\Resources\SimpleCarResource;
+use App\Http\Resources\CarDiscountResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class SimpleDiscountResource extends JsonResource
@@ -28,7 +29,7 @@ class SimpleDiscountResource extends JsonResource
             'type'=>$this->type,
             'value'=>$this->value,
             'expired_date'=>$this->expired_date,
-            'car'=>new CarReource($this->car),
+            'car'=>new CarDiscountResource($this->car),
             'created_at'=>$this->created_at->format('Y-m-d H:i:s'),
             'updated_at'=>$this->updated_at->format('Y-m-d H:i:s'),            
 

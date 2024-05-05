@@ -106,7 +106,7 @@ const CarCard = ({ item, index, toggleFavorite, favoriteList }) => {
                 <div className=" text-start">
                     <p className=" fs-5">
                         <span>₪</span>
-                        <b>{item.prices?.[0]?.price}</b>/day
+                        <b>{item.prices?.[0]?.price_after_discount}</b>/day
                     </p>
                 </div>
 

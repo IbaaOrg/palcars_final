@@ -68,7 +68,8 @@ function Booking() {
   bookingByMonth[monthYearKey].push(item);
  })
   return (
-    loading?<Loading/>:(
+    loading?(                        <div className=" d-flex justify-center align-middle">
+    <Loading/></div>):(
     <div className='d-flex flex-column align-items-center mainBooking'>
       {user.role==="Renter"?<h3 className='fw-bold fs-4 py-3 '>My Booking</h3>:<h3 className='fw-bold fs-4 py-3 '>Booking from my company</h3>}
       {bookings.length>0?Object.entries(bookingByMonth).map(([monthYearKey, bookings]) => (

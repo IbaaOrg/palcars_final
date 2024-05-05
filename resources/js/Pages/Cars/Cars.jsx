@@ -302,7 +302,10 @@ modelValue     );
                 </div>
                 <div className="col-6 col-md-10  d-flex flex-wrap justify-evenly">
             {loading ? (
+                                        <div className=" d-flex justify-center align-middle">
+
                 <Loading />
+                </div>
             ) : (
                 data.length>0 ?data.map((item, index) => (
                     <CarCard

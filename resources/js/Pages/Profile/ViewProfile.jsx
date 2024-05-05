@@ -45,7 +45,10 @@ function ViewProfile({id}) {
     <div>
       <div className='card w-120 bg-white'>
         {loading ? (
+                          <div className=" d-flex justify-center align-middle">
+        
           <Loading />
+          </div>
         ) : (
           <div class="card-body">
           <div className='row '>

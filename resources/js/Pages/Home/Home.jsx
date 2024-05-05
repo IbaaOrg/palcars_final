@@ -82,12 +82,12 @@ function Home() {
         try {
             const response = await axios.get(`/showalldiscounts`);
             const data = response.data.data;
-            const lastMonth = new Date();
+            const now = new Date();
             //lastMonth.setMonth(lastMonth.getMonth() - 1);
-
+            const fiftenDayFromNow=new Date(now.getTime()+ 15*24*60*60*1000)
             const filteredData = data.filter(discount => {
                 const expiredDate = new Date(discount.expired_date);
-                return expiredDate > lastMonth;
+                return expiredDate <= fiftenDayFromNow && expiredDate >=now;
             });
             console.log(filteredData)
             console.log(data)
@@ -224,12 +224,12 @@ function Home() {
                     <Loading />
                     </div>
                 ):(
+
 <>
                                 <h1 className="text-center fs-3 m-2">Special offers</h1>
-                    <div className=" container ">
+                    <div className="  mx-5">{data&&data.length>0?
                         <div className="">
                             <Swiper
-                               
                                 modules={[Navigation, Pagination]}
                                 slidesPerView={3}
                                 spaceBetween={15}
@@ -252,7 +252,7 @@ function Home() {
                                                     <div className="col ">
                                                         <h1 className="card-header text-center">{d.note}</h1>
                                                         <Timer targetDate={d.expired_date}/>
-                                                        <h1 className="old-price">50</h1>
+                                                        <h1 className="old-price text-center">{d.car.prices[0].price}₪ / day</h1>
                                                        
                                                         <div class=" text-red-700 text-center" role="alert">
                                                            You Save {d.value}{d.type == "percentage" ? ("%") : ("₪")} 
@@ -273,7 +273,7 @@ function Home() {
                             </div>
                         </div>
 
-                    </div>
+                   :<div className="d-flex justify-content-center align-items-center w-100 fw-bolc fs-5">There are no offers in the next 15 days </div>} </div>
                             </>
                 )}
                     
