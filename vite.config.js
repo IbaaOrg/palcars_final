@@ -9,5 +9,10 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    server: {
+        hmr: {
+          overlay: false
+        }
+      }
     
 });

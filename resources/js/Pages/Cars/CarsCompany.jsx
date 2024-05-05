@@ -121,7 +121,10 @@ const CarsCompany = () => {
     <div className="d-flex flex-column justify-content-center align-items-center w-100">
         <h2 className='mainheadingCompany'>All Cars Of this company</h2>
         <div className="d-flex flex-wrap justify-evenly w-100  " >
-            {loading?<Loading/>:(
+            {loading?(
+                                    <div className=" d-flex justify-center align-middle">
+
+            <Loading/></div>):(
                 cars.map((item,index)=>(
                     <CarCard
                     key={item.id}

@@ -82,7 +82,10 @@ const FilteredCars = () => {
         {carsData.length>0?<div>
             <div className="d-flex flex-wrap justify-around bg-slate-100  w-100  px-5" >
 {loading ? (
+                            <div className=" d-flex justify-center align-middle">
+
                 <Loading />
+                </div>
                ) : (
             
                 carsData.map((item, index) => (

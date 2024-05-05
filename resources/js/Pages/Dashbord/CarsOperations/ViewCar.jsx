@@ -34,8 +34,10 @@ function ViewCar() {
   return (
       <div>
          {loading ? (
-              <Loading className=" d-flex justify-items-center align-items-center" />
+                                    <div className=" d-flex justify-center align-middle">
 
+              <Loading />
+</div>
           ) : ( 
               <div>
                   <div className='container d-flex justify-items-center'>
