@@ -93,6 +93,7 @@ Route::middleware('auth:sanctum','company')->post('/addcar',[CarController::clas
 Route::middleware('auth:sanctum','adminorcompany')->delete('/cars/{id}',[CarController::class,'destroy']);
 //update information of car
 Route::middleware('auth:sanctum','company')->post('/cars/update/{id}',[CarController::class,'update']);
+Route::middleware('auth:sanctum','company')->post('/cars/updateStatus/{id}',[CarController::class,'updateStatus']);
 //show information of all cars 
 Route::get('/cars',[CarController::class,'index']);
 //show detials of  car 

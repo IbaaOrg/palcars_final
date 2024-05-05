@@ -87,6 +87,9 @@ textarea {
     width: 100%;
     margin: auto;
 }
+.tableitem {
+    width: calc(100% / 13);
+}
 .Home{
     width: 100%;
     padding: 0;

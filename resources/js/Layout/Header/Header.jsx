@@ -166,7 +166,7 @@ const toggleList=()=>{
                     </div>
 
                     {/* search */}
-                    {role === "Company" ? <div></div> : <NaveBar />}
+                    {user.role === "Company" ? <div></div> : <NaveBar />}
                    
 
                     <div class="hstack gap-1">

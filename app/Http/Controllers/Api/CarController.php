@@ -244,43 +244,10 @@ foreach ($notifications as $notification) {
      */
     public function update(Request $request, string $id)
     {
-        //
-
-        
-    //     $car=Car::find($id);
-    //     if(!$car){
-    //         return $this->fail('car not found',404);
-    //     }
-    //     if($request->fuel_type==='electricity'){
-    //         $fuel_full='nullable';
-    //     }else{ 
-    //         $fuel_full='required|numeric|min:0|max:1000';
-    //     }
-    //     $validator=Validator::make($request->all(), [
-    //         'car_number'=> 'nullable|unique:cars,car_number|regex:/^[A-Z]{1,2}-[0-9]{4,5}-[A-Z]{1}$/u',
-    //         'make'=>'nullable|string|max:255',
-    //         'model'=>'nullable|string|max:255',
-    //         'catrgory'=>'nullable|string|in:SUV,Hatchback,Sedan,Convertible,Crossover,Station Wagon,Minivan,Pickup trucks',
-    //         'description'=>'nullable|string',
-    //         'year'=>'nullable|integer|digits:4|min:1900|max:' . date('Y'),
-    //         'seats'=>'nullable|integer|min:1|max:10',
-    //         'doors'=>'nullable|string|in:2,3,4',
-    //         'bags'=>'nullable|integer|min:1|max:8', 
-    //         'fuel_type'=>'nullable|string|in:gas,diesel,electricity',
-    //         'fuel_full'=>$fuel_full,
-    //         'steering'=>'nullable|string|in:Automatic,Manual',            
-    //         'car_id'=>'nullable|exists:colors,id'
-    //     ]);
-    //  
-    //     if($request->fuel_full)
-    //    $data['fuel_full']= $request->has('fuel_full')?$request->input('fuel_full',$car->fuel_full):$car->fuel_full; 
-       
-    //    $data['fuel_type']= $request->has('fuel_type')?$request->input('fuel_type', $car->fuel_type):$car->fuel_type;
-   
     $car = Car::find($id);
-    if (!$car) {
-        return $this->fail('Car not found', 404);
-    }
+        if (!$car) {
+            return $this->fail('Car not found', 404);
+        }
 
     $validator = Validator::make($request->all(), [
         'car_number' => 'nullable|unique:cars,car_number|regex:/^[A-Z]{1,2}-[0-9]{4,5}-[A-Z]{1}$/u',
@@ -311,7 +278,32 @@ foreach ($notifications as $notification) {
 
     return $this->success($car);
     }
+    public function updateStatus(Request $request, string $id)
+    {
+    $car = Car::find($id);
+        if (!$car) {
+            return $this->fail('Car not found', 404);
+        }
 
+    $validator = Validator::make($request->all(), [
+        'status' => 'required|string|in:rented,unrented,returned',
+    
+    ]);
+
+    if ($validator->fails()) {
+        $msg = $validator->errors()->first();
+        return $this->fail($msg, 400);
+    }
+
+    $data = $request->only([
+        'status'
+    ]);
+
+    // Update the car
+    $car->update($data);
+
+    return $this->success($car);
+    }
     /**
      * Remove the specified resource from storage.
      */
