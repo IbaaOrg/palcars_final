@@ -28,7 +28,7 @@ const CarCard = ({ item, index, toggleFavorite, favoriteList }) => {
     return (
         <div
             key={item.id}
-            className={"  bg-white p-3 rounded-md  my-4 cardMainCar "}
+            className={"  bg-white p-3 rounded-md  my-4 cardMainCar  align-self-start"}
         >
             <div className="card-body ">
                 <h2 className="card-title font-bold d-flex justify-content-between">

@@ -73,7 +73,7 @@ class CarController extends Controller
         $query->where('steering',$steering);
     }
     // Apply price range filter based on the last final price
-if ($minPrice && $maxPrice) {
+if ($minPrice || $maxPrice) {
     $query->whereHas('prices', function ($query) use ($minPrice, $maxPrice) {
         // Subquery to get the last (final) price for each car
         $query->whereRaw('prices.id = (SELECT MAX(id) FROM prices WHERE car_id = cars.id)')
