@@ -310,7 +310,56 @@ const toggleList=()=>{
                                                                     </div>
                                                                 </div>
                                                             </NavLink>
-                                                        ) : (
+                                                        ) : (notification.data.content.includes(
+                                                            "note"
+                                                        ) ? (
+                                                            <NavLink
+                                                                  
+                                                                className={
+                                                                    "text-black"
+                                                                }
+                                                                to={`/profile/Notes`}
+                                                            >
+                                                                <div class=" d-flex justify-content-center fw-bold ">
+                                                                    <div class="col-lg-3 col-sm-3 col-3 text-center">
+                                                                        <img
+                                                                            src={
+                                                                                notification
+                                                                                    .data
+                                                                                    .user_photo
+                                                                            }
+                                                                            width={
+                                                                                70
+                                                                            }
+                                                                            height={
+                                                                                70
+                                                                            }
+                                                                            class=" rounded-circle border border-black"
+                                                                        />
+                                                                    </div>
+                                                                    <div class="col-lg-8 col-sm-8 col-8">
+                                                                        <strong>
+                                                                            {
+                                                                                notification
+                                                                                    .data
+                                                                                    .comment_create
+                                                                            }
+                                                                        </strong>
+                                                                        <div>
+                                                                            {
+                                                                                notification
+                                                                                    .data
+                                                                                    .content
+                                                                            }
+                                                                        </div>
+                                                                        <small class="fw-bold font-color">
+                                                                            {
+                                                                                notification.timeago
+                                                                            }{" "}
+                                                                        </small>
+                                                                    </div>
+                                                                </div>
+                                                            </NavLink>):
                                                             <NavLink
                                                                 className={
                                                                     "text-black"

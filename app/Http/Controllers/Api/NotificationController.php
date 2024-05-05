@@ -95,12 +95,12 @@ class NotificationController extends Controller
 
    public function getAllRecivedNotes(Request $request){
     $userId=$request->user()->id;
-    $recivedNotes=Note::where('receiver_id',$userId)->get();
+    $recivedNotes=Note::where('receiver_id',$userId)->orderBy('created_at', 'desc')->get();
     return $this->success(NotesResource::collection($recivedNotes));
 }
 public function getAllSendNotes(Request $request){
     $userId=$request->user()->id;
-    $sendNotes=Note::where('user_id',$userId)->get();
+    $sendNotes=Note::where('user_id',$userId)->orderBy('created_at', 'desc')->get();
     return $this->success(NotesResource::collection($sendNotes));
 }
 //     protected function sendFirebaseNotificationToUsers($users, $content)
