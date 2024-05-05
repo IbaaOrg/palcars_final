@@ -51,8 +51,8 @@ function Notes() {
     const handelTo=async(e)=>{
        // item.sender.name? item.sender.name  : 'Unknown Owner'
         const id=e.target.id;
-      //  const id=e.target.id;
-        navigate(`/carofcompany/${id}`)
+        
+        user.role==="Renter"?navigate(`/carofcompany/${id}`):navigate('/profile')
         }
 // {/* <button onClick={MyNotes}> ghghghg </button> */}
   

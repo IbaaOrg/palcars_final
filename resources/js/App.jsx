@@ -68,6 +68,7 @@ import AllLocations from "./Pages/Dashbord/AllLocations";
 import { MdAddLocation } from "react-icons/md";
 import LocationsDashbord from "./Pages/Dashbord/LocationsDashbord";
 import Report from "./Pages/Bill/Report";
+import Notes from "./Pages/Profile/Notes";
 
 //LocationDashbord
 const App = () => {
@@ -151,7 +152,7 @@ const App = () => {
                     <Route path={"information"} element={<UserInfo />} />
                     <Route path={"booking"} element={<Booking />} />
                     <Route path={"reviews"} element={<Reviews />} />
-
+                    <Route path={"notes"}   element={<Notes/>}/>
                     <Route path={"messages"} element={<Messages />} />
                     <Route path={"Faverate"} element={<faverateContextProvider><Faverate /></faverateContextProvider>} />
                     <Route path={"editprofile"} element={<EditProfile />} />
