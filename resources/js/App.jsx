@@ -58,6 +58,7 @@ import CarCard from "./Pages/Cars/CarCard";
 import Bill from "./Pages/Bill/Bill";
 import CarsCompany from "./Pages/Cars/CarsCompany";
 import Reviews from "./Pages/Profile/Reviews";
+import Favorites from "./Pages/Profile/Favorites";
 import DiscountsDashbord from "./Pages/Dashbord/DiscountsDashbord";
 import LocationDashbord from "./Pages/Dashbord/LocationsDashbord";
 import Discounts from "./Pages/Discounts/Discounts";
@@ -68,7 +69,7 @@ import AllLocations from "./Pages/Dashbord/AllLocations";
 import { MdAddLocation } from "react-icons/md";
 import LocationsDashbord from "./Pages/Dashbord/LocationsDashbord";
 import Report from "./Pages/Bill/Report";
-import Favorites from './Pages/Profile/Favorites';
+import Notes from "./Pages/Profile/Notes";
 
 //LocationDashbord
 const App = () => {
@@ -152,9 +153,9 @@ const App = () => {
                     <Route path={"information"} element={<UserInfo />} />
                     <Route path={"booking"} element={<Booking />} />
                     <Route path={"reviews"} element={<Reviews />} />
-
+                    <Route path={"Notes"}   element={<Notes/>}/>
                     <Route path={"messages"} element={<Messages />} />
-                    <Route path={"Faverate"} element={<Faverate />} />
+                    <Route path={"Faverate"} element={<faverateContextProvider><Faverate /></faverateContextProvider>} />
                     <Route path={"editprofile"} element={<EditProfile />} />
                 </Route>
 

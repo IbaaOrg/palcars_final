@@ -42,7 +42,8 @@ function Reviews() {
 },[user.role]);
 const handelTo=async(e)=>{
 const id=e.target.id;
-navigate(`/cars/${id}`)
+user.role==="Renter"?navigate(`/cars/${id}`):navigate('/profile');
+
 }
   return (
     loading?(                        <div className=" d-flex justify-center align-middle">

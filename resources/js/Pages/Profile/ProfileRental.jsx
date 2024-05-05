@@ -73,7 +73,8 @@ function ProfileRental() {
                   <NavLink className=' list-group-item col' to={"information"}>Information</NavLink>
                   <NavLink className=' list-group-item col' to={"booking"}>Booking</NavLink>
                   <NavLink className=' list-group-item col' to={"messages"}>Messages</NavLink>
-                  <NavLink className=' list-group-item col' to={"Faverate"}>Faverate</NavLink>
+                  
+                  <NavLink className=' list-group-item col' to={"Notes"}>Notes</NavLink> 
                   <NavLink className=' list-group-item col' to={"reviews"}>Reviews</NavLink>
                   <NavLink className=' list-group-item col' to="editprofile">Edit Profile</NavLink>
 
