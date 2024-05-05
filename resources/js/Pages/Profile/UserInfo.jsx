@@ -77,7 +77,10 @@ function UserInfo() {
   return (
     <div>
       {loading ? (
+                                <div className=" d-flex justify-center align-middle">
+
         <Loading/>
+        </div>
       ) : (
       <div class="card" >
         <ul class="list-group list-group-flush">

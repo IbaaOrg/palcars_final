@@ -94,10 +94,19 @@
     padding: 20px;
 }
 /* Remove the !important declarations */
+/* area {
+    position: relative;
+} */
 .map-highlight:hover {
     background-color: rgba(0, 0, 0, 0.2);
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
     transition: background-color 0.3s ease;
+    z-index: 1;
+    /* position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0; */
   }
   
   

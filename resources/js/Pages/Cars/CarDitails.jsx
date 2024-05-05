@@ -99,18 +99,19 @@ function CarDitails() {
     return (
         <div>
             {loading ? (
-                <Loading className=" d-flex justify-items-center align-items-center" />
+                                        <div className=" d-flex justify-center align-middle">
+
+                <Loading  />
+                </div>
             ) : (
                 <div>
                     <div className="container d-flex justify-items-center">
                         <div className="car col m-2 mb-3 ">
-                            <div>
+                            <div className="DetialsImg">
                                 <img
                                     src={car.sub_images[0].photo_car_url}
                                     alt="imgcar"
-                                    width={500}
-                                    height={500}
-                                    className="imgcar"
+                                   className="imgCarDetials"
                                 />
                                 <div className="mt-4  row">
                                     {car.sub_images.length >= 2 && (
@@ -198,13 +199,18 @@ function CarDitails() {
                                     <li className="list-group-item">
                                         Car Color : {car.car_color.color}
                                     </li>
-                                    <li className="list-group-item">
+                                    <li className="list-group-item d-flex align-items-center">
                                         Price :
-                                        <span className=" text-success">
+                                        <span className=" text-success d-flex">
                                             {" "}
-                                            {car.prices[0].price}
-                                        </span>{" "}
-                                        ₪
+                                            {car.prices[0].price !== car.prices[0].price_after_discount ?                                                 
+                                                       (<> <p className="old-price ">{car.prices[0].price}₪ / day</p>
+                                                       <p>{car.prices[0].price_after_discount}₪ / day</p>
+                                                       </>)
+                                                        : (<> <h1 className=" text-success">{car.prices[0].price}₪ / day</h1>
+                                                       
+                                                        </>)}
+                                        </span>
                                     </li>
                                 </ul>
                                 {/*      <div className="card-text">
