@@ -29,7 +29,6 @@ function ProfileRental() {
 
       navigator("/")
       
-      window.location.reload()
 
     })
 

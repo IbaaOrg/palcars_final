@@ -12,6 +12,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { Bounce, Zoom } from "react-toastify";
 import DialogTitle from '@mui/material/DialogTitle';
 //import { DialogTitle } from ".mui/material";
+import moment from 'moment';
 import Dialog from "@mui/material/Dialog";
 //import { Dialog } from ".mui/material";
 import { height, margin, padding, width } from "@mui/system";
@@ -98,7 +99,8 @@ const dialogStyle = {
     const [step2,setStep2]=useState(false);
     const [step3,setStep3]=useState(false);
     const [step4,setStep4]=useState(false);
-    const[totalPrice,setTotalPrice]=useState(0);
+    const[totalPrice,setTotalPrice]=useState(0);4
+    const[disabledDate,setDisabledDate]=useState([]);
     const navigate=useNavigate();
     function todayDate() {
         const today = new Date();
@@ -129,11 +131,39 @@ const dialogStyle = {
         const res = await axios.get("/showallcities");
         setArrayCity(await res.data.data);
     };
+    const getDatesInRange=(startDate,endDate)=>{
+        const dates=[];
+        const currentDate=new Date(startDate);
+        while (currentDate<=endDate){
+            const dateString=currentDate.toISOString().slice(0, 10);
+            dates.push(dateString)
+            currentDate.setDate(currentDate.getDate()+1)
+        }
+        return dates;
+    }
+    const getBillsOnCar=async (id)=>{
+        const token=localStorage.getItem('token');
+        const response= await axios.get (`/showAllBillsOnCar/${id}`,{
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        
+        const disabledDates=response.data.data.reduce((acc,bill)=>{
+            const startDate=new Date(bill.start_date);
+            const endDate=new Date(bill.end_date);
+            const datesInRange=getDatesInRange(startDate,endDate);
+            return acc.concat(datesInRange);
+        },[])
+        setDisabledDate(disabledDates)
+        console.log(disabledDates)
+    }
     useEffect(() => {
         getPickup();
         getDropoff();
         getCities();
         setCarId(id);
+        getBillsOnCar(id);
     }, []);
     useEffect(() => {
         const pickuplocations = arrayPickup.filter(
@@ -216,11 +246,48 @@ const dialogStyle = {
         setCityId(city.id);
         setShowCity(false);
     };
+    const isDateDisabled=(date)=>{
+        const formattedDate=moment(date).format('YYYY-MM-DD')
+        return disabledDate.includes(formattedDate)
+    }   
     const handelStartDate = (e) => {
-        setStartDate(e.target.value);
+        const selctedDate=e.target.value;
+        if(isDateDisabled(selctedDate)){
+            console.log("this car rented from another in this date")
+            // alert("This car is rented by another person on this date.");
+            toast.error("This car is rented by another person on this date , please change it !", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Zoom,
+            });
+        }else{
+            setStartDate(e.target.value);
+        }
     };
     const handelEndDate = (e) => {
-        setEndDate(e.target.value);
+        const selectedDate=e.target.value;
+        if(isDateDisabled(selectedDate)){
+            toast.error("This car is rented by another person on this date , please change it !", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Zoom,
+            });
+            // alert(" This car is rented by another person on this date.");
+        }else {
+            setEndDate(e.target.value);
+        }
     };
     const handelStartTime = (e) => {
         setStartTime(e.target.value);
@@ -305,7 +372,8 @@ const dialogStyle = {
 
     setTotalPrice(car.prices[0].price_per_hour*Math.round(hours));
     },[startDate,startTime,endDate,endTime])
-    return (
+   
+     return (
         <>
             <ToastContainer />
             <div className="d-flex flex-column  bg-slate-100  w-100 ">
@@ -560,6 +628,7 @@ const dialogStyle = {
                                             min={todayDate()}
                                             value={startDate}
                                             onChange={handelStartDate}
+
                                         />
                                     </div>
                                     <div class="col-12 col-md-6">

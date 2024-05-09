@@ -185,7 +185,7 @@ function CarDitails() {
                                         seats : {car.seats}
                                     </li>
                                     <li className="list-group-item">
-                                        Steering: {car.steering}
+                                    Gear : {car.steering}
                                     </li>
                                     <li className="list-group-item">
                                         Year : {car.year}

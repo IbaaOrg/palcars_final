@@ -128,7 +128,7 @@ modelValue     );
         console.log(car_id)
         const token = localStorage.getItem("token");
         try {
-            const isFavorite=favoriteList.some((favorite)=>favorite.car.id === car_id)
+            const isFavorite=favoriteList.some((favorite)=>favorite.car.id&&favorite.car.id === car_id)
             if (isFavorite) {
                 await axios.delete(`/favorites/${car_id}`, {
                     headers: {
@@ -236,7 +236,7 @@ modelValue     );
                 </div>
                 <hr />
                 <div className="py-2">
-                <span className="text-muted mt-1 fs-5 d-flex align-items-center gap-2">Steering                         <GiSteeringWheel className="icon" />
+                <span className="text-muted mt-1 fs-5 d-flex align-items-center gap-2">Gear                          <GiSteeringWheel className="icon" />
 </span>
  
                     <div className="type-list" onChange={handleSteeringChange}>

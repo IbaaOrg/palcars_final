@@ -438,10 +438,10 @@ useEffect(() => {
           {/* Automatic,Manual */}
           <div  className='col-6 d-flex'>
              
-             <label for="select" className=' mr-3'>Steering</label>
+             <label for="select" className=' mr-3'>Gear </label>
 
              <select class="select-input" onChange={set} name="steering" id="steering">
-                 <option value="" class="dropdown-item" href="#">Select Steering </option>
+                 <option value="" class="dropdown-item" href="#">Select Gear  </option>
                <option value="Automatic" class="dropdown-item" href="#">Automatic </option>
 
                  <option value="Manual" class="dropdown-item" href="#">Manual </option>

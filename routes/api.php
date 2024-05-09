@@ -19,6 +19,7 @@ use App\Http\Controllers\Api\FavoriteController;
 
 use App\Http\Controllers\Api\LocationController;
 use App\Http\Controllers\Api\NotificationController;
+use App\Http\Controllers\Api\UserWorkingHoursController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 /*
 |--------------------------------------------------------------------------
@@ -211,7 +212,7 @@ Route::middleware('auth:sanctum','renter')->post('/updateBill/{id}',[BillControl
 Route::middleware('auth:sanctum','renter')->delete('/destroyBill/{id}',[BillController::class,'destroy']);
 Route::middleware('auth:sanctum','company')->get('/showAllBillsOfMyCompany',[BillController::class,'allBillsOfMyCompany']);
 Route::middleware('auth:sanctum','renter')->get('/allBillsOfRenter',[BillController::class,'allBillsOfRenter']);
-
+Route::middleware('auth:sanctum')->get('/showAllBillsOnCar/{id}',[BillController::class,'showAllBillsOnCar']);
 Route::middleware('auth:sanctum')->get('/allNotifications',[NotificationController::class,'allNotifications']);
 Route::middleware('auth:sanctum')->get('/notes/{id}',[NotificationController::class,'show']);
 Route::post('/local', [LocaleController::class, 'local']);
@@ -219,6 +220,8 @@ Route::middleware('auth:sanctum')->get('/markallread',[NotificationController::c
 Route::middleware('auth:sanctum','renter')->get('/getMyComments',[CommentController::class,'getMyComments']);
 Route::middleware('auth:sanctum','company')->get('/getAllcomentsOfMyCar',[CommentController::class,'getAllcomentsOfMyCar']);
 Route::middleware('auth:sanctum','company')->get('/getAllrenterUsers',[UserController::class,'getRenters']);
+Route::middleware('auth:sanctum','company')->post('/storeWorkingHour',[UserWorkingHoursController::class,'store']);
+Route::get('/showAll',[UserWorkingHoursController::class,'showAll'])
 //Route::get('stripe',[BillController::class,'stripe']);
 //Route::post('stripe',[BillController::class,'stripePost'])->name('stripe.post');
 
