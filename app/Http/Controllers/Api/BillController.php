@@ -162,6 +162,18 @@ $dropoffLocationIds = $dropofflocations_ids->pluck('id')->toArray();
 
         return $this->success(SimpleBillResource::collection($bills));
     }
+    public function showAllBillsOnCar(string $id){
+       $car= Car::find($id);
+       if(!$car){
+        return $this->fail("car not find",404);
+       }
+       if ($car->status !== "rented") {
+        return $this->fail("Car is not rented", 404);
+    }
+       $bills = Bill::where('car_id',$id)->get();
+       return $this->success($bills);
+
+    }
 
     /**
      * Update the specified resource in storage.

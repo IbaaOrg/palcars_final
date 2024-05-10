@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use App\Models\Car;
+use App\Models\Bill;
 use App\Models\Comment;
 use App\Models\Message;
 use App\Models\CarImage;
 use App\Models\Favorite;
 use App\Models\Location;
 use App\Models\Notification;
-use App\Models\Bill;
+use App\Models\UserWorkingHour;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
@@ -108,6 +109,9 @@ class User extends AuthenticatableUser implements Authenticatable
     public function bills()
     {
         return $this->hasMany(Bill::class);
+    }
+    public function userWorkingHours(){
+        return $this->hasMany(UserWorkingHour::class);
     }
     // //all rentals
     // public function rentals()

@@ -69,8 +69,8 @@ function ViewCar() {
                               <ul className="list-group list-group-flush">
                                   <li className="list-group-item">Car Number : {car.car_number}</li>
                                   <li className="list-group-item">Cartogery : {car.catrgory}</li>
-                                  <li className="list-group-item">seats : {car.seats}</li>
-                                  <li className="list-group-item">Steering: {car.steering}</li>
+                                  <li className="list-group-item">Seats : {car.seats}</li>
+                                  <li className="list-group-item">Gear: {car.steering}</li>
                                   <li className="list-group-item">Year : {car.year}</li>
                                   <li className="list-group-item">Door : {car.doors}</li>
                                   <li className="list-group-item">Fuel Type : {car.fuel_type}</li>

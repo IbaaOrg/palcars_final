@@ -11,6 +11,7 @@ const [citys , setCitys] = useState(null)
 
     const [locationname, setLocationname] = useState(null)
     const [locationname2, setLocationname2] = useState(null)
+    const [locationname3, setLocationname3] = useState(null)
 
 
     const [error, setError] = useState(null)
@@ -61,18 +62,22 @@ const chicktype = async()=>{
  
 
 const addlocation = async () =>{
+    const formData1 = new FormData();
 
 
     if (showdropoff) {
-        setType1("pickup")
-    }
-    //addLocation
-    const token = localStorage.getItem('token');
-    const formData1 = new FormData();
+        formData1.append("city_id", locationid.id);
+        formData1.append("location", locationname);
+        formData1.append("type",'pickup' );
+        formData1.append("user_id", user.user_id);    }else {
     formData1.append("city_id", locationid.id);
     formData1.append("location", locationname);
     formData1.append("type", type1);
     formData1.append("user_id", user.user_id);
+        }
+    //addLocation
+    const token = localStorage.getItem('token');
+    
 
 
     try {
@@ -82,7 +87,7 @@ const addlocation = async () =>{
             }
         })
         const res = response.data
-
+console.log(res)
         if (res.status === true) {
             setSeccsses(true)
             setLocationname('');

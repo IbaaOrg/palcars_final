@@ -10,7 +10,6 @@ const TranslateContextProvider = ({ children }) => {
             lang: "en",
         });
         setTranslates(await response.data);
-        console.log(translates);
     };
     const changeLanguage = async (e) => {
         const language = e.target.dataset.lang;
@@ -19,7 +18,7 @@ const TranslateContextProvider = ({ children }) => {
         });
         setLanguage(language);
         setTranslates(await response.data);
-        console.log(translates);
+
     };
 
     useEffect(() => {

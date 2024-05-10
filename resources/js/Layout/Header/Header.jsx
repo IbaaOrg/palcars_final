@@ -208,7 +208,7 @@ const toggleList=()=>{
 
                         </NavLink>)}
                         <div className=" d-flex mx-2 ">
-                            {islogined && (
+                            {islogined &&user&& (
                                 <div className="nav-item dropdown">
                                     <a
                                         className="nav-link text-black"
