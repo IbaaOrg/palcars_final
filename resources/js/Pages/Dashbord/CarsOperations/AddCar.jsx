@@ -3,7 +3,7 @@ import { Form, FormGroup, FormLabel, FormControl, Button } from 'react-bootstrap
 import axios from 'axios';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import '../../../../css/app.css'
-
+import Select from "react-select";
 
 
 
@@ -101,7 +101,7 @@ const[alert,setAlert]=useState(false);
     
     const formData = new FormData();
     formData.append("car_number", form.current.car_number);
-    formData.append("make", form.current.make);
+    formData.append("make", selectedOption);
     formData.append("model", form.current.model);
     formData.append("year", form.current.year);
     formData.append("seats", form.current.seats);
@@ -109,7 +109,7 @@ const[alert,setAlert]=useState(false);
     formData.append("bags", form.current.bags);
     formData.append("catrgory", form.current.catrgory);
     formData.append("fuel_type", type);
-    
+    console.log(formData.get("make"));
     // Conditionally append fuel_full only when fuel_type is not electricity
     if (type !== 'electricity' && form.current.fuel_full !== null) {
       formData.append("fuel_full", form.current.fuel_full);
@@ -261,6 +261,34 @@ useEffect(() => {
       setSelectedImages([...selectedImages, ...newImages]); // Concatenate arrays
     };
 
+    const options = [
+      { value: "Marcedes", label: "Marcedes" },
+      { value: "Honda", label: "Honda" },
+      { value: "BMW", label: "BMW" },
+      { value: "Honday", label: "Honday" },
+      { value: "Toyota", label: "Toyota" },
+      { value: "Volkswagen", label: "Volkswagen" },
+      { value: "Stellantis", label: "Stellantis" },
+      { value: "General Motors", label: "General Motors" },
+      { value: "Ford", label: "Ford" },
+      { value: "Chevrolet", label: "Chevrolet" },
+      { value: "Audi", label: "Audi" },
+      { value: "Nissan", label: "Nissan" },
+      
+    ];
+    const [selectedOption, setSelectedOption] = useState(null);
+    const [formData, setFormData] = useState({});
+    const handleChange = (e) => {
+      const selectedOption = e.target.value;
+      setSelectedOption(selectedOption);
+      setFormData({
+        ...formData,
+        make: selectedOption
+      });
+      formRef.current = { ...formRef.current, [e.target.name]: selectedOption }; // تحديث البيانات في formRef.current
+    };
+  
+    const formRef = useRef(null); // مرجع للنموذج
 
   return (
     <div className='row p-4'>
@@ -346,7 +374,24 @@ useEffect(() => {
 
             <FormGroup className='col'>
               <FormLabel>Manufacturing Company</FormLabel>
-              <FormControl type="text" placeholder="Enter Company name" onChange={set} name="make" id="make"/>
+              <Form ref={formRef}>
+      <Form.Control
+        as="select"
+        name="make"
+        id="make"
+        className="bg-white"
+        onChange={handleChange}
+        value={selectedOption || ""}
+        placeholder="Select Company"
+      >
+        <option value="">Select Company</option>
+        {options.map(option => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </Form.Control>
+    </Form>
             </FormGroup>
           </div>
           <div className='row mt-3'>
