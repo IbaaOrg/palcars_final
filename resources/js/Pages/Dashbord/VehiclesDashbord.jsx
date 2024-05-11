@@ -116,8 +116,47 @@ function VehiclesDashbord() {
      }
   }, [message]); 
     // /cars/{id}   post
- 
-    return (
+    const [searchTerm, setSearchTerm] = useState(""); // الحالة المحلية لتخزين قيمة حقل البحث
+
+    const handleChange = (e) => {
+      setSearchTerm(e.target.value); // تحديث القيمة عند تغييرها في حقل البحث
+    };
+//   <tr key={data.id}>
+//       <td>{data.car_number}</td>
+//       <td>{data.make}</td>
+//       <td>{data.model}</td>
+//       <td>{data.catrgory}</td>
+//       <td>{data.description}</td>
+//       <td>{data.year}</td>
+//       <td>{data.seats}</td>
+//       <td>{data.doors}</td>
+//       <td>{data.bags}</td>
+//       <td>{data.fuel_type}</td>
+//       <td>{data.fuel_full}</td>
+const handleSearch = (e) => {
+    e.preventDefault();
+    // أضف هنا الشيفرة للبحث في البيانات باستخدام قيمة searchTerm
+    const filteredData = data.filter(item => {
+      // يمكنك استبدال "item" بالاسم الذي تحتاجه في بياناتك
+      return (
+        item.car_number !== null && item.car_number.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.make !== null && item.make.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.model !== null && item.model.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.catrgory !== null && item.catrgory.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.description !== null && item.description.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.year !== null && item.year.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.seats !== null && item.seats.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.doors !== null && item.doors.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.fuel_type !== null && item.fuel_type.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.fuel_full !== null && item.fuel_full.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.status !== null && item.status.toString().toLowerCase().includes(searchTerm.toLowerCase()) 
+        // قم بإضافة المزيد من الحقول حسب الحاجة
+      );
+    });
+    console.log("Filtered Data:", filteredData);
+  };
+  
+     return (
         <div>{
             loading ? (
                 <div className=" d-flex justify-center align-middle">
@@ -133,14 +172,17 @@ function VehiclesDashbord() {
                         <p className=''>Your all vehicles are listed bellow</p>
                     </div>
                     <div className="col ">
-                        <form class="d-flex" role="search">
+                        {/* <form class="d-flex" role="search">
                             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form>
+                            <button class="btn btn-outline-success" type="submit" onClick={SearchFunction}>Search</button>
+                        </form> */}
+                            <form className="d-flex" role="search">
+      <input
+        className="form-control me-2" type="search" placeholder="Search" aria-label="Search" value={searchTerm} onChange={handleChange} />
+      <button className="btn btn-outline-success" type="submit" onClick={handleSearch} > Search </button>
+    </form>
                     </div>
                     <div className="col">
-                        <button type="button" class="btn btn-light">Filter</button>
-
                         <button type="button" class="btn btn-primary Addvehicle" >
                             <NavLink to="/dashbord/addvehical">Add vehicle</NavLink>
                         </button>
