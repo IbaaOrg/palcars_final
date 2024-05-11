@@ -81,7 +81,10 @@ const App = () => {
     useEffect(() => {
         const token = localStorage.getItem("token");
         if (token) {
-            setIslogined(!islogined);
+            setIslogined(true);
+        }else {
+            setIslogined(false);
+
         }
     }, []);
     const showHeaderFooter =
@@ -90,7 +93,7 @@ const App = () => {
         location.pathname !== "/forgetpassword";
     return (
         <div className={language === "ar" ? "rtl " : "ltr"}>
-            {showHeaderFooter && <Header islogined={islogined} />}
+            {showHeaderFooter && <Header />}
 
             <Routes>
                 <Route

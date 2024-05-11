@@ -16,13 +16,16 @@ import { FaStarOfLife } from "react-icons/fa";
 import { getAuth, updatePassword } from "firebase/auth";
 import { BiShowAlt } from "react-icons/bi";
 import { IoEyeOffOutline } from "react-icons/io5";
-import loginimage from '../../../../public/image/undraw_undraw_undraw_undraw_sign_up_ln1s_-1-_s4bc_-1-_ee41__1__3xti-removebg-preview.png'
+import loginimage from "../../../../public/image/undraw_undraw_undraw_undraw_sign_up_ln1s_-1-_s4bc_-1-_ee41__1__3xti-removebg-preview.png";
+import { UserContext } from "../../Context/User";
 
 function SignUpRenter() {
     const { translates } = useContext(TranslateContext);
+    const { setUserToken } = useContext(UserContext);
     const navigate = useNavigate();
     const [errors, setErrors] = useState(null);
     const [role, setRole] = useState("Renter");
+    const [valid, setValid] = useState(0);
     const [visibale, setVisible] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -31,7 +34,7 @@ function SignUpRenter() {
 
     const [preview, setPreview] = useState(null);
     const [previewd, setPreviewd] = useState(null);
-
+    const [showDetials,setShowDetials]=useState(false);
     const file = useRef(null);
     const filed = useRef(null);
 
@@ -40,6 +43,8 @@ function SignUpRenter() {
         name: null,
         phone: null,
         password: null,
+        valid: null,
+        expireddate:null,
         PhotoDrivinglicense: null,
         birthdate: null,
     });
@@ -51,6 +56,7 @@ function SignUpRenter() {
             password: string().required().min(8),
             phone: string().min(10).max(10).required(),
             PhotoDrivinglicense: string().required(),
+            expireddate: string().required(),
             birthdate: string().required(),
         });
         try {
@@ -106,14 +112,20 @@ function SignUpRenter() {
 
         const validatedata = await validate();
         setError(null);
+        const ckeckBoxValid=document.getElementById('flexCheckChecked').checked;
+        if(!ckeckBoxValid){
+            setError('Please confirm that you have a valid driving license.');
+            return ;
+        }
         const formData = new FormData();
         formData.append("name", form.current.name);
         formData.append("role", role);
         formData.append("email", form.current.email);
         formData.append("password", form.current.password);
         formData.append("phone", form.current.phone);
+        formData.append("valid", valid ? 1 : 0);
+        formData.append("expireddate", form.current.expireddate);
         formData.append("photo_drivinglicense", filed.current);
-
         formData.append("birthdate", form.current.birthdate);
 
         if (file.current) {
@@ -125,12 +137,12 @@ function SignUpRenter() {
             formData,
             (user) => {
                 if (user.role === "Company") {
+                    setUserToken(user.token);
                     navigate("/dashbord");
-                    localStorage.setItem("token", user.token);
                 } else {
+                    setUserToken(user.token);
                     navigate("/profile");
                 }
-                window.location.reload();
             },
             (msg) => {
                 setError(msg);
@@ -138,6 +150,24 @@ function SignUpRenter() {
         );
         setLoading(false);
     };
+    const toggleDetials =()=>{
+        setShowDetials(!showDetials);
+        setValid(!valid)
+    }
+    function todayDate(){
+        const today = new Date();
+        today.setDate(today.getDate() + 7); // Add 7 days to current date
+        const year = today.getFullYear();
+        let month = today.getMonth() + 1;
+        let day = today.getDate();
+        if (month < 10) {
+            month = "0" + month;
+        }
+        if (day < 10) {
+            day = "0" + day;
+        }
+        return `${year}-${month}-${day}`;
+    }
 
     return (
         <div class="d-flex justify-content-around cont">
@@ -321,22 +351,57 @@ function SignUpRenter() {
                                         className="text-danger"
                                     />
                                 </div>
-
-                                <div className="drivingImg">
-                                    <img id="driving-img" src={previewd} />
-
-                                    <label htmlFor="driving-path">
-                                        <IoCamera size={20} />
-                                    </label>
-
+                                <div class="form-check" id={"checkInput"}>
                                     <input
-                                        name={"photo_drivinglicense"}
-                                        type={"file"}
-                                        onChange={showD}
-                                        id="driving-path"
-                                        className="form-control-file form-control "
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        value=""
+                                        id="flexCheckChecked"  
+                                        onChange={toggleDetials}
                                     />
+                                    <label
+                                        class="form-check-label"
+                                        for="flexCheckChecked"      
+                                                                    
+
+                                    >
+                                        Are you have valid driving license?
+                                    </label>
                                 </div>
+                               {showDetials&&<div class="d-flex flex-column gap-2" id={"textInput"}>
+                               <div className="d-flex"><label
+                                        class="form-check-label"
+                                        for="flexText"
+                                    >
+                                        Expired date of driving license
+                                    </label>
+                                    <FaStarOfLife
+                                        size={5}
+                                        className="text-danger"
+                                    />
+                                    </div> 
+                                    <input
+                                        class="form-control"
+                                        type="date"
+                                        min={todayDate()}
+                                        name="expireddate"
+                                        onChange={set}
+                                        id="flexText"                                
+                                    />
+                                    <div className="d-flex">
+                                    <label htmlFor="imgDriving" className="form-check-label">Photo of driving license</label>
+                                    <FaStarOfLife
+                                        size={5}
+                                        className="text-danger"
+                                    />
+                                   </div> 
+                                   <input type="file" id={"imgDriving"} name={"photo_drivinglicense"}
+                                        onChange={showD}
+                                        className="form-control-file form-control " />
+                                </div>
+                                } 
+
+                          
                             </div>
                         </div>
                     </div>

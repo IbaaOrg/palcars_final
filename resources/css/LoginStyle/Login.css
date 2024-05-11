@@ -233,6 +233,16 @@
     padding: 6px 6px;
     transition: all;
 }
+.custom-file-upload {
+    display: inline-block;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+
+
 .drivingImg {
     position: relative;
 
@@ -248,7 +258,7 @@
 .desc {
     width: 100%;
 }
-.drivingImg label {
+/* .drivingImg label {
     position: absolute;
     top: 0;
     color: white;
@@ -264,5 +274,5 @@
 .drivingImg:hover label {
     padding: 6px 6px;
     transition: all;
-}
+} */
 

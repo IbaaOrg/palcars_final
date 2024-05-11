@@ -10,8 +10,9 @@ use App\Http\Traits\ResponseTrait;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use App\Http\Resources\SimpleDiscountResource;
 use App\Http\Resources\DiscountCarResource;
+use App\Http\Resources\SimpleDiscountResource;
+use App\Http\Resources\ShowAllDiscountsResource;
 
 
 class DiscountController extends Controller
@@ -25,7 +26,7 @@ class DiscountController extends Controller
         $data=Discount::all();
         $data = $data->sortBy('expired_date');
 
-        return $this->success(SimpleDiscountResource::collection($data));
+        return $this->success(ShowAllDiscountsResource::collection($data));
        
     }
 

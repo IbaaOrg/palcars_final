@@ -97,17 +97,10 @@
 /* area {
     position: relative;
 } */
-.map-highlight:hover {
-    background-color: rgba(0, 0, 0, 0.2);
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
-    transition: background-color 0.3s ease;
-    z-index: 1;
-    /* position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0; */
-  }
+.map-hilight {
+    width: 100%;
+    height: 100%;
+}
   
   
   
@@ -119,9 +112,18 @@
 }
 .divdesmap{
     background-color: rgb(255, 255, 255);
-
+    width: 93%;
+    margin: auto;
 }
-
+.mapInfo {
+    width: 40%;
+    min-height: 700px;
+}
+@media screen and (max-width : 763px ){
+    .mapInfo {
+        width: 380px !important;
+    }
+}
 .offers{
     background-color: #ffffff;
 }
@@ -134,4 +136,38 @@
 .new-price {
     color: #b12704;
     font-weight: bold;
+}
+.itemswiper  {
+    width: 31% !important;
+}
+@media screen and (max-width: 919px){
+    .itemswiper {
+        width: 100% !important;
+    }
+}
+@media screen and (max-width: 400px){
+    .imgcardTimer {
+        width: 60% !important;
+        min-height: 170px;
+    }
+    .contentTimer {
+        width: 40%;
+    }
+}
+.imgcardTimer {
+    width: 20%;
+    min-height: 170px;
+}
+.contentTimer {
+    width: 80%;
+}
+.cardStatistics {
+    width: 260px;
+}
+.mainOffers {
+    min-height: 400px;
+    padding: 20px 0;
+}
+.mainOffers .mainhead {
+    padding: 30px 0;
 }

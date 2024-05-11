@@ -217,21 +217,9 @@ function CardBasic({ title }) {
         return `${year}-${month}-${day}`;
     }
 
-    // function currentTime() {
-    //   const now = new Date();
-    //   let hours = now.getHours();
-    //   let minutes = now.getMinutes();
-    //   if (hours < 10) {
-    //       hours = '0' + hours;
-    //   }
-    //   if (minutes < 10) {
-    //       minutes = '0' + minutes;
-    //   }
-    //   $minTime= `${hours}:${minutes}`;
-    // }
+
     return (
         <div className=" container cardmain shadow">
-            {/* <div>{arraypickup[0].location.location}</div> */}
             <form class="row g-3">
                 {!toggle ? (
                     <div class="col-md-12 mainlist">

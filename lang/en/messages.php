@@ -65,7 +65,7 @@ return [
     'name.min' => 'The name must be at least :min characters.',
     'name required'=>'name is required',
     'choose'=>'Choose what you want be in PalCars',
-    'PhotoDrivinglicense'=>'Photo Drivinglicense',
+    'PhotoDrivinglicense'=>'Driving license',
     'enter'=>"Enter description about your company...",
     'Discountsanddeals'=>'Discounts and deals',
     'BrowseNow'=>'Browse Now',

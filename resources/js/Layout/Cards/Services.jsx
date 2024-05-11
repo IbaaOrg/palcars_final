@@ -6,12 +6,12 @@ import { TranslateContext } from '../../Context/Translate';
 import { NavLink } from 'react-router-dom';
 import { TbShoppingCartDiscount } from "react-icons/tb";
 import { RiCustomerServiceFill } from "react-icons/ri";
-
+import '../../../css/HomeStyle/Home.css'
 const Services = () => {
     const {translates}=useContext(TranslateContext)
   return (
-    <div >
-        <h2 className='fw-bold fs-5 text-center p-4'>{translates.Features}</h2>
+    <div className='mainOffers'>
+        <h1 className='text-center fs-3 m-2 mainhead'>{translates.Features}</h1>
         <div className='d-flex flex-wrap justify-content-center'>
         <div className='col-8 col-lg-3 cards mx-2 d-flex flex-column align-items-center custom-shadow rounded'>
         <div className="image">

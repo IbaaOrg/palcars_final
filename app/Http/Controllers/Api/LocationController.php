@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\LocationOfCityResource;
 use App\Http\Resources\SimpleLocationResource;
 use App\Http\Resources\LocationOfCompanyResource;
+use App\Http\Resources\SimpleLocationShowResource;
 
 
 class LocationController extends Controller
@@ -87,15 +88,15 @@ class LocationController extends Controller
     }
     public function allLocationPickup(){
         $locations = Location::whereIn('type', ['pickup', 'pickup_dropoff'])->get();
-        return $this->success( SimpleLocationResource::collection( $locations));
+        return $this->success( SimpleLocationShowResource::collection( $locations));
     }
     public function allLocationDropoff(){
         $locations = Location::whereIn('type', ['dropoff', 'pickup_dropoff'])->get();
-        return $this->success( SimpleLocationResource::collection($locations));
+        return $this->success( SimpleLocationShowResource::collection($locations));
     }
     public function allLocationPickupDropoff(){
         $locations = Location::whereIn('type', ['pickup_dropoff'])->get();
-        return $this->success( SimpleLocationResource::collection($locations));
+        return $this->success( SimpleLocationShowResource::collection($locations));
     }
     /**
      * Store a newly created resource in storage.

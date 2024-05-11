@@ -15,9 +15,11 @@ import { doc } from "firebase/firestore";
 import { BiShowAlt } from "react-icons/bi";
 import { IoEyeOffOutline } from "react-icons/io5";
 import loginimage from '../../../../public/image/undraw_undraw_undraw_undraw_sign_up_ln1s_-1-_s4bc_-1-_ee41__1__3xti-removebg-preview.png'
+import { UserContext } from "../../Context/User";
 
 function SignUp() {
     const { translates } = useContext(TranslateContext);
+    const {userToken,setUserToken}= useContext(UserContext);
     const navigate = useNavigate();
     const [errors, setErrors] = useState(null);
     const [role, setRole] = useState("Company");
@@ -100,17 +102,18 @@ function SignUp() {
             formData,
             (user) => {
                 if (user.role === "Company") {
+                    setUserToken(user.token)
                     navigate("/dashbord");
-                    localStorage.setItem("token", user.token);
                 } else {
+                    setUserToken(user.token)
                     navigate("/profile");
                 }
-                window.location.reload();
             },
             (msg) => {
                 setError(msg);
-            }
+            },
         );
+
         setLoading(false);
     };
 

@@ -6,8 +6,10 @@ export const UserContext = createContext();
 
 const UserContextProvider = ({ children }) => {
     const [user, setUser] = useState({});
+    const [userToken,setUserToken]=useState(localStorage.getItem('token'));
+
     const getUser = async () => {
-        const token = localStorage.getItem("token");
+        const token=localStorage.getItem('token')
         if (token) {
             try {
                 const response = await axios.get("/user", {
@@ -16,7 +18,10 @@ const UserContextProvider = ({ children }) => {
                     },
                 });
                 if (response.data.status === true) 
-                setUser(response.data.data);
+                setUser(await response.data.data);
+
+            console.log(response.data.data)
+            console.log(userToken)
             } catch (e) {}
         } else {
             console.log("Token not found in local storage");
@@ -26,13 +31,13 @@ const UserContextProvider = ({ children }) => {
     const updateUser = (newUserData) => {
         setUser(newUserData);
     };
-
+  
     useEffect(() => {
         getUser();
-    }, []);
+    }, [userToken]);
 
     return (
-        <UserContext.Provider value={{ user, updateUser }}>
+        <UserContext.Provider value={{ user, updateUser ,userToken,setUserToken}}>
             {children}
         </UserContext.Provider>
     );

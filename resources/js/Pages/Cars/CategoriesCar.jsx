@@ -19,6 +19,7 @@ import 'swiper/css/scrollbar';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import '../../../css/HomeStyle/Home.css'
 // Import Swiper styles
 import get_all_cars from '../../NetWorking/get_all_cars';
 
@@ -75,8 +76,8 @@ const getCarByCategory=async(type)=>{
   navigate(`/cars?category=${type}`)
 }
     return (
-        <div className="container categories">
-            <h2 className="fw-bold fs-5 text-center pt-4 mt-5">Categories of car</h2>
+        <div className="container categories mt-5">
+            <h1 className="text-center fs-3 mt-4 mainhead">Categories of car</h1>
             <Swiper
              breakpoints={{
               

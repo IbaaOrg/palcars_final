@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import 'jquery';
+// import 'maphilight';
 import imghome from '../../../../public/image/homeimage.jpeg'
 import image2 from '../../../../public/image/user.png'
 import jawwal from '../../../../public/image/jawwal.png'
@@ -16,10 +18,12 @@ import ScroolTrigger from 'react-scroll-trigger'
 import '../../../css/HomeStyle/Home.css';
 import ScrollToTopButton from '../../Layout/ScrollToTopButton';
 import CardBasic from '../../Layout/Cards/CardBasic';
+import { PiPoliceCarFill } from "react-icons/pi";
 import { useContext } from 'react';
 import { UserContext } from '../../Context/User';
 import CategoriesCar from './../Cars/CategoriesCar';
 import { useRef } from 'react';
+import { BsFillPeopleFill } from "react-icons/bs";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
@@ -30,8 +34,36 @@ import Services from './../../Layout/Cards/Services';
 import { Link } from 'react-router-dom';
 import Loading from './../../Componants/UI/Loading';
 import { TranslateContext } from "../../Context/Translate";
-function Home() {
+import { FaCity } from "react-icons/fa6";
+import { width } from '@mui/system';
 
+function Home() {
+   
+    
+    useEffect(() => {
+        const img = document.querySelector('.map-highlight');
+        img.onload = () => {
+                            jQuery(img).maphilight({
+                fill: true,
+                fillColor: "000000",
+                fillOpacity: 0.2,
+                stroke: false,
+                fade: true,
+                shadow: true,
+                shadowX: 0,
+                shadowY: 0,
+                shadowRadius: 6,
+                shadowColor: "000000",
+                shadowOpacity: 0.8,
+                shadowPosition: "outside",
+                shadowFrom: false,
+            });
+        }
+    }, []);
+
+       
+   
+    const [delays] = useState([10000, 3000, 3000, 3000]); 
     const [remainingTime, setRemainingTime] = useState(moment.duration());
     const targetDate = '2024-12-31T23:59:59'
     useEffect(() => {
@@ -83,15 +115,11 @@ function Home() {
             const response = await axios.get(`/showalldiscounts`);
             const data = response.data.data;
             const now = new Date();
-            //lastMonth.setMonth(lastMonth.getMonth() - 1);
             const fiftenDayFromNow=new Date(now.getTime()+ 15*24*60*60*1000)
             const filteredData = data.filter(discount => {
                 const expiredDate = new Date(discount.expired_date);
                 return expiredDate <= fiftenDayFromNow && expiredDate >=now;
             });
-            console.log(filteredData)
-            console.log(data)
-
             setDate(filteredData);
             setILoading(false)
            
@@ -168,8 +196,10 @@ function Home() {
                             clickable: true,
                         }}
                         autoplay={{
-                            delay: 5000, // Set autoplay delay to 3 seconds
+                            delay: delays[0], // Set autoplay delay to 3 seconds
                             disableOnInteraction: false,
+                            direction: 'normal', // Specify the direction of autoplay
+
                         }}
                         modules={[Autoplay, EffectCoverflow, Pagination, Navigation]} // Include all modules here
                         className="swiper_container"
@@ -177,19 +207,19 @@ function Home() {
                         onAutoplayTimeLeft={onAutoplayTimeLeft}
 
                     >
-                        <SwiperSlide className="">
+                        <SwiperSlide className="" delay={()=>delays[0]}>
                             <img src={imghome} alt="slide_image" className='imgSlider'/>
                         </SwiperSlide>
-                        <SwiperSlide>
+                        <SwiperSlide delay={()=>delays[1]}>
                             <img src={jawwal} alt="slide_image" className='imgSlider' />
                         </SwiperSlide>
-                        <SwiperSlide>
+                        <SwiperSlide delay={()=>delays[2]}>
                             <img src={Ads1} alt="slide_image" className='imgSlider' />
                         </SwiperSlide>
-                        <SwiperSlide>
+                        <SwiperSlide delay={()=>delays[3]}>
                             <img src={Ads3} alt="slide_image"  className='imgSlider'/>
                         </SwiperSlide>
-                        <SwiperSlide>
+                        <SwiperSlide delay={()=>delays[4]}>
                             <img src={Ads4} alt="slide_image"  className='imgSlider' />
                         </SwiperSlide>   <SwiperSlide>
                             <img src={Ads5} alt="slide_image"  className='imgSlider' />
@@ -225,31 +255,21 @@ function Home() {
                     </div>
                 ):(
 
-<>
-                                <h1 className="text-center fs-3 m-2">Special offers</h1>
-                    <div className="  mx-5">{data&&data.length>0?
+<div className='mainOffers'>
+                                <h1 className="text-center fs-3 m-2 mainhead">Special offers</h1>
+                    <div className="   mx-5">{data&&data.length>0?
                         <div className="">
-                            <Swiper
-                                modules={[Navigation, Pagination]}
-                                slidesPerView={3}
-                                spaceBetween={15}
-                                navigation={true}
-                                loop={true}
-                                pagination={{
-                                    clickable: true,
-                                }}
-                                className=" mySwiperC"
-                            >
+                          
                             {data&&(
-                                <div className="swiper-wrapper">
+                                <div className="swiper-wrapper gap-5 d-flex flex-wrap justify-content-center align-items-center">
                                     {data.map((d) => (
-                                        <SwiperSlide key={d.id}>
-                                           <div className="card shadow p-1">
-                                                <div className="row">
-                                                    <div className="col d-flex justify-center align-middle">
-                                                        <img src={d.car.sub_images[0].photo_car_url}  className=" "/>
+                                        <div key={d.id} className='itemswiper'>
+                                           <div className="card shadow p-1 d-flex">
+                                                <div className="d-flex w-100  gap-2">
+                                                    <div className=" d-flex justify-center align-middle imgcardTimer">
+                                                        <img src={d.car.sub_images[0].photo_car_url}  className="w-100 "/>
                                                     </div>
-                                                    <div className="col ">
+                                                    <div className="contentTimer">
                                                         <h1 className="card-header text-center">{d.note}</h1>
                                                         <Timer targetDate={d.expired_date}/>
                                                         <h1 className="old-price text-center">{d.car.prices[0].price}₪ / day</h1>
@@ -263,83 +283,42 @@ function Home() {
                                                 </div>
                                                 
                                            </div>
-                                        </SwiperSlide>
+                                        </div>
                                     ))}
                                 </div>
                                 )}
-                            </Swiper>
                             <div className='d-flex justify-content-center align-items-center'>
                                 <Link className="btn btn-primary rounded my-5" to="/discounts">View All Deals</Link>
                             </div>
                         </div>
 
                    :<div className="d-flex justify-content-center align-items-center w-100 fw-bolc fs-5">There are no offers in the next 15 days </div>} </div>
-                            </>
+                            </div>
                 )}
                     
                 </div>
-                <div className="counter py-5" >
-                    <h1 className=" fs-3 text-center mb-4">Site statistics</h1>
-                    <ScroolTrigger onEnter={() => { setCounterOn(true) }} onExit={() => { setCounterOn(false) }}>
-                        {counterOn &&
-                            <div className=" container p-1 d-flex  justify-around">
-
-
-                                <div className=" card p-4 shadow">
-                                    <div className="fs-1  p-3">
-
-                                        <CountUp start={0} end={userCount} duration={2} delay={1} className="  " />
-                                        
-                                    </div>
-                                    <h1 className="fs-3">Users</h1>
-
-                                </div>
-                                <div className=" card p-4 shadow">
-                                    <div className="fs-1  p-3">
-
-                                        <CountUp start={0} end={userCount} duration={2} delay={1} className="  " />
-                                        
-                                    </div>
-                                    <h1 className="fs-3">Rented</h1>
-
-                                </div>
-                                <div className=" card p-4 shadow">
-                                    <div className="fs-1  p-3">
-
-                                        <CountUp start={0} end={citycount} duration={2} delay={1} className="  " />
-                                        
-                                    </div>
-                                    <h1 className="fs-3">Citys</h1>
-
-                                </div>
-                            </div>
-                        }
-
-
-                    </ScroolTrigger>
-                </div>
-                <div className="d-flex divdesmap py-5">
-                    <div className="container d-flex justify-center col ">
-                        <div className="card p-4 m-2 shadow desmap d-flex justify-center align-middle">
+              
+                <div className="d-flex flex-wrap divdesmap py-5  justify-content-center  gap-5" >
+                        <div className="card p-4 shadow  d-flex justify-center align-middle mapInfo">
                             <h1 className=" text-center fs-5">Map of palestine</h1>
                             <p className='text-left'>
                                 Welcome to the PalCars map
                                 On this map, click on the city you want to know about the companies available in this city. For example, when you click on the city of Hebron, the companies available in Hebron are displayed.
                             </p>
-                           
+                            <div className='w-100 d-flex justify-content-center align-items-center'>                           <img src="../../../../image/map.gif" alt="" width={"180px"} height={"180px"}/>
+</div>
 
                         </div>
 
-                </div>
-                <div className="container d-flex justify-center col">
                 
 
-                        <div className="card p-4 m-2 shadow ">
-                        <h1 className="fs-4 text-center">The Palstine City Map</h1>
-                        <img src={map} usemap="#image-map" />
+                        <div className="card p-4 shadow mapImg">
+                        <h1 className="fs-4 text-center">The Palestine City Map</h1>
+                        <div>
+                        <img src={map} usemap="#image-map"  className='map-highlight ' />
 
                         <map name="image-map">
-                                <area className="map-highlight " target="" alt="الخليل" title="Hebron" href={`city?city=${city}`} onClick={(e)=>setCity(e.target.title)} coords="242,451,228,449,217,450,206,452,196,447,192,438,184,443,176,446,167,442,160,433,158,422,149,418,144,411,140,398,142,389,147,384,143,376,138,369,141,362,143,351,150,344,157,338,165,350,172,346,180,349,185,354,193,362,200,364,203,373,210,372,213,366,218,375,228,378,236,380,237,387,232,397,237,403,243,404,246,409,247,424,246,435,245,442" shape="poly" />
+                            <area target="" alt="الخليل" title="Hebron" href={`city?city=${city}`} onClick={(e)=>setCity(e.target.title)} coords="242,451,228,449,217,450,206,452,196,447,192,438,184,443,176,446,167,442,160,433,158,422,149,418,144,411,140,398,142,389,147,384,143,376,138,369,141,362,143,351,150,344,157,338,165,350,172,346,180,349,185,354,193,362,200,364,203,373,210,372,213,366,218,375,228,378,236,380,237,387,232,397,237,403,243,404,246,409,247,424,246,435,245,442" shape="poly" />
                             <area target="" alt="quds" title="Jerusalem" href={`city?city=${city}`} onClick={(e)=>setCity(e.target.title)} coords="159,337,166,333,175,331,181,328,189,323,198,320,209,319,225,316,241,322,253,327,245,306,251,295,265,291,280,291,283,301,281,312,278,323,273,335,271,340,263,343,258,352,255,363,253,369,249,382,250,396,248,405,240,403,235,392,240,385,231,377,219,376,214,366,209,371,200,365,183,349,176,346,167,345,162,341" shape="poly" />
                             <area target="" alt="ramalla" title="Ramallah" href={`city?city=${city}`} onClick={(e)=>setCity(e.target.title)} coords="249,320,244,306,250,294,249,282,237,282,227,279,214,278,198,277,184,281,179,284,178,293,186,294,184,305,181,315,183,322,204,315,222,312,232,316,239,318" shape="poly" />
                             <area target="" alt="nablus" title="Nablus" href={`city?city=${city}`} onClick={(e)=>setCity(e.target.title)} coords="280,288,278,280,284,272,282,261,276,252,282,237,283,219,280,199,268,201,258,195,252,198,247,208,237,210,236,217,232,223,223,222,213,222,201,221,201,228,202,236,198,241,193,246,186,252,183,256,173,264,170,270,173,275,182,280,195,276,212,273,217,277,230,278,245,278,248,282,251,288,262,286,272,286" shape="poly" />
@@ -356,12 +335,57 @@ function Home() {
                             <area target="" alt="ramleh" title="Alramlah" href={`city?city=${city}`} onClick={(e)=>setCity(e.target.title)} coords="122,294,112,314,123,329,139,333,142,343,148,344,170,330,160,310,153,293,144,301,133,296" shape="poly" />
                             <area target="" alt="led" title="Allyd" href={`city?city=${city}`} onClick={(e)=>setCity(e.target.title)} coords="160,268,159,276,163,281,160,291,155,296,171,329,182,324,183,295,176,295,178,280,166,269" shape="poly" />
                             <area target="" alt="beralsaba" title="Beersheba" href={`city?city=${city}`} onClick={(e)=>setCity(e.target.title)} coords="52,443,66,436,65,429,57,420,65,415,77,412,90,413,105,404,115,404,117,395,117,384,127,379,139,378,141,384,137,394,137,406,142,413,149,420,157,424,156,431,160,438,169,445,182,444,188,442,191,448,200,450,213,453,223,453,234,452,239,461,244,465,245,472,249,482,250,488,245,492,241,497,240,509,237,515,235,527,230,536,227,547,224,553,221,559,209,568,219,565,225,573,228,579,224,584,222,593,219,601,223,613,227,617,219,629,215,643,212,655,210,668,208,678,206,688,205,701,202,711,199,720,189,727,188,735,180,723,175,694,168,685,157,668,151,658,149,641,138,616,125,592,118,590,110,582,111,561,107,548,99,523,82,502,65,468,60,459,57,453,57,462,63,461,60,459" shape="poly" />
-                        </map>
+                        </map></div>
                     </div>
-                </div>
                 </div>
                 <div className='container'>
                     <Services />
+                </div>
+                <div className="counter mx-5 mainOffers" >
+                    <h1 className=" fs-3 text-center mb-4 mainhead">Site statistics</h1>
+                    <ScroolTrigger onEnter={() => { setCounterOn(true) }} onExit={() => { setCounterOn(false) }}>
+                        {counterOn &&
+                            <div className=" container p-1 d-flex  justify-center  align-items-center flex-wrap gap-5 ">
+
+
+                                <div className=" card p-4 shadow   d-flex justify-content-center align-items-center cardStatistics mx-3">
+                                <BsFillPeopleFill  size={60}/>
+
+                                    <div className="fs-1  p-3  ">
+
+                                        <CountUp start={0} end={userCount} duration={2} delay={1} className="  " />
+                                        
+                                    </div>
+                                    <h1 className="fs-3 ">Users</h1>
+
+                                </div>
+                                <div className=" card p-4 shadow   d-flex justify-content-center align-items-center cardStatistics mx-3">
+                                <PiPoliceCarFill size={60}/>
+
+                                    <div className="fs-1  p-3">
+
+                                        <CountUp start={0} end={userCount} duration={2} delay={1} className="  " />
+                                        
+                                    </div>
+                                    <h1 className="fs-3">Rented</h1>
+
+                                </div>
+                                <div className=" card p-4 shadow d-flex justify-content-center align-items-center cardStatistics mx-3">
+                                <FaCity size={60}/>
+
+                                    <div className="fs-1  p-3">
+
+                                        <CountUp start={0} end={citycount} duration={2} delay={1} className="  " />
+                                        
+                                    </div>
+                                    <h1 className="fs-3">Citys</h1>
+
+                                </div>
+                            </div>
+                        }
+
+
+                    </ScroolTrigger>
                 </div>
                 <div >
                     {/* <img src={imgluxury} alt="" /> */}

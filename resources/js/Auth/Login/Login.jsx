@@ -7,7 +7,6 @@ import { IoEyeOffOutline } from "react-icons/io5";
 import "../../../css/LoginStyle/Login.css";
 import Logo from "../../../../public/logo1.png";
 import { signInWithPopup } from "firebase/auth";
-import login from "../../NetWorking/login";
 import Loading from "../../Componants/UI/Loading";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -15,8 +14,10 @@ import { FaStarOfLife } from "react-icons/fa";
 import { TranslateContext } from "./../../Context/Translate";
 import { auth, google } from "../../firebase.js";
 import bg5 from "../../../../public/image/bg5.jpg";
+import { UserContext } from "../../Context/User.jsx";
 function Login(props) {
     const { translates } = useContext(TranslateContext);
+    const {setUserToken}=useContext(UserContext);
     const navigate = useNavigate();
     const location = useLocation();
     const [error, setError] = useState(null);
@@ -41,27 +42,30 @@ function Login(props) {
         setSeccsses(null);
         setError(null);
         setIsLoading(true);
-
-        await login(
+        try {
+            const response = await axios.post("/login",
             form.current,
-            (user) => {
-                if (user.role === "Company") {
+            );
+            const res = response.data
+            if (res) {
+                setSeccsses(res.data) 
+                const token = res.data.token;
+                localStorage.setItem("token", token)
+                if (res.data.role === "Company") {
+                    setUserToken(token)
                     navigate("/dashbord");
-                    localStorage.setItem("token", user.token);
                 } else {
+                    setUserToken(token)
                     navigate("/profile");
                 }
-
-                setSeccsses(true);
-                setIsLoading(false);
-
-                window.location.reload();
-            },
-            (msg) => {
-                setError(msg);
-                setIsLoading(false);
             }
-        );
+    
+        } catch (e) {
+            setError(e.response.data.msg)
+        }finally{
+            setIsLoading(false);
+
+        }
     };
 
     const byGoogle = async () => {

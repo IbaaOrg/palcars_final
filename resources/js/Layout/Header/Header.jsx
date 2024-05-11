@@ -30,13 +30,9 @@ function Header({ islogined }) {
     const { changeLanguage, translates } = useContext(TranslateContext);
   const navigator = useNavigate()
 
-  const {user}=useContext(UserContext);
-    const [role, setRole] = useState(user.role);
-    const [username, setUserName] = useState(user.name);
+  const {user,userToken,setUserToken}=useContext(UserContext);
     const [countUnreadNotification, setCountUnreadNotification] = useState(0);
     const [notifications, setNotifications] = useState([]);
-    const [goTo, setGoTo] = useState("");
-    const[showList,setShowList]=useState(false);
     const getCountNotification = async () => {
         const token = localStorage.getItem("token");
         if (token ) {
@@ -91,11 +87,6 @@ function Header({ islogined }) {
         getNotifications();
     }, []);
 
-    // useEffect(() => {
-    //     getNotifications();
-    //     getCountNotification();
-    // }, [notifications]);
-
     useEffect(() => {
         const intervalId = setInterval(() => {
             getCountNotification();
@@ -105,51 +96,12 @@ function Header({ islogined }) {
         return () => clearInterval(intervalId);
     }, [countUnreadNotification]);
 
-    // Rest of your component code...
-    // const user = useContext(UserContext)
-    //  useEffect(() => {
-
-    //     setUseUser(user);
-
-    // }, []);
-
-    const [isDialogOpen, setDialogOpen] = useState(false);
-
-    const openDialog = () => {
-        setDialogOpen(true);
-    };
-
-    const closeDialog = () => {
-        setDialogOpen(false);
-    };
-
-    const [isSignOpen, setSignOpen] = useState(false);
-
-    const openDialogSign = () => {
-        setSignOpen(true);
-    };
-
-    const closeDialogSign = () => {
-        setSignOpen(false);
-    };
-
-    const [openlogin, setOpenlogin] = useState(false);
-    const [opensignup, setOpensignup] = useState(false);
-    const [showprofile, setShowprofile] = useState(false);
-
-
     const out = async () => {
         await logout((out) => {
-
+            setUserToken(null);
             navigator("/")
-
-            window.location.reload()
-
         })
         }
-const toggleList=()=>{
-    setShowList(!showList);
-}
 
     return (
         <div class="d-flex  justify-content-around">
@@ -166,7 +118,7 @@ const toggleList=()=>{
                     </div>
 
                     {/* search */}
-                    {user.role === "Company" ? <div></div> : <NaveBar />}
+                    {userToken? '' : <NaveBar />}
                    
 
                     <div class="hstack gap-1">
@@ -203,12 +155,12 @@ const toggleList=()=>{
                                 </li>
                             </ul>
                         </div>
-                        {islogined&&user&&user.role==="Renter"&&(<NavLink to="FavoriteList" className="d-flex  d-flex align-items-center justify-content-center border rounded-circle p-2">
+                        {userToken&&user&&user.role==="Renter"&&(<NavLink to="FavoriteList" className="d-flex  d-flex align-items-center justify-content-center border rounded-circle p-2">
                         <FaHeart size={20} className="text-black"/>
 
                         </NavLink>)}
                         <div className=" d-flex mx-2 ">
-                            {islogined &&user&& (
+                            {userToken &&user&& (
                                 <div className="nav-item dropdown">
                                     <a
                                         className="nav-link text-black"
@@ -423,7 +375,7 @@ const toggleList=()=>{
                     </div>
 
                     <div class="d-flex justify-content-around align-items-center">
-                        {islogined ? (
+                        {userToken ? (
                             <>
                                 <NavLink to="/profile">
                                     {/* <i class="bi bi-person-fill"></i>*/}
@@ -460,7 +412,7 @@ const toggleList=()=>{
                                 </li>
                             </ul>
                         </div>
-                                {role === "Company" ? (
+                                {user.role === "Company" ? (
                                     <NavLink
                                         to="/dashbord"
                                         class="btn btn-primary dashbord ml-5 "

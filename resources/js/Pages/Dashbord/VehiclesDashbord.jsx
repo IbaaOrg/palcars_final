@@ -38,9 +38,6 @@ function VehiclesDashbord() {
                
                 setMessage("Done")
 
-                //window.location.reload()
-
-                //console.log(res.data.id)
 
                
 
