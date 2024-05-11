@@ -51,37 +51,4 @@ class CityController extends Controller
         $data = City::find($id); // استرجاع سجل محدد بالمعرف
         return $this->success($data);
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        $newCity = $request->city;
-        $city = City::find($id);
-        if(!$city){
-            return $this->fail('city not found',404);
-        }
-        $city->update(['city' => $newCity]);
-        return $this->success(new SimpleCityResource($city));
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-       $city = City::find($id);
-    
-       if (!$city) {
-        return $this->fail("The city does not exist", 404);
-                   }
-
-       if ($city->delete()) {
-        return $this->success("Deleted successfully",200);
-                            } 
-       else {
-        return $this->fail("A problem occurred while deleting", 500);
-            }
-    }
 }

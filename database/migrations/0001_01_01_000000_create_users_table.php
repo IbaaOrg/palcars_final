@@ -20,6 +20,8 @@ return new class extends Migration
             $table->rememberToken();
             $table->string('phone');
             $table->string('photo_user')->nullable();
+            $table->boolean('valid')->nullable();
+            $table->date('expireddate')->nullable();
             $table->string('photo_drivinglicense')->nullable();
             $table->date('birthdate')->nullable();
             $table->text('description')->nullable();

@@ -21,18 +21,18 @@ const CountdownTimer = ({ targetDate }) => {
     }, [targetDate]);
 
     return (
-        <div className="countdown-timer">
-            <div className="timer-item">
-                <span>{remainingTime.days()}</span> 
+        <div className="countdown-timer w-100">
+            <div className="timer-item ">
+                <span >{remainingTime.days()} Day</span> 
             </div>
             <div className="timer-item">
-                <span>{remainingTime.hours()}</span> 
+                <span>{remainingTime.hours()} Hour</span> 
             </div>
             <div className="timer-item">
-                <span>{remainingTime.minutes()}</span> 
+                <span>{remainingTime.minutes()} Minute</span> 
             </div>
             <div className="timer-item">
-                <span>{remainingTime.seconds()}</span> 
+                <span>{remainingTime.seconds()} Second</span> 
             </div>
         </div>
     );

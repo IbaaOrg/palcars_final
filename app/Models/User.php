@@ -32,6 +32,8 @@ class User extends AuthenticatableUser implements Authenticatable
         'password',
         'phone',
         'photo_user',
+        'valid',
+        'expireddate',
         'photo_drivinglicense',
         'birthdate',
         'description',

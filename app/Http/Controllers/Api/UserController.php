@@ -45,6 +45,8 @@ class UserController extends Controller
             'phone' => 'required|numeric|regex:/^05[0-9]{8}$/',
             'password' => 'required|string|min:8|regex:/[A-Z]/|regex:/[a-z]/|regex:/[0-9]/|regex:/[@$!%*?&-_]/',
             'photo_user' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'valid'=>$request->role === 'Renter' ? 'required|in:1' : 'nullable',
+            'expireddate' => $request->role === 'Renter' ? 'required|date' : 'nullable' ,
             'photo_drivinglicense' => $request->role === 'Renter'?'required|image|mimes:jpeg,png,jpg,gif':'nullable|image|mimes:jpeg,png,jpg,gif',
             'birthdate' => $request->role === 'Renter' ? 'required|date|before_or_equal:' . Carbon::now()->subYears(18)->format('Y-m-d') : 'nullable' ,
             'description' => 'nullable',
@@ -55,7 +57,9 @@ class UserController extends Controller
             'name.regex'=>'your name can only contain letters',
             'password.regex'=>'The password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.',
             'phone.regex'=>'The phone number must contain 10 digits start with (05)',
+            'valid.required'=>'Please confirm that you have a valid driving license.',
             'birthdate.before_or_equal' => 'You must be 18 years old or older to register.',
+        
         ]);
     
         if ($validator->fails()) {
@@ -73,7 +77,6 @@ class UserController extends Controller
             // Set default photo_user if no image is uploaded
             $photo_user = Storage::url('images/users/user.png');
         }
-    
         // Process photo_drivinglicense
         if ($request->hasFile('photo_drivinglicense')) {
             $file_drivinglicense = $request->file('photo_drivinglicense');
@@ -94,6 +97,8 @@ class UserController extends Controller
             'password' => $request->password,
             'phone' => $request->phone,
             'photo_user' => $photo_user,
+            'valid'=>$request->valid,
+            'expireddate'=>$request->expireddate,
             'photo_drivinglicense' => $photo_drivinglicense,
             'birthdate' => $request->birthdate,
             'description' => $request->description,

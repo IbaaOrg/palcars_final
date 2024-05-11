@@ -62,7 +62,7 @@ return [
     'name.min' => 'يجب أن يحتوي على الأقل :min أحرف',
     'name required'=>'الاسم مطلوب',
     'choose'=>'اختار ماذا تريد أن تكون في موقعنا ',
-    'PhotoDrivinglicense'=>'صورة رخصة القيادة',
+    'PhotoDrivinglicense'=>' رخصة القيادة',
     'description'=>'وصف عن الشركة (اختياري)',
     'enter'=>'اكتب وصفاً عن شركتك',
     'Discountsanddeals'=>'العروضات والخصومات',

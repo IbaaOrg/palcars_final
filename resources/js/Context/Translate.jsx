@@ -19,6 +19,7 @@ const TranslateContextProvider = ({ children }) => {
         setLanguage(language);
         setTranslates(await response.data);
 
+
     };
 
     useEffect(() => {

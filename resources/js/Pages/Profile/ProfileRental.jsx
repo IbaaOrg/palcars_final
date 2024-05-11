@@ -13,7 +13,7 @@ import { UserContext } from '../../Context/User';
 
 function ProfileRental() {
   const [loading, setLoading] = useState(true);
-  const {user}=useContext(UserContext)
+  const {user, updateUser ,userToken,setUserToken}=useContext(UserContext)
   const [username, setUserName] = useState("");
   const [role, setRole] = useState("");
   
@@ -52,7 +52,7 @@ function ProfileRental() {
                       src={homeimg}
                       alt=""
                     />
-                    {user && (
+                
 
                       
                     <img
@@ -60,7 +60,7 @@ function ProfileRental() {
                       src={user.photo_user}
                       alt=""
                     />
-                    )}
+                    
                   </div>
                   <div className="profileInfo">
                     <h4 className="profileInfoName">{user.name}</h4>
