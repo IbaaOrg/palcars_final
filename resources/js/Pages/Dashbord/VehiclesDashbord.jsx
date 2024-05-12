@@ -195,7 +195,6 @@ function VehiclesDashbord() {
                                     <th scope="tableitem">fuel_type</th>
                                     <th scope="tableitem">fuel_full</th>
                                     <th scope="tableitem">status</th>
-                                    <th scope="tableitem">price</th>
                                     <th scope="tableitem">operation</th>
 
 
@@ -230,7 +229,6 @@ function VehiclesDashbord() {
                                             </span>)}
 
                                         </td>
-                                        <td>{data.prices.price}</td>
                                         <td className=' d-flex flex-column gap-2'>
                                             <NavLink to={`viewvehical/${data.id}`} className='btn btn-success w-70'>View</NavLink>
                                             <NavLink to={`editvehical/${data.id}`} className='btn btn-primary w-70'>Update</NavLink>

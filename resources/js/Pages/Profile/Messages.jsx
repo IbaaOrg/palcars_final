@@ -7,6 +7,7 @@ import CommetInput from '../../Layout/Comments/CommetInput'
 import MessageInput from '../../Layout/Message/MessageInput'
 function Messages() {
   const [data, setData] = useState([])
+  const[dataSearch,setdataSearch]=useState([])
   const [resever, setResever] = useState(null)
   const [reseverid, setReseverid] = useState(null)
   const [chat, setChat] = useState(null)
@@ -78,7 +79,7 @@ function Messages() {
       if (res.status === true) {
         const filteredData = res.data.filter(item => item.role === "Company")
         setData(filteredData)
-
+        setdataSearch(res.data);
 
 
         //onSuccess(res.data)
@@ -94,14 +95,29 @@ function Messages() {
     get_users()
   
   }, []);
+  const [searchTerm, setSearchTerm] = useState(""); // الحالة المحلية لتخزين قيمة حقل البحث
 
+  const handleChange = (e) => {
+      setSearchTerm(e.target.value); // تحديث القيمة عند تغييرها في حقل البحث
+  };
+  const handleSearch = (e) => {
+      e.preventDefault();
+      console.log();
+      console.log(data);
+      setData(dataSearch.filter(item => {
+          return (
+              item.name !== null && (searchTerm ? item.name?.toString().toLowerCase().includes(searchTerm.toLowerCase()) : false) 
+     ) }));
+    
+  };
+  
   return (
     <div className='row ' >
       <div className='col-4 message_list_list'>
       <div className="m-2">
            <form class="d-flex" role="search">
-          <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search"/>
-            <button class="btn btn-outline-success" type="submit">Search</button>
+           <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search" value={searchTerm} onChange={handleChange} />
+              <button class="btn btn-outline-success" type="submit" onClick={handleSearch}>Search</button>
         </form>
       </div>
      
