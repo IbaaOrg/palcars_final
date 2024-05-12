@@ -58,10 +58,14 @@ function AllDiscounts() {
         //console.log(data);
         setDiscounts(data.filter(item => {
             return (
-                item.note !== null && (searchTerm ? item.note?.toString().toLowerCase().includes(searchTerm.toLowerCase()) : false) 
+                item.note !== null && (searchTerm ? item.note?.toString().toLowerCase().includes(searchTerm.toLowerCase()) : false) ||
+                item.expired_date !== null && (searchTerm ? item.expired_date?.toString().toLowerCase().includes(searchTerm.toLowerCase()) : false) ||
+                item.type !== null && (searchTerm ? item.type?.toString().toLowerCase().includes(searchTerm.toLowerCase()) : false) ||
+                item.value !== null && (searchTerm ? item.value?.toString().toLowerCase().includes(searchTerm.toLowerCase()) : false) ||
+                item.car.car_number !== null && (searchTerm ? item.car.car_number?.toString().toLowerCase().includes(searchTerm.toLowerCase()) : false) 
+
             ); 
         }));
-        //console.log("Filtered Data:", filteredData);
     };
 
   return (
