@@ -55,21 +55,12 @@ function VehiclesDashbord() {
     }
     const handleEditClick = (id, index, currentStatus) => {
         setEditStatusId(id); // Set the ID of the status being edited
-<<<<<<< HEAD
-=======
-        setStatuses(prevStatuses => {
-            const newStatuses = [...prevStatuses];
-            newStatuses[index] = currentStatus;
-            return newStatuses;
-        }); // Initialize input field with current status
->>>>>>> 6e8478ca5202579a0e78260436563857c5c6d499
     };
 
     const handleSaveClick = async (index, id) => {
         // Implement save logic
         setEditStatusId(null); // Reset edit mode
         const token = localStorage.getItem('token');
-<<<<<<< HEAD
         
      
     
@@ -98,16 +89,6 @@ function VehiclesDashbord() {
                 theme: "light",
                 transition: Bounce,
             });
-=======
-
-        const response = await axios.post(`cars/updateStatus/${id}`, { status: statuses[index] }, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-
-    };
->>>>>>> 6e8478ca5202579a0e78260436563857c5c6d499
 
         } catch (error) {
             if (error.response && error.response.status === 400) {
@@ -141,18 +122,10 @@ function VehiclesDashbord() {
         setEditStatusId(null); // Reset edit mode
     };
 
-<<<<<<< HEAD
     const handleInputChange = async(index,e ,id) => {
         const {value}=e.target
         setStatuses(prevStatuses=>{const newStatuses=[...prevStatuses];
             newStatuses[index]=value.toLowerCase();
-=======
-    const handleInputChange = async (index, e, id) => {
-        const { value } = e.target
-        setStatuses(prevStatuses => {
-            const newStatuses = [...prevStatuses];
-            newStatuses[index] = value
->>>>>>> 6e8478ca5202579a0e78260436563857c5c6d499
             return newStatuses;
         }); // Update status input value 
 
@@ -183,54 +156,16 @@ function VehiclesDashbord() {
                     console.error('Error fetching data:', error);
                 });
 
-<<<<<<< HEAD
      } catch (error) {
          console.error('Error fetching data:', error);
      }
   }, [message,statusVal]); 
-=======
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    }, [message]);
->>>>>>> 6e8478ca5202579a0e78260436563857c5c6d499
     // /cars/{id}   post
     const [searchTerm, setSearchTerm] = useState(""); // الحالة المحلية لتخزين قيمة حقل البحث
 
     const handleChange = (e) => {
         setSearchTerm(e.target.value); // تحديث القيمة عند تغييرها في حقل البحث
     };
-<<<<<<< HEAD
-
-const handleSearch = (e) => {
-    e.preventDefault();
-    // أضف هنا الشيفرة للبحث في البيانات باستخدام قيمة searchTerm
-    const filteredData = data.filter(item => {
-      // يمكنك استبدال "item" بالاسم الذي تحتاجه في بياناتك
-      return (
-        item.car_number !== null && item.car_number.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.make !== null && item.make.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.model !== null && item.model.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.catrgory !== null && item.catrgory.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.description !== null && item.description.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.year !== null && item.year.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.seats !== null && item.seats.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.doors !== null && item.doors.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.fuel_type !== null && item.fuel_type.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.fuel_full !== null && item.fuel_full.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.status !== null && item.status.toString().toLowerCase().includes(searchTerm.toLowerCase()) 
-        // قم بإضافة المزيد من الحقول حسب الحاجة
-      );
-    });
-    console.log("Filtered Data:", filteredData);
-  };
-  
-     return (
-        <div>
-                    <ToastContainer/>
-
-            {
-=======
     const handleSearch = (e) => {
         e.preventDefault();
         setData( data.filter(item => {
@@ -258,7 +193,6 @@ const handleSearch = (e) => {
    
     return (
         <div>{
->>>>>>> 6e8478ca5202579a0e78260436563857c5c6d499
             loading ? (
                 <div className=" d-flex justify-center align-middle">
 
@@ -307,53 +241,10 @@ const handleSearch = (e) => {
                                     <th scope="tableitem">operation</th>
 
 
-<<<<<<< HEAD
                             </tr>
                         </thead>
                         <tbody>
-                            {data.map((data,index) => (
-                                <tr key={data.id}>
-                                    <td>{data.car_number}</td>
-                                    <td>{data.make}</td>
-                                    <td>{data.model}</td>
-                                    <td>{data.catrgory}</td>
-                                    <td>{data.description}</td>
-                                    <td>{data.year}</td>
-                                    <td>{data.seats}</td>
-                                    <td>{data.doors}</td>
-                                    <td>{data.bags}</td>
-                                    <td>{data.fuel_type}</td>
-                                    <td>{data.fuel_full}</td>
-                                    <td className=''>
-                                    {editStatusId === data.id ? (
-                                        <div className='d-flex flex-column justify-content-center align-items-center gap-1'>
-                                            <input type='text'  className="text-center border" value={statuses[index]} onChange={(e)=>handleInputChange(index,e,data.id)} />
-                                            <div className="d-flex justify-content-center align-items-center gap-2">
-                                            <button onClick={() => handleSaveClick(index,data.id)} className='btn border'>Save</button>
-                                            <button onClick={handleCancelClick} className='btn border'>Cancel</button>
-                                            </div>
-                                        </div>
-                                    ) : (<span className='d-flex justify-content-center cursor-auto'>
-                                            {data.status} 
-                                            <GrFormEdit className='cursor-pointer' onClick={()=>handleEditClick(data.id,index,statuses[index])}/>
-                                        </span>)}
-                                
-                                </td>
-                                  
-                                    <td className=' d-flex flex-column gap-2'>
-                                        <NavLink to={`viewvehical/${data.id}`} className='btn btn-success w-70'>View</NavLink>
-                                        <NavLink to={`editvehical/${data.id}`} className='btn btn-primary w-70'>Update</NavLink>
-                                        <button id={data.id} onClick={deleteVehical} className='btn btn-danger me-2'>Delete</button>
-
-
-                                    </td>
-
-                                    {/* Add more table cells for other car attributes */}
-=======
->>>>>>> 6e8478ca5202579a0e78260436563857c5c6d499
-                                </tr>
-                            </thead>
-                            <tbody>
+                          
                                 {data.map((data, index) => (
                                     <tr key={data.id}>
                                         <td>{data.car_number}</td>
