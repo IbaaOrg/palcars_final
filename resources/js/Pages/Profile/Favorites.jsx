@@ -44,7 +44,7 @@ const navigateToCarDetials=(car_id)=>{
   return (
     <div className=" border-none card py-5 d-flex flex-column  align-items-center justify-content-center">
     {favoriteList.length>0?(favoriteList.map((item,index)=>(
-        <div key={item.id} className='card-header w-50 rounded border p-3 mb-4 bg-white rounded card-favorite ' onClick={()=>navigateToCarDetials(item.car.id)} >
+        <div key={item.id} className='card-header w-50 rounded border p-3 mb-4 bg-white rounded card-favorite '  >
             <div className="d-flex justify-content-between">
             <h2 className='fw-bold '>Item # {index+1}</h2>
             <IoCloseCircleOutline  size={20} className="DeleteBtn "
@@ -54,13 +54,13 @@ const navigateToCarDetials=(car_id)=>{
             <div className="d-flex justify-content-between py-3">
             <div className="d-flex flex-column align-items-start">
                 <p className='m-1 fw-bold'>{item.car.make} <span className='fw-bold'>-</span> {item.car.model}</p>
-                <p className='m-1'>Category : <span className='fw-bold'>{item.car.catrgory}</span></p>
-                <p className='m-1'>Year : <span className='fw-bold'>{item.car.year}</span></p>
+                <p className='m-1 fw-bold'>Category : <span className='fw-bold'>{item.car.catrgory}</span></p>
+                <p className='m-1 fw-bold'>Year : <span className='fw-bold'>{item.car.year}</span></p>
                 </div>
                 <div className="d-flex flex-column align-items-start">
                 <p className='m-1 fw-bold d-flex align-items-start gap-1'><IoPeople size={20} /> {item.car.seats} person</p>
-                <p className='m-1  d-flex align-items-start gap-1'>{item.car.fuel_type==="electricity"?<><MdElectricCar size={20}/> <span>{item.car.fuel_type}</span></>:<><FaGasPump /> <span>{item.car.fuel_type}</span></>}</p>
-                <p className='m-1  d-flex align-items-start '><GiSteeringWheel size={20}/>{item.car.steering}</p>
+                <p className='m-1 fw-bold  d-flex align-items-start gap-1'>{item.car.fuel_type==="electricity"?<><MdElectricCar size={20}/> <span>{item.car.fuel_type}</span></>:<><FaGasPump /> <span>{item.car.fuel_type}</span></>}</p>
+                <p className='m-1 fw-bold d-flex align-items-start '><GiSteeringWheel size={20}/>{item.car.steering}</p>
                 </div>
                <div className="imgFavorite">
                <img src={item.car&&item.car.sub_images&&item.car.sub_images[0].photo_car_url} alt=""  className='rounded border w-100'/>
@@ -68,12 +68,12 @@ const navigateToCarDetials=(car_id)=>{
                </div>
       
             </div>
-           <div className="d-flex justify-content-end">
-           <p>Price : <span className='fw-bold'>{item.car.prices[item.car.prices.length-1].price}₪/day</span></p>
+           <div className="d-flex justify-content-between">
+           <p className='fw-bold'>Price : <span className='fw-bold'>{item.car.prices[item.car.prices.length-1].price}₪/day</span></p>
+           <input type="submit"  className='btn btn-primary w-25' value="Detials" onClick={()=>navigateToCarDetials(item.car.id)}/>
 
            </div>
-          
-        </div>
+           </div>
 
     ))):(<div className='fw-bold fs-5 d-flex justify-content-center p-3'>No items in favorite list</div>)}
     {favoriteList.length>0&&<button className='btn btn-primary' onClick={clearAll}>Clear All</button>}

@@ -24,8 +24,7 @@ function DiscountsDashbord() {
 
   const set = (e) => {
     form.current = { ...form.current, [e.target.name]: e.target.value }
-    console.log({ ...form.current, [e.target.name]: e.target.value })
-    console.log(carid)
+
   }
 
   //

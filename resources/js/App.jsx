@@ -70,6 +70,11 @@ import { MdAddLocation } from "react-icons/md";
 import LocationsDashbord from "./Pages/Dashbord/LocationsDashbord";
 import Report from "./Pages/Bill/Report";
 import Notes from "./Pages/Profile/Notes";
+import WorkingHourDashbord from "./Pages/Dashbord/WorkingHourDashbord";
+import RentedCars from "./Pages/Dashbord/RentedCars";
+import MaintainedCars from "./Pages/Dashbord/MaintainedCars";
+import AllWorkingHours from "./Pages/Dashbord/AllWorkingHours";
+import EditWorkingHour from "./Pages/Dashbord/EditWorkingHour";
 
 //LocationDashbord
 const App = () => {
@@ -82,9 +87,8 @@ const App = () => {
         const token = localStorage.getItem("token");
         if (token) {
             setIslogined(true);
-        }else {
+        } else {
             setIslogined(false);
-
         }
     }, []);
     const showHeaderFooter =
@@ -111,7 +115,14 @@ const App = () => {
                 <Route path={"/bill/:id"} element={<Bill />} />
                 <Route path={"/login"} element={<Login />} />
                 <Route path={"/register"} element={<SignUp />} />
-                <Route path={"/favoritelist"} element={<FavoriteContextProvider><Favorites/></FavoriteContextProvider>} />
+                <Route
+                    path={"/favoritelist"}
+                    element={
+                        <FavoriteContextProvider>
+                            <Favorites />
+                        </FavoriteContextProvider>
+                    }
+                />
                 <Route path={"/registerRenter"} element={<SignUpRenter />} />
 
                 <Route
@@ -156,9 +167,16 @@ const App = () => {
                     <Route path={"information"} element={<UserInfo />} />
                     <Route path={"booking"} element={<Booking />} />
                     <Route path={"reviews"} element={<Reviews />} />
-                    <Route path={"Notes"}   element={<Notes/>}/>
+                    <Route path={"Notes"} element={<Notes />} />
                     <Route path={"messages"} element={<Messages />} />
-                    <Route path={"Faverate"} element={<faverateContextProvider><Faverate /></faverateContextProvider>} />
+                    <Route
+                        path={"Faverate"}
+                        element={
+                            <faverateContextProvider>
+                                <Faverate />
+                            </faverateContextProvider>
+                        }
+                    />
                     <Route path={"editprofile"} element={<EditProfile />} />
                 </Route>
 
@@ -207,6 +225,18 @@ const App = () => {
                         element={<AllLocations />}
                     />
                     <Route
+                        path={"WorkingHourDashbord"}
+                        element={<WorkingHourDashbord />}
+                    />
+                    <Route
+                        path={"AllWorkingHours"}
+                        element={<AllWorkingHours />}
+                    />
+                    <Route
+                        path={"EditWorkingHour/:id"}
+                        element={<EditWorkingHour />}
+                    />
+                    <Route
                         path={"addLocation"}
                         element={<LocationsDashbord />}
                     />
@@ -220,12 +250,25 @@ const App = () => {
                     ></Route>
 
                     <Route path={"addvehical"} element={<AddCar />}></Route>
+                    <Route path={"rented"} element={<RentedCars />}></Route>
+                    <Route
+                        path={"maintend"}
+                        element={<MaintainedCars />}
+                    ></Route>
                     <Route
                         path={"VehiclesDashbord/editvehical/:id"}
                         element={<EditCar />}
                     />
                     <Route
                         path={"VehiclesDashbord/viewvehical/:id"}
+                        element={<ViewCar />}
+                    />
+                    <Route
+                        path={"rented/viewvehical/:id"}
+                        element={<ViewCar />}
+                    />
+                    <Route
+                        path={"VehiclesDashbord/maintend/:id"}
                         element={<ViewCar />}
                     />
                 </Route>

@@ -25,7 +25,7 @@ return new class extends Migration
             $table->smallInteger('fuel_full')->nullable();
             $table->enum('fuel_type',array('gas', 'diesel', 'electricity'));
             $table->enum('steering',array('Automatic', 'Manual'));
-            $table->enum('status',array('unrented','rented','returned'))->default('unrented');
+            $table->enum('status',array('unrented','rented','maintained '))->default('unrented');
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
     $table->foreignId('color_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();

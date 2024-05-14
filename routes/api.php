@@ -221,7 +221,10 @@ Route::middleware('auth:sanctum','renter')->get('/getMyComments',[CommentControl
 Route::middleware('auth:sanctum','company')->get('/getAllcomentsOfMyCar',[CommentController::class,'getAllcomentsOfMyCar']);
 Route::middleware('auth:sanctum','company')->get('/getAllrenterUsers',[UserController::class,'getRenters']);
 Route::middleware('auth:sanctum','company')->post('/storeWorkingHour',[UserWorkingHoursController::class,'store']);
-Route::get('/showAll',[UserWorkingHoursController::class,'showAll'])
+Route::get('/showAll/{id}',[UserWorkingHoursController::class,'showAll']);
+Route::middleware('auth:sanctum')->get('/getWorkingHours',[UserWorkingHoursController::class,'getWorkingHours']);
+Route::middleware('auth:sanctum')->post('/updateWorkingHours/{id}',[UserWorkingHoursController::class,'updateWorkingHours']);
+Route::middleware('auth:sanctum')->delete('/userWorkingHour/{id}',[UserWorkingHoursController::class,'destroy'])
 //Route::get('stripe',[BillController::class,'stripe']);
 //Route::post('stripe',[BillController::class,'stripePost'])->name('stripe.post');
 

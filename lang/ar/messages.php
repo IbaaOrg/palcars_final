@@ -68,7 +68,7 @@ return [
     'Discountsanddeals'=>'العروضات والخصومات',
     'BrowseNow'=>'تصفحها الآن',
     'AllCars'=>'استئجار سيارة',
-    'ContactWithCompany'=>'تواصل مع الشركة التي تختار'  ,
+    'ContactWithCompany'=>'تواصل معنا  '  ,
     'vision'=>' هدفنا هو تسهيل حركة السياح والمواطنين في جميع أنحاء دولة فلسطين من خلا تطبيقنا ',
     'Howitworks'=>'كيف نعمل؟',
     'Features'=>'خدماتنا',

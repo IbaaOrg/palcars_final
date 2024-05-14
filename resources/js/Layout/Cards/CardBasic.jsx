@@ -130,14 +130,14 @@ function CardBasic({ title }) {
         setPickupDate(e.target.value);
     };
     const PickupTime = (e) => {
-      const selectedTime=e.target.value;
+        const selectedTime = e.target.value;
         setPickupTime(selectedTime);
     };
     const DropoffDate = (e) => {
         setDropoffDate(e.target.value);
     };
     const DropoffTime = (e) => {
-      const selectedTime=e.target.value;
+        const selectedTime = e.target.value;
 
         setDropoffTime(selectedTime);
     };
@@ -150,7 +150,6 @@ function CardBasic({ title }) {
             setFinalDropoffValue(dropoff);
             setFinalPickupValue(pickup);
         }
-
     };
     const getCars = async (
         pickup,
@@ -160,8 +159,6 @@ function CardBasic({ title }) {
         dropoffDate,
         dropoffTime
     ) => {
-      
-
         setLoading(true);
         if (pickup !== "" || dropoff !== "") {
             const response = await axios.get(
@@ -216,7 +213,6 @@ function CardBasic({ title }) {
         }
         return `${year}-${month}-${day}`;
     }
-
 
     return (
         <div className=" container cardmain shadow">
@@ -368,8 +364,8 @@ function CardBasic({ title }) {
                             id="gridCheck"
                             onClick={difrentLocation}
                         />
-                        <label class="form-check-label" for="gridCheck">
-                            {translates.returncar}{" "}
+                        <label class="form-check-label " for="gridCheck">
+                            {translates.returncar}
                         </label>
                     </div>
                 </div>
@@ -404,9 +400,8 @@ function CardBasic({ title }) {
                         type="date"
                         class="form-control"
                         id="endDate"
-                        min={pickupDate} 
+                        min={pickupDate}
                         onChange={DropoffDate}
-
                     />
                 </div>
                 <div class="col-3">

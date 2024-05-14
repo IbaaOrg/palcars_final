@@ -39,10 +39,9 @@ function ViewCar() {
               <Loading />
 </div>
           ) : ( 
-              <div>
-                  <div className='container d-flex justify-items-center'>
+                  <div className='container d-flex justify-items-center mt-5 pt-5'>
 
-                      <div className="car col  ">
+                      <div className="car col mb-3 m-2  ">
                           <div>
                                <img src={car.sub_images[0].photo_car_url} alt="imgcar" width={500} height={500} className='imgcar' />
                              
@@ -85,11 +84,7 @@ function ViewCar() {
 
 
                               </ul>
-                                <div className=' p-2 m-2'>
-                                      <button type="button" className="btn commentbtn">Edit</button>
-                                  <button type="button" className="btn btn-secondary">Hide</button>
-                                  <button type="button" className="btn btn-danger">Delete</button>
-                                </div>
+                            
                             
 
 
@@ -101,7 +96,6 @@ function ViewCar() {
                   </div>
               
 
-              </div>
 
            )
 

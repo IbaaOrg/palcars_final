@@ -256,7 +256,7 @@ function Home() {
                 ):(
 
 <div className='mainOffers'>
-                                <h1 className="text-center fs-3 m-2 mainhead">Special offers</h1>
+                                <h1 className="text-center m-2 mainhead">Special offers</h1>
                     <div className="   mx-5">{data&&data.length>0?
                         <div className="">
                           
@@ -265,7 +265,7 @@ function Home() {
                                     {data.map((d) => (
                                         <div key={d.id} className='itemswiper'>
                                            <div className="card shadow p-1 d-flex">
-                                                <div className="d-flex w-100  gap-2">
+                                                <div className="d-flex w-100  gap-1">
                                                     <div className=" d-flex justify-center align-middle imgcardTimer">
                                                         <img src={d.car.sub_images[0].photo_car_url}  className="w-100 "/>
                                                     </div>
@@ -300,8 +300,8 @@ function Home() {
               
                 <div className="d-flex flex-wrap divdesmap py-5  justify-content-center  gap-5" >
                         <div className="card p-4 shadow  d-flex justify-center align-middle mapInfo">
-                            <h1 className=" text-center fs-5">Map of palestine</h1>
-                            <p className='text-left'>
+                            <h1 className=" text-center fs-4 p-3">Map of palestine</h1>
+                            <p className='text-left '>
                                 Welcome to the PalCars map
                                 On this map, click on the city you want to know about the companies available in this city. For example, when you click on the city of Hebron, the companies available in Hebron are displayed.
                             </p>
@@ -313,9 +313,9 @@ function Home() {
                 
 
                         <div className="card p-4 shadow mapImg">
-                        <h1 className="fs-4 text-center">The Palestine City Map</h1>
-                        <div>
-                        <img src={map} usemap="#image-map"  className='map-highlight ' />
+                        <h1 className="fs-4 px-3 text-center">The Palestine City Map</h1>
+                        <div className='ImageMap'>
+                        <img src={map} usemap="#image-map"  className='map-highlight '/>
 
                         <map name="image-map">
                             <area target="" alt="الخليل" title="Hebron" href={`city?city=${city}`} onClick={(e)=>setCity(e.target.title)} coords="242,451,228,449,217,450,206,452,196,447,192,438,184,443,176,446,167,442,160,433,158,422,149,418,144,411,140,398,142,389,147,384,143,376,138,369,141,362,143,351,150,344,157,338,165,350,172,346,180,349,185,354,193,362,200,364,203,373,210,372,213,366,218,375,228,378,236,380,237,387,232,397,237,403,243,404,246,409,247,424,246,435,245,442" shape="poly" />
@@ -342,7 +342,7 @@ function Home() {
                     <Services />
                 </div>
                 <div className="counter mx-5 mainOffers" >
-                    <h1 className=" fs-3 text-center mb-4 mainhead">Site statistics</h1>
+                    <h1 className=" text-center mb-4 mainhead">Site statistics</h1>
                     <ScroolTrigger onEnter={() => { setCounterOn(true) }} onExit={() => { setCounterOn(false) }}>
                         {counterOn &&
                             <div className=" container p-1 d-flex  justify-center  align-items-center flex-wrap gap-5 ">
@@ -388,10 +388,8 @@ function Home() {
                     </ScroolTrigger>
                 </div>
                 <div >
-                    {/* <img src={imgluxury} alt="" /> */}
                     <CategoriesCar />
                     <div>
-                        {/* <img src={imgluxury} alt="" /> */}
 
                     </div>
                 </div>

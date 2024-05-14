@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import Logo from '../../../public/logo1.png';
 import { BrowserRouter as Router, Routes, Route, Link, Outlet, NavLink } from "react-router-dom";
+import { Ri24HoursLine } from "react-icons/ri";
+import { MdCarCrash } from "react-icons/md";
+import { BiSolidCarMechanic } from "react-icons/bi";
 
 function Sidebar() {
 
@@ -40,14 +43,27 @@ function Sidebar() {
               
               </NavLink>
               {isListOpen && (
-                  <nav className='pt-2 pb-2'>
-                      <NavLink to={"addvehical"} className='toggle-btn list-group-item list-group-item-action py-2'>
-                          <i className="bi bi-plus  fs-4 me-2"></i>
+                  <nav className='pt-2 pb-2 d-flex flex-column gap-2'>
+                      <NavLink to={"addvehical"} className='toggle-btn list-group-item list-group-item-action py-1 border'>
+                          <i className="bi bi-plus  fs-3 me-1"></i>
                       <span className=''>Add Vehicles</span>
                   </NavLink>
+                  <NavLink to={"rented"} className='toggle-btn list-group-item list-group-item-action py-3 border d-flex align-items-center gap-2'>
+                  <MdCarCrash size={20} className=''/>
+                      <span className=''>Rented Vehicles</span>
+                  </NavLink>
+                  <NavLink to={"maintend"} className='toggle-btn list-group-item list-group-item-action py-3 border d-flex align-items-center gap-2'>
+                  <BiSolidCarMechanic size={20}/>
+                      <span className=''>maintained vehicles</span>
+                  </NavLink>
+
                   
               </nav>
               )}
+              <NavLink  to={"AllWorkingHours"} className='main-btn  list-group-item list-group-item-action py-2 d-flex gap-1 align-items-center'>
+              <Ri24HoursLine  size={25}/>
+                  <span className='fs-5'>Working Hours</span>
+              </NavLink>
            
               <NavLink  to={"EmployeeDashbord"} className='main-btn  list-group-item list-group-item-action py-2'>
                   <i className='bi bi-people fs-4 me-2'></i>
@@ -58,10 +74,7 @@ function Sidebar() {
 
                   <span className='fs-5'>Chats</span>
               </NavLink>
-              <NavLink  to={"AccessDashbord"} className='main-btn  list-group-item list-group-item-action py-2'>
-                  <i className='bi bi-universal-access-circle fs-4 me-2'></i>
-                  <span className='fs-5'>Access Control</span>
-              </NavLink>
+        
               <NavLink  to={"ExpensesDashbord"} className='main-btn  list-group-item list-group-item-action py-2'>
                   <i className='bi bi-cash-coin fs-4 me-2'></i>
                   <span className='fs-5'>Expenses</span>

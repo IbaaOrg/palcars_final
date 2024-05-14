@@ -4,7 +4,14 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
-
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+html {
+    --font-size-main: 16px;
+    --font-size-minor: 18px ;
+}
+.fontSizeNav{
+    font-size: var(--font-size-minor) !important;
+}
 .rtl {
     direction: rtl;
 }
@@ -273,6 +280,10 @@ html::-webkit-scrollbar-thumb:hover{
 html::-webkit-scrollbar-track{
     background-color: rgb(216, 216, 216);
 }
+.cardmain label ,.cardmain input{
+    font-size: var(--font-size-main) !important;
+}
+
 .cardmain{
         padding: 20px;
        /*  margin-top: 10px !important; */
@@ -438,7 +449,13 @@ border-radius: 8px;
     top: 150px;
     border: 3px solid white;
 }
-
+.workingHours form {
+    width: calc((100% - 70px) / 3);
+    padding: 8px 8px;
+    background-color: white;
+    border-radius: 10px;
+    margin: 5px 10px;
+}
 .profileInfo {
     display: flex;
     flex-direction: column;
@@ -457,9 +474,17 @@ border-radius: 8px;
 .profileRightBottom {
     display: flex;
 }
+.mainEdit {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    padding: 150px 0;
+};
 
 .profilebuttons {
-    background-color: #ebebeb;
+    background-color: #dadada ;
     padding: 20px;
     border-radius: 10px;
     margin-top: 10px;
@@ -529,7 +554,7 @@ border-radius: 8px;
     transform: scale(1.03);
 }
 .imgFavorite {
-    width: 160px;
+    width: 180px;
     height: 90px;;
 }
 .imgFavorite img {

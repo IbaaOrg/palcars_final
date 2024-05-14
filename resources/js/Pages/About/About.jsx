@@ -22,8 +22,8 @@ function About() {
                 </video>
             </div>
 
-            <div className='  p-3 '>
-                <div className='row m-2 p-2 container aboutmain'>
+            <div className='  '>
+                <div className='d-flex  p-2 container aboutmain'>
                     <div className='col'>
                         <h3 className=' fs-1 d-flex align-top justify-center'>About Us</h3>
                         <p className=' fs-5 text-start'>Welcome to PalCars Car Rental, your ultimate destination for convenient and reliable car rentals across all cities in Palestine. Whether you're a local resident or a tourist exploring our beautiful country, we're here to provide you with top-notch car rental services that meet your needs.
@@ -36,7 +36,7 @@ function About() {
                     </div>
 
                 </div>
-                <div className='row missing'>
+                <div className='d-flex missing'>
                     <div className='col'>
                         <img src={valus} />
                     </div>
@@ -57,47 +57,36 @@ function About() {
 
                 </div>
 
-                {/*   <div className=''>
-                    <h2 className='d-flex justify-center badge text-bg-primary text-wrap fs-4 p-11'>About Us</h2>
+                    <h2 className='d-flex justify-center text-black bg-body-tertiary  fs-4 p-4 w-100 '>Our Team</h2>
 
-        </div>
-            <div className=''>
-                    <p className=' fs-5 text-start'>the first and only website and mobile app in the state of palestine for car rental and to facilitate communication between rental companies between the govenorates</p>
-
-            </div> */}
-
-                <div className=' container mt-4'>
-                    <h2 className='d-flex justify-center badge text-bg-primary text-wrap fs-4 p-11'>Our Team</h2>
-
-                </div>
-                <div className='row p-3  d-flex justify-center'>
-                    <div className='col'>
+                <div className=' p-3  d-flex justify-center gap-5'>
+                    <div className='col-3'>
                         <div class="card" >
                             <img src={man} class="card-img-top" alt="..." />
                             <div class="card-body">
                                 <h5 class="card-title text-center">Zaid Ameen Turman</h5>
                                 <p class="card-text">zaidturman17@gmail.com</p>
-                                <a href="#" class="btn btn-primary d-flex justify-center">Send Email</a>
+                                <a href="#" class="py-2 text-black bg-body-tertiary d-flex justify-center">Send Email</a>
                             </div>
                         </div>
                     </div>
-                    <div className='col'>
+                    <div className='col-3'>
                         <div class="card" >
                             <img src={woman} class="card-img-top" alt="..." />
                             <div class="card-body">
-                                <h5 class="card-title text-center">Ibaa alsid ahmad</h5>
-                                <p class="card-text">ibaa@gmail.com</p>
-                                <a href="#" class="btn btn-primary d-flex justify-center">Send Email</a>
+                                <h5 class="card-title text-center">Ibaa Alsayed Ahmad</h5>
+                                <p class="card-text">ebaahmad12@gmail.com</p>
+                                <a href="#" class="py-2 text-black  bg-body-tertiary  d-flex justify-center">Send Email</a>
                             </div>
                         </div>
                     </div>
-                    <div className='col'>
+                    <div className='col-3'>
                         <div class="card">
                             <img src={woman} class="card-img-top" alt="..." />
                             <div class="card-body">
-                                <h5 class="card-title text-center">Maryam al-hashlamon</h5>
+                                <h5 class="card-title text-center">Maryam Al-hashlamon</h5>
                                 <p class="card-text">Maryam@gmail.com</p>
-                                <a href="#" class="btn btn-primary d-flex justify-center">Send Email</a>
+                                <a href="#" class="py-2 text-black bg-body-tertiary  d-flex justify-center">Send Email</a>
                             </div>
                         </div>
                     </div>

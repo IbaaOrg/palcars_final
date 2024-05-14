@@ -70,7 +70,7 @@ return [
     'Discountsanddeals'=>'Discounts and deals',
     'BrowseNow'=>'Browse Now',
     'AllCars'=>'Booking a Car',
-    'ContactWithCompany'=>'Contact With Chosen Company',
+    'ContactWithCompany'=>'Contact With Us',
     'vision'=>'Our vision is to facilitate the movement
     of tourists and citizens throughout the
     State of palestine via PalCars',

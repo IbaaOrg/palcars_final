@@ -8,13 +8,14 @@ import get_user from './../../NetWorking/get_user';
 import Loading from '../../Componants/UI/Loading';
 import RecordButton from './../../Componants/UI/RecordButton';
 import { GrFormEdit } from "react-icons/gr";
+import { ToastContainer, Bounce, Zoom, toast } from "react-toastify";
 
 function VehiclesDashbord() {
    
 
   const [data, setData] = useState([]);
     const [message, setMessage] = useState(null);
-
+    const [statusVal,setStatusVal]=useState(false);
     const [user, setUser] = useState([]);
     const [loading, setLoading] = useState(false);
     const [statuses,setStatuses]=useState([])
@@ -53,26 +54,69 @@ function VehiclesDashbord() {
     }
     const handleEditClick = (id,index, currentStatus) => {
         setEditStatusId(id); // Set the ID of the status being edited
-        setStatuses(prevStatuses=>{
-            const newStatuses=[...prevStatuses];
-            newStatuses[index]=currentStatus;
-            return newStatuses;
-        }); // Initialize input field with current status
     };
 
-    const handleSaveClick =async (index,id) => {
+    const handleSaveClick = async (index, id) => {
         // Implement save logic
         setEditStatusId(null); // Reset edit mode
-        const token =localStorage.getItem('token');
-       
-        const response =await axios.post (`cars/updateStatus/${id}`,{status:  statuses[index]},{
-            headers : {
-                Authorization : `Bearer ${token}`
-            }
-        })
+        const token = localStorage.getItem('token');
+        
+     
+    
+        // If status is valid, proceed with the axios post request
+        try {
+            const response = await axios.post(`cars/updateStatus/${id}`, { status: statuses[index].toLowerCase() }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            console.log(response)
+            setStatuses(prevStatuses => {
+                const newStatuses = [...prevStatuses];
+                newStatuses[index] = statuses[index].toLowerCase();
+                return newStatuses;
+            });
+            setStatusVal(prevStatusVal => !prevStatusVal);
+            toast.success("Status updated successfully", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+            });
 
-    };
-
+        } catch (error) {
+            if (error.response && error.response.status === 400) {
+                // Handle specific backend error (e.g., validation error)
+                toast.error("status is not rented or unrented or maintained", {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    transition: Bounce,
+                });
+            } else {
+                // Handle other types of errors (e.g., network error)
+                toast.error("An error occurred while saving changes.", {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    transition: Bounce,
+                });        
+            }}}
     const handleCancelClick = () => {
         setEditStatusId(null); // Reset edit mode
     };
@@ -80,7 +124,7 @@ function VehiclesDashbord() {
     const handleInputChange = async(index,e ,id) => {
         const {value}=e.target
         setStatuses(prevStatuses=>{const newStatuses=[...prevStatuses];
-            newStatuses[index]=value
+            newStatuses[index]=value.toLowerCase();
             return newStatuses;
         }); // Update status input value 
        
@@ -114,25 +158,14 @@ function VehiclesDashbord() {
      } catch (error) {
          console.error('Error fetching data:', error);
      }
-  }, [message]); 
+  }, [message,statusVal]); 
     // /cars/{id}   post
     const [searchTerm, setSearchTerm] = useState(""); // الحالة المحلية لتخزين قيمة حقل البحث
 
     const handleChange = (e) => {
       setSearchTerm(e.target.value); // تحديث القيمة عند تغييرها في حقل البحث
     };
-//   <tr key={data.id}>
-//       <td>{data.car_number}</td>
-//       <td>{data.make}</td>
-//       <td>{data.model}</td>
-//       <td>{data.catrgory}</td>
-//       <td>{data.description}</td>
-//       <td>{data.year}</td>
-//       <td>{data.seats}</td>
-//       <td>{data.doors}</td>
-//       <td>{data.bags}</td>
-//       <td>{data.fuel_type}</td>
-//       <td>{data.fuel_full}</td>
+
 const handleSearch = (e) => {
     e.preventDefault();
     // أضف هنا الشيفرة للبحث في البيانات باستخدام قيمة searchTerm
@@ -157,7 +190,10 @@ const handleSearch = (e) => {
   };
   
      return (
-        <div>{
+        <div>
+                    <ToastContainer/>
+
+            {
             loading ? (
                 <div className=" d-flex justify-center align-middle">
 
@@ -228,15 +264,15 @@ const handleSearch = (e) => {
                                     <td>{data.fuel_full}</td>
                                     <td className=''>
                                     {editStatusId === data.id ? (
-                                        <div className='d-flex flex-column justify-content-center align-items-center'>
-                                            <input type='text'  className="text-center" value={statuses[index]} onChange={(e)=>handleInputChange(index,e,data.id)} />
+                                        <div className='d-flex flex-column justify-content-center align-items-center gap-1'>
+                                            <input type='text'  className="text-center border" value={statuses[index]} onChange={(e)=>handleInputChange(index,e,data.id)} />
                                             <div className="d-flex justify-content-center align-items-center gap-2">
                                             <button onClick={() => handleSaveClick(index,data.id)} className='btn border'>Save</button>
                                             <button onClick={handleCancelClick} className='btn border'>Cancel</button>
                                             </div>
                                         </div>
                                     ) : (<span className='d-flex justify-content-center cursor-auto'>
-                                            {statuses[index]} 
+                                            {data.status} 
                                             <GrFormEdit className='cursor-pointer' onClick={()=>handleEditClick(data.id,index,statuses[index])}/>
                                         </span>)}
                                 

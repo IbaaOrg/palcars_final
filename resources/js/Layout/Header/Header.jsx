@@ -118,7 +118,7 @@ function Header({ islogined }) {
                     </div>
 
                     {/* search */}
-                    {userToken? '' : <NaveBar />}
+                    {userToken&&user.role!=='Renter'? '' : <NaveBar />}
                    
 
                     <div class="hstack gap-1">
@@ -430,12 +430,12 @@ function Header({ islogined }) {
                             <>
                                 <NavLink
                                     to="/login"
-                                    className=" fw-bold border-end border-primary px-2 "
+                                    className=" fw-bold border-end border-primary px-2  fontSizeNav"
                                 >
                                     {" "}
                                     {translates.Login}
-                                </NavLink>
-                                <NavLink to="/role" className="fw-bold">
+                                </NavLink> 
+                                <NavLink to="/role" className="fw-bold fontSizeNav">
                                     {" "}
                                     {translates.Register}
                                 </NavLink>

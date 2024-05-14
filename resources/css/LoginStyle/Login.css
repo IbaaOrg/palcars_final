@@ -135,17 +135,13 @@
 
 .form-container .forgot-password-link {
     align-self: flex-end;
-    margin-top: -20px;
+    margin-top: -5px;
 }
 
 .form-container .signup-link {
     align-self: center;
-    font-weight: 500;
 }
 
-.form-container .signup-link .link {
-    font-weight: 400;
-}
 
 .form-container .link:hover {
     text-decoration: underline;

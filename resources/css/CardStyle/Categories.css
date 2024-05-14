@@ -1,14 +1,17 @@
 .categories {
     border-radius: 30px;
     width: 90%;
-    height: 550px;
+    min-height: 550px;
     margin-top: 90px !important;
-    padding: 20px 0;
+    padding: 10px 0;
     margin-bottom: 20px;
     
   }
+  .categories .mainhead {
+    font-size: 30px;
+  }
 .mySwiperC .swiper {
-    height: 270px;
+    height: 200px;
 }
 .mySwiperC .swiper-slide{
     background-position: end;

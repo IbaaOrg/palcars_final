@@ -9,13 +9,20 @@ const Report = () => {
     const { resultBill } = location.state;
     const [numHours, setNumHours] = useState(0);
     useEffect(() => {
-        const createdAt = resultBill.created_at;
-        const parts = createdAt.split(" ");
-        setDate(parts[0]);
-        setTime(parts[1]);
-        setNumHours(
-            resultBill.amount / resultBill.car.prices[0].price_per_hour
-        );
+        const pickupDateTime = new Date(`${resultBill.start_date}T${resultBill.start_time}`);
+        const dropoffDateTime = new Date(`${resultBill.end_date}T${resultBill.end_time}`);
+    
+        // Calculate the difference in milliseconds
+        const timeDiffInMillis = dropoffDateTime - pickupDateTime;
+    
+        // Calculate days and remaining hours
+        const days = Math.floor(timeDiffInMillis / (1000 * 60 * 60 * 24));
+        const remainingHours = (timeDiffInMillis % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
+    
+        setNumHours({
+            days: days,
+            hours: remainingHours
+        });
     }, []);
 
     return (
@@ -109,22 +116,22 @@ const Report = () => {
                             <p>Category : {resultBill.car.catrgory} </p>
                             <p>Year : {resultBill.car.year} </p>
                             <p>
-                                Price :{" "}
+                                Price :
                                 {resultBill.car.prices[0].price ===
                                 resultBill.car.prices[0]
                                     .price_after_discount ? (
                                     <span>
-                                        {resultBill.car.prices[0].price} ₪ / Day{" "}
+                                        {resultBill.car.prices[0].price} ₪ / Day
                                     </span>
                                 ) : (
                                     <span>
                                         {
                                             resultBill.car.prices[0]
                                                 .price_after_discount
-                                        }{" "}
+                                        }
                                         ₪ / Day
                                     </span>
-                                )}{" "}
+                                )}
                             </p>
                         </div>
                     </div>
@@ -167,13 +174,17 @@ const Report = () => {
                     </div>
                     <div className="d-flex justify-content-around p-2">
                         <div className="d-flex flex-column align-items-center">
-                            <h3>Rental Of Renting</h3>
+                            <h3>Rental Period</h3>
                             <p>
-                                {numHours > 24 ? (
-                                    <span>{Math.round(numHours / 24)} Day</span>
-                                ) : (
-                                    <span>{numHours} Hour</span>
-                                )}{" "}
+                            {numHours&&numHours.days > 1 ? (
+                <span>{numHours.days} Days</span>
+            ) :                 <span>{numHours.days} Day</span>
+        }
+            {numHours.days > 0 && numHours.hours > 0 ? ' , ' : null}
+            {numHours.hours&&numHours.hours > 1 ? (
+                <span>{Math.ceil(numHours.hours)} Hours</span>
+            ) :                 <span>{Math.ceil(numHours.hours)} Hour</span>
+        }
                             </p>
                         </div>
                         <div className="d-flex flex-column align-items-center">

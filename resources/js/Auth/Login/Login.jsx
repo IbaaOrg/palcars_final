@@ -78,6 +78,8 @@ function Login(props) {
 
     return (
         <div class="d-flex justify-content-around cont">
+                            <ToastContainer />
+
         <div>
                 <img src={loginimage} className="w-100"/>
         </div>
@@ -170,16 +172,14 @@ function Login(props) {
                         disabled={isLoading}
                     />
                 </form>
-                <ToastContainer />
 
-                <NavLink class="forgot-password-link link" to="/forgetpassword">
-                    Do you forget Password?
+                <NavLink class="forgot-password-link link " to="/forgetpassword">
+                   <span> Do you forget Password?</span>
                 </NavLink>
 
-                <p class="signup-link">
-                    Don't have an account?
+                <p class="signup-link d-flex gap-2">
+                    <span>Don't have an account?</span>
                     <NavLink class="signup-link link" to="/register">
-                        {" "}
                         Sign up now
                     </NavLink>
                 </p>

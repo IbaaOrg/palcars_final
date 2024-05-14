@@ -13,9 +13,11 @@ const NotesDashboard = () => {
   }
   return (
     <div className='  mainrenternote'>
+
     <div className='card px-5 py-3 notesmain'> 
-    
       <form class="row g-3">
+      <h2 className='fs-5 fw-bold pb-5 w-100 text-center'>Send Notes</h2>
+
         <div class="d-flex flex-column justify-contetnt-center align-items-center cardnote " onClick={tospecificuser}>
         <FaUser size={50} />
         <p>To specific User</p>
