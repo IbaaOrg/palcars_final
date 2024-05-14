@@ -262,7 +262,7 @@ useEffect(() => {
     };
 
     const options = [
-      { value: "Marcedes", label: "Marcedes" },
+      { value: "Mercedes", label: "Mercedes" },
       { value: "Honda", label: "Honda" },
       { value: "BMW", label: "BMW" },
       { value: "Honday", label: "Honday" },
@@ -274,7 +274,23 @@ useEffect(() => {
       { value: "Chevrolet", label: "Chevrolet" },
       { value: "Audi", label: "Audi" },
       { value: "Nissan", label: "Nissan" },
-      
+      { value: "Buick", label: "Buick"},
+      { value: "Acura", label: "Acura"},
+      { value: "Cadillac", label: "Cadillac"},
+      { value: "Subaru", label: "Subaru"},
+      { value: "Bugatti", label: "Bugatti"},
+      { value: "Aston Martin", label: "Aston Martin"},
+      { value: "Chevrolet", label: "Chevrolet"},
+      { value: "Chrysler", label: "Chrysler"},
+      { value: "Fisker", label: "Fisker"},
+      { value: "Mazda", label: "Mazda"},
+      { value: "Canoo", label: "Canoo"},
+      { value: "Ferrari", label: "Ferrari"},
+      { value: "Bentley", label: "Bentley"},
+      { value: "Dodge", label: "Dodge"},
+      { value: "GMC", label: "GMC"},
+      { value: "Fiat", label: "Fiat"},
+
     ];
     const [selectedOption, setSelectedOption] = useState(null);
     const [formData, setFormData] = useState({});

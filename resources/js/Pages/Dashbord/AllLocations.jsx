@@ -8,6 +8,7 @@ function AllLocations() {
     const [loading, setLoading] = useState(false);
     const [locations, setLocations] = useState([]);
     const [deleted,setDeleted]=useState(null);
+    const [data, setData] = useState([]);
     const deleteLocation = async (e) => {
         e.preventDefault();
         const id = e.target.id;
@@ -41,11 +42,31 @@ function AllLocations() {
             .then((response) => {
                 const res = response.data;
                 setLocations(res.data.locations);
+                setData(res.data.locations);
             })
             .catch((error) => {
                 console.error("Error fetching data:", error);
             });
     }, [deleted]);
+
+    const [searchTerm, setSearchTerm] = useState(""); // الحالة المحلية لتخزين قيمة حقل البحث
+
+    const handleChange = (e) => {
+        setSearchTerm(e.target.value); // تحديث القيمة عند تغييرها في حقل البحث
+    };
+    const handleSearch = (e) => {
+        e.preventDefault();
+        console.log(locations);
+        console.log(data);
+        setLocations(data.filter(item => {
+            return (
+                item.location !== null && (searchTerm ? item.location?.toString().toLowerCase().includes(searchTerm.toLowerCase()) : false) ||
+                item.city.city !== null && (searchTerm ? item.city.city?.toString().toLowerCase().includes(searchTerm.toLowerCase()) : false) ||
+                item.type !== null && (searchTerm ? item.type?.toString().toLowerCase().includes(searchTerm.toLowerCase()) : false)             ); 
+        }));
+      
+    };
+    
     return (
         <div>
             {loading ? (
@@ -63,19 +84,10 @@ function AllLocations() {
                             </p>
                         </div>
                         <div className="col ">
-                            <form class="d-flex" role="search">
+                        <form className="d-flex" role="search">
                                 <input
-                                    class="form-control me-2"
-                                    type="search"
-                                    placeholder="Search"
-                                    aria-label="Search"
-                                />
-                                <button
-                                    class="btn btn-outline-success"
-                                    type="submit"
-                                >
-                                    Search
-                                </button>
+                                    className="form-control me-2" type="search" placeholder="Search" aria-label="Search" value={searchTerm} onChange={handleChange} />
+                                <button className="btn btn-outline-success" type="submit" onClick={handleSearch} > Search </button>
                             </form>
                         </div>
                         <div className="col">

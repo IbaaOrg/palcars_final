@@ -9,7 +9,8 @@ function AllDiscounts() {
         const [loading, setLoading] = useState(false);
     const [discounts, setDiscounts] = useState([]);
     const [deleted,setDeleted]=useState(null);
-    const deleteDiscount=(e)=>{
+    const [data, setData] = useState([]);
+        const deleteDiscount=(e)=>{
         e.preventDefault();
         const id=e.target.id;
         const token=localStorage.getItem('token');
@@ -38,6 +39,7 @@ function AllDiscounts() {
                  const res = response.data;
                  console.log(res);
                  setDiscounts(res.data);
+                 setData(res.data);
              })
              .catch(error => {
                  console.error('Error fetching data:', error);
@@ -45,6 +47,27 @@ function AllDiscounts() {
 
   
   }, [deleted]); 
+
+  const [searchTerm, setSearchTerm] = useState(""); // الحالة المحلية لتخزين قيمة حقل البحث
+
+    const handleChange = (e) => {
+        setSearchTerm(e.target.value); // تحديث القيمة عند تغييرها في حقل البحث
+    };
+    const handleSearch = (e) => {
+        e.preventDefault();
+        //console.log(data);
+        setDiscounts(data.filter(item => {
+            return (
+                item.note !== null && (searchTerm ? item.note?.toString().toLowerCase().includes(searchTerm.toLowerCase()) : false) ||
+                item.expired_date !== null && (searchTerm ? item.expired_date?.toString().toLowerCase().includes(searchTerm.toLowerCase()) : false) ||
+                item.type !== null && (searchTerm ? item.type?.toString().toLowerCase().includes(searchTerm.toLowerCase()) : false) ||
+                item.value !== null && (searchTerm ? item.value?.toString().toLowerCase().includes(searchTerm.toLowerCase()) : false) ||
+                item.car.car_number !== null && (searchTerm ? item.car.car_number?.toString().toLowerCase().includes(searchTerm.toLowerCase()) : false) 
+
+            ); 
+        }));
+    };
+
   return (
       <div>{
           loading ? (
@@ -61,10 +84,11 @@ function AllDiscounts() {
                               <p className=''>Your all Discounts are listed bellow</p>
                       </div>
                       <div className="col ">
-                          <form class="d-flex" role="search">
-                              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                              <button class="btn btn-outline-success" type="submit">Search</button>
-                          </form>
+                      <form className="d-flex" role="search">
+                                <input
+                                    className="form-control me-2" type="search" placeholder="Search about title" aria-label="Search" value={searchTerm} onChange={handleChange} />
+                                <button className="btn btn-outline-success" type="submit" onClick={handleSearch} > Search </button>
+                            </form>
                       </div>
                       <div className="col">
                           <button type="button" class="btn btn-light">Filter</button>
