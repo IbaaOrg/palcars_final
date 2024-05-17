@@ -228,7 +228,6 @@ function VehiclesDashbord() {
                                     <th scope="tableitem">Car Number</th>
                                     <th scope="tableitem">Make</th>
                                     <th scope="tableitem">model</th>
-
                                     <th scope="tableitem">catrgory</th>
                                     <th scope="tableitem">description</th>
                                     <th scope="tableitem">year</th>

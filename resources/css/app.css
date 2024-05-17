@@ -139,6 +139,9 @@ textarea {
 .Addvehicle{
     color: #0056b3;
 }
+.Addvehicle a:hover {
+    color: white;
+}
 
 .ulprofile
  {
@@ -560,4 +563,12 @@ border-radius: 8px;
 .imgFavorite img {
     width: 100%;
     height: 100%;
+}
+.expensesIcon {
+    font-size: 150px;
+    color: black;
+}
+.employeeItem {
+    
+    width: calc((100% - 20px )/2);
 }

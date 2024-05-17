@@ -75,6 +75,9 @@ import RentedCars from "./Pages/Dashbord/RentedCars";
 import MaintainedCars from "./Pages/Dashbord/MaintainedCars";
 import AllWorkingHours from "./Pages/Dashbord/AllWorkingHours";
 import EditWorkingHour from "./Pages/Dashbord/EditWorkingHour";
+import AddEmployee from "./Pages/Dashbord/AddEmployee";
+import EditEmployee from "./Pages/Dashbord/EditEmployee";
+import RenterDashbord from './Pages/Dashbord/RenterDashbord';
 
 //LocationDashbord
 const App = () => {
@@ -199,6 +202,10 @@ const App = () => {
                         path={"EmployeeDashbord"}
                         element={<EmployeeDashbord />}
                     />
+                     <Route
+                        path={"RenterDashbord"}
+                        element={<RenterDashbord/>}
+                    />
                     <Route path={"ChatsDashbord"} element={<ChatsDashbord />} />
                     <Route
                         path={"NotesDashboard"}
@@ -239,6 +246,13 @@ const App = () => {
                     <Route
                         path={"addLocation"}
                         element={<LocationsDashbord />}
+                    />   <Route
+                    path={"addEmployee"}
+                    element={<AddEmployee/>}
+                />
+                 <Route
+                        path={"EditEmployee/:id"}
+                        element={<EditEmployee/>}
                     />
                     <Route
                         path={"DiscountsDashbord"}

@@ -202,14 +202,14 @@ modelValue     );
                 </div>
                 <hr />
                 <div className="py-4">
-                <span className="text-muted mt-3 fs-5">Type</span>
+                <span className="text-muted mt-1 fs-5 d-flex gap-2 align-items-center">Type</span>
  
                     <div className="type-list" onChange={handleTypeValue} >
 
                         {types.map((item)=>(
                                        <div class="form-check">
                                        <input class="form-check-input" type="radio" name='type' id={item}/>
-                                       <label class="form-check-label" for={item}>
+                                       <label class="form-check-label " for={item}>
                                          {item}
                                        </label>
                                        </div>
@@ -219,7 +219,7 @@ modelValue     );
                 </div>
                 <hr />
                 <div className="py-2">
-                <span className="text-muted mt-1 fs-5 d-flex gap-2 align-items-center">Fuel type                                 <FaGasPump className="icon" /></span>
+                <span className="text-muted mt-1 fs-5 d-flex gap-2 align-items-center">Fuel Type                                 <FaGasPump className="icon" /></span>
  
                     <div className="type-list" onChange={handleFuelTypeChange}>
 
@@ -227,7 +227,7 @@ modelValue     );
                                        <div class="form-check">
                                        <input class="form-check-input" type="radio" name='fuel_type' id={item}/>
                                        <label class="form-check-label" for={item}>
-                                         {item}
+                                         {item==="gas"?"Gas":item==="diesel"?"Deisel":item==="electricity"?"Electrecity":item}
                                        </label>
                                        </div>
                         ))}

@@ -67,7 +67,11 @@ function Sidebar() {
            
               <NavLink  to={"EmployeeDashbord"} className='main-btn  list-group-item list-group-item-action py-2'>
                   <i className='bi bi-people fs-4 me-2'></i>
-                  <span className='fs-5'>Employee</span>
+                  <span className='fs-5'>Employees</span>
+              </NavLink>
+              <NavLink  to={"RenterDashbord"} className='main-btn  list-group-item list-group-item-action py-2'>
+                  <i className='bi bi-people fs-4 me-2'></i>
+                  <span className='fs-5'>Renters</span>
               </NavLink>
               <NavLink  to={"ChatsDashbord"} className='main-btn  list-group-item list-group-item-action py-2'>
                   <i class="bi bi-chat-left-text fs-4 me-2"></i>

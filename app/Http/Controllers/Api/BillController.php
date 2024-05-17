@@ -15,9 +15,12 @@ use Illuminate\Validation\Rule;
 use App\Http\Traits\ResponseTrait;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\ColorResource;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\SimpleBillResource;
+use App\Http\Resources\BillsCompanyResource;
 use App\Http\Resources\BillsOfRenterResource;
+use App\Http\Resources\RentersCompanyResource;
 use App\Http\Resources\BillsOfMyCompanyResource;
 
 class BillController extends Controller
@@ -28,13 +31,15 @@ class BillController extends Controller
     }
     
     public function store(Request $request)
-    {$currentTime=now()->format('H:i');
+    {
+        $currentTime=now()->format('H:i');
         $car = Car::find($request->car_id);
+        $user = User::find($request->user()->id);
         $company=$car->ownerUser;
         $pickuplocations_ids=$company->locations()->whereIn('type',['pickup','pickup_dropoff'])->get();
         $dropofflocations_ids=$company->locations()->whereIn('type',['dropoff','pickup_dropoff'])->get();
         $pickupLocationIds = $pickuplocations_ids->pluck('id')->toArray();
-$dropoffLocationIds = $dropofflocations_ids->pluck('id')->toArray();
+        $dropoffLocationIds = $dropofflocations_ids->pluck('id')->toArray();
 
         // Validate the request data
         $validate = Validator::make($request->all(), [
@@ -91,7 +96,7 @@ $dropoffLocationIds = $dropofflocations_ids->pluck('id')->toArray();
             // $durationInHours = $endTime->diffInHours($startTime);
     
             // Multiply the number of hours by the price per hour
-            $amount = $rentalDuration *$car->prices[count($car->prices) - 1]['price_per_hour'];;
+            $amount = $rentalDuration *$car->prices[count($car->prices) - 1]['price_per_hour'];
             $finalDiscount = null; // Initialize finalDiscount variable
 
             // Check if there are any discounts associated with the car
@@ -128,6 +133,8 @@ $dropoffLocationIds = $dropofflocations_ids->pluck('id')->toArray();
         ]);
         $prices = Price::where('car_id', $request->car_id)->get();
         $car->update(['status' => 'rented']);
+        $user->points += 5;
+        $user->save();        
         // Return success response
         return $this->success(new SimpleBillResource($bill));
     }
@@ -142,14 +149,58 @@ $dropoffLocationIds = $dropofflocations_ids->pluck('id')->toArray();
     }
 
     public function allBillsOfMyCompany(){
+        $user = auth()->user();
+        $myCars = $user->cars;
+    
+        $allBills = $myCars->flatMap(function($car) {
+            return $car->bills()->orderBy("end_date", "ASC")->get();
+        });
+    
+        return $this->success(SimpleBillResource::collection($allBills));
+    }
+    public function allRentersOfMyCompany()
+    {
+        $user = auth()->user();
+        $myCars = $user->cars()->pluck('id');
+    
+        // Get all unique user IDs from bills of my cars
+        $uniqueUserIds = \App\Models\Bill::whereIn('car_id', $myCars)
+                                         ->distinct()
+                                         ->pluck('user_id');
+    
+        // Retrieve unique users with their rental counts, points, and limited bills
+        $usersWithRentalCounts = \App\Models\User::whereIn('id', $uniqueUserIds)
+                                                 ->withCount(['bills as rental_count' => function ($query) use ($myCars) {
+                                                     $query->whereIn('car_id', $myCars);
+                                                 }])
+                                                 ->with('bills')->get();
+    
+        // Add points to the users
+        $usersWithRentalCounts->each(function ($user) {
+            $user->points = $user->rental_count * 5;
+        });
+    
+        return $this->success(RentersCompanyResource::collection($usersWithRentalCounts));
+    }
+    
+    public function allBillsOfChosenRenter(string $id)
+   {
+    $user=auth()->user();
+    $myCars=$user->cars()->pluck('id');
+    $bills = \App\Models\Bill::where('user_id', $id)
+    ->whereIn('car_id', $myCars)
+    ->with(['car', 'pickup_location', 'dropoff_location'])
+    ->get();
+    return $this->success(BillsCompanyResource::collection($bills));
+   }
+    
+    public function allMyExpenses(){
         $user=auth()->user();
         $myCars=$user->cars;
-        foreach ($myCars as $car) {
+        foreach($myCars as $car){
             $bills=$car->bills()->orderBy("end_date","ASC")->get();
-
         }
-
-        return $this->success(SimpleBillResource::collection($bills));
+        return $this->success($bills);
     }
     
     public function allBillsOfRenter() {
@@ -169,7 +220,7 @@ $dropoffLocationIds = $dropofflocations_ids->pluck('id')->toArray();
        }
        if ($car->status !== "rented") {
         return $this->fail("Car is not rented", 404);
-    }
+        }
        $bills = Bill::where('car_id',$id)->get();
        return $this->success($bills);
 
@@ -303,5 +354,6 @@ $dropoffLocationIds = $dropofflocations_ids->pluck('id')->toArray();
     {
         return view('stripe');
     }*/
+
 }
 ?>

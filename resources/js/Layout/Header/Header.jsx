@@ -423,7 +423,7 @@ function Header({ islogined }) {
                                 ) : (
                                     <div></div>
                                 )}
-                                <button type="button" class="btn btn-outline-danger" onClick={out} > Logout</button>
+                                <button type="button" class="btn btn-outline-primary" onClick={out} > Logout</button>
 
                             </>
                         ) : (

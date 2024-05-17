@@ -16,6 +16,99 @@
     border-radius: 50%;
     border: 1px solid rgb(122, 122, 122);
 }
+.imgUserBillOwner {
+    width: 100%;
+    height: 100%;
+}
+.item {
+    width: 70%;
+    display: flex;
+}
+.itemLicense {
+    width: 30%;
+}
+.itemDetials {
+    display: flex;
+    justify-content: space-between;
+    width: calc((100% ) / 2)
+}
+.renters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+}
+
+.renterInfoImg {
+display: flex;
+align-items: start;
+gap: 10px;
+}
+.renterInfoParagraph {
+    display: flex;
+    align-items: start;
+margin-top: 0px;
+padding-top: 0px;
+    }
+
+.renterInfoImgLincense {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.renterInfoImgContainer {
+    width: 100px;
+    height: 90px;
+}
+.renterInfoImgContainer img {
+    width: 100%;
+    height: 100%;
+}
+.imgUserBill {
+    width: 20%;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+.imgUserBill img {
+    height: 90%;
+    width:100%;
+}
+.imgLicenseBill {
+    width: 30%;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.imgLicenseBill img{
+    height: 90%;
+    width: 80%;
+}
+.renterInfoImgContainer{
+    position: relative;
+}
+.imgShow {
+    background-color:rgba(23, 23, 23, 0.134);
+    color: white;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left:0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease; 
+
+}
+.imgShow:hover {
+    background-color:  rgba(32, 32, 32, 0.333);
+}
 .phone {
     width: 13%;
 }
