@@ -111,4 +111,14 @@ class EmployeeController extends Controller
         $user->employees=$user->employees;
         return $this->Success(($user));
 }
+public function EmployeesCount(Request $request)
+{
+    $user = $request->user();
+    $employees = $user->employees;
+    $employeesCount = $employees->count();
+    
+    return $this->success([
+        'employees_count' => $employeesCount,
+    ]);
+}
 }

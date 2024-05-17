@@ -106,7 +106,7 @@ textarea {
 }
 .view{
   
-    background-color: #f3f3f3;
+    background-color: #f4f4f4;
 }
 
 .scroll-to-top {
@@ -132,7 +132,25 @@ textarea {
     border-radius: 50%;
     transition: background-color 0.3s ease;
 }
-
+.containerImg {
+    position: absolute;
+    width: 330px;
+    height: 320px;
+    right: 10px;
+}
+.containerImg img {
+    width: 100% !important;
+    height: 100% !important;
+}
+.containerImg :hover {
+    transform: scale(1.1);
+}
+.info {
+    width: 50%;
+}
+.info p {
+    font-size: 18px;
+}
 .scroll-to-top button:hover {
     background-color: #0056b3;
 }
@@ -529,7 +547,8 @@ border-radius: 8px;
 }
 
 .caricondiv:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
+    transition: transform 2s ease;
         /* Increase the scale factor as needed */}
 
 
