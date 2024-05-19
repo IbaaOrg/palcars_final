@@ -7,7 +7,7 @@ import Date from "../../Componants/UI/DateToday";
 import DateToday from "./../../Componants/UI/DateToday";
 function HomeDashbord() {
     const [data, setData] = useState(0);
-    const [name, setName] = useState(0);
+    const [name, setName] = useState('');
     const [locations, setLocations] = useState(0);
     const [Bookings, setBookings] = useState(0);
     const [renters, setRenters] = useState(0);
