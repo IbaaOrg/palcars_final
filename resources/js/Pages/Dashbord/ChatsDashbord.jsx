@@ -202,7 +202,7 @@ console.log("allmessages:",allMessages);
            
 {resever&&(
 
-            <div className="message  text-bg-primary ">{resever.name}</div>
+            <div className="message  bg-dark text-white ">{resever.name}</div>
 )}
           
             
