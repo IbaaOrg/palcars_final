@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import Loading from '../../Componants/UI/Loading';
 import Discounts from './../Discounts/Discounts';
-import { NavLink, Outlet } from 'react-router-dom'
+import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 
 function AllDiscounts() {
@@ -10,6 +10,7 @@ function AllDiscounts() {
     const [discounts, setDiscounts] = useState([]);
     const [deleted,setDeleted]=useState(null);
     const [data, setData] = useState([]);
+    const navigate=useNavigate();
         const deleteDiscount=(e)=>{
         e.preventDefault();
         const id=e.target.id;
@@ -67,7 +68,12 @@ function AllDiscounts() {
             ); 
         }));
     };
-
+    const viewDiscount=(id)=>{
+        navigate(`/dashbord/viewDiscount/${id}`);
+    }
+    const editDiscount=(id)=>{
+        navigate(`/dashbord/editDiscount/${id}`)
+    }
   return (
       <div>{
           loading ? (
@@ -131,8 +137,8 @@ function AllDiscounts() {
                                      
 
                                       <td className=' p-1 d-flex justify-content-center gap-2'>
-                                          <button  className='btn btn-success'>View</button>
-                                          <button  className='btn btn-primary'>Update</button>
+                                          <button  className='btn btn-success' onClick={()=>viewDiscount(data.id)}>View</button>
+                                          <button  className='btn btn-primary' onClick={()=>editDiscount(data.id)}>Update</button>
                                           <button id={data.id} className='btn btn-danger' onClick={deleteDiscount}>Delete</button>
 
 

@@ -1,31 +1,30 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import Logo from '../../../public/logo1.png';
 import { BrowserRouter as Router, Routes, Route, Link, Outlet, NavLink } from "react-router-dom";
 import { Ri24HoursLine } from "react-icons/ri";
 import { MdCarCrash } from "react-icons/md";
 import { BiSolidCarMechanic } from "react-icons/bi";
+import { UserContext } from '../Context/User';
 
 function Sidebar() {
 
     const [isListOpen, setIsListOpen] = useState(false);
-
     const toggleList = () => {
         setIsListOpen(!isListOpen);
     };
   return (
     <div className='bg-white sidebar p-2 sidebarMain'>
-
+        <h2 className='fs-4 fw-bold text-primary pt-4 p-3 text-center' >Palestine cars </h2>
+        <div className='list-group list-group-flush pt-3'>
         <hr className='text-dark'/>
-        <div className='list-group list-group-flush pt-2'>
 
             <NavLink to={"HomeDashbord"} className='main-btn list-group-item list-group-item-action py-2'>
                   <i class="bi bi-speedometer2 fs-4 me-2"></i>
                 <span className='fs-5'>Dashbord</span>
             </NavLink>
-            <br/>
              
-              <NavLink to={"VehiclesDashbord"} className='main-btn  list-group-item list-group-item-action py-2 d-flex justify-between ' onClick={toggleList}>
+              <NavLink to={"VehiclesDashbord"} className='main-btn  list-group-item list-group-item-action py-2 d-flex justify-between align-items-center ' onClick={toggleList}>
               <div> 
                   <i className="bi bi-car-front  fs-4 me-2"></i>
                   <span className='fs-5'>Vehicles</span>
@@ -44,15 +43,15 @@ function Sidebar() {
               </NavLink>
               {isListOpen && (
                   <nav className='pt-2 pb-2 d-flex flex-column gap-2'>
-                      <NavLink to={"addvehical"} className='toggle-btn list-group-item list-group-item-action py-1 border'>
+                      <NavLink to={"addvehical"} className='toggle-btn list-group-item list-group-item-action py-1 border d-flex flex-wrap align-items-center'>
                           <i className="bi bi-plus  fs-3 me-1"></i>
                       <span className=''>Add Vehicles</span>
                   </NavLink>
-                  <NavLink to={"rented"} className='toggle-btn list-group-item list-group-item-action py-3 border d-flex align-items-center gap-2'>
+                  <NavLink to={"rented"} className='toggle-btn list-group-item list-group-item-action py-3 border d-flex  flex-wrap align-items-center gap-2' >
                   <MdCarCrash size={20} className=''/>
                       <span className=''>Rented Vehicles</span>
                   </NavLink>
-                  <NavLink to={"maintend"} className='toggle-btn list-group-item list-group-item-action py-3 border d-flex align-items-center gap-2'>
+                  <NavLink to={"maintend"} className='toggle-btn list-group-item list-group-item-action py-3 border d-flex flex-wrap  align-items-center gap-2'>
                   <BiSolidCarMechanic size={20}/>
                       <span className=''>maintained vehicles</span>
                   </NavLink>
@@ -60,7 +59,7 @@ function Sidebar() {
                   
               </nav>
               )}
-              <NavLink  to={"AllWorkingHours"} className='main-btn  list-group-item list-group-item-action py-2 d-flex gap-1 align-items-center'>
+              <NavLink  to={"AllWorkingHours"} className='main-btn  list-group-item list-group-item-action py-2 d-flex  flex-wrap gap-1 align-items-center'>
               <Ri24HoursLine  size={25}/>
                   <span className='fs-5'>Working Hours</span>
               </NavLink>

@@ -52,6 +52,19 @@ const AddEmployee = () => {
             setLoading(false);
         }
     };
+    function maxToday() {
+        const today = new Date();
+        const year = today.getFullYear();
+        let month = today.getMonth() + 1;
+        let day = today.getDate();
+        if (month < 10) {
+            month = "0" + month;
+        }
+        if (day < 10) {
+            day = "0" + day;
+        }
+        return `${year}-${month}-${day}`;
+    }
     return (
         <div className="w-75 d-flex justify-content-center align-items-center m-auto mt-5">
             <div className="bg-white w-100  border rounded px-3 py-2">
@@ -163,6 +176,7 @@ const AddEmployee = () => {
                             placeholder="Enter start date"
                             name="start_date"
                             value={startDate}
+                            max={maxToday()}
                             onChange={(e) => setStartDate(e.target.value)}
                         />
                     </div>

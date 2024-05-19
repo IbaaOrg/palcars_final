@@ -134,9 +134,18 @@ textarea {
 }
 .containerImg {
     position: absolute;
-    width: 330px;
-    height: 320px;
+    width: 340px;
+    height: 260px;
     right: 10px;
+}
+@media screen and (max-width: 800px){
+    
+    .info {
+        width: 90%;
+        margin: auto;
+    }
+    .containerImg {
+        position: relative;}
 }
 .containerImg img {
     width: 100% !important;

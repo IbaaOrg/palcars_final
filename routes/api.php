@@ -234,4 +234,7 @@ Route::middleware('auth:sanctum','company')->delete('/deleteEmployee/{id}',[Empl
 Route::middleware('auth:sanctum','company')->get('/showEmployee/{id}',[EmployeeController::class,'show']);
 Route::middleware('auth:sanctum','company')->get('/allBills/{id}',[BillController::class,'allBillsOfChosenRenter']);
 Route::middleware('auth:sanctum','company')->get('/EmployeesCount',[EmployeeController::class,'EmployeesCount']);
+Route::get('/CarsCount',[CarController::class,'CarsCount']);
+Route::middleware('auth:sanctum','company')->get('/showLocation/{id}',[LocationController::class,'show']);
+Route::middleware('auth:sanctum','company')->get('/showOneDiscount/{id}',[DiscountController::class,'show']);
 ?>

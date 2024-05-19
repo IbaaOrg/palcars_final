@@ -14,12 +14,12 @@ function Dashbord() {
     <div className='row'>
        {toggle &&
 
-        <div className='col-2 bg-white sidebarMain'>
+        <div className='col-md-2 col-4 bg-white sidebarMain'>
                   <Sidebar />
 
         </div>
         }
-        <div className='col-10 view'>
+        <div className=' col-md-10  col-8 view'>
           <Outlet/>
         </div>
     </div>

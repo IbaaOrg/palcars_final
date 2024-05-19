@@ -74,7 +74,7 @@ function ViewProfile({id}) {
             </div>
             <div className='mt-4'>
                 <Link to={`/carofcompany/${id}`} class="card-link btn btn-outline-primary">Profile</Link>
-                <a href="#" class="card-link btn btn-success">Message</a>
+                <Link to={localStorage.getItem('token')?`/profile/messages`:`/login`} class="card-link btn btn-success">Message</Link>
             </div>
             
           </div>

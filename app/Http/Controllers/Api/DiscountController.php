@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\DiscountCarResource;
+use App\Http\Resources\OneDiscountResource;
 use App\Http\Resources\SimpleDiscountResource;
 use App\Http\Resources\ShowAllDiscountsResource;
 
@@ -86,6 +87,8 @@ class DiscountController extends Controller
     public function show(string $id)
     {
         //
+         $discount=Discount::find($id);
+         return $this->success(new OneDiscountResource($discount));
     }
 
     /**
@@ -105,10 +108,10 @@ class DiscountController extends Controller
         if($request->type)
         {
             if($request->type==='percentage'){
-                $rules['value']= 'required|numeric|min:0|max:100';
+                $rules['value']= 'nullable|numeric|min:0|max:100';
              }
              if($request->type==='fixed'){
-                $rules['value']= 'required|numeric|min:0';
+                $rules['value']= 'nullable|numeric|min:0';
              } 
 
         }else {
