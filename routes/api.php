@@ -186,6 +186,10 @@ Route::middleware('auth:sanctum','renterorcompany')->delete('/messages/delete/{i
 Route::middleware('auth:sanctum','renterorcompany')->get('/messagesRecieved',[MessageController::class,'messagesRecieved']);
 //message that i send
 Route::middleware('auth:sanctum','renterorcompany')->get('/messagesSend',[MessageController::class,'messagesSend']);
+Route::middleware('auth:sanctum','renterorcompany')->get('/allmessagesSend/{receverid}', [MessageController::class, 'allmessagesSend']);
+Route::middleware('auth:sanctum','renterorcompany')->get('/allmessagesReceived/{senderid}', [MessageController::class, 'allmessagesReceived']);
+
+
 //show one message
 Route::middleware('auth:sanctum','renterorcompany')->get('/showmessage/{id}',[MessageController::class,'show']);
 Route::middleware('auth:sanctum','company')->post('/sendNoteToAllRenters',[NotificationController::class,'sendNoteToAllRenters']);

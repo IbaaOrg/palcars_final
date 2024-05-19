@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Resources;
-
+use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
@@ -27,7 +27,9 @@ class MessageResource extends JsonResource
             'sender'=>new SimpleUserResource($sender),
             'reciever'=>new SimpleUserResource($receiver),
             'created_at'=>$this->created_at->format('Y-m-d H:i:s'),
-            'updated_at'=>$this->updated_at->format('Y-m-d H:i:s'),      
+            'updated_at'=>$this->updated_at->format('Y-m-d H:i:s'),   
+            'timeago'=>Carbon::parse($this->created_at)->diffForHumans(),  
+   
         ];
         if($this->photo){
             $data['photo']=url($this->photo);
