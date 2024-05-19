@@ -155,6 +155,11 @@ all_received_message();
     get_users()
     all_send_message()
     all_received_message()
+    const intervalId = setInterval(() => {
+      all_received_message(); // Fetch messages every 5 seconds
+    }, 5000);
+
+    return () => clearInterval(intervalId); 
   }, []);
   const [searchTerm, setSearchTerm] = useState(""); // الحالة المحلية لتخزين قيمة حقل البحث
 
@@ -223,7 +228,7 @@ console.log("allmessages:",allMessages);
 ))} */}
 
 {Array.isArray(allMessages) && allMessages.sort((a, b) => new Date(a.created_at) - new Date(b.created_at)).map((message, index) => (
-    <p key={index} className={`p-3 mb-2 rounded text-right ${message.sender.id === reseverid ? 'bg-primary text-white' : 'bg-success text-white'}`}>
+    <p key={index} className={`p-3 mb-2 rounded ${message.sender.id === reseverid ? 'bg-primary text-white text-right' : 'bg-success text-white text-left'}`}>
         {message.message}
     </p>
 ))}
