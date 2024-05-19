@@ -116,4 +116,37 @@ class MessageController extends Controller
         // Return the received messages as a JSON response
         return $this->success(MessageResource::collection($sendMessages));
     }
+    public function allmessagesSend($receverid){
+        // Get the ID of the currently authenticated user
+        $user = Auth::user();
+    
+        // Retrieve all messages sent by the current user to the specified receiver
+        $sendMessages = Message::where('user_id', $user->id)->where('reciever_id', $receverid)->get();
+                               
+                                
+                                
+    
+        // Return the sent messages as a JSON response
+        return response()->json([
+            'status' => true,
+            'data' => MessageResource::collection($sendMessages)
+        ]);
+    }
+    public function allmessagesReceived($senderId){
+        // Get the ID of the currently authenticated user
+        $user = Auth::user();
+    
+        // Retrieve all messages received by the current user from the specified sender
+        $receivedMessages = Message::where('user_id', $senderId)
+                                   ->where('reciever_id', $user->id) 
+                                   ->get();
+    
+        // Return the received messages as a JSON response
+        return response()->json([
+            'status' => true,
+            'data' => MessageResource::collection($receivedMessages)
+        ]);
+    }
+    
+    
 }

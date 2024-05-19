@@ -6,23 +6,24 @@ import '../../../css/MessageStyle/message.css'
 import CommetInput from '../../Layout/Comments/CommetInput'
 import MessageInput from '../../Layout/Message/MessageInput'
 function Messages() {
-  const [data, setData] = useState([])
-  const[dataSearch,setdataSearch]=useState([])
-  const [resever, setResever] = useState(null)
-  const [reseverid, setReseverid] = useState(null)
-  const [chat, setChat] = useState(null)
-
-  const [message, setMessage] = useState("")
+  const [data, setData] = useState([]);
+  const[dataSearch,setdataSearch]=useState([]);
+  const [resever, setResever] = useState(null);
+  const [reseverid, setReseverid] = useState(null);
+  const [chat, setChat] = useState(null);
+  const[allChat,setallChat]=useState([]);
+  const [chatSender, setChatSender] = useState(null);
+  const[allChatSender,setallChatSender]=useState([]);
+  const [message, setMessage] = useState("");
 
   
+  
   const send_message=async()=>{
-   
 
     const formData = new FormData();
     formData.append("message", message);
     formData.append("reciever_id", reseverid);
-   
-
+ 
     const token = localStorage.getItem("token")
 
     try {
@@ -31,24 +32,81 @@ function Messages() {
           "Authorization": `Bearer ${token}`
         }
       });
-
-      const res = response.data;
+      const res = response.data;console.log("rrr=",res.data);
       if (res.status === true) {
         setChat(res.data);
-       
+        
       }
+      all_send_message();
+      all_received_message();
     } catch (e) {
       console.log(e.response.data.msg);
     } 
-
+    setMessage("");
+      console.log("Message after sending:", message); 
   }
-
-
+  const all_send_message = async () => {
+    const receverid = reseverid; // تأكد من تعيين قيمة `reseverid` بشكل صحيح
+  
+    const token = localStorage.getItem("token");
+  
+    try {
+      const response = await axios.get(`/allmessagesSend/${receverid}`, {
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
+      });
+  
+      const res = response.data;
+      console.log(res);
+      if (res.status === true) {
+        setChatSender(res.data);
+        setallChatSender(res.data); // استخدم قوسين مربعين لتعيين قيمة المصفوفة
+        setMessage(res.data);
+        console.log("message", message);
+        console.log("res.data", res.data);
+      }
+    } catch (e) {
+      if (e.response) {
+        console.log(e.response.data.msg);
+      } else {
+        console.log('An error occurred:', e);
+      }
+    }
+  };
+ 
+  const all_received_message = async () => {
+    const senderId = reseverid; // تأكد من تعيين قيمة `reseverid` بشكل صحيح
+  console.log(senderId);
+    const token = localStorage.getItem("token");
+  
+    try {
+      const response = await axios.get(`/allmessagesReceived/${senderId}`, {
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
+      });
+  
+      const res = response.data;
+      console.log(res);
+      if (res.status === true) {
+        setChat(res.data);
+        setallChat(res.data); // استخدم قوسين مربعين لتعيين قيمة المصفوفة
+        setMessage(res.data);
+        console.log("message", message);
+        console.log("res.data", res.data);
+      }
+    } catch (e) {
+      if (e.response) {
+        console.log(e.response.data.msg);
+      } else {
+        console.log('An error occurred:', e);
+      }
+    }
+  };
   const get_user = async (userId) => {
     setReseverid(userId)
 
-
-    
     try {
       const response = await axios.get(`/user/${userId}`)
 
@@ -60,7 +118,8 @@ function Messages() {
 
         //onSuccess(res.data)
       }
-
+all_send_message();
+all_received_message();
     } catch (e) {
       console.log(e)
       // onError()
@@ -93,7 +152,13 @@ function Messages() {
 
   useEffect(() => {
     get_users()
-  
+    all_send_message()
+    all_received_message()
+    const intervalId = setInterval(() => {
+      all_received_message(); // Fetch messages every 5 seconds
+    }, 5000);
+
+    return () => clearInterval(intervalId); 
   }, []);
   const [searchTerm, setSearchTerm] = useState(""); // الحالة المحلية لتخزين قيمة حقل البحث
 
@@ -110,7 +175,9 @@ function Messages() {
      ) }));
     
   };
-  
+  const allMessages = allChat.concat(allChatSender);
+
+console.log("allmessages:",allMessages);
   return (
     <div className='row ' >
       <div className='col-4 message_list_list'>
@@ -139,17 +206,34 @@ function Messages() {
            
 {resever&&(
 
-            <div className="message  text-bg-primary ">{resever.name}</div>
+            <div className="message  bg-dark text-white ">{resever.name}</div>
 )}
           
             
           </div>
-          {chat&&(
-            <div>
-              <p className="p-3 mb-2 bg-success text-white rounded ">{chat.message}</p>
-          </div>
-          )}
-          
+          {/* {Array.isArray(allChat) && allChat.map((message, index) => (
+  <p key={index} className="p-3 mb-2 bg-success text-white rounded text-right !important">
+    {message.message}
+    <small className="text-dark">{" "+message.timeago}</small>
+  </p>
+))}
+          {Array.isArray(allChatSender) && allChatSender.map((message, index) => (
+ <p key={index} className="p-3 mb-2 bg-primary text-white rounded text-left !important">
+ {message.message}
+ <small className="text-dark">{" "+message.timeago}</small>
+
+</p>
+
+))} */}
+
+{Array.isArray(allMessages) && allMessages.sort((a, b) => new Date(a.created_at) - new Date(b.created_at)).map((message, index) => (
+    <p key={index} className={`p-3 mb-2 rounded text-right ${message.sender.id === reseverid ? 'bg-primary text-white' : 'bg-success text-white'}`}>
+        {message.message}
+    </p>
+))}
+
+
+  
 
         <div className="input-container">
           <input
