@@ -185,6 +185,7 @@ function Messages() {
 
   };
   return (
+    
     <div className='row ' >
       <div className='col-4 message_list_list'>
         <div className="m-2">
@@ -209,14 +210,14 @@ function Messages() {
           ))}
         </div>
       </div>
-      <div className='col-7 message_list border-0'>
+      <div className='col-7 message_list border-0'style={{ position: 'relative' }}>
 
 
-        <div className="chat-container" style={{ maxHeight: '800px', overflowY: 'scroll', overflowX: 'hidden' }}>
+        <div className="chat-container" style={{ maxHeight: '800px', overflowY: 'scroll', overflowX: 'hidden', paddingTop: '40px' }}>
           <div className="message-list">
 
             {resever && (
-              <div className="message bg-dark text-white p-2 text-center">{resever.name}</div>
+              <div className=" sticky-header message bg-dark text-white p-2 text-center ">{resever.name}</div>
             )}
 
 

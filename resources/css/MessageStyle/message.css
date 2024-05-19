@@ -79,3 +79,12 @@
 .user-name {
     font-weight: bold;
 }
+/* Add this CSS to your stylesheet */
+  .sticky-header {
+    position: fixed;
+    top: 0;
+    width: calc(100% - 15px); /* Adjust as necessary */
+    z-index: 10;
+    background-color: #343a40;
+ }
+  
