@@ -220,7 +220,7 @@ function Messages() {
                                     class=" rounded-circle w-20 col-4"
                                 />
                                 <span
-                                    class="user-name col-8"
+                                    class="user-name col-8 d-flex justify-content-start ms-4"
                                     onClick={() => {
                                         get_user(user.id);
                                     }}
