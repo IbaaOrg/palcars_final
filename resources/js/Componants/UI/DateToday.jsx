@@ -20,9 +20,9 @@ const DateToday = () => {
     },[])
   return (
     
-    <div className='bg-primary  rounded timecontainer d-flex flex-column justify-content-center align-items-center gap-3  '>
+    <div className='bg-primary  rounded p-3 d-flex flex-column justify-content-center align-items-center gap-3  '>
         <h2 className='fw-bold text-white fs-5 p-3'>Today Date</h2>
-        <div className="d-flex gap-3 pb-4">
+        <div className="d-flex flex-wrap gap-3 pb-4">
 <div className="time-item ">
                 <span > {date.day}</span> 
             </div>

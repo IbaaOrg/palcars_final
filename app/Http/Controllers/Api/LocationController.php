@@ -22,6 +22,7 @@ class LocationController extends Controller
      * Display a listing of the resource.
      */
     use ResponseTrait; 
+  
     public function index()
     {
         return $this->success(SimpleLocationResource::collection(Location::all()));
@@ -131,7 +132,7 @@ class LocationController extends Controller
     public function show(string $id)
     {
         $data = Location::find($id); // استرجاع سجل محدد بالمعرف
-        return $this->success($data);
+        return $this->success(new SimpleLocationResource ($data));
     }
 
     /**
@@ -146,14 +147,14 @@ class LocationController extends Controller
         $validator=Validator::make($request->all(),[
             'location'=>'nullable|string|max:255',
             'type'=>'nullable|in:pickup,dropoff,pickup_dropoff',
-            'city_id'=>'nullable|in:pickup,dropoff,pickup_dropoff',
+            'city_id'=>'nullable|exists:cities,id',
         ]);
         if($validator->fails()){
             $msg=$validator->errors()->first();
             return $this->fail($msg,400);
         }
         $data= $request->only([
-            'location','type','car_id'
+            'location','type','city_id'
         ]);
         $location->update($data);
         return $this->success(new SimpleLocationResource($location));

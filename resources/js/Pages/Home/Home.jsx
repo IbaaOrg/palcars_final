@@ -92,6 +92,7 @@ function Home() {
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [userCount, setUserCount] = useState(0);
+    const [carsCount, setCarsCount] = useState(0);
 
     
     const [location, setLocation] = useState('');
@@ -163,9 +164,14 @@ function Home() {
             console.error(error);
         }
     }
+    const getcarscount= async()=>{
+        const response=await axios.get('/CarsCount');
+        setCarsCount(response.data.data.cars_count)
+    }
     useEffect(() => {
         getusercount();
         getcitycount();
+        getcarscount();
         console.log(data)
 
     }, []);
@@ -364,10 +370,10 @@ function Home() {
 
                                     <div className="fs-1  p-3">
 
-                                        <CountUp start={0} end={userCount} duration={2} delay={1} className="  " />
+                                        <CountUp start={0} end={carsCount} duration={2} delay={1} className="  " />
                                         
                                     </div>
-                                    <h1 className="fs-3">Rented</h1>
+                                    <h1 className="fs-3">Cars</h1>
 
                                 </div>
                                 <div className=" card p-4 shadow d-flex justify-content-center align-items-center cardStatistics mx-3">

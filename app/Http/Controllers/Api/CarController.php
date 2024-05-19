@@ -375,5 +375,13 @@ foreach ($notifications as $notification) {
         return $this->success(new DiscountCarResource($car));
 
     }
-
+    public function CarsCount(Request $request)
+    {
+        $cars = Car::all();
+        $carsCount = $cars->count();
+        
+        return $this->success([
+            'cars_count' => $carsCount,
+        ]);
+    }
 }

@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 
 import Loading from "../../Componants/UI/Loading";
 import Discounts from "./../Discounts/Discounts";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 
 function AllLocations() {
     const [loading, setLoading] = useState(false);
     const [locations, setLocations] = useState([]);
     const [deleted,setDeleted]=useState(null);
     const [data, setData] = useState([]);
+    const navigate=useNavigate();
     const deleteLocation = async (e) => {
         e.preventDefault();
         const id = e.target.id;
@@ -66,7 +67,9 @@ function AllLocations() {
         }));
       
     };
-    
+    const updateLocation= (e)=>{
+        navigate(`/dashbord/EditLocation/${e.target.id}`)
+    }
     return (
         <div>
             {loading ? (
@@ -91,9 +94,7 @@ function AllLocations() {
                             </form>
                         </div>
                         <div className="col">
-                            <button type="button" class="btn btn-light">
-                                Filter
-                            </button>
+                           
 
                             <button
                                 type="button"
@@ -129,8 +130,7 @@ function AllLocations() {
                                             <td>{data.type}</td>
                                             
                                       <td className=' p-1 d-flex justify-content-center gap-3'>
-                                          <button  className='btn btn-success'>View</button>
-                                          <button  className='btn btn-primary'>Update</button>
+                                          <button  className='btn btn-primary' id={data.id} onClick={updateLocation}>Update</button>
                                           <button type="button" id={data.id} className='btn btn-danger' onClick={deleteLocation}>Delete</button>
                                       </td>
                                         </tr>
