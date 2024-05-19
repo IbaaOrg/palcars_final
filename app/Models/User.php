@@ -60,6 +60,12 @@ class User extends AuthenticatableUser implements Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    protected $appends = ['points'];
+
+    public function getPointsAttribute()
+    {
+        return $this->rental_count * 5;
+    }
     public function isAdmin(){
         return $this->role==="Admin";
     }
@@ -75,7 +81,9 @@ class User extends AuthenticatableUser implements Authenticatable
     public function isRenterOrCompany(){
         return $this->role === "Company"||$this->role === "Renter";
     }
-
+    public function employees(){
+        return $this->hasMany(Employee::class);
+    }
     //cars for company
     public function cars(){
         return $this->hasMany(Car::class);

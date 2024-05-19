@@ -6,7 +6,11 @@ import { TranslateContext } from '../../Context/Translate';
 import { NavLink } from 'react-router-dom';
 import { TbShoppingCartDiscount } from "react-icons/tb";
 import { RiCustomerServiceFill } from "react-icons/ri";
+import { Link } from 'react-router-dom';
 import '../../../css/HomeStyle/Home.css'
+import imgRent from '../../../../public/image/rent.png'
+import imgDiscount from '../../../../public/image/dis.png'
+import imgSupport from '../../../../public/image/support.png'
 const Services = () => {
     const {translates}=useContext(TranslateContext)
   return (
@@ -15,31 +19,30 @@ const Services = () => {
         <div className='d-flex flex-wrap justify-content-center'>
         <div className='col-8 col-lg-3 cards mx-2 d-flex flex-column align-items-center custom-shadow rounded'>
         <div className="image">
-        <TbShoppingCartDiscount size={"90px"} className='text-primary p-2 ' />
-
+          <img src={imgDiscount} alt="" />
 
         </div>
         <div className='content'>
-        <h3 className='my-4 fw-bold'>{translates.Discountsanddeals}</h3>
-        <NavLink href="" className={'bg-primary my-3 p-3 text-white rounded'}>{translates.BrowseNow}</NavLink>
+        <h3 className='my-4 fs-5 py-2'>{translates.Discountsanddeals}</h3>
+        <Link to="/discounts" className={'bg-primary my-3 p-3 text-white rounded fw-bold'}>{translates.BrowseNow}</Link>
       </div>
         </div>
         <div  className='col-8 col-lg-3 cards mx-2 d-flex flex-column align-items-center custom-shadow rounded'>
         <div className="image">
-        <IoCarSportSharp  size={"90px"} className='text-primary p-2 '  />
-        </div>
+          <img src={imgRent} alt="" />
+       </div>
         <div className='content'>
-        <h3 className='my-4 fw-bold'>{translates.AllCars}</h3>
-        <NavLink to="/cars" className={'bg-primary my-3 p-3 text-white rounded'}>{translates.BrowseNow}</NavLink>
+        <h3 className='my-4  fs-5 py-2'>{translates.AllCars}</h3>
+        <Link to="/cars" className={'bg-primary my-3 p-3 text-white rounded fw-bold'}>{translates.BrowseNow}</Link>
       </div>
         </div>
         <div className='col-8 col-lg-3 cards mx-2 d-flex flex-column align-items-center custom-shadow rounded' >
         <div className="image">
-        <RiCustomerServiceFill  size={"90px"} className='text-primary p-2 '  />
+          <img src={imgSupport} alt="" />
         </div> 
         <div className="content">
-        <h3 className='my-4 fw-bold'>{translates.ContactWithCompany}</h3>
-        <NavLink to="/cars" className={'bg-primary my-3 p-3 text-white rounded'}>{translates.BrowseNow}</NavLink>        </div>
+        <h3 className='my-4  fs-5 py-2'>{translates.ContactWithCompany}</h3>
+        <Link to="/contact" className={'bg-primary my-3 p-3 text-white rounded fw-bold'}>{translates.BrowseNow}</Link>        </div>
         </div>
         </div>
 

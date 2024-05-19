@@ -118,7 +118,7 @@ function Header({ islogined }) {
                     </div>
 
                     {/* search */}
-                    {userToken? '' : <NaveBar />}
+                    {userToken&&user.role!=='Renter'? '' : <NaveBar />}
                    
 
                     <div class="hstack gap-1">
@@ -423,19 +423,19 @@ function Header({ islogined }) {
                                 ) : (
                                     <div></div>
                                 )}
-                                <button type="button" class="btn btn-outline-danger" onClick={out} > Logout</button>
+                                <button type="button" class="btn btn-outline-primary" onClick={out} > Logout</button>
 
                             </>
                         ) : (
                             <>
                                 <NavLink
                                     to="/login"
-                                    className=" fw-bold border-end border-primary px-2 "
+                                    className=" fw-bold border-end border-primary px-2  fontSizeNav"
                                 >
                                     {" "}
                                     {translates.Login}
-                                </NavLink>
-                                <NavLink to="/role" className="fw-bold">
+                                </NavLink> 
+                                <NavLink to="/role" className="fw-bold fontSizeNav">
                                     {" "}
                                     {translates.Register}
                                 </NavLink>

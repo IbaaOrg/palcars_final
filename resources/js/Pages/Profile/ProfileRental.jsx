@@ -68,7 +68,7 @@ function ProfileRental() {
                   </div>
                 </div>
                 
-                <div className="row profilebuttons">
+                <div className="d-flex aling-items-center  p-4 profilebuttons bg-slate-100 rounded">
                   <NavLink className=' list-group-item col' to={"information"}>Information</NavLink>
                   <NavLink className=' list-group-item col' to={"booking"}>Booking</NavLink>
                   <NavLink className=' list-group-item col' to={"messages"}>Messages</NavLink>

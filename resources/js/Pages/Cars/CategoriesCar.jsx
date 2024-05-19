@@ -77,7 +77,7 @@ const getCarByCategory=async(type)=>{
 }
     return (
         <div className="container categories mt-5">
-            <h1 className="text-center fs-3 mt-4 mainhead">Categories of car</h1>
+            <h1 className="text-center  mt-4 mainhead">Categories of car</h1>
             <Swiper
              breakpoints={{
               
@@ -106,7 +106,7 @@ const getCarByCategory=async(type)=>{
                         <SwiperSlide key={category.id}>
                             <div className='d-flex flex-column '>
                                 <img src={category.img} width={"300px"} height={"200px"} />
-                                <h3 className='fw-bold text-center' onClick={()=>getCarByCategory(category.type)}>{category.name}</h3>
+                                <h3 className='fw-bold text-center fs-5' onClick={()=>getCarByCategory(category.type)}>{category.name}</h3>
                             </div>
                         </SwiperSlide>
                     ))}

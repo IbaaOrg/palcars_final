@@ -8,6 +8,7 @@ import get_user from './../../NetWorking/get_user';
 import Loading from '../../Componants/UI/Loading';
 import RecordButton from './../../Componants/UI/RecordButton';
 import { GrFormEdit } from "react-icons/gr";
+import { ToastContainer, Bounce, Zoom, toast } from "react-toastify";
 
 
 function VehiclesDashbord() {
@@ -15,7 +16,7 @@ function VehiclesDashbord() {
 
     const [data, setData] = useState([]);
     const [message, setMessage] = useState(null);
-
+    const [statusVal,setStatusVal]=useState(false);
     const [user, setUser] = useState([]);
     const [loading, setLoading] = useState(false);
     const [statuses, setStatuses] = useState([])
@@ -54,35 +55,77 @@ function VehiclesDashbord() {
     }
     const handleEditClick = (id, index, currentStatus) => {
         setEditStatusId(id); // Set the ID of the status being edited
-        setStatuses(prevStatuses => {
-            const newStatuses = [...prevStatuses];
-            newStatuses[index] = currentStatus;
-            return newStatuses;
-        }); // Initialize input field with current status
     };
 
     const handleSaveClick = async (index, id) => {
         // Implement save logic
         setEditStatusId(null); // Reset edit mode
         const token = localStorage.getItem('token');
+        
+     
+    
+        // If status is valid, proceed with the axios post request
+        try {
+            const response = await axios.post(`cars/updateStatus/${id}`, { status: statuses[index].toLowerCase() }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            console.log(response)
+            setStatuses(prevStatuses => {
+                const newStatuses = [...prevStatuses];
+                newStatuses[index] = statuses[index].toLowerCase();
+                return newStatuses;
+            });
+            setStatusVal(prevStatusVal => !prevStatusVal);
+            toast.success("Status updated successfully", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+            });
 
-        const response = await axios.post(`cars/updateStatus/${id}`, { status: statuses[index] }, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-
-    };
-
+        } catch (error) {
+            if (error.response && error.response.status === 400) {
+                // Handle specific backend error (e.g., validation error)
+                toast.error("status is not rented or unrented or maintained", {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    transition: Bounce,
+                });
+            } else {
+                // Handle other types of errors (e.g., network error)
+                toast.error("An error occurred while saving changes.", {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    transition: Bounce,
+                });        
+            }}}
     const handleCancelClick = () => {
         setEditStatusId(null); // Reset edit mode
     };
 
-    const handleInputChange = async (index, e, id) => {
-        const { value } = e.target
-        setStatuses(prevStatuses => {
-            const newStatuses = [...prevStatuses];
-            newStatuses[index] = value
+    const handleInputChange = async(index,e ,id) => {
+        const {value}=e.target
+        setStatuses(prevStatuses=>{const newStatuses=[...prevStatuses];
+            newStatuses[index]=value.toLowerCase();
             return newStatuses;
         }); // Update status input value 
 
@@ -113,10 +156,10 @@ function VehiclesDashbord() {
                     console.error('Error fetching data:', error);
                 });
 
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    }, [message]);
+     } catch (error) {
+         console.error('Error fetching data:', error);
+     }
+  }, [message,statusVal]); 
     // /cars/{id}   post
     const [searchTerm, setSearchTerm] = useState(""); // الحالة المحلية لتخزين قيمة حقل البحث
 
@@ -185,7 +228,6 @@ function VehiclesDashbord() {
                                     <th scope="tableitem">Car Number</th>
                                     <th scope="tableitem">Make</th>
                                     <th scope="tableitem">model</th>
-
                                     <th scope="tableitem">catrgory</th>
                                     <th scope="tableitem">description</th>
                                     <th scope="tableitem">year</th>
@@ -198,9 +240,10 @@ function VehiclesDashbord() {
                                     <th scope="tableitem">operation</th>
 
 
-                                </tr>
-                            </thead>
-                            <tbody>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          
                                 {data.map((data, index) => (
                                     <tr key={data.id}>
                                         <td>{data.car_number}</td>

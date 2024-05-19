@@ -42,12 +42,13 @@ class Bill extends Model
       return $this->belongsTo(Method::class);
     }
     public function pickup_location(){
-      return $this->belongsTo(Location::class);
+      return $this->belongsTo(Location::class, 'pickup_location_id');
     }
 
     public function dropoff_location(){
-      return $this->belongsTo(Location::class);
+      return $this->belongsTo(Location::class, 'dropoff_location_id');
     }
+    
     public function city(){
       return $this->belongsTo(City::class);
 

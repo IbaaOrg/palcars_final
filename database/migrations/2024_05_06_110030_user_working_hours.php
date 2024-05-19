@@ -15,7 +15,7 @@ return new class extends Migration
 
         $table->id();
         $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-        $table->json('working_days');
+        $table->enum('day', ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']);
         $table->time('start_hour');
         $table->time('end_hour');
         $table->timestamps();
