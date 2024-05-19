@@ -222,7 +222,7 @@ console.log("allmessages:",allMessages);
 ))} */}
 
 {Array.isArray(allMessages) && allMessages.sort((a, b) => new Date(a.created_at) - new Date(b.created_at)).map((message, index) => (
-    <p key={index} className={`p-3 mb-2 rounded text-right ${message.sender.id === reseverid ? 'bg-primary text-black' : 'bg-success text-white'}`}>
+    <p key={index} className={`p-3 mb-2 rounded text-right ${message.sender.id === reseverid ? 'bg-primary text-white' : 'bg-success text-white'}`}>
         {message.message}
     </p>
 ))}
