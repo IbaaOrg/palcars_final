@@ -226,6 +226,7 @@ console.log("allmessages:",allMessages);
 {Array.isArray(allMessages) && allMessages.sort((a, b) => new Date(a.created_at) - new Date(b.created_at)).map((message, index) => (
     <p key={index} className={`p-3 mb-2 rounded ${message.sender.id === reseverid ? 'bg-primary text-white text-right' : 'bg-success text-white text-left'}`}>
         {message.message}
+        <small className="text-dark">{" "+message.timeago}</small>
     </p>
 ))}
 
