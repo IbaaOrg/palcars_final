@@ -209,7 +209,7 @@ const App = () => {
                         path={"RenterDashbord"}
                         element={<RenterDashbord/>}
                     />
-                    <Route path={"ChatsDashbord"} element={<ChatsDashbord />} />
+                    <Route path={"ChatsDashbord"} element={<Messages/>} />
                     <Route
                         path={"NotesDashboard"}
                         element={<NotesDashboard />}

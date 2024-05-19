@@ -217,7 +217,7 @@ function Messages() {
                                 <img
                                     src={user.photo_user}
                                     alt="User Avatar"
-                                    class=" rounded-circle w-20 col-4"
+                                    class=" rounded-circle w-20  h-20 col-4"
                                 />
                                 <span
                                     class="user-name col-8 d-flex justify-content-start ms-4"
