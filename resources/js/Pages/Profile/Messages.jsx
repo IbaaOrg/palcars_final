@@ -5,6 +5,7 @@ import '../../../css/app.css'
 import '../../../css/MessageStyle/message.css'
 import CommetInput from '../../Layout/Comments/CommetInput'
 import MessageInput from '../../Layout/Message/MessageInput'
+import Input from 'postcss/lib/input';
 function Messages() {
   const [data, setData] = useState([]);
   const[dataSearch,setdataSearch]=useState([]);
@@ -37,13 +38,14 @@ function Messages() {
         setChat(res.data);
         
       }
+            setMessage("");
+      console.log("Message after sending:", message); 
       all_send_message();
       all_received_message();
+
     } catch (e) {
       console.log(e.response.data.msg);
     } 
-    setMessage("");
-      console.log("Message after sending:", message); 
   }
   const all_send_message = async () => {
     const receverid = reseverid; // تأكد من تعيين قيمة `reseverid` بشكل صحيح
@@ -65,7 +67,7 @@ function Messages() {
         setMessage(res.data);
         console.log("message", message);
         console.log("res.data", res.data);
-      }
+      }setMessage("")
     } catch (e) {
       if (e.response) {
         console.log(e.response.data.msg);
@@ -95,7 +97,7 @@ function Messages() {
         setMessage(res.data);
         console.log("message", message);
         console.log("res.data", res.data);
-      }
+      }setMessage("")
     } catch (e) {
       if (e.response) {
         console.log(e.response.data.msg);
@@ -120,6 +122,7 @@ function Messages() {
       }
 all_send_message();
 all_received_message();
+setMessage("");
     } catch (e) {
       console.log(e)
       // onError()
@@ -143,7 +146,7 @@ all_received_message();
 
         //onSuccess(res.data)
       }
-
+setMessage("")
     } catch (e) {
       console.log(e)
       // onError()
@@ -154,7 +157,7 @@ all_received_message();
     get_users()
     all_send_message()
     all_received_message()
-    
+    setMessage("");
   }, []);
   const [searchTerm, setSearchTerm] = useState(""); // الحالة المحلية لتخزين قيمة حقل البحث
 
@@ -174,6 +177,12 @@ all_received_message();
   const allMessages = allChat.concat(allChatSender);
 
 console.log("allmessages:",allMessages);
+const handleSendMessage = () => {
+ 
+    send_message(message);
+    setMessage(""); // Reset the input field after sending the message
+  
+};
   return (
     <div className='row ' >
       <div className='col-4 message_list_list'>
@@ -240,7 +249,7 @@ console.log("allmessages:",allMessages);
             onChange={(e)=>{setMessage(e.target.value)}}
             
           />
-            <button className="send-button" onClick={send_message}>Send</button>
+            <button className="send-button" onClick={handleSendMessage}>Send</button>
         </div>
 
       </div>

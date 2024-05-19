@@ -40,6 +40,7 @@ function ChatsDashbord() {
       }
       all_send_message();
       all_received_message();
+      setMessage("")
     } catch (e) {
       console.log(e.response.data.msg);
     } 
@@ -66,7 +67,7 @@ function ChatsDashbord() {
         setMessage(res.data);
         console.log("message", message);
         console.log("res.data", res.data);
-      }
+      }setMessage("")
     } catch (e) {
       if (e.response) {
         console.log(e.response.data.msg);
@@ -96,7 +97,7 @@ function ChatsDashbord() {
         setMessage(res.data);
         console.log("message", message);
         console.log("res.data", res.data);
-      }
+      }setMessage("")
     } catch (e) {
       if (e.response) {
         console.log(e.response.data.msg);
@@ -116,11 +117,12 @@ function ChatsDashbord() {
         setResever(res.data)
         console.log(res.data)
 
-
+setMessage("")
         //onSuccess(res.data)
       }
 all_send_message();
 all_received_message();
+setMessage("");
     } catch (e) {
       console.log(e)
       // onError()
@@ -144,7 +146,7 @@ all_received_message();
 
         //onSuccess(res.data)
       }
-
+setMessage("")
     } catch (e) {
       console.log(e)
       // onError()
@@ -155,7 +157,7 @@ all_received_message();
     get_users()
     all_send_message()
     all_received_message()
-    
+    setMessage("")
   }, []);
   const [searchTerm, setSearchTerm] = useState(""); // الحالة المحلية لتخزين قيمة حقل البحث
 
@@ -175,6 +177,12 @@ all_received_message();
   const allMessages = allChat.concat(allChatSender);
 
 console.log("allmessages:",allMessages);
+const handleSendMessage = () => {
+ 
+  send_message(message);
+  setMessage(""); // Reset the input field after sending the message
+
+};
   return (
     <div className='row ' >
       <div className='col-4 message_list_list'>
@@ -241,7 +249,7 @@ console.log("allmessages:",allMessages);
             onChange={(e)=>{setMessage(e.target.value)}}
             
           />
-            <button className="send-button" onClick={send_message}>Send</button>
+            <button className="send-button" onClick={handleSendMessage}>Send</button>
         </div>
 
       </div>
