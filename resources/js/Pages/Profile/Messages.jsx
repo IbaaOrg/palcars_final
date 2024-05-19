@@ -184,7 +184,7 @@ const handleSendMessage = () => {
 };
   return (
     <div className='row ' >
-      <div className='col-4 message_list_list'>
+      <div className='col-4 message_list_list' style={{ maxHeight: '800px', overflowY: 'scroll', overflowX: 'hidden' }}>
       <div className="m-2">
            <form class="d-flex" role="search">
            <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search" value={searchTerm} onChange={handleChange} />
@@ -204,8 +204,8 @@ const handleSendMessage = () => {
 
         ))}
       </div>
-      <div className='col-7 message_list'>
-        <div className="chat-container">
+      <div className='col-7 message_list  border-0'>
+        <div className="chat-container" style={{ maxHeight: '800px', overflowY: 'scroll', overflowX: 'hidden', paddingTop: '40px' }}>
           <div className="message-list">
            
 {resever&&(
