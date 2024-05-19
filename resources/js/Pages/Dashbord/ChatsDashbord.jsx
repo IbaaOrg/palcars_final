@@ -155,11 +155,7 @@ all_received_message();
     get_users()
     all_send_message()
     all_received_message()
-    const intervalId = setInterval(() => {
-      all_received_message(); // Fetch messages every 5 seconds
-    }, 5000);
-
-    return () => clearInterval(intervalId); 
+    
   }, []);
   const [searchTerm, setSearchTerm] = useState(""); // الحالة المحلية لتخزين قيمة حقل البحث
 
