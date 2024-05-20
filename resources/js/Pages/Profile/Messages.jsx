@@ -210,7 +210,7 @@ const handleSendMessage = () => {
            
 {resever&&(
 
-            <div className="message  bg-dark text-white ">{resever.name}</div>
+            <div className=" message  bg-dark text-white ">{resever.name}</div>
 )}
           
             

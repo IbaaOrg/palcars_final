@@ -62,7 +62,7 @@ const RenterDashbord = () => {
                             class="btn btn-primary Addvehicle"
                         >
                             <NavLink
-                                to="/dashbord/addEmployee"
+                                to="/profile/booking"
                                 className={"activeLinkPrim"}
                             >
                                 All Bookings
