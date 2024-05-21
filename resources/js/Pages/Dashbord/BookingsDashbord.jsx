@@ -12,7 +12,8 @@ function BookingsDashbord(){
     const [selectedImage, setSelectedImage] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const { id } = useParams();  
-    
+    const [data, setData] = useState([]);
+
     const getRenters = async () => {
         const token = localStorage.getItem("token");
        try{
@@ -23,6 +24,7 @@ function BookingsDashbord(){
             },
         });
         setRenters( response.data.data);
+        setData(response.data.data);
      console.log(response.data.data);
     
     } catch (error) {
@@ -45,6 +47,27 @@ function BookingsDashbord(){
         setSelectedImage(null);
     };
 
+    const [searchTerm, setSearchTerm] = useState(""); // الحالة المحلية لتخزين قيمة حقل البحث
+
+    const handleChange = (e) => {
+        setSearchTerm(e.target.value); // تحديث القيمة عند تغييرها في حقل البحث
+    };
+    const handleSearch = (e) => {
+        e.preventDefault();
+        console.log(data);
+        setRenters(data.filter(item => {
+            return (
+                item.start_date !== null && (searchTerm ? item.start_date?.toString().toLowerCase().includes(searchTerm.toLowerCase()) : false) ||
+                item.end_date !== null && (searchTerm ? item.end_date?.toString().toLowerCase().includes(searchTerm.toLowerCase()) : false) ||
+                item.car.car_number !== null && (searchTerm ? item.car.car_number?.toString().toLowerCase().includes(searchTerm.toLowerCase()) : false)   ||     
+                item.amount !== null && (searchTerm ? item.amount?.toString().toLowerCase().includes(searchTerm.toLowerCase()) : false) 
+
+            ); 
+
+        }));
+      
+    };
+
     return (
     //   <div>
     //    {renters.map((item)=>(<h1>{item.name}</h1>)
@@ -60,22 +83,13 @@ function BookingsDashbord(){
                 <h1 className="fs-1">Renter Bills List</h1>
                 <p className="">Your all Renter Bills are listed bellow</p>
             </div>
-            <div className="col ">
-                <form class="d-flex" role="search">
-                    <input
-                        class="form-control me-2"
-                        type="search"
-                        placeholder="Search"
-                        aria-label="Search"
-                    />
-                    <button
-                        class="btn btn-outline-success"
-                        type="submit"
-                    >
-                        Search
-                    </button>
-                </form>
-            </div>
+                        <div className="col ">
+                        <form className="d-flex" role="search">
+                                <input
+                                    className="form-control me-2" type="search" placeholder="Search" aria-label="Search" value={searchTerm} onChange={handleChange} />
+                                <button className="btn btn-outline-success" type="submit" onClick={handleSearch} > Search </button>
+                            </form>
+                        </div>
         </div>
         {renters.length > 0 ? (
             <div className="w-100  mt-4 rounded bg-white px-3 pt-3">

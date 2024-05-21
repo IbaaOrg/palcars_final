@@ -218,8 +218,6 @@ Route::middleware('auth:sanctum','renter')->delete('/destroyBill/{id}',[BillCont
 Route::middleware('auth:sanctum','company')->get('/showAllBillsOfMyCompany',[BillController::class,'allBillsOfMyCompany']);
 Route::middleware('auth:sanctum','company')->get('/allRentersOfMyCompany',[BillController::class,'allRentersOfMyCompany']);
 Route::middleware('auth:sanctum','renter')->get('/allBillsOfRenter',[BillController::class,'allBillsOfRenter']);
-//allBillsOfChosenRenterInChosenCompany
-//Route::get('allBillsOfChosenRenterInChosenCompany/{userId}/{companyId}', [BillController::class, 'allBillsOfChosenRenterInChosenCompany']);
 Route::middleware('auth:sanctum')->get('/showAllBillsOnCar/{id}',[BillController::class,'showAllBillsOnCar']);
 Route::middleware('auth:sanctum')->get('/allNotifications',[NotificationController::class,'allNotifications']);
 Route::middleware('auth:sanctum')->get('/notes/{id}',[NotificationController::class,'show']);
