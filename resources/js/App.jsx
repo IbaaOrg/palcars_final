@@ -81,6 +81,7 @@ import RenterDashbord from './Pages/Dashbord/RenterDashbord';
 import EditLocation from "./Pages/Dashbord/EditLocation";
 import ViewDiscount from "./Pages/Dashbord/ViewDiscount";
 import EditDiscount from "./Pages/Dashbord/EditDiscount";
+import BookingsDashbord from "./Pages/Dashbord/BookingsDashbord";
 
 //LocationDashbord
 const App = () => {
@@ -209,6 +210,8 @@ const App = () => {
                         path={"RenterDashbord"}
                         element={<RenterDashbord/>}
                     />
+                    <Route path="/dashbord/RenterDashbord/bookings/:id" element={<BookingsDashbord/>}/>
+             
                     <Route path={"ChatsDashbord"} element={<Messages/>} />
                     <Route
                         path={"NotesDashboard"}

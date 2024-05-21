@@ -4,8 +4,8 @@ import "../../../css/app.css";
 import { FaRegImages } from "react-icons/fa6";
 import ImageModel from "../../Layout/Dialog/ImageModel";
 import '../../../css/DialogStyle/Model.css'
-
-const RenterDashbord = () => {
+import { Outlet } from "react-router-dom";
+const RenterDashbord = ({ id }) => {
     const [renters, setRenters] = useState([]);
     const [selectedImage, setSelectedImage] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -59,7 +59,7 @@ const RenterDashbord = () => {
                     <div className="col">
                         <button
                             type="button"
-                            class="btn btn-primary Addvehicle"
+                            class="btn btn-primary AllBokings"
                         >
                             <NavLink
                                 to="/profile/booking"
@@ -115,7 +115,13 @@ const RenterDashbord = () => {
 
                                     </div>
                                     <div className=" d-flex  align-items-start">
-                                        <button className="btn btn-primary mt-0 p-2">Bookings </button>
+                                        <button className="btn btn-primary mt-0 p-2">  
+                                        <NavLink
+                                to={`/dashbord/RenterDashbord/bookings/${item.id}`}
+                                className={"activeLinkPrim"}
+                            >
+                                Bookings
+                            </NavLink> </button>
 
                                     </div>
                                 </div>
