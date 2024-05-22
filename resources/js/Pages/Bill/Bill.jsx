@@ -12,11 +12,9 @@ import { ToastContainer, toast } from "react-toastify";
 import { Bounce, Zoom } from "react-toastify";
 import DialogTitle from '@mui/material/DialogTitle';
 //import { DialogTitle } from ".mui/material";
-import moment from 'moment';
 import Dialog from "@mui/material/Dialog";
 import { PiTimerBold } from "react-icons/pi";
 import { MdOutlinePriceCheck } from "react-icons/md";
-
 //import { Dialog } from ".mui/material";
 import { height, margin, padding, width } from "@mui/system";
 const Bill = () => {
@@ -93,6 +91,7 @@ const dialogStyle = {
     const [methodId, setMethodId] = useState("");
     const [cityId, setCityId] = useState("");
     const [carId, setCarId] = useState("");
+    const [carOwner, setCarOwner] = useState("");
     const [disoucntId, setDiscountId] = useState("");
     const [showCity, setShowCity] = useState(false);
     const [arrayCity, setArrayCity] = useState([]);
@@ -105,6 +104,8 @@ const dialogStyle = {
     const [step5,setStep5]=useState(false);
     const[totalPrice,setTotalPrice]=useState(0);4
     const[disabledDate,setDisabledDate]=useState([]);
+    const [enabledDates, setEnabledDates] = useState([]);
+    const [availableTimes,setAvailableTimes]=useState({});
     const [totalDays,setTotalDays]=useState('');
     const [totalHours,setTotalHours]=useState('');
     const navigate=useNavigate();
@@ -162,14 +163,30 @@ const dialogStyle = {
             return acc.concat(datesInRange);
         },[])
         setDisabledDate(disabledDates)
-        console.log(disabledDates)
     }
+    const fetchEnabledDate=async()=>{
+
+        const response=await axios.get(`/showAll/${id}`)
+        const dates = response.data.data.map(date => date.date);
+        const times = response.data.data.reduce((acc,entry)=>{
+            acc[entry.date]={start: entry.start_time, end: entry.end_time}
+            return acc;
+
+        })
+
+        setEnabledDates(dates);
+        setAvailableTimes(times)
+      }
+      useEffect(() => {
+        fetchEnabledDate();
+    }, [id]);
     useEffect(() => {
         getPickup();
         getDropoff();
         getCities();
         setCarId(id);
         getBillsOnCar(id);
+        fetchEnabledDate();
     }, []);
     useEffect(() => {
         const pickuplocations = arrayPickup.filter(
@@ -272,14 +289,26 @@ const dialogStyle = {
                 theme: "light",
                 transition: Zoom,
             });
-        }else{
+        }else if(!enabledDates.includes(selctedDate)){
+            toast.error("Owner company of car isn't work in this day , please change it !", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Zoom,
+            });
+        } else{
             setStartDate(e.target.value);
         }
     };
     const handelEndDate = (e) => {
         const selectedDate=e.target.value;
         if(isDateDisabled(selectedDate)){
-            toast.error("This car is rented by another person on this date , please change it !", {
+            toast.error("This car is rented by another person on this day ", {
                 position: "top-center",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -291,16 +320,68 @@ const dialogStyle = {
                 transition: Zoom,
             });
             // alert(" This car is rented by another person on this date.");
+        }else if(!enabledDates.includes(selectedDate)){
+            toast.error("Owner company of car isn't work in this day", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Zoom,
+            });
         }else {
             setEndDate(e.target.value);
         }
     };
-    const handelStartTime = (e) => {
-        setStartTime(e.target.value);
-    };
+    const handelStartTime =  (e) => {
+        const selectedTime = e.target.value;
+        const { start, end } = availableTimes[startDate];
+        const formattedStartTime = moment(start, 'HH:mm').format('h:mm A');
+        const formattedEndTime = moment(end, 'HH:mm').format('h:mm A');
+        // Check if the selected time is within the available range
+        if (selectedTime < start || selectedTime > end) {
+            // If not, reset to the nearest valid time within the range
+            toast.error(`in ${startDate} this company work from ${formattedStartTime} to ${formattedEndTime}`, {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Zoom,
+            });
+        } else {
+            // If within the range, update the state with the selected time
+            setStartTime(selectedTime);
+        }    };
     const handelEndTime = (e) => {
-        setEndTime(e.target.value);
-    };
+        const selectedTime = e.target.value;
+        const { start, end } = availableTimes[endDate];
+     const formattedStartTime = moment(start, 'HH:mm').format('h:mm A');
+     const formattedEndTime = moment(end, 'HH:mm').format('h:mm A');
+        // Check if the selected time is within the available range
+        if (selectedTime < start || selectedTime > end) {
+            // If not, reset to the nearest valid time within the range
+            toast.error(`in ${endDate} this company work from ${formattedStartTime} to ${formattedEndTime} `, {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Zoom,
+            });
+        } else {
+            // If within the range, update the state with the selected time
+            setEndTime(selectedTime);
+        }    };
 
     const handelValues = async () => {
         setLoading(true);
@@ -385,7 +466,7 @@ const dialogStyle = {
     setTotalPrice(car.prices[0].price_per_hour*hours);
     },[startDate,startTime,endDate,endTime])
    
-     return (
+    return (
         <>
             <ToastContainer />
             <div className="d-flex flex-column  bg-slate-100  w-100 ">
@@ -612,12 +693,12 @@ const dialogStyle = {
                                                         >
                                                             {location.location}
                                                             <p className="text-primary">
-                                                                In{" "}
+                                                                In
                                                                 {
                                                                     location
                                                                         .city
                                                                         .city
-                                                                }{" "}
+                                                                }
                                                                 City
                                                             </p>
                                                         </li>
@@ -637,8 +718,8 @@ const dialogStyle = {
                                             type="date"
                                             class="form-control"
                                             id="startDatepick"
-                                            min={todayDate()}
-                                            value={startDate}
+                                            min={enabledDates.length > 0 ? enabledDates[0] : todayDate()}
+                                            max={enabledDates.length > 0 ? enabledDates[enabledDates.length - 1] : todayDate()}                                            value={startDate}
                                             onChange={handelStartDate}
 
                                         />
@@ -651,12 +732,14 @@ const dialogStyle = {
                                             Time
                                         </label>
                                         <input
-                                            type="time"
-                                            class="form-control"
-                                            id="startTimepick"
-                                            value={startTime}
-                                            onChange={handelStartTime}
-                                        />
+                                        type="time"
+                                        className="form-control"
+                                        id="startTimepick"
+                                        value={startTime}
+                                        onChange={handelStartTime}
+                                        min={startDate && availableTimes[startDate] ? availableTimes[startDate].start : '00:00'}
+                                        max={startDate && availableTimes[startDate] ? availableTimes[startDate].end : '23:59'}
+                                    />
                                     </div>
                                 </div>
                             </div>
@@ -730,7 +813,8 @@ const dialogStyle = {
                                             type="date"
                                             class="form-control "
                                             id="endDate"
-                                            min={startDate}
+                                            min={enabledDates.length > 0 ? enabledDates[0] : startDate}
+                                            max={enabledDates.length > 0 ? enabledDates[enabledDates.length - 1] : startDate}
                                             value={endDate}
                                             onChange={handelEndDate}
                                         />
@@ -743,12 +827,14 @@ const dialogStyle = {
                                             Time
                                         </label>
                                         <input
-                                            type="time"
-                                            class="form-control"
-                                            id="endTime"
-                                            value={endTime}
-                                            onChange={handelEndTime}
-                                        />
+                                        type="time"
+                                        className="form-control"
+                                        id="endTime"
+                                        value={endTime}
+                                        onChange={ handelEndTime}
+                                        min={endDate && availableTimes[endDate] ? availableTimes[endDate].start : '00:00'}
+                                        max={endDate && availableTimes[endDate] ? availableTimes[endDate].end : '23:59'}
+                                    />
                                     </div>
                                 </div>
                             </div>

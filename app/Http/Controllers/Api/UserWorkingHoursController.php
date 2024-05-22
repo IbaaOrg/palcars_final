@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Car;
 use App\Models\User;
 use Firebase\JWT\JWT;
 use forgetPasswordMail;
@@ -89,61 +90,66 @@ class UserWorkingHoursController extends Controller
     public function getAllDatesForWorkingHours(string $day, string $startHour, string $endHour): array
     {
         $dates = [];
-        $currentYear = Carbon::now()->year;
-        $nextYear = $currentYear + 1;
+    $currentDate = Carbon::now()->startOfDay(); // Start from today
+    $nextYear = $currentDate->copy()->addYear(); // Next year from today
+
+        // Loop through all dates from today to the end of the next year
+        while ($currentDate->lessThanOrEqualTo($nextYear)) {
+            // Check if the current date is the specified day of the week
+            if ($currentDate->englishDayOfWeek === $day) {
+                // Combine the current date with the start hour to create the start datetime
+                $startDateTime = $currentDate->copy()->setTimeFromTimeString($startHour);
     
-        // Loop through all dates in the current year and next year
-        foreach ([$currentYear, $nextYear] as $year) {
-            $currentDate = Carbon::create($year, 1, 1)->startOfDay(); // Start from the beginning of the year
-            
-            while ($currentDate->year == $year) {
-                // Check if the current date is the specified day of the week
-                if ($currentDate->englishDayOfWeek === $day) {
-                    // Combine the current date with the start hour to create the start datetime
-                    $startDateTime = $currentDate->copy()->setTimeFromTimeString($startHour);
-                    
-                    // Combine the current date with the end hour to create the end datetime
-                    $endDateTime = $currentDate->copy()->setTimeFromTimeString($endHour);
-                    
-                    // Add the start and end datetime to the array of dates
-                    $dates[] = [
-                        'start_datetime' => $startDateTime->toDateTimeString(),
-                        'end_datetime' => $endDateTime->toDateTimeString(),
-                    ];
-                }
-                
-                // Move to the next day
-                $currentDate->addDay();
+                // Combine the current date with the end hour to create the end datetime
+                $endDateTime = $currentDate->copy()->setTimeFromTimeString($endHour);
+    
+                // Add the date, start time, and end time to the array of dates
+                $dates[] = (object) [
+                    'date' => $currentDate->toDateString(),
+                    'start_time' => $startDateTime->toTimeString(),
+                    'end_time' => $endDateTime->toTimeString(),
+                ];
             }
+    
+            // Move to the next day
+            $currentDate->addDay();
         }
-        
+    
         return $dates;
     }
     
-  
-public function showAll(string $id)
-{
-    $user = User::find($id);
-    if ($user) {
-        $workingHours = [];
-        // Iterate through each day of the week
-        foreach (['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'] as $day) {
-            // Get the start and end hours for the current day
-            $startHour = $user->userWorkingHours()->where('day', $day)->value('start_hour');
-            $endHour = $user->userWorkingHours()->where('day', $day)->value('end_hour');
-            
-            // Check if both start and end hours are not null
-            if ($startHour !== null && $endHour !== null) {
-                // Generate dates for the current day and add them to the array
-                $workingHours[$day] = $this->getAllDatesForWorkingHours($day, $startHour, $endHour);
-            }
+    public function showAll(string $id)
+    {
+        $car = Car::find($id);
+        if(!$car){
+            return $this->fail('car not found',404);
         }
-        
-        return $this->success($workingHours);
-    }
+        $user=$car->ownerUser;
+        if ($user) {
+            $workingHours = [];
+            // Iterate through each day of the week
+            foreach (['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'] as $day) {
+                // Get the start and end hours for the current day
+                $startHour = $user->userWorkingHours()->where('day', $day)->value('start_hour');
+                $endHour = $user->userWorkingHours()->where('day', $day)->value('end_hour');
     
-    return $this->fail("Company isn't found", 404);
-}
+                // Check if both start and end hours are not null
+                if ($startHour !== null && $endHour !== null) {
+                    // Generate dates for the current day and add them to the array
+                    $workingHours = array_merge($workingHours, $this->getAllDatesForWorkingHours($day, $startHour, $endHour));
+                }
+            }
+    
+            // Sort the array of dates in ascending order
+            usort($workingHours, function ($a, $b) {
+                return strtotime($a->date . ' ' . $a->start_time) <=> strtotime($b->date . ' ' . $b->start_time);
+            });
+    
+            return $this->success($workingHours);
+        }
+    
+        return $this->fail("Company isn't found", 404);
+    }
 public function destroy(string $id)
 {
     $userWorkingHour=UserWorkingHour::find($id);

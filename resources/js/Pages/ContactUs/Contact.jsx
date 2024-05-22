@@ -16,7 +16,7 @@ function Contact() {
       <h2 className='fs-4 fw-bold text-center'>Social Media</h2>
       <div className="d-flex gap-5">
       <div className='d-flex flex-column align-items-center '><GrInstagram size={45}/>
-      <Link className='fw-bold mt-4 fs-5 ' to={"https://www.instagram.com/palcars.ps?igsh=MTFnODQ3b2tnb2xwcA=="} >Palcars.ps</Link>
+      <Link className='fw-bold mt-4 fs-5 ' to={"https://www.instagram.com/palcars.ps?igsh=MTFnODQ3b2tnb2xwcA=="} target='_blank'>Palcars.ps</Link>
 </div>
       <div className='d-flex flex-column align-items-center'><FaSquareFacebook size={45}/>
       <Link className='fw-bold mt-4  fs-5'>Palcars</Link>

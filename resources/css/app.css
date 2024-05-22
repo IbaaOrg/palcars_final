@@ -25,6 +25,14 @@ textarea {
     border: 1px solid #dee2e6;
     border-radius: 10px;
 }
+.containerImgCompany {
+    width: 200px;
+    height: 180px;
+}
+.containerImgCompany img {
+    width: 100%;
+    height: 100%;
+}
 .sidebarMain {
     min-height: 100vh;
     background-color: white;

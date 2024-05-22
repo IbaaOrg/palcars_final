@@ -86,9 +86,9 @@ function City() {
                                           </div> 
                                       </div> */}
 
-                                      <div className="d-flex flex-column justify-content-center align-items-center pt-5">
-                                          <img src={company.owner.photo_user} alt="" className=' w-40' />
-                                          <p className='d-flex gap-3 justify-content-start align-items-center fw-bold pt-2 w-15'> <i class="bi bi-house-door-fill fs-2"></i>{company.owner.name} Company
+                                      <div className="d-flex flex-column justify-content-between align-items-center pt-5">
+                                         <div className='containerImgCompany'> <img src={company.owner.photo_user} alt="" width={200} height={200} />
+                                          </div><p className='d-flex gap-3 justify-content-start align-items-center fw-bold pt-2 w-15'> <i class="bi bi-house-door-fill fs-2"></i>{company.owner.name} Company
                                           </p>
                                          
                                           </div>

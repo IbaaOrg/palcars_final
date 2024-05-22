@@ -1,16 +1,58 @@
 .message_list{
     border: 1px solid #000;
-    height: 80vh;
+    height: 600px;
     display: flex;
     margin: 10px;
+    width: 60%;
+    overflow: auto;
+    border-radius: 5px;
+
 
 }
 .message_list_list {
     border: 1px solid #000;
     margin: 10px;
-
+    width: 40%;
+    height: 600px;
+    border-radius: 5px;
+    position: relative;
 }
 
+.chat-content {
+   height: 90%; 
+   overflow: auto;
+   width: 100%;
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+}
+.searchContent {
+    overflow: auto;
+    height: 530px;
+}
+.chat-content::-webkit-scrollbar,
+.searchContent::-webkit-scrollbar{
+    width: 8px;
+  
+}
+.chat-content::-webkit-scrollbar-thumb,
+.searchContent::-webkit-scrollbar-thumb
+{
+    background-color: #4c9ef6;
+}
+.chat-content::-webkit-scrollbar-thumb:hover,
+.searchContent::-webkit-scrollbar-thumb:hover{
+    background-color: #0174ef;
+}
+
+.chat-content::-webkit-scrollbar-track,
+.searchContent::-webkit-scrollbar-track{
+    background-color: rgb(216, 216, 216);
+}
+.serachContainer {
+    position: sticky ;
+    top: 0;
+}
 
 .chat-container {
     display: flex;
@@ -19,13 +61,18 @@
    width: 100%;
     border: 1px solid #ccc;
     padding: 10px;
-    overflow-y: scroll;
     background-image: url('../../../public/image/chatbg.jpg');
+    background-size: cover; /* Make the background cover the entire container */
+    background-repeat: repeat-y; /* Prevent the background image from repeating */
+    background-position: fixed; /* Center the background image */
+    position: relative;
 }
 
 .message-list {
-    flex: 1;
     width: 100%;
+    position: sticky;
+    top :1px;
+
 }
 
 .message {
@@ -40,7 +87,8 @@
     justify-content: space-between;
     align-items: end;
     width: 100%;
-    margin: 10px;
+    position: sticky;
+    bottom: 0px !important;
 }
 
 .message-input {
