@@ -6,9 +6,15 @@ const Report = () => {
     const [date, setDate] = useState("");
     const [time, setTime] = useState("");
     const location = useLocation();
-    const { resultBill } = location.state;
+    const { resultBill ,discountVal } = location.state;
     const [numHours, setNumHours] = useState(0);
     useEffect(() => {
+        const currentDate= new Date();
+        const formattedDate= currentDate.toLocaleDateString();
+        const formattedTime=currentDate.toLocaleTimeString();
+        setDate(formattedDate);
+        setTime(formattedTime);
+
         const pickupDateTime = new Date(`${resultBill.start_date}T${resultBill.start_time}`);
         const dropoffDateTime = new Date(`${resultBill.end_date}T${resultBill.end_time}`);
     
@@ -96,7 +102,7 @@ const Report = () => {
                     </div>
                 </div>
                 <hr />
-                <div className="d-flex flex-column  ">
+                <div className="d-flex flex-column m-2  ">
                     <h3 className="fw-bold fs-5 text-center py-4">
                         Detials Of Car
                     </h3>
@@ -168,8 +174,8 @@ const Report = () => {
                             <p>{resultBill.method.method} </p>
                         </div>
                         <div className="d-flex flex-column align-items-center">
-                            <h3>Total Price</h3>
-                            <p>{Math.round(resultBill.amount)} ₪</p>
+                            <h3>Final Price</h3>
+                            <p>{Math.ceil(resultBill.final_amount)} ₪</p>
                         </div>
                     </div>
                     <div className="d-flex justify-content-around p-2">

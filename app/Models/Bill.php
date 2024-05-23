@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Bill extends Model
 {
     use HasFactory;
-    protected $fillable = ['name','phone','address','city_id','amount','user_id','car_id','method_id','discount_id','start_date','end_date','start_time','end_time','pickup_location_id','dropoff_location_id'];
+    protected $fillable = ['name','phone','address','city_id','amount','final_amount','user_id','car_id','method_id','discount_id','start_date','end_date','start_time','end_time','pickup_location_id','dropoff_location_id'];
 
     public function discount()
     {

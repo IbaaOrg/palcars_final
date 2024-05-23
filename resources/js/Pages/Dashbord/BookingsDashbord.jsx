@@ -102,7 +102,7 @@ function BookingsDashbord(){
                                 <div className="renterInfoImg">  
                                     <div className="renterInfoImgContainer">
                                     <img
-                                        src={item.car.sub_images}
+                                        src={item.car.sub_images[0].photo_car_url}
                                         alt=""
                                         className="rounded"
                                     />
@@ -130,7 +130,7 @@ function BookingsDashbord(){
                                 </div> */}
                                 <p className="fw-bold  mt-4">Car Number : {item.car.car_number}</p>
                                 <p className="fw-bold  mt-4">
-                                             {item.amount} ₪
+                                             {item.final_amount} ₪
                                         </p>
                             
                         </div>

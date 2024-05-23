@@ -112,8 +112,20 @@ class BillController extends Controller
                 // Handle the case where there are no discounts associated with the car
                 $finalDiscountId = null; // Or any other appropriate action
             }
+            $finalAmount = $amount; 
+            if($user->points==5 || $user->points==10||$user->points==15){
+               $finalAmount=ceil($amount)-ceil(ceil($amount)*0.05);
+            }else if($user->points==20 || $user->points==25||$user->points==30){
+                $finalAmount=ceil($amount)-ceil(ceil($amount)*0.1);
 
-        // Create a new bill record
+            }else if($user->points==35 || $user->points==40||$user->points==45){
+                $finalAmount=ceil($amount)-ceil(ceil($amount)*0.15);
+
+            }else if ($user->points==50|| $user->points >50 ){
+                $finalAmount=ceil($amount)-ceil(ceil($amount)*0.2);
+
+               }
+                // Create a new bill record
         $bill = Bill::create([
             'name'=>$request->name,
             'phone'=>$request->phone,
@@ -121,6 +133,7 @@ class BillController extends Controller
             'city_id'=>$request->city_id,
             'user_id' => $request->user()->id,
             'amount' => $amount,
+            'final_amount'=>$finalAmount,
             'car_id' => $request->car_id,
             'method_id' => $request->method_id,
             'discount_id' => $finalDiscountId,
@@ -134,6 +147,7 @@ class BillController extends Controller
         $prices = Price::where('car_id', $request->car_id)->get();
         $car->update(['status' => 'rented']);
         $user->points += 5;
+
         $user->save();        
         // Return success response
         return $this->success(new SimpleBillResource($bill));

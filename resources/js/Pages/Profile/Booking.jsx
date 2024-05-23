@@ -9,8 +9,20 @@ function Booking() {
   const { user } = useContext(UserContext);
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [discountVal,setDiscountVal]=useState(0);
   const navigate = useNavigate();
+  const checkDicount=()=>{
+    if(user.points==5 || user.points==10||user.points==15){
+     setDiscountVal(0.05);
+    }else if(user.points==20 || user.points==25||user.points==30){
+     setDiscountVal(0.1);
+    }else if(user.points==35 || user.points==40||user.points==45){
+     setDiscountVal(0.1);
+    }else if (user.points==50|| user.points >50 ){
+     setDiscountVal(0.2);
 
+    }
+   }
   const bookingResult = async () => {
     const token = localStorage.getItem('token');
     try {
@@ -39,6 +51,7 @@ function Booking() {
 
   useEffect(() => {
     bookingResult();
+    checkDicount();
   }, [user.role]);
 
   const handleBooking = async (e) => {
@@ -97,8 +110,7 @@ function Booking() {
                 )}
                 <span>
                   <span className="text-primary fw-bold">Total Price: </span>
-                  {Math.round(item.amount)} ₪
-                </span>
+                  {user.points>0  &&(Math.ceil(item.amount) - Math.ceil(Math.ceil(item.amount) *  discountVal)) } ₪                </span>
               </div>
             ))}
           </div>

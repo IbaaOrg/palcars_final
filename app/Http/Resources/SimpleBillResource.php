@@ -29,6 +29,7 @@ class SimpleBillResource extends JsonResource
             'address'=>$this->address,
             'city'=>new CityResource($this->city),
             'amount'=>$this->amount,
+            'final_amount'=>$this->final_amount,
             'car'=>new BillCarResource($this->car),
             'method'=>new SimpleMethodResource($this->method),
             'amount'=>$this->amount,

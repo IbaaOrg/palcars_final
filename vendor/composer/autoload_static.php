@@ -585,6 +585,7 @@ class ComposerStaticInit968f73bcf5520ee401d641d0d79555ec
         'App\\Http\\Middleware\\Admin' => __DIR__ . '/../..' . '/app/Http/Middleware/Admin.php',
         'App\\Http\\Middleware\\AdminOrCompany' => __DIR__ . '/../..' . '/app/Http/Middleware/AdminOrCompany.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
+        'App\\Http\\Middleware\\CheckEmployee' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckEmployee.php',
         'App\\Http\\Middleware\\Company' => __DIR__ . '/../..' . '/app/Http/Middleware/Company.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'App\\Http\\Middleware\\PreventRequestsDuringMaintenance' => __DIR__ . '/../..' . '/app/Http/Middleware/PreventRequestsDuringMaintenance.php',

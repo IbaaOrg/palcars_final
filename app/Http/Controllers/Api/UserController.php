@@ -6,16 +6,19 @@ use Carbon\Carbon;
 use App\Models\User;
 use Firebase\JWT\JWT;
 use forgetPasswordMail;
+use App\Models\Employee;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\ResetPassword;
 use App\Http\Traits\ResponseTrait;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AuthResource;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Resources\AllUserResource;
 use Illuminate\Support\Facades\Storage;
@@ -147,6 +150,43 @@ class UserController extends Controller
 
         return $this->fail( 'Invalid email or password.',403);
         
+    }
+    public function loginWithEmail(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|exists:employees',
+            'password' => 'required|string'
+        ]);
+    
+        // Find the employee by email
+        $employee = Employee::where('email', $request->email)->first();
+    
+        if ($employee) {
+            // Check if the provided password matches the employee's password
+            if ($request->password === $employee->password) {
+                // Retrieve the company (user) associated with the employee
+                $company = $employee->user;
+    
+                // Log in the company (user) using Auth::login
+                Auth::login($company);
+    
+                // Generate an API token for the authenticated company (user)
+                $user = Auth::user();
+                $token = $user->createToken("TokenUser")->plainTextToken;
+                $user->token = $token;
+    
+                return $this->success(new AuthResource($user));
+            } else {
+                // Password does not match
+                return $this->fail('Invalid email or password.', 401);
+            }
+        } else {
+            // Employee not found
+            return response()->json([
+                'success' => false,
+                'message' => 'Employee not found.',
+            ], 404);
+        }
     }
     public function logout(){
          Auth::logout();
@@ -346,8 +386,6 @@ class UserController extends Controller
     public function getUser(Request $request){
         $user = $request->user();
         return $this->Success(new AllUserResource($user));
-           return $request->user();
-
     }
     public function getRenters(Request $request){
         $renterUsers = User::where('role', 'renter')->get();

@@ -11,6 +11,7 @@ use App\Models\CarImage;
 use App\Models\Employee;
 use App\Models\Favorite;
 use App\Models\Location;
+use Illuminate\Support\Str;
 use App\Models\Notification;
 use App\Models\UserWorkingHour;
 use Laravel\Sanctum\HasApiTokens;
@@ -36,8 +37,26 @@ class Employee extends AuthenticatableUser implements Authenticatable
         'location',
         'job_title', 
         'start_date',
+        'password'
     ];
     public function user(){
         return $this->belongsTo(User::class, 'user_id');
+    }
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($employee) {
+            $employee->password = self::generateUniqueCode();
+        });
+    }
+
+    private static function generateUniqueCode()
+    {
+        do {
+            $code = Str::random(8);
+        } while (self::where('password', $code)->exists());
+
+        return $code;
     }
 }

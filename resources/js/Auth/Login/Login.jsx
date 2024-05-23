@@ -42,6 +42,29 @@ function Login(props) {
         setSeccsses(null);
         setError(null);
         setIsLoading(true);
+        if(form.current.email.includes('@employee.ps')){
+            try {
+                const response = await axios.post("/login-email",
+                form.current,
+                );
+                const res = response.data
+                if (res) {
+                    setSeccsses(res.data) 
+                    const token = res.data.token;
+                    localStorage.setItem("token", token)
+                    if (res.data.role === "Company") {
+                        setUserToken(token)
+                        navigate("/dashbord");
+                    }
+                }
+        
+            } catch (e) {
+                setError(e.response.data.msg)
+            }finally{
+                setIsLoading(false);
+    
+            }
+        }else {
         try {
             const response = await axios.post("/login",
             form.current,
@@ -66,6 +89,7 @@ function Login(props) {
             setIsLoading(false);
 
         }
+    }
     };
 
     const byGoogle = async () => {

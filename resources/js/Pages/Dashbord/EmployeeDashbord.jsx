@@ -93,6 +93,7 @@ function EmployeeDashbord() {
                                 <th scope="col">Address</th>
                                 <th scope="col">Job Title</th>
                                 <th scope="col">Start Date</th>
+                                <th scope="col">Code</th>
                                 <th scope="col">Operation</th>
                             </tr>
                         </thead>
@@ -107,6 +108,7 @@ function EmployeeDashbord() {
                                         <td>{data.location}</td>
                                         <td>{data.job_title}</td>
                                         <td>{data.start_date}</td>
+                                        <td>{data.password}</td>
 
                                         <td className=" ">
                                             

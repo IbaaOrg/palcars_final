@@ -37,8 +37,10 @@ class User extends AuthenticatableUser implements Authenticatable
         'photo_drivinglicense',
         'birthdate',
         'description',
-        'role'
+        'role',
+        'points'
     ];
+    protected $appends = [];
 
 
     /**
@@ -60,12 +62,11 @@ class User extends AuthenticatableUser implements Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    protected $appends = ['points'];
 
-    public function getPointsAttribute()
-    {
-        return $this->rental_count * 5;
-    }
+    // public function getPointsAttribute()
+    // {
+    //     return $this->rental_count * 5;
+    // }
     public function isAdmin(){
         return $this->role==="Admin";
     }

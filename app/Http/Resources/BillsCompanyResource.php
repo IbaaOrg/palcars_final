@@ -22,6 +22,7 @@ class BillsCompanyResource extends JsonResource
             "name"=> $this->name,
             "phone"=> $this->phone,
             "amount"=> $this->amount,
+            "final_amount"=> $this->final_amount,
             "car" => new CarReource($this->car),
             "pickup_location"=> new SimpleLocationShowResource($this->pickup_location),
             "dropoff_location"=> new SimpleLocationShowResource($this->dropoff_location),

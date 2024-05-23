@@ -30,6 +30,7 @@ return array(
     'App\\Http\\Middleware\\Admin' => $baseDir . '/app/Http/Middleware/Admin.php',
     'App\\Http\\Middleware\\AdminOrCompany' => $baseDir . '/app/Http/Middleware/AdminOrCompany.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
+    'App\\Http\\Middleware\\CheckEmployee' => $baseDir . '/app/Http/Middleware/CheckEmployee.php',
     'App\\Http\\Middleware\\Company' => $baseDir . '/app/Http/Middleware/Company.php',
     'App\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',
     'App\\Http\\Middleware\\PreventRequestsDuringMaintenance' => $baseDir . '/app/Http/Middleware/PreventRequestsDuringMaintenance.php',

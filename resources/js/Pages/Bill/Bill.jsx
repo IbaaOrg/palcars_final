@@ -11,11 +11,14 @@ import { UserContext } from "../../Context/User";
 import { ToastContainer, toast } from "react-toastify";
 import { Bounce, Zoom } from "react-toastify";
 import DialogTitle from '@mui/material/DialogTitle';
+import { CiDiscount1 } from "react-icons/ci";
 //import { DialogTitle } from ".mui/material";
 import Dialog from "@mui/material/Dialog";
 import { PiTimerBold } from "react-icons/pi";
 import { MdOutlinePriceCheck } from "react-icons/md";
 //import { Dialog } from ".mui/material";
+import moment from 'moment';
+
 import { height, margin, padding, width } from "@mui/system";
 const Bill = () => {
     const [openDialog, handleDisplay] = React.useState(false);
@@ -108,6 +111,7 @@ const dialogStyle = {
     const [availableTimes,setAvailableTimes]=useState({});
     const [totalDays,setTotalDays]=useState('');
     const [totalHours,setTotalHours]=useState('');
+    const [discountVal,setDiscountVal]=useState('');
     const navigate=useNavigate();
     function todayDate() {
         const today = new Date();
@@ -177,6 +181,18 @@ const dialogStyle = {
         setEnabledDates(dates);
         setAvailableTimes(times)
       }
+      const checkDicount=()=>{
+       if(user.points==5 || user.points==10||user.points==15){
+        setDiscountVal(0.05);
+       }else if(user.points==20 || user.points==25||user.points==30){
+        setDiscountVal(0.1);
+       }else if(user.points==35 || user.points==40||user.points==45){
+        setDiscountVal(0.1);
+       }else if (user.points==50|| user.points >50 ){
+        setDiscountVal(0.2);
+
+       }
+      }
       useEffect(() => {
         fetchEnabledDate();
     }, [id]);
@@ -187,6 +203,7 @@ const dialogStyle = {
         setCarId(id);
         getBillsOnCar(id);
         fetchEnabledDate();
+        checkDicount();
     }, []);
     useEffect(() => {
         const pickuplocations = arrayPickup.filter(
@@ -430,7 +447,7 @@ const dialogStyle = {
         }
     };
     const navigateToReport=()=>{
-        navigate('/report',{state:{resultBill}});
+        navigate('/report',{state:{resultBill,discountVal}});
     }
     const NextStep2=()=>{
         setStep2(true);
@@ -847,7 +864,8 @@ const dialogStyle = {
               {step3&&<div className="  billpay mt-4 mb-4 bg-white px-5 py-3">
                     <h2 className="fw-bold fs-5 py-2">Payment Info</h2>
                     <div className="d-flex justify-content-between text-slate-400">
-                        <span>Please check this payment info</span>
+                    <span>Please check this payment info , each rental you gain 5 points </span>
+                    <span>{`5 - 19 points -> 5% , 20 - 34 points -> 10% , 35 - 49 points -> 15%, greater than 50 -> 20% `} </span>
                         <span>step 3 of 5</span>
                     </div>
 
@@ -856,7 +874,7 @@ const dialogStyle = {
                         <PiTimerBold  size={100}/>
 
                             <label className="fs-5 fw-bold">Rental period</label>
-                            <span className="fs-5 fw-bold p-3">{totalDays&&totalDays>1?`${totalDays} Days`:`${totalDays} Day`}  {totalHours&&totalHours>1?`and ${Math.round(totalHours)} Hours`:`and ${Math.round(totalHours)} Hour`}</span>
+                            <span className="fs-5 fw-bold p-3">{totalDays&&totalDays>1?`${totalDays} Days`:`${totalDays} Day`}  {totalHours&&totalHours>1?`and ${Math.ceil(totalHours)} Hours`:`and ${Math.ceil(totalHours)} Hour`}</span>
                             </div>
                             <div className="d-flex flex-column align-items-center justif-content-center  gap-2">
                             <MdOutlinePriceCheck size={100}/>
@@ -864,6 +882,16 @@ const dialogStyle = {
                             <label className="fs-5 fw-bold">Total price: </label>
                             <span className="fs-5 fw-bold p-3">{totalPrice?Math.ceil(totalPrice):0} ₪</span>
                             </div>
+                            <div className="d-flex flex-column align-items-center justif-content-center  gap-2">
+                            <CiDiscount1 size={100}/>
+                            <label className="fs-5 fw-bold">Total Points: </label>
+                            <span className="fs-5 fw-bold p-3">{user.points>0 ? user.points  : 'no' } point</span>
+                            </div>
+                            {user.points>0 ? <div className="d-flex flex-column align-items-center justif-content-center  gap-2">
+                            <MdOutlinePriceCheck size={100}/>
+                            <label className="fs-5 fw-bold">Price After Discount: </label>
+                            <span className="fs-5 fw-bold p-3">{user.points>0  &&(Math.ceil(totalPrice) - Math.ceil(Math.ceil(totalPrice) *  discountVal)) } ₪</span>
+                            </div>:''}
 </div>
 <div className="w-100 d-flex justify-content-start">
 <input type="submit" value={"Check"} onClick={NextStep4} className="btn btn-primary"/>

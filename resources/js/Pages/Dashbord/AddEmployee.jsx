@@ -112,7 +112,7 @@ const AddEmployee = () => {
                                 class="form-control"
                                 id="exampleInputEmail2"
                                 aria-describedby="emailHelp"
-                                placeholder="Enter email"
+                                placeholder="email@employee.ps"
                                 name="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}

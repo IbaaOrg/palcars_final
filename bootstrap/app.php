@@ -3,6 +3,7 @@
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\Renter;
 use App\Http\Middleware\Company;
+use App\Http\Middleware\CheckEmployee;
 use Illuminate\Foundation\Application;
 use App\Http\Middleware\AdminOrCompany;
 use App\Http\Middleware\ChangeLanguage;
@@ -29,6 +30,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'renter'=>Renter::class,
             'adminorcompany'=>AdminOrCompany::class,
             'renterorcompany'=>RenterOrCompany::class,
+            'checkemployee'=>CheckEmployee::class,
             'localize'                => LaravelLocalizationRoutes::class,
             'localizationRedirect'    => LaravelLocalizationRedirectFilter::class,
             'localeSessionRedirect'   => LocaleSessionRedirect::class,

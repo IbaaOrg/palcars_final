@@ -7,6 +7,7 @@ use App\Models\City;
 use App\Models\User;
 use App\Models\Employee;
 use App\Models\Location;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Traits\ResponseTrait;
 use App\Http\Controllers\Controller;
@@ -38,7 +39,7 @@ class EmployeeController extends Controller
 
         $validator = Validator::make($request->all(),[
             'full_name'=>'required|string|max:255',
-            'email' => 'required|email:rfc,dns|unique:employees',
+            'email' => 'required|email|regex:/^[A-Za-z0-9._%+-]+@employee\.ps$/|unique:employees,email', // Validation rule for email
             'phone' => 'required|numeric|regex:/^05[0-9]{8}$/',
             'location'=>'required',
             'job_title'=>'required',
@@ -58,11 +59,14 @@ class EmployeeController extends Controller
             'job_title'=>$request->job_title,
             'start_date'=>$request->start_date,
             'user_id'=>$request->user()->id,
+            'password'=>Str::random(8)
         ];
-       
+        while(Employee::where('password',$data['password'])->exists()){
+                $data['password'] = Str::random(8);
 
+        }
         $employee=Employee::create($data);
-        return $this->success(($employee));
+        return $this->success($employee);
     }
 
     /**
