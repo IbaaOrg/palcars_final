@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 // import Swiper core and required modules
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 
@@ -22,8 +22,10 @@ import { useState } from 'react';
 import '../../../css/HomeStyle/Home.css'
 // Import Swiper styles
 import get_all_cars from '../../NetWorking/get_all_cars';
+import { TranslateContext } from '../../Context/Translate';
 
 const CategoriesCar = () => {
+    const {translates}=useContext(TranslateContext)
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -77,7 +79,7 @@ const getCarByCategory=async(type)=>{
 }
     return (
         <div className="container categories mt-5">
-            <h1 className="text-center  mt-4 mainhead">Categories of car</h1>
+            <h1 className="text-center  mt-4 mainhead">{translates.Categoriesofcar}</h1>
             <Swiper
              breakpoints={{
               

@@ -120,6 +120,9 @@ public function getAllSendNotes(Request $request){
         $unreadcount=$request->user()->unreadNotifications->count();
         if($unreadcount)
         return $this->success(['unread_count' => $unreadcount]);
+    else 
+    return $this->success(['unread_count' => 0]);
+
     }
     public function allNotifications(Request $request){
         $notifications = $request->user()->unreadNotifications;

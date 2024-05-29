@@ -259,13 +259,17 @@ function VehiclesDashbord() {
                                         <td>{data.fuel_full}</td>
                                         <td className=''>
                                             {editStatusId === data.id ? (
-                                                <div className='d-flex flex-column justify-content-center align-items-center'>
-                                                    <input type='text' className="text-center" value={statuses[index]} onChange={(e) => handleInputChange(index, e, data.id)} />
-                                                    <div className="d-flex justify-content-center align-items-center gap-2">
-                                                        <button onClick={() => handleSaveClick(index, data.id)} className='btn border'>Save</button>
-                                                        <button onClick={handleCancelClick} className='btn border'>Cancel</button>
-                                                    </div>
-                                                </div>
+                                               <div className='d-flex flex-column justify-content-center align-items-center'>
+                                               <select className="text-center w-100 p-2 border mb-2" value={statuses[index]} onChange={(e) => handleInputChange(index, e, data.id)}>
+                                                   <option value="unrented">unrented</option>
+                                                   <option value="rented">rented</option>
+                                                   <option value="maintained">maintained</option>
+                                               </select>
+                                               <div className="d-flex justify-content-center align-items-center gap-2">
+                                                   <button onClick={() => handleSaveClick(index, data.id)} className='btn border'>Save</button>
+                                                   <button onClick={handleCancelClick} className='btn border'>Cancel</button>
+                                               </div>
+                                           </div>
                                             ) : (<span className='d-flex justify-content-center cursor-auto'>
                                                 {statuses[index]}
                                                 <GrFormEdit className='cursor-pointer' onClick={() => handleEditClick(data.id, index, statuses[index])} />

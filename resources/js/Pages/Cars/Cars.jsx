@@ -18,8 +18,10 @@ import { FavoriteContext } from "../../Context/Favorite";
 import '../../../css/FilterStyle/Filter.css';
 import { FaGasPump } from "react-icons/fa";
 import { BsPeopleFill } from "react-icons/bs";
+import { TranslateContext } from "../../Context/Translate";
 
 function Cars() {
+    const {translates}=useContext(TranslateContext)
     const {favoriteList,setFavoriteList}=useContext(FavoriteContext);
     const searchParams = new URLSearchParams(location.search);
     const category = searchParams.get("category");
@@ -173,44 +175,46 @@ modelValue     );
         }
     };
     const types=['SUV','Sedan','Hatchback','Convertible','Crossover','Minivan','Pickup trucks','Station Wagon'] 
+    const typesdesc=[`${translates.SUV}`,`${translates.Sedan}`,`${translates.Hatchback}`,`${translates.Convertible}`,`${translates.Crossover}`,`${translates.Minivan}`,`${translates.Pickuptrucks}`,`${translates.StationWagon}`] 
     const fuel_type=['gas','diesel','electricity'] 
     const steering=['Manual','Automatic'] 
+    const steeringdesc=[`${translates.Manual}`,`${translates.Automatic}`] 
     const persons=['2','4 ','5 ','6', '7',' 8'] 
     
     return (
        
             <div className="d-flex flex-wrap justify-evenly bg-slate-100 w-100  ">
                 <div className="col-5 col-md-2 bg-white p-3">
-                <div className="d-flex justify-content-center btn btn-primary align-items-center" onClick={Reset}> <span className="fs-5 ">Reset To all cars</span> <TbFilterSearch size={40}/></div>
+                <div className="d-flex justify-content-center btn btn-primary align-items-center" onClick={Reset}> <span className="fs-5 ">{translates.reset}</span> <TbFilterSearch size={40}/></div>
                 <div className="pt-3 d-flex align-items-center">
-                <span className="text-muted  fs-5 px-1">Make:</span>
+                <span className="text-muted  fs-5 px-1">{translates.Make}:</span>
  
                     <div className="w-70">
-                        <input type="text" className="border px-2 py-1 w-100 "  placeholder="Enter make" onChange={handleMake}/>
+                        <input type="text" className="border px-2 py-1 w-100 "  placeholder={translates.entermake} onChange={handleMake}/>
                       
                     </div>
          
                 </div>
                 <div className="pt-2  pb-3 d-flex align-items-center">
-                <span className="text-muted  fs-5 px-1">Model:</span>
+                <span className="text-muted  fs-5 px-1">{translates.model}:</span>
  
                     <div className="w-70">
-                        <input type="text" className="border px-2 py-1 w-100 "  placeholder="Enter model" onChange={handleModel}/>
+                        <input type="text" className="border px-2 py-1 w-100 "  placeholder={translates.entermodel} onChange={handleModel}/>
                       
                     </div>
          
                 </div>
                 <hr />
                 <div className="py-4">
-                <span className="text-muted mt-1 fs-5 d-flex gap-2 align-items-center">Type</span>
+                <span className="text-muted mt-1 fs-5 d-flex gap-2 align-items-center">{translates.type}</span>
  
                     <div className="type-list" onChange={handleTypeValue} >
 
-                        {types.map((item)=>(
+                        {types.map((item,index)=>(
                                        <div class="form-check">
                                        <input class="form-check-input" type="radio" name='type' id={item}/>
                                        <label class="form-check-label " for={item}>
-                                         {item}
+                                         {typesdesc[index]}
                                        </label>
                                        </div>
                         ))}
@@ -219,7 +223,7 @@ modelValue     );
                 </div>
                 <hr />
                 <div className="py-2">
-                <span className="text-muted mt-1 fs-5 d-flex gap-2 align-items-center">Fuel Type                                 <FaGasPump className="icon" /></span>
+                <span className="text-muted mt-1 fs-5 d-flex gap-2 align-items-center">{translates.Fueltype}                                <FaGasPump className="icon" /></span>
  
                     <div className="type-list" onChange={handleFuelTypeChange}>
 
@@ -227,7 +231,7 @@ modelValue     );
                                        <div class="form-check">
                                        <input class="form-check-input" type="radio" name='fuel_type' id={item}/>
                                        <label class="form-check-label" for={item}>
-                                         {item==="gas"?"Gas":item==="diesel"?"Deisel":item==="electricity"?"Electrecity":item}
+                                         {item==="gas"?`${translates.Gas}`:item==="diesel"?`${translates.Deisel}`:item==="electricity"?`${translates.Electrecity}`:item}
                                        </label>
                                        </div>
                         ))}
@@ -236,16 +240,16 @@ modelValue     );
                 </div>
                 <hr />
                 <div className="py-2">
-                <span className="text-muted mt-1 fs-5 d-flex align-items-center gap-2">Gear                          <GiSteeringWheel className="icon" />
+                <span className="text-muted mt-1 fs-5 d-flex align-items-center gap-2">{translates.Gear}                          <GiSteeringWheel className="icon" />
 </span>
  
                     <div className="type-list" onChange={handleSteeringChange}>
 
-                        {steering.map((item)=>(
+                        {steering.map((item,index)=>(
                                        <div class="form-check">
                                        <input class="form-check-input" type="radio" name='steering' id={item}/>
                                        <label class="form-check-label" for={item}>
-                                         {item}
+                                         {steeringdesc[index]}
                                        </label>
                                        </div>
                         ))}
@@ -254,7 +258,7 @@ modelValue     );
                 </div>
                 <hr />
                 <div className="py-2">
-                <span className="text-muted mt-1 fs-5 d-flex align-items-center gap-2">Capacity                              <BsPeopleFill className="icon" />
+                <span className="text-muted mt-1 fs-5 d-flex align-items-center gap-2">{translates.Capacity}                              <BsPeopleFill className="icon" />
                 
 </span>
  
@@ -264,7 +268,7 @@ modelValue     );
                                        <div class="form-check">
                                        <input class="form-check-input" type="radio" name='seats' id={item}/>
                                        <label class="form-check-label" for={item}>
-                                         {item} person
+                                         {item} {translates.person}
                                        </label>
                                        </div>
                         ))}
@@ -273,18 +277,18 @@ modelValue     );
                 </div>
                 <hr />
                 <div className="py-2">
-                <span className="text-muted mt-1 fs-5 d-flex align-items-center gap-2">Price Per Day  
+                <span className="text-muted mt-1 fs-5 d-flex align-items-center gap-2">{translates.priceperday}
                 
 </span>
  
                     <div className="type-list">
                         <div className="price-content">
                         <div className="price-item">
-                            <label htmlFor="">Min</label>
+                            <label htmlFor="">{translates.Min}</label>
                             <p id="min-value" className="m-0">{minPrice} ₪</p>
                         </div>
                         <div className="price-item">
-                            <label htmlFor="">Max</label>
+                            <label htmlFor="">{translates.Max}</label>
                             <p id="max-value" className="m-0">{maxPrice} ₪</p>
                         </div> 
                         </div>

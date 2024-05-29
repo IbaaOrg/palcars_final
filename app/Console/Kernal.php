@@ -26,9 +26,9 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // Your scheduled tasks here...
-        $schedule->command('discounts:update')->everySecond(); // Run the command daily
-        $schedule->command('car:update-status')->everyMinute();
-
+        $schedule->command('discounts:reset-expired')->everyMinute();
+        
+        
 
     }
 

@@ -214,7 +214,7 @@ Route::middleware('auth:sanctum','company')->get('/showAllbills',[BillController
 Route::middleware('auth:sanctum','renter')->post('/storeBill',[BillController::class,'store']);
 Route::middleware('auth:sanctum','renterorcompany')->get('/showBill/{id}',[BillController::class,'show']);
 Route::middleware('auth:sanctum','renter')->post('/updateBill/{id}',[BillController::class,'update']);
-Route::middleware('auth:sanctum','renter')->delete('/destroyBill/{id}',[BillController::class,'destroy']);
+Route::middleware('auth:sanctum','company')->delete('/destroyBill/{id}',[BillController::class,'destroy']);
 Route::middleware('auth:sanctum','company')->get('/showAllBillsOfMyCompany',[BillController::class,'allBillsOfMyCompany']);
 Route::middleware('auth:sanctum','company')->get('/allRentersOfMyCompany',[BillController::class,'allRentersOfMyCompany']);
 Route::middleware('auth:sanctum','renter')->get('/allBillsOfRenter',[BillController::class,'allBillsOfRenter']);

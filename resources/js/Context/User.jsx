@@ -20,8 +20,7 @@ const UserContextProvider = ({ children }) => {
                 if (response.data.status === true) 
                 setUser(await response.data.data);
 
-            console.log(response.data.data)
-            console.log(userToken)
+         
             } catch (e) {}
         } else {
             console.log("Token not found in local storage");

@@ -60,7 +60,7 @@ function Discounts() {
                     <h3 class="badge text-bg-danger fs-5"></h3>
                     <div className=" card-body ">
                          <div className=" card-header fs-4" >{d.car.model}</div>
-                        <img className=" h-52" src={d.car.sub_images[0].photo_car_url}/>
+                        <img className="w-100 h-52" src={d.car.sub_images[0].photo_car_url}/>
                     </div>
 
                 <div className=" card-header fs-4">{d.note}</div>

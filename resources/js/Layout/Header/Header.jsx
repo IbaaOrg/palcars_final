@@ -17,7 +17,7 @@ import axios from "axios";
 
 import Login from "../../Auth/Login/Login";
 import SignUp from "../../Auth/Login/SignUp";
-import logout from './../../NetWorking/logout';
+import logout from "./../../NetWorking/logout";
 
 import { data } from "autoprefixer";
 import { TranslateContext } from "../../Context/Translate";
@@ -28,14 +28,14 @@ import { Nav } from "react-bootstrap";
 
 function Header({ islogined }) {
     const { changeLanguage, translates } = useContext(TranslateContext);
-  const navigator = useNavigate()
+    const navigator = useNavigate();
 
-  const {user,userToken,setUserToken}=useContext(UserContext);
+    const { user, userToken, setUserToken } = useContext(UserContext);
     const [countUnreadNotification, setCountUnreadNotification] = useState(0);
     const [notifications, setNotifications] = useState([]);
     const getCountNotification = async () => {
         const token = localStorage.getItem("token");
-        if (token ) {
+     
             try {
                 const response = await axios.get("/countNotifications", {
                     headers: {
@@ -43,11 +43,15 @@ function Header({ islogined }) {
                     },
                 });
                 const { unread_count } = await response.data.data; // Assuming response structure is { data: { unread_count: ... } }
-                setCountUnreadNotification(unread_count);
+                if(unread_count>0)
+                    setCountUnreadNotification(unread_count);
+                else
+                setCountUnreadNotification('');
+
             } catch (error) {
                 
             }
-        }
+        
     };
 
     const getNotifications = async () => {
@@ -66,7 +70,7 @@ function Header({ islogined }) {
             }
         }
     };
-  
+
     const Translate = async (e) => {
         changeLanguage(e);
     };
@@ -80,12 +84,11 @@ function Header({ islogined }) {
         });
         getNotifications();
         setCountUnreadNotification(0);
-        console.log(res);
     };
     useEffect(() => {
         getCountNotification();
         getNotifications();
-    }, []);
+    }, [userToken]);
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -99,9 +102,9 @@ function Header({ islogined }) {
     const out = async () => {
         await logout((out) => {
             setUserToken(null);
-            navigator("/")
-        })
-        }
+            navigator("/");
+        });
+    };
 
     return (
         <div class="d-flex  justify-content-around">
@@ -118,12 +121,9 @@ function Header({ islogined }) {
                     </div>
 
                     {/* search */}
-                    {userToken&&user.role!=='Renter'? '' : <NaveBar />}
-                   
+                    {userToken && user.role !== "Renter" ? "" : <NaveBar />}
 
                     <div class="hstack gap-1">
-                        
-
                         <div class="nav-item dropdown d-flex align-items-center justify-content-center translate">
                             <Link
                                 class="nav-link "
@@ -155,12 +155,16 @@ function Header({ islogined }) {
                                 </li>
                             </ul>
                         </div>
-                        {userToken&&user&&user.role==="Renter"&&(<NavLink to="FavoriteList" className="d-flex  d-flex align-items-center justify-content-center border rounded-circle p-2">
-                        <FaHeart size={20} className="text-black"/>
-
-                        </NavLink>)}
+                        {userToken && user && user.role === "Renter" && (
+                            <NavLink
+                                to="FavoriteList"
+                                className="d-flex  d-flex align-items-center justify-content-center border rounded-circle p-2"
+                            >
+                                <FaHeart size={20} className="text-black" />
+                            </NavLink>
+                        )}
                         <div className=" d-flex mx-2 ">
-                            {userToken &&user&& (
+                            {userToken && user && (
                                 <div className="nav-item dropdown">
                                     <a
                                         className="nav-link text-black"
@@ -179,7 +183,7 @@ function Header({ islogined }) {
                                             </span>
                                         ) : (
                                             <span className="position-absolute  bg-danger border border-danger rounded-circle circle-notification py-1">
-                                                {""}
+                                                {" "}
                                             </span>
                                         )}
                                     </a>
@@ -191,9 +195,9 @@ function Header({ islogined }) {
                                             <div className="row">
                                                 <div className="col-lg-12 col-sm-12 col-12">
                                                     <span>
-                                                        Notifications{" "}
+                                                        Notifications
                                                         {countUnreadNotification &&
-                                                            countUnreadNotification}{" "}
+                                                            countUnreadNotification}
                                                     </span>
                                                     <Link
                                                         className="float-right text-light"
@@ -209,21 +213,16 @@ function Header({ islogined }) {
                                             notifications.map(
                                                 (notification, index) => (
                                                     <li
-                                                        class="notification-box "
+                                                        className="notification-box"
                                                         key={index}
                                                     >
-                                                        {notification.data.content.includes(
-                                                            "car"
-                                                        ) ? (
+                                                        {
                                                             <NavLink
-                                                                  
-                                                                className={
-                                                                    "text-black"
-                                                                }
-                                                                to={`/cars/${notification.data.comment_id}`}
+                                                                className="text-black"
+                                                                to={notification.data.content.includes('car')?`/cars/${notification.data.comment_id}`:notification.data.content.includes('booking')?`/profile/booking`:notification.data.content.includes('note')?`/profile/Notes`:`/profile/Messages`}
                                                             >
-                                                                <div class=" d-flex justify-content-center fw-bold ">
-                                                                    <div class="col-lg-3 col-sm-3 col-3 text-center">
+                                                                <div className="d-flex justify-content-center fw-bold">
+                                                                    <div className="col-lg-3 col-sm-3 col-3 text-center">
                                                                         <img
                                                                             src={
                                                                                 notification
@@ -236,10 +235,10 @@ function Header({ islogined }) {
                                                                             height={
                                                                                 70
                                                                             }
-                                                                            class=" rounded-circle border border-black"
+                                                                            className="rounded-circle border border-black"
                                                                         />
                                                                     </div>
-                                                                    <div class="col-lg-8 col-sm-8 col-8">
+                                                                    <div className="col-lg-8 col-sm-8 col-8">
                                                                         <strong>
                                                                             {
                                                                                 notification
@@ -254,111 +253,15 @@ function Header({ islogined }) {
                                                                                     .content
                                                                             }
                                                                         </div>
-                                                                        <small class="fw-bold font-color">
+                                                                        <small className="fw-bold font-color">
                                                                             {
                                                                                 notification.timeago
-                                                                            }{" "}
+                                                                            }
                                                                         </small>
                                                                     </div>
                                                                 </div>
                                                             </NavLink>
-                                                        ) : (notification.data.content.includes(
-                                                            "note"
-                                                        ) ? (
-                                                            <NavLink
-                                                                  
-                                                                className={
-                                                                    "text-black"
-                                                                }
-                                                                to={`/profile/Notes`}
-                                                            >
-                                                                <div class=" d-flex justify-content-center fw-bold ">
-                                                                    <div class="col-lg-3 col-sm-3 col-3 text-center">
-                                                                        <img
-                                                                            src={
-                                                                                notification
-                                                                                    .data
-                                                                                    .user_photo
-                                                                            }
-                                                                            width={
-                                                                                70
-                                                                            }
-                                                                            height={
-                                                                                70
-                                                                            }
-                                                                            class=" rounded-circle border border-black"
-                                                                        />
-                                                                    </div>
-                                                                    <div class="col-lg-8 col-sm-8 col-8">
-                                                                        <strong>
-                                                                            {
-                                                                                notification
-                                                                                    .data
-                                                                                    .comment_create
-                                                                            }
-                                                                        </strong>
-                                                                        <div>
-                                                                            {
-                                                                                notification
-                                                                                    .data
-                                                                                    .content
-                                                                            }
-                                                                        </div>
-                                                                        <small class="fw-bold font-color">
-                                                                            {
-                                                                                notification.timeago
-                                                                            }{" "}
-                                                                        </small>
-                                                                    </div>
-                                                                </div>
-                                                            </NavLink>):
-                                                            <NavLink
-                                                                className={
-                                                                    "text-black"
-                                                                }
-                                                                to={"/about"}
-                                                            >
-                                                                <div class="row d-flex justify-content-center fw-bold ">
-                                                                    <div class="col-lg-3 col-sm-3 col-3 text-center">
-                                                                        <img
-                                                                            src={
-                                                                                notification
-                                                                                    .data
-                                                                                    .user_photo
-                                                                            }
-                                                                            width={
-                                                                                70
-                                                                            }
-                                                                            height={
-                                                                                70
-                                                                            }
-                                                                            class=" rounded-circle border border-black"
-                                                                        />
-                                                                    </div>
-                                                                    <div class="col-lg-8 col-sm-8 col-8">
-                                                                        <strong>
-                                                                            {
-                                                                                notification
-                                                                                    .data
-                                                                                    .comment_create
-                                                                            }
-                                                                        </strong>
-                                                                        <div>
-                                                                            {
-                                                                                notification
-                                                                                    .data
-                                                                                    .content
-                                                                            }
-                                                                        </div>
-                                                                        <small class="fw-bold font-color">
-                                                                            {
-                                                                                notification.timeago
-                                                                            }{" "}
-                                                                        </small>
-                                                                    </div>
-                                                                </div>
-                                                            </NavLink>
-                                                        )}
+                                                        }
                                                     </li>
                                                 )
                                             )}
@@ -383,48 +286,56 @@ function Header({ islogined }) {
                                         <img
                                             src={user.photo_user}
                                             className="rounded-circle userPhoto"
-                                            
                                         />
                                     )}
                                 </NavLink>
                                 <div class="nav-item dropdown d-flex align-items-center justify-content-center translate">
-                            <Link
-                                class="nav-link text-black text-capitalize d-flex align-items-center"
-                                href="#"
-                                role="button"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false"
-
-                            >
-                                {user&&user.name}
-                                <IoIosArrowDown size={30} className="px-2"/>
-
-                            </Link>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <span
-                                        class="dropdown-item"
-                                        data-lang="ar"
-                                        onClick={(e) => (navigator('/profile'))}
+                                    <Link
+                                        class="nav-link text-black text-capitalize d-flex align-items-center"
+                                        href="#"
+                                        role="button"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
                                     >
-                                        {"My Profile"}
-                                    </span>
-                                </li>
-                            </ul>
-                        </div>
+                                        {user && user.name}
+                                        <IoIosArrowDown
+                                            size={30}
+                                            className="px-2"
+                                        />
+                                    </Link>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <span
+                                                class="dropdown-item"
+                                                data-lang="ar"
+                                                onClick={(e) =>
+                                                    navigator("/profile")
+                                                }
+                                            >
+                                                {"My Profile"}
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
                                 {user.role === "Company" ? (
                                     <NavLink
                                         to="/dashbord"
                                         class="btn btn-primary dashbord ml-5 "
                                     >
                                         {" "}
-                                        Dashbord
+                                        {translates.Dashbord}
                                     </NavLink>
                                 ) : (
                                     <div></div>
                                 )}
-                                <button type="button" class="btn btn-outline-primary" onClick={out} > Logout</button>
-
+                                <button
+                                    type="button"
+                                    class="btn btn-outline-primary"
+                                    onClick={out}
+                                >
+                                    {" "}
+                                    Logout
+                                </button>
                             </>
                         ) : (
                             <>
@@ -434,8 +345,11 @@ function Header({ islogined }) {
                                 >
                                     {" "}
                                     {translates.Login}
-                                </NavLink> 
-                                <NavLink to="/role" className="fw-bold fontSizeNav">
+                                </NavLink>
+                                <NavLink
+                                    to="/role"
+                                    className="fw-bold fontSizeNav"
+                                >
                                     {" "}
                                     {translates.Register}
                                 </NavLink>

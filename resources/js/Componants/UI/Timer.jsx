@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import moment from 'moment';
 import './CountdownTimer.css'; // ملف CSS لتنسيق العداد
+import { TranslateContext } from '../../Context/Translate';
 
 const CountdownTimer = ({ targetDate }) => {
+    const {translates}=useContext(TranslateContext)
     const [remainingTime, setRemainingTime] = useState(moment.duration());
 
     useEffect(() => {
@@ -23,16 +25,16 @@ const CountdownTimer = ({ targetDate }) => {
     return (
         <div className="countdown-timer w-100">
             <div className="timer-item ">
-                <span >{remainingTime.days()} Day</span> 
+                <span >{remainingTime.days()} {translates.Day}</span> 
             </div>
             <div className="timer-item">
-                <span>{remainingTime.hours()} Hour</span> 
+                <span>{remainingTime.hours()} {translates.Hour}</span> 
             </div>
             <div className="timer-item">
-                <span>{remainingTime.minutes()} Minute</span> 
+                <span>{remainingTime.minutes()} {translates.Minute}</span> 
             </div>
             <div className="timer-item">
-                <span>{remainingTime.seconds()} Second</span> 
+                <span>{remainingTime.seconds()} {translates.Second}</span> 
             </div>
         </div>
     );

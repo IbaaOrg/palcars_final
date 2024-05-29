@@ -7,6 +7,7 @@ use App\Models\Message;
 use Illuminate\Http\Request;
 use App\Http\Traits\ResponseTrait;
 use App\Http\Controllers\Controller;
+use App\Notifications\createComment;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\MessageResource;
 use Illuminate\Support\Facades\Storage;
@@ -55,6 +56,14 @@ class MessageController extends Controller
         }
        
         $message = Message::create($data);
+        $user= User::find($request->reciever_id);
+        $user_comment=$request->user()->name;
+        $user_photo=$request->user()->photo_user;
+        $words = explode(" ", $message->message);
+        // Extract the first word
+        $firstWord = $words[0];
+        $content="Send Messgae of you : ".$firstWord."...";
+        $user->notify(new createComment($user->id, $user_comment,$user_photo,$content));
         return $this->success(new SimpleMessageResource($message));
     }
 

@@ -6,9 +6,10 @@ import { Ri24HoursLine } from "react-icons/ri";
 import { MdCarCrash } from "react-icons/md";
 import { BiSolidCarMechanic } from "react-icons/bi";
 import { UserContext } from '../Context/User';
+import { TranslateContext } from './../Context/Translate';
 
 function Sidebar() {
-
+    const {translates}=useContext(TranslateContext)
     const [isListOpen, setIsListOpen] = useState(false);
     const toggleList = () => {
         setIsListOpen(!isListOpen);
@@ -21,7 +22,7 @@ function Sidebar() {
 
             <NavLink to={"HomeDashbord"} className='main-btn list-group-item list-group-item-action py-2'>
                   <i class="bi bi-speedometer2 fs-4 me-2"></i>
-                <span className='fs-5'>Dashbord</span>
+                <span className='fs-5'>{translates.Dashbord}</span>
             </NavLink>
              
               <NavLink to={"VehiclesDashbord"} className='main-btn  list-group-item list-group-item-action py-2 d-flex justify-between align-items-center ' onClick={toggleList}>

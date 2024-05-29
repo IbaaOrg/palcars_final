@@ -220,7 +220,7 @@ function CardBasic({ title }) {
                 {!toggle ? (
                     <div class="col-md-12 mainlist">
                         <label for="inputEmail4" class="form-label">
-                            Pickup and Dropoff Location
+                            Pickup and Dropoff 
                         </label>
                         <input
                             type="text"

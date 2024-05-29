@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Traits\ResponseTrait;
 use App\Http\Controllers\Controller;
+use App\Notifications\createComment;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\ColorResource;
 use Illuminate\Support\Facades\Validator;
@@ -145,10 +146,17 @@ class BillController extends Controller
             'end_time' => $request->end_time,
         ]);
         $prices = Price::where('car_id', $request->car_id)->get();
-        $car->update(['status' => 'rented']);
         $user->points += 5;
 
-        $user->save();        
+        $user->save();  
+        $car= Car::find($request->car_id);
+        $user_comment=$request->user()->name;
+        $user_photo=$request->user()->photo_user;
+        $words = explode(" ", $car->make);
+        // Extract the first word
+        $firstWord = $words[0];
+        $content="Booking a new car from your company : ".$firstWord."...";
+        $car->ownerUser->notify(new createComment($car->id, $user_comment,$user_photo,$content));
         // Return success response
         return $this->success(new SimpleBillResource($bill));
     }
@@ -176,23 +184,19 @@ class BillController extends Controller
     {
         $user = auth()->user();
         $myCars = $user->cars()->pluck('id');
-    
+        
         // Get all unique user IDs from bills of my cars
         $uniqueUserIds = \App\Models\Bill::whereIn('car_id', $myCars)
                                          ->distinct()
                                          ->pluck('user_id');
-    
+        
         // Retrieve unique users with their rental counts, points, and limited bills
         $usersWithRentalCounts = \App\Models\User::whereIn('id', $uniqueUserIds)
                                                  ->withCount(['bills as rental_count' => function ($query) use ($myCars) {
                                                      $query->whereIn('car_id', $myCars);
                                                  }])
-                                                 ->with('bills')->get();
-    
-        // Add points to the users
-        $usersWithRentalCounts->each(function ($user) {
-            $user->points = $user->rental_count * 5;
-        });
+                                                 ->with('bills')
+                                                 ->get();
     
         return $this->success(RentersCompanyResource::collection($usersWithRentalCounts));
     }
@@ -264,20 +268,32 @@ class BillController extends Controller
     public function destroy(string $id)
     {
        $bill = Bill::find($id);
-    
         if (!$bill) {
-         return $this->fail("The bill does not exist", 404);
+            return $this->fail("The bill does not exist", 404);
                     }
- 
-        if ($bill->delete()) {
-         return $this->success("Deleted successfully",200);
-                             } 
-        else {
-         return $this->fail("A problem occurred while deleting", 500);
-             }
+        $car=$bill->car;
+        $user=$bill->user;
+        if($bill->start_date > now() && $car->status !== 'rented'){
+            if ($bill->delete()) {
+            $user->points -=5;
+            $user->save();
+            $user_comment=$request->user()->name;
+            $user_photo=$request->user()->photo_user;
+            // Construct the message content
+            $content = "Cancel your booking that from " . $bill->start_date . " to " . $bill->end_date ." of car ".$car->make." ".$car->model;
+            // Notify the owner of the car
+            $car->ownerUser->notify(new createComment($car->id, $user_comment, $user_photo, $content));
+            return $this->success("Deleted successfully",200);
+        }  else {
+            return $this->fail("A problem occurred while deleting", 500);
+        }
+         }else {
+                return $this->fail("Booking cannot be deleted because has already rented car", 400);
+            }
+            
     }
 
-
+    
 
 
 }

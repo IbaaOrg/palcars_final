@@ -67,6 +67,11 @@ class User extends AuthenticatableUser implements Authenticatable
     // {
     //     return $this->rental_count * 5;
     // }
+    public function getPointsAttribute()
+    {
+        // Assuming points are stored in the points column
+        return $this->attributes['points'];
+    }
     public function isAdmin(){
         return $this->role==="Admin";
     }

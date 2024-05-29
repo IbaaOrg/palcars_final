@@ -198,6 +198,8 @@ function LocationsDashbord() {
                                     id="select"
                                     onChange={setlocation2}
                                 >
+                                                                    <option>Choose City..</option>
+
                                     {citys.map((city) => (
                                         <option
                                             key={city.id}

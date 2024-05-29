@@ -94,7 +94,7 @@ const EditLocation = () => {
                     onSubmit={updateLocation}
                 >
                     <h2 className="text-center fs-4 p-3">
-                        Update Information Location
+                        Update Location Information 
                     </h2>
                     {error && (
                         <div className="alert alert-danger w-100" role="alert">

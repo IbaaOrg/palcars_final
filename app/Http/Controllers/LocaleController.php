@@ -30,7 +30,10 @@ class LocaleController extends Controller
             'Birthdate', 'SignUp', 'LogOut', 'SignInWithGoogle', 'Enteryouremail', 'Enteryourpassword',
             'Company','Renter','choose','Enteryourname','Phone','Enteryourphone','PhotoUser','PhotoDrivinglicense','Enteryourbirthdate','description'=>'description','enter'=>'enter'
             ,'Discountsanddeals','BrowseNow','AllCars','ContactWithCompany','vision','Howitworks','Features','Partenership','BussinessRelation','Socials','Deals','Community','Blog',
-            'OurTeams','join','Inviteafrind','AboutPalCars','enterlocation','returncar','pickupdate','pickuptime','dropoffdate','dropofftime','SignUpWithGoogle'
+            'OurTeams','join','Inviteafrind','AboutPalCars','enterlocation','returncar','pickupdate','pickuptime','dropoffdate','dropofftime','SignUpWithGoogle','pickupdropoff','Specialoffers','viewdeals','Sitestatistics','Cities','Users','Categoriesofcar'
+            ,'Day','Hour','Second','Minute','Save','map','descmap','reset','Make','entermake','model','entermodel','type','SUV',  'Sedan','Convertible','Crossover','Minivan','Pickuptrucks','StationWagon','Hatchback','Gas','Deisel','Electrecity'
+            ,    'Fueltype','Gear','Manual','Automatic','Capacity','person','priceperday','Min','Max','Rent'
+
         ];
 
         // Fetch data from language files

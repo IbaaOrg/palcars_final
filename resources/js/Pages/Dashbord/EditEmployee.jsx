@@ -113,7 +113,7 @@ const EditEmployee = () => {
             <div className="bg-white w-100  border rounded px-3 py-2">
                 <form className="w-75 m-auto" onSubmit={updateEmployee}>
                     <h2 className="text-center fs-4 p-3">
-                        Update Information Employee
+                        Update Employee Information 
                     </h2>
                     {error && (
                         <div className="alert alert-danger w-100" role="alert">

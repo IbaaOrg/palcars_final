@@ -102,7 +102,7 @@ function DiscountsDashbord() {
         <form class="row g-3">
           <div class="col-md-6">
             <label for="inputEmail4" class="form-label">Title</label>
-            <input type="text" class="form-control" id="note" name="note"  onChange={set}/>
+            <input type="text" class="form-control" id="note" name="note"  onChange={set} placeholder='Enter description of discount'/>
           </div>
           <div class="col-md-6">
             <label for="type" class="form-label">Type</label>

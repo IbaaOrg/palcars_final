@@ -46,6 +46,7 @@ class CarController extends Controller
 
     // Start with a base query for cars
     $query = Car::query();
+    $query->where('status', '!=', 'maintained');
 
     // Apply filters based on parameters
     if ($make) {
@@ -140,10 +141,8 @@ $availableCars = Car::whereIn('user_id', $userIds)
         ->orWhere(function ($query) use ($request) {
             $query->where('start_date', '>=', $request->start_date)
                 ->where('end_date', '<=', $request->end_date);
-        })
-        ->where('status', 'rented'); // Exclude cars that are currently rented
+        });
     })
-    ->where('status', 'unrented') // Include only cars that are marked as "unrented"
     ->get();
     if ($availableCars->isNotEmpty()) {
         return $this->success(CarResource::collection($availableCars));
@@ -286,7 +285,7 @@ foreach ($notifications as $notification) {
         }
 
     $validator = Validator::make($request->all(), [
-        'status' => 'required|string|in:rented,unrented,returned',
+        'status' => 'required|string|in:rented,unrented,maintained',
     
     ]);
 

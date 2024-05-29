@@ -10,7 +10,9 @@ import "../../../css/CardStyle/CarCard.css";
 import { useState } from "react";
 import Dialog from "../../Layout/Dialog/Dialog";
 import { UserContext } from "../../Context/User";
+import { TranslateContext } from "../../Context/Translate";
 const CarCard = ({ item, index, toggleFavorite, favoriteList }) => {
+    const {translates}=useContext(TranslateContext);
     const [isDialogOpen, setDialogOpen] = useState(false);
     const [ownerid, setOwnerid] = useState(null);
     const { user } = useContext(UserContext);
@@ -74,7 +76,7 @@ const CarCard = ({ item, index, toggleFavorite, favoriteList }) => {
                             />
                         </div>
                         <span className="col-9 justify-slef-center align-self-start pt-1">
-                            {item.owneruser.name} Company
+                            {item.owneruser.name} {translates.Company}
                         </span>
                     </div>
                 )}
@@ -114,8 +116,7 @@ const CarCard = ({ item, index, toggleFavorite, favoriteList }) => {
                         to={`/cars/${item.id}`}
                         className="btn btn-primary px-3 "
                     >
-                        Rent Now
-                    </Link>
+{translates.Rent}                    </Link>
                 </div>
             </div>
         </div>
