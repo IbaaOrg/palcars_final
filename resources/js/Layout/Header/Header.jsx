@@ -35,23 +35,17 @@ function Header({ islogined }) {
     const [notifications, setNotifications] = useState([]);
     const getCountNotification = async () => {
         const token = localStorage.getItem("token");
-     
-            try {
-                const response = await axios.get("/countNotifications", {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
-                const { unread_count } = await response.data.data; // Assuming response structure is { data: { unread_count: ... } }
-                if(unread_count>0)
-                    setCountUnreadNotification(unread_count);
-                else
-                setCountUnreadNotification('');
 
-            } catch (error) {
-                
-            }
-        
+        try {
+            const response = await axios.get("/countNotifications", {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            const { unread_count } = await response.data.data; // Assuming response structure is { data: { unread_count: ... } }
+            if (unread_count > 0) setCountUnreadNotification(unread_count);
+            else setCountUnreadNotification("");
+        } catch (error) {}
     };
 
     const getNotifications = async () => {
@@ -107,42 +101,42 @@ function Header({ islogined }) {
     };
 
     return (
-        <div class="d-flex  justify-content-around">
-            <nav class="navbar bg-body-tertiary  ">
-                <div class="container-fluid">
+        <div className="d-flex  justify-content-around">
+            <nav className="navbar bg-body-tertiary  ">
+                <div className="container-fluid">
                     <div className={`nav-logo d-flex align-middle`}>
-                        <a href="/">
+                        <Link href="/">
                             <img
                                 src={logo}
                                 alt="logo"
                                 className="nav-logo-img"
                             />
-                        </a>
+                        </Link>
                     </div>
 
                     {/* search */}
                     {userToken && user.role !== "Renter" ? "" : <NaveBar />}
 
-                    <div class="hstack gap-1">
-                        <div class="nav-item dropdown d-flex align-items-center justify-content-center translate">
+                    <div className="hstack gap-1">
+                        <div className="nav-item dropdown d-flex align-items-center justify-content-center translate">
                             <Link
-                                class="nav-link "
+                                className="nav-link "
                                 href="#"
                                 role="button"
                                 data-bs-toggle="dropdown"
                                 aria-expanded="false"
                             >
-<img width="40" height="40" src="https://img.icons8.com/small/32/english-to-arabic.png" alt="english-to-arabic"/>
-
-
-
-
-
-</Link>
-                            <ul class="dropdown-menu">
+                                <img
+                                    width="40"
+                                    height="40"
+                                    src="https://img.icons8.com/small/32/english-to-arabic.png"
+                                    alt="english-to-arabic"
+                                />
+                            </Link>
+                            <ul className="dropdown-menu">
                                 <li>
                                     <span
-                                        class="dropdown-item"
+                                        className="dropdown-item"
                                         data-lang="ar"
                                         onClick={(e) => Translate(e)}
                                     >
@@ -151,11 +145,11 @@ function Header({ islogined }) {
                                 </li>
                                 <li>
                                     <span
-                                        class="dropdown-item"
+                                        className="dropdown-item"
                                         data-lang="en"
                                         onClick={(e) => Translate(e)}
                                     >
-                                       English
+                                        English
                                     </span>
                                 </li>
                             </ul>
@@ -171,7 +165,7 @@ function Header({ islogined }) {
                         <div className=" d-flex mx-2 ">
                             {userToken && user && (
                                 <div className="nav-item dropdown">
-                                    <a
+                                    <Link
                                         className="nav-link text-black"
                                         href="#"
                                         id="navbarDropdown"
@@ -191,7 +185,7 @@ function Header({ islogined }) {
                                                 {" "}
                                             </span>
                                         )}
-                                    </a>
+                                    </Link>
                                     <ul
                                         className="dropdown-menu"
                                         aria-labelledby="navbarDropdown"
@@ -224,7 +218,21 @@ function Header({ islogined }) {
                                                         {
                                                             <NavLink
                                                                 className="text-black"
-                                                                to={notification.data.content.includes('car')?`/cars/${notification.data.comment_id}`:notification.data.content.includes('booking')?`/profile/booking`:notification.data.content.includes('note')?`/profile/Notes`:`/profile/Messages`}
+                                                                to={
+                                                                    notification.data.content.includes(
+                                                                        "car"
+                                                                    )
+                                                                        ? `/cars/${notification.data.comment_id}`
+                                                                        : notification.data.content.includes(
+                                                                              "booking"
+                                                                          )
+                                                                        ? `/profile/booking`
+                                                                        : notification.data.content.includes(
+                                                                              "note"
+                                                                          )
+                                                                        ? `/profile/Notes`
+                                                                        : `/profile/Messages`
+                                                                }
                                                             >
                                                                 <div className="d-flex justify-content-center fw-bold">
                                                                     <div className="col-lg-3 col-sm-3 col-3 text-center">
@@ -272,9 +280,12 @@ function Header({ islogined }) {
                                             )}
 
                                         <li className="footer bg-dark text-center">
-                                            <a href="#" className="text-light">
+                                            <Link
+                                                href="#"
+                                                className="text-light"
+                                            >
                                                 View All
-                                            </a>
+                                            </Link>
                                         </li>
                                     </ul>
                                 </div>
@@ -282,7 +293,7 @@ function Header({ islogined }) {
                         </div>
                     </div>
 
-                    <div class="d-flex justify-content-around align-items-center">
+                    <div className="d-flex justify-content-around align-items-center">
                         {userToken ? (
                             <>
                                 <NavLink to="/profile">
@@ -294,9 +305,9 @@ function Header({ islogined }) {
                                         />
                                     )}
                                 </NavLink>
-                                <div class="nav-item dropdown d-flex align-items-center justify-content-center translate">
+                                <div className="nav-item dropdown d-flex align-items-center justify-content-center translate">
                                     <Link
-                                        class="nav-link text-black text-capitalize d-flex align-items-center"
+                                        className="nav-link text-black text-capitalize d-flex align-items-center"
                                         href="#"
                                         role="button"
                                         data-bs-toggle="dropdown"
@@ -308,10 +319,10 @@ function Header({ islogined }) {
                                             className="px-2"
                                         />
                                     </Link>
-                                    <ul class="dropdown-menu">
+                                    <ul className="dropdown-menu">
                                         <li>
                                             <span
-                                                class="dropdown-item"
+                                                className="dropdown-item"
                                                 data-lang="ar"
                                                 onClick={(e) =>
                                                     navigator("/profile")
@@ -325,7 +336,7 @@ function Header({ islogined }) {
                                 {user.role === "Company" ? (
                                     <NavLink
                                         to="/dashbord"
-                                        class="btn btn-primary dashbord ml-5 "
+                                        className="btn btn-primary dashbord ml-5 "
                                     >
                                         {" "}
                                         {translates.Dashbord}
@@ -335,10 +346,9 @@ function Header({ islogined }) {
                                 )}
                                 <button
                                     type="button"
-                                    class="btn btn-outline-primary"
+                                    className="btn btn-outline-primary"
                                     onClick={out}
                                 >
-                                    {" "}
                                     Logout
                                 </button>
                             </>
@@ -348,14 +358,12 @@ function Header({ islogined }) {
                                     to="/login"
                                     className=" fw-bold border-end border-primary px-2  fontSizeNav"
                                 >
-                                    {" "}
                                     {translates.Login}
                                 </NavLink>
                                 <NavLink
                                     to="/role"
                                     className="fw-bold fontSizeNav"
                                 >
-                                    {" "}
                                     {translates.Register}
                                 </NavLink>
                             </>

@@ -37,7 +37,7 @@ function SignUp() {
         name: null,
         phone: null,
         password: null,
-        active_points:null,
+        active_points: null,
     });
 
     const validate = async () => {
@@ -152,14 +152,14 @@ function SignUp() {
         document.addEventListener("dirchange", handleDirectionChange);
     });
     return (
-        <div class="d-flex justify-content-around cont">
+        <div className="d-flex justify-content-around cont">
             <div>
                 <img src={loginimage} className="w-100" />
             </div>
-            <div class="form-container  m-2">
-                <div class="social-buttons">
-                    <button class="social-button apple" onClick={byGoogle}>
-                        <svg class="icon" viewBox="0 0 24 24">
+            <div className="form-container  m-2">
+                <div className="social-buttons">
+                    <button className="social-button apple" onClick={byGoogle}>
+                        <svg className="icon" viewBox="0 0 24 24">
                             <path
                                 d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
                                 fill="#4285F4"
@@ -181,33 +181,35 @@ function SignUp() {
                         <span>{translates.SignUpWithGoogle}</span>
                     </button>
                 </div>
-                <div class="line"></div>
+                <div className="line"></div>
                 {seccsses && (
-                    <div class="alert alert-success" role="alert">
+                    <div className="alert alert-success" role="alert">
                         {seccsses}
                     </div>
                 )}
 
                 {error && !errors && (
-                    <div class="alert alert-danger" role="alert">
+                    <div className="alert alert-danger" role="alert">
                         {errors}
                     </div>
                 )}
                 {!error && errors && (
-                    <div class="alert alert-danger" role="alert">
+                    <div className="alert alert-danger" role="alert">
                         {error}
                     </div>
                 )}
                 {error && errors && (
-                    <div class="alert alert-danger" role="alert">
+                    <div className="alert alert-danger" role="alert">
                         {error}
                     </div>
                 )}
                 <form class="form" onSubmit={reg}>
                     <div className="row">
-                        <div class="form-group col">
+                        <div className="form-group col">
                             <div className="d-flex">
-                                <label for="email">{translates.Email}</label>
+                                <label htmlFor="email">
+                                    {translates.Email}
+                                </label>
                                 <FaStarOfLife
                                     size={5}
                                     className="text-danger"
@@ -222,8 +224,8 @@ function SignUp() {
                                 type="email"
                             />
                         </div>
-                        <div class="form-group col">
-                            <label for="name">
+                        <div className="form-group col">
+                            <label htmlFor="name">
                                 {translates.FullName}
                                 <span className=" text-red-600"> *</span>
                             </label>
@@ -238,9 +240,11 @@ function SignUp() {
                         </div>
                     </div>
                     <div className="row">
-                        <div class="form-group col">
+                        <div className="form-group col">
                             <div className="d-flex">
-                                <label for="phone">{translates.Phone}</label>
+                                <label htmlFor="phone">
+                                    {translates.Phone}
+                                </label>
 
                                 <FaStarOfLife
                                     size={5}
@@ -256,9 +260,9 @@ function SignUp() {
                                 type="text"
                             />
                         </div>
-                        <div class="form-group col">
+                        <div className="form-group col">
                             <div className="d-flex">
-                                <label for="password">
+                                <label htmlFor="password">
                                     {translates.Password}
                                 </label>
                                 <FaStarOfLife
@@ -296,8 +300,8 @@ function SignUp() {
                         </div>
                     </div>
                     <div className="row">
-                        <div class="form-group col ">
-                            <label for="photo">
+                        <div className="form-group col ">
+                            <label htmlFor="photo">
                                 {translates.PhotoUser}
                                 <span className=" text-red-600"> *</span>
                             </label>
@@ -319,8 +323,10 @@ function SignUp() {
                                 />
                             </div>
                         </div>
-                        <div class="form-group col ">
-                            <label for="text">{translates.description}</label>
+                        <div className="form-group col ">
+                            <label htmlFor="text">
+                                {translates.description}
+                            </label>
                             <textarea
                                 name="description"
                                 id="text"
@@ -332,15 +338,17 @@ function SignUp() {
                         </div>
                     </div>
                     <div className="form-group col">
-                        <div class="d-flex flex-column align-items-center p-2">
-                            <label class="form-check-label" for="defaultCheck1">
-                                Are you want to give special discounts of users
-                                depends on their points?
+                        <div className="d-flex flex-column align-items-center p-2">
+                            <label
+                                className="form-check-label"
+                                htmlFor="defaultCheck1"
+                            >
+                                {translates.givepoint}
                             </label>
                             <div className="d-flex gap-5">
-                                <div class="form-check">
+                                <div className="form-check">
                                     <input
-                                        class="form-check-input"
+                                        className="form-check-input"
                                         type="radio"
                                         name="active_points"
                                         id="exampleRadios1"
@@ -348,15 +356,15 @@ function SignUp() {
                                         onChange={set}
                                     />
                                     <label
-                                        class="form-check-label"
-                                        for="exampleRadios1"
+                                        className="form-check-label"
+                                        htmlFor="exampleRadios1"
                                     >
-                                        Yes
+                                        {translates.yes}
                                     </label>
                                 </div>
-                                <div class="form-check">
+                                <div className="form-check">
                                     <input
-                                        class="form-check-input"
+                                        className="form-check-input"
                                         type="radio"
                                         name="active_points"
                                         id="exampleRadios2"
@@ -364,10 +372,10 @@ function SignUp() {
                                         onChange={set}
                                     />
                                     <label
-                                        class="form-check-label"
-                                        for="exampleRadios2"
+                                        className="form-check-label"
+                                        htmlFor="exampleRadios2"
                                     >
-                                        No
+                                        {translates.no}
                                     </label>
                                 </div>
                             </div>
@@ -376,8 +384,10 @@ function SignUp() {
                     <hr />
                     <input
                         type="submit"
-                        class="form-submit-btn"
-                        value={loading ? "Loading..." : "Sign Up"}
+                        className="form-submit-btn"
+                        value={
+                            loading ? "Loading..." : `${translates.Register}`
+                        }
                         disabled={loading}
                     />
                 </form>

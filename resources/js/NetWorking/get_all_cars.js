@@ -18,7 +18,6 @@ const get_all_cars = async (onSuccess, onError, categoryValue, minPrice, maxPric
         });
         const data = await response.data;
         onSuccess(data);
-        console.log(data);
 
     } catch (error) {
         console.error(error);

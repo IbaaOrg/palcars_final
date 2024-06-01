@@ -23,7 +23,6 @@ const UserContextProvider = ({ children }) => {
          
             } catch (e) {}
         } else {
-            console.log("Token not found in local storage");
         }
     };
 

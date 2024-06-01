@@ -77,7 +77,7 @@ import AllWorkingHours from "./Pages/Dashbord/AllWorkingHours";
 import EditWorkingHour from "./Pages/Dashbord/EditWorkingHour";
 import AddEmployee from "./Pages/Dashbord/AddEmployee";
 import EditEmployee from "./Pages/Dashbord/EditEmployee";
-import RenterDashbord from './Pages/Dashbord/RenterDashbord';
+import RenterDashbord from "./Pages/Dashbord/RenterDashbord";
 import EditLocation from "./Pages/Dashbord/EditLocation";
 import ViewDiscount from "./Pages/Dashbord/ViewDiscount";
 import EditDiscount from "./Pages/Dashbord/EditDiscount";
@@ -196,7 +196,6 @@ const App = () => {
                     }
                 >
                     <Route path={""} element={<HomeDashbord />} />
-
                     <Route path={"HomeDashbord"} element={<HomeDashbord />} />
                     <Route
                         path={"VehiclesDashbord"}
@@ -206,13 +205,15 @@ const App = () => {
                         path={"EmployeeDashbord"}
                         element={<EmployeeDashbord />}
                     />
-                     <Route
+                    <Route
                         path={"RenterDashbord"}
-                        element={<RenterDashbord/>}
+                        element={<RenterDashbord />}
                     />
-                    <Route path="/dashbord/RenterDashbord/bookings/:id" element={<BookingsDashbord/>}/>
-             
-                    <Route path={"ChatsDashbord"} element={<Messages/>} />
+                    <Route
+                        path="/dashbord/RenterDashbord/bookings/:id"
+                        element={<BookingsDashbord />}
+                    />
+                    <Route path={"ChatsDashbord"} element={<Messages />} />
                     <Route
                         path={"NotesDashboard"}
                         element={<NotesDashboard />}
@@ -238,8 +239,8 @@ const App = () => {
                         element={<AllLocations />}
                     />
                     <Route
-                    path={"EditLocation/:id"}
-                    element={<EditLocation/>}
+                        path={"EditLocation/:id"}
+                        element={<EditLocation />}
                     />
                     <Route
                         path={"WorkingHourDashbord"}
@@ -253,17 +254,14 @@ const App = () => {
                         path={"EditWorkingHour/:id"}
                         element={<EditWorkingHour />}
                     />
-                
                     <Route
                         path={"addLocation"}
                         element={<LocationsDashbord />}
-                    />   <Route
-                    path={"addEmployee"}
-                    element={<AddEmployee/>}
-                />
-                 <Route
+                    />{" "}
+                    <Route path={"addEmployee"} element={<AddEmployee />} />
+                    <Route
                         path={"EditEmployee/:id"}
-                        element={<EditEmployee/>}
+                        element={<EditEmployee />}
                     />
                     <Route
                         path={"DiscountsDashbord"}
@@ -275,9 +273,12 @@ const App = () => {
                     ></Route>
                     <Route
                         path={"editDiscount/:id"}
-                        element={<EditDiscount/>}
+                        element={<EditDiscount />}
                     ></Route>
-                    <Route path={"viewDiscount/:id"} element={<ViewDiscount/>}></Route>
+                    <Route
+                        path={"viewDiscount/:id"}
+                        element={<ViewDiscount />}
+                    ></Route>
                     <Route path={"addvehical"} element={<AddCar />}></Route>
                     <Route path={"rented"} element={<RentedCars />}></Route>
                     <Route

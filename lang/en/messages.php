@@ -136,7 +136,16 @@ return [
     'priceperday'=>'Price Per Day',
     'Min'=>'Min',
     'Max'=>'Max',
-    'Rent'=>'Rent Now'
-
+    'Rent'=>'Rent Now',
+    'forgetPassword'=>'Do you forget Password?',
+    'account'=>"Don't have an account?",
+    'signnow'=>'Sign up now',
+    'valid'=>'Are you have valid driving license?',
+    'exdate'=>' Expired date of driving license',
+    'photolicense'=>'Photo of driving license',
+    'givepoint'=>'Are you want to give special discounts of users
+    depends on their points?',
+    'yes'=>'Yes',
+    'no'=>'No',
 ];
 ?>

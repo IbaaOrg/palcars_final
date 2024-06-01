@@ -34,7 +34,7 @@ function SignUpRenter() {
 
     const [preview, setPreview] = useState(null);
     const [previewd, setPreviewd] = useState(null);
-    const [showDetials,setShowDetials]=useState(false);
+    const [showDetials, setShowDetials] = useState(false);
     const file = useRef(null);
     const filed = useRef(null);
 
@@ -44,7 +44,7 @@ function SignUpRenter() {
         phone: null,
         password: null,
         valid: null,
-        expireddate:null,
+        expireddate: null,
         PhotoDrivinglicense: null,
         birthdate: null,
     });
@@ -112,10 +112,11 @@ function SignUpRenter() {
 
         const validatedata = await validate();
         setError(null);
-        const ckeckBoxValid=document.getElementById('flexCheckChecked').checked;
-        if(!ckeckBoxValid){
-            setError('Please confirm that you have a valid driving license.');
-            return ;
+        const ckeckBoxValid =
+            document.getElementById("flexCheckChecked").checked;
+        if (!ckeckBoxValid) {
+            setError("Please confirm that you have a valid driving license.");
+            return;
         }
         const formData = new FormData();
         formData.append("name", form.current.name);
@@ -150,11 +151,11 @@ function SignUpRenter() {
         );
         setLoading(false);
     };
-    const toggleDetials =()=>{
+    const toggleDetials = () => {
         setShowDetials(!showDetials);
-        setValid(!valid)
-    }
-    function todayDate(){
+        setValid(!valid);
+    };
+    function todayDate() {
         const today = new Date();
         today.setDate(today.getDate() + 7); // Add 7 days to current date
         const year = today.getFullYear();
@@ -170,14 +171,14 @@ function SignUpRenter() {
     }
 
     return (
-        <div class="d-flex justify-content-around cont">
+        <div className="d-flex justify-content-around cont">
             <div>
                 <img src={loginimage} className="w-100" />
             </div>
-            <div class="form-container  m-2">
-                <div class="social-buttons">
-                    <button class="social-button apple" onClick={byGoogle}>
-                        <svg class="icon" viewBox="0 0 24 24">
+            <div className="form-container  m-2">
+                <div className="social-buttons">
+                    <button className="social-button apple" onClick={byGoogle}>
+                        <svg className="icon" viewBox="0 0 24 24">
                             <path
                                 d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
                                 fill="#4285F4"
@@ -199,15 +200,15 @@ function SignUpRenter() {
                         <span>{translates.SignUpWithGoogle}</span>
                     </button>
                 </div>
-                <div class="line"></div>
+                <div className="line"></div>
                 {seccsses && (
-                    <div class="alert alert-success" role="alert">
+                    <div className="alert alert-success" role="alert">
                         {seccsses}
                     </div>
                 )}
 
                 {error && !errors && (
-                    <div class="alert alert-danger" role="alert">
+                    <div className="alert alert-danger" role="alert">
                         {errors}
                     </div>
                 )}
@@ -217,15 +218,17 @@ function SignUpRenter() {
                     </div>
                 )} */}
                 {error && errors && (
-                    <div class="alert alert-danger" role="alert">
+                    <div className="alert alert-danger" role="alert">
                         {error}
                     </div>
                 )}
-                <form class="form" onSubmit={reg}>
+                <form className="form" onSubmit={reg}>
                     <div className="row">
-                        <div class="form-group col">
+                        <div className="form-group col">
                             <div className="d-flex">
-                                <label for="email">{translates.Email}</label>
+                                <label htmlFor="email">
+                                    {translates.Email}
+                                </label>
                                 <FaStarOfLife
                                     size={5}
                                     className="text-danger"
@@ -240,9 +243,11 @@ function SignUpRenter() {
                                 type="email"
                             />
                         </div>
-                        <div class="form-group col">
+                        <div className="form-group col">
                             <div className="d-flex">
-                                <label for="name">{translates.FullName}</label>
+                                <label htmlFor="name">
+                                    {translates.FullName}
+                                </label>
                                 <FaStarOfLife
                                     size={5}
                                     className="text-danger"
@@ -259,9 +264,11 @@ function SignUpRenter() {
                         </div>
                     </div>
                     <div className="row">
-                        <div class="form-group col">
+                        <div className="form-group col">
                             <div className="d-flex">
-                                <label for="phone">{translates.Phone}</label>
+                                <label htmlFor="phone">
+                                    {translates.Phone}
+                                </label>
                                 <FaStarOfLife
                                     size={5}
                                     className="text-danger"
@@ -276,9 +283,9 @@ function SignUpRenter() {
                                 type="text"
                             />
                         </div>
-                        <div class="form-group col">
+                        <div className="form-group col">
                             <div className="d-flex">
-                                <label for="password">
+                                <label htmlFor="password">
                                     {translates.Password}
                                 </label>
                                 <FaStarOfLife
@@ -316,8 +323,8 @@ function SignUpRenter() {
                         </div>
                     </div>
                     <div className="row">
-                        <div class="form-group col ">
-                            <label for="password">
+                        <div className="form-group col ">
+                            <label htmlFor="password">
                                 {translates.PhotoUser}
                                 <span className=" text-red-600"> *</span>
                             </label>
@@ -341,9 +348,9 @@ function SignUpRenter() {
                         </div>
 
                         <div className=" form-group select-container col">
-                            <div class="form-group col ">
+                            <div className="form-group col ">
                                 <div className="d-flex">
-                                    <label for="password">
+                                    <label htmlFor="password">
                                         {translates.PhotoDrivinglicense}
                                     </label>
                                     <FaStarOfLife
@@ -351,64 +358,74 @@ function SignUpRenter() {
                                         className="text-danger"
                                     />
                                 </div>
-                                <div class="form-check" id={"checkInput"}>
+                                <div className="form-check" id={"checkInput"}>
                                     <input
-                                        class="form-check-input"
+                                        className="form-check-input"
                                         type="checkbox"
                                         value=""
-                                        id="flexCheckChecked"  
+                                        id="flexCheckChecked"
                                         onChange={toggleDetials}
                                     />
                                     <label
-                                        class="form-check-label"
-                                        for="flexCheckChecked"      
-                                                                    
-
+                                        className="form-check-label"
+                                        htmlFor="flexCheckChecked"
                                     >
-                                        Are you have valid driving license?
+                                        {translates.valid}
                                     </label>
                                 </div>
-                               {showDetials&&<div class="d-flex flex-column gap-2" id={"textInput"}>
-                               <div className="d-flex"><label
-                                        class="form-check-label"
-                                        for="flexText"
+                                {showDetials && (
+                                    <div
+                                        className="d-flex flex-column gap-2"
+                                        id={"textInput"}
                                     >
-                                        Expired date of driving license
-                                    </label>
-                                    <FaStarOfLife
-                                        size={5}
-                                        className="text-danger"
-                                    />
-                                    </div> 
-                                    <input
-                                        class="form-control"
-                                        type="date"
-                                        min={todayDate()}
-                                        name="expireddate"
-                                        onChange={set}
-                                        id="flexText"                                
-                                    />
-                                    <div className="d-flex">
-                                    <label htmlFor="imgDriving" className="form-check-label">Photo of driving license</label>
-                                    <FaStarOfLife
-                                        size={5}
-                                        className="text-danger"
-                                    />
-                                   </div> 
-                                   <input type="file" id={"imgDriving"} name={"photo_drivinglicense"}
-                                        onChange={showD}
-                                        className="form-control-file form-control " />
-                                </div>
-                                } 
-
-                          
+                                        <div className="d-flex">
+                                            <label
+                                                className="form-check-label"
+                                                htmlFor="flexText"
+                                            >
+                                                {translates.exdate}
+                                            </label>
+                                            <FaStarOfLife
+                                                size={5}
+                                                className="text-danger"
+                                            />
+                                        </div>
+                                        <input
+                                            className="form-control"
+                                            type="date"
+                                            min={todayDate()}
+                                            name="expireddate"
+                                            onChange={set}
+                                            id="flexText"
+                                        />
+                                        <div className="d-flex">
+                                            <label
+                                                htmlFor="imgDriving"
+                                                className="form-check-label"
+                                            >
+                                                {translates.photolicense}
+                                            </label>
+                                            <FaStarOfLife
+                                                size={5}
+                                                className="text-danger"
+                                            />
+                                        </div>
+                                        <input
+                                            type="file"
+                                            id={"imgDriving"}
+                                            name={"photo_drivinglicense"}
+                                            onChange={showD}
+                                            className="form-control-file form-control "
+                                        />
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
 
                     <div>
                         <div className="d-flex">
-                            <label for="birthdate">
+                            <label htmlFor="birthdate">
                                 {translates.Birthdate}
                             </label>
                             <FaStarOfLife size={5} className="text-danger" />
@@ -424,8 +441,10 @@ function SignUpRenter() {
                     <hr />
                     <input
                         type="submit"
-                        class="form-submit-btn"
-                        value={loading ? "loading..." : "Sign Up"}
+                        className="form-submit-btn"
+                        value={
+                            loading ? "loading..." : `${translates.Register}`
+                        }
                         disabled={loading}
                     />
                 </form>

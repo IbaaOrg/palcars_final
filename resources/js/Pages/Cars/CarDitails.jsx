@@ -16,7 +16,6 @@ import ResetPassword from "./../../Auth/Login/ResetPassword";
 import { UserContext } from "../../Context/User";
 import { IoCloseCircleOutline } from "react-icons/io5";
 
-
 function CarDitails() {
     const { id } = useParams(); // This will give you the value of "id" from the URL
     const [loading, setLoading] = useState(true);
@@ -24,7 +23,7 @@ function CarDitails() {
     const [car, setCar] = useState(null);
     const [rate, setRate] = useState(null);
     const [deleted, setDeleted] = useState(null);
-    const {user}=useContext(UserContext);
+    const { user } = useContext(UserContext);
     const navigator = useNavigate();
     const getUserById = async () => {
         try {
@@ -99,9 +98,8 @@ function CarDitails() {
     return (
         <div>
             {loading ? (
-                                        <div className=" d-flex justify-center align-middle">
-
-                <Loading  />
+                <div className=" d-flex justify-center align-middle">
+                    <Loading />
                 </div>
             ) : (
                 <div>
@@ -111,7 +109,7 @@ function CarDitails() {
                                 <img
                                     src={car.sub_images[0].photo_car_url}
                                     alt="imgcar"
-                                   className="imgCarDetials"
+                                    className="imgCarDetials"
                                 />
                                 <div className="mt-4  row">
                                     {car.sub_images.length >= 2 && (
@@ -185,7 +183,7 @@ function CarDitails() {
                                         seats : {car.seats}
                                     </li>
                                     <li className="list-group-item">
-                                    Gear : {car.steering}
+                                        Gear : {car.steering}
                                     </li>
                                     <li className="list-group-item">
                                         Year : {car.year}
@@ -203,13 +201,32 @@ function CarDitails() {
                                         Price :
                                         <span className=" text-success d-flex">
                                             {" "}
-                                            {car.prices[0].price !== car.prices[0].price_after_discount ?                                                 
-                                                       (<> <p className="old-price ">{car.prices[0].price}₪ / day</p>
-                                                       <p>{car.prices[0].price_after_discount}₪ / day</p>
-                                                       </>)
-                                                        : (<> <h1 className=" text-success">{car.prices[0].price}₪ / day</h1>
-                                                       
-                                                        </>)}
+                                            {car.prices[0].price !==
+                                            car.prices[0]
+                                                .price_after_discount ? (
+                                                <>
+                                                    {" "}
+                                                    <p className="old-price ">
+                                                        {car.prices[0].price}₪ /
+                                                        day
+                                                    </p>
+                                                    <p>
+                                                        {
+                                                            car.prices[0]
+                                                                .price_after_discount
+                                                        }
+                                                        ₪ / day
+                                                    </p>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    {" "}
+                                                    <h1 className=" text-success">
+                                                        {car.prices[0].price}₪ /
+                                                        day
+                                                    </h1>
+                                                </>
+                                            )}
                                         </span>
                                     </li>
                                 </ul>
@@ -265,16 +282,18 @@ function CarDitails() {
                                                     }{" "}
                                                     comment :
                                                 </h4>
-                                               {comment.owner_of_comment.name===user.name &&(
-                                                           <IoCloseCircleOutline  size={30}
-                                                           className="DeleteBtn"
-                                                           onClick={() =>
-                                                               deleteComment(
-                                                                   comment.id
-                                                               )
-                                                           } />
-
-                                               )}
+                                                {comment.owner_of_comment
+                                                    .name === user.name && (
+                                                    <IoCloseCircleOutline
+                                                        size={30}
+                                                        className="DeleteBtn"
+                                                        onClick={() =>
+                                                            deleteComment(
+                                                                comment.id
+                                                            )
+                                                        }
+                                                    />
+                                                )}
                                             </div>
 
                                             <div

@@ -6,28 +6,33 @@ const Report = () => {
     const [date, setDate] = useState("");
     const [time, setTime] = useState("");
     const location = useLocation();
-    const { resultBill ,discountVal } = location.state;
+    const { resultBill, discountVal } = location.state;
     const [numHours, setNumHours] = useState(0);
     useEffect(() => {
-        const currentDate= new Date();
-        const formattedDate= currentDate.toLocaleDateString();
-        const formattedTime=currentDate.toLocaleTimeString();
+        const currentDate = new Date();
+        const formattedDate = currentDate.toLocaleDateString();
+        const formattedTime = currentDate.toLocaleTimeString();
         setDate(formattedDate);
         setTime(formattedTime);
 
-        const pickupDateTime = new Date(`${resultBill.start_date}T${resultBill.start_time}`);
-        const dropoffDateTime = new Date(`${resultBill.end_date}T${resultBill.end_time}`);
-    
+        const pickupDateTime = new Date(
+            `${resultBill.start_date}T${resultBill.start_time}`
+        );
+        const dropoffDateTime = new Date(
+            `${resultBill.end_date}T${resultBill.end_time}`
+        );
+
         // Calculate the difference in milliseconds
         const timeDiffInMillis = dropoffDateTime - pickupDateTime;
-    
+
         // Calculate days and remaining hours
         const days = Math.floor(timeDiffInMillis / (1000 * 60 * 60 * 24));
-        const remainingHours = (timeDiffInMillis % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
-    
+        const remainingHours =
+            (timeDiffInMillis % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
+
         setNumHours({
             days: days,
-            hours: remainingHours
+            hours: remainingHours,
         });
     }, []);
 
@@ -182,15 +187,23 @@ const Report = () => {
                         <div className="d-flex flex-column align-items-center">
                             <h3>Rental Period</h3>
                             <p>
-                            {numHours&&numHours.days > 1 ? (
-                <span>{numHours.days} Days</span>
-            ) :                 <span>{numHours.days} Day</span>
-        }
-            {numHours.days > 0 && numHours.hours > 0 ? ' , ' : null}
-            {numHours.hours&&numHours.hours > 1 ? (
-                <span>{Math.ceil(numHours.hours)} Hours</span>
-            ) :                 <span>{Math.ceil(numHours.hours)} Hour</span>
-        }
+                                {numHours && numHours.days > 1 ? (
+                                    <span>{numHours.days} Days</span>
+                                ) : (
+                                    <span>{numHours.days} Day</span>
+                                )}
+                                {numHours.days > 0 && numHours.hours > 0
+                                    ? " , "
+                                    : null}
+                                {numHours.hours && numHours.hours > 1 ? (
+                                    <span>
+                                        {Math.ceil(numHours.hours)} Hours
+                                    </span>
+                                ) : (
+                                    <span>
+                                        {Math.ceil(numHours.hours)} Hour
+                                    </span>
+                                )}
                             </p>
                         </div>
                         <div className="d-flex flex-column align-items-center">
