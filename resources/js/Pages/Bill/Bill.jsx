@@ -94,7 +94,7 @@ const dialogStyle = {
     const [methodId, setMethodId] = useState("");
     const [cityId, setCityId] = useState("");
     const [carId, setCarId] = useState("");
-    const [carOwner, setCarOwner] = useState("");
+    const [carOwner, setCarOwner] = useState(car.owneruser);
     const [disoucntId, setDiscountId] = useState("");
     const [showCity, setShowCity] = useState(false);
     const [arrayCity, setArrayCity] = useState([]);
@@ -887,7 +887,7 @@ const dialogStyle = {
                             <label className="fs-5 fw-bold">Total Points: </label>
                             <span className="fs-5 fw-bold p-3">{user.points>0 ? user.points  : 'no' } point</span>
                             </div>
-                            {user.points>0 ? <div className="d-flex flex-column align-items-center justif-content-center  gap-2">
+                            {carOwner.active_points===1 ? <div className="d-flex flex-column align-items-center justif-content-center  gap-2">
                             <MdOutlinePriceCheck size={100}/>
                             <label className="fs-5 fw-bold">Price After Discount: </label>
                             <span className="fs-5 fw-bold p-3">{user.points>0  &&(Math.ceil(totalPrice) - Math.ceil(Math.ceil(totalPrice) *  discountVal)) } ₪</span>

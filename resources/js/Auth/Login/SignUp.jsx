@@ -14,12 +14,12 @@ import { IoCamera } from "react-icons/io5";
 import { doc } from "firebase/firestore";
 import { BiShowAlt } from "react-icons/bi";
 import { IoEyeOffOutline } from "react-icons/io5";
-import loginimage from '../../../../public/image/undraw_undraw_undraw_undraw_sign_up_ln1s_-1-_s4bc_-1-_ee41__1__3xti-removebg-preview.png'
+import loginimage from "../../../../public/image/undraw_undraw_undraw_undraw_sign_up_ln1s_-1-_s4bc_-1-_ee41__1__3xti-removebg-preview.png";
 import { UserContext } from "../../Context/User";
 
 function SignUp() {
     const { translates } = useContext(TranslateContext);
-    const {userToken,setUserToken}= useContext(UserContext);
+    const { userToken, setUserToken } = useContext(UserContext);
     const navigate = useNavigate();
     const [errors, setErrors] = useState(null);
     const [role, setRole] = useState("Company");
@@ -37,6 +37,7 @@ function SignUp() {
         name: null,
         phone: null,
         password: null,
+        active_points:null,
     });
 
     const validate = async () => {
@@ -96,22 +97,24 @@ function SignUp() {
         if (file.current) {
             formData.append("photo_user", file.current);
         }
+        formData.append("active_points", form.current.active_points);
+
         setLoading(true);
 
         await Signup(
             formData,
             (user) => {
                 if (user.role === "Company") {
-                    setUserToken(user.token)
+                    setUserToken(user.token);
                     navigate("/dashbord");
                 } else {
-                    setUserToken(user.token)
+                    setUserToken(user.token);
                     navigate("/profile");
                 }
             },
             (msg) => {
                 setError(msg);
-            },
+            }
         );
 
         setLoading(false);
@@ -328,7 +331,48 @@ function SignUp() {
                             ></textarea>
                         </div>
                     </div>
-
+                    <div className="form-group col">
+                        <div class="d-flex flex-column align-items-center p-2">
+                            <label class="form-check-label" for="defaultCheck1">
+                                Are you want to give special discounts of users
+                                depends on their points?
+                            </label>
+                            <div className="d-flex gap-5">
+                                <div class="form-check">
+                                    <input
+                                        class="form-check-input"
+                                        type="radio"
+                                        name="active_points"
+                                        id="exampleRadios1"
+                                        value="1"
+                                        onChange={set}
+                                    />
+                                    <label
+                                        class="form-check-label"
+                                        for="exampleRadios1"
+                                    >
+                                        Yes
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input
+                                        class="form-check-input"
+                                        type="radio"
+                                        name="active_points"
+                                        id="exampleRadios2"
+                                        value="0"
+                                        onChange={set}
+                                    />
+                                    <label
+                                        class="form-check-label"
+                                        for="exampleRadios2"
+                                    >
+                                        No
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <hr />
                     <input
                         type="submit"

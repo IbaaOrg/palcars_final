@@ -38,6 +38,7 @@ class User extends AuthenticatableUser implements Authenticatable
         'birthdate',
         'description',
         'role',
+        'active_points',
         'points'
     ];
     protected $appends = [];

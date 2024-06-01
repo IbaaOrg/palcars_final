@@ -53,6 +53,7 @@ class UserController extends Controller
             'photo_drivinglicense' => $request->role === 'Renter'?'required|image|mimes:jpeg,png,jpg,gif':'nullable|image|mimes:jpeg,png,jpg,gif',
             'birthdate' => $request->role === 'Renter' ? 'required|date|before_or_equal:' . Carbon::now()->subYears(18)->format('Y-m-d') : 'nullable' ,
             'description' => 'nullable',
+            'active_points'=>$request->role === 'Company' ? 'required|boolean':'nullable',
             'role' => 'required|in:Admin,Renter,Company',
         ], [
             'name.required'=>__('Messages.name required'),
@@ -62,7 +63,8 @@ class UserController extends Controller
             'phone.regex'=>'The phone number must contain 10 digits start with (05)',
             'valid.required'=>'Please confirm that you have a valid driving license.',
             'birthdate.before_or_equal' => 'You must be 18 years old or older to register.',
-        
+            'active_points.required' => 'Active points must be specified for a company.',
+
         ]);
     
         if ($validator->fails()) {
@@ -105,6 +107,7 @@ class UserController extends Controller
             'photo_drivinglicense' => $photo_drivinglicense,
             'birthdate' => $request->birthdate,
             'description' => $request->description,
+            'active_points' =>  $request->active_points,
             'role' => $request->role,
         ]);
 

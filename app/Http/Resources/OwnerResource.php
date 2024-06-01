@@ -21,6 +21,7 @@ class OwnerResource extends JsonResource
             'email'=>$this->email,
             'phone'=>$this->phone,
             'photo_user'=>url($this->photo_user),
+            'active_points'=>$this->active_points,
         
         ];
         return $data;

@@ -132,8 +132,13 @@ function Header({ islogined }) {
                                 data-bs-toggle="dropdown"
                                 aria-expanded="false"
                             >
-                                <i className="bi bi-translate fs-3 me-2 text-black"></i>
-                            </Link>
+<img width="40" height="40" src="https://img.icons8.com/small/32/english-to-arabic.png" alt="english-to-arabic"/>
+
+
+
+
+
+</Link>
                             <ul class="dropdown-menu">
                                 <li>
                                     <span
@@ -141,7 +146,7 @@ function Header({ islogined }) {
                                         data-lang="ar"
                                         onClick={(e) => Translate(e)}
                                     >
-                                        {translates.Arabic}
+                                        العربية
                                     </span>
                                 </li>
                                 <li>
@@ -150,7 +155,7 @@ function Header({ islogined }) {
                                         data-lang="en"
                                         onClick={(e) => Translate(e)}
                                     >
-                                        {translates.English}
+                                       English
                                     </span>
                                 </li>
                             </ul>

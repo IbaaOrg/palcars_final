@@ -25,7 +25,8 @@ return new class extends Migration
             $table->string('photo_drivinglicense')->nullable();
             $table->date('birthdate')->nullable();
             $table->text('description')->nullable();
-            $table->integer('points')->default(0);
+            $table->integer('points')->default(0);           
+            $table-> boolean('active_points')->nullable()->default(0);
             $table->enum('role',['Admin','Renter','Company']);
             $table-> boolean('active')->default(1);
             $table->timestamps();

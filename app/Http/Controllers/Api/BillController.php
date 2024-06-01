@@ -114,6 +114,7 @@ class BillController extends Controller
                 $finalDiscountId = null; // Or any other appropriate action
             }
             $finalAmount = $amount; 
+            if($car->ownerUser->role === 'Company' && $car->ownerUser->active_points===1){
             if($user->points==5 || $user->points==10||$user->points==15){
                $finalAmount=ceil($amount)-ceil(ceil($amount)*0.05);
             }else if($user->points==20 || $user->points==25||$user->points==30){
@@ -126,6 +127,7 @@ class BillController extends Controller
                 $finalAmount=ceil($amount)-ceil(ceil($amount)*0.2);
 
                }
+            }
                 // Create a new bill record
         $bill = Bill::create([
             'name'=>$request->name,
@@ -146,10 +148,13 @@ class BillController extends Controller
             'end_time' => $request->end_time,
         ]);
         $prices = Price::where('car_id', $request->car_id)->get();
-        $user->points += 5;
-
-        $user->save();  
         $car= Car::find($request->car_id);
+
+        if ($car->ownerUser->role === 'Company' && $car->ownerUser->active_points === 1) {
+            $user->points += 5;
+            $user->save();
+        } 
+        
         $user_comment=$request->user()->name;
         $user_photo=$request->user()->photo_user;
         $words = explode(" ", $car->make);
