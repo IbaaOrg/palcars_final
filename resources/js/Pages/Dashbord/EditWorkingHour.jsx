@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "../../../css/app.css";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { Bounce, Zoom } from "react-toastify";
 import axios from "axios";
+import { TranslateContext } from "../../Context/Translate";
 
 const EditWorkingHour = () => {
+    const {translates}=useContext(TranslateContext)
     const { id } = useParams();
     const navigate = useNavigate();
     const [workingHour, setWorkingHour] = useState({
@@ -63,12 +65,12 @@ const EditWorkingHour = () => {
         <div className="mainEdit ">
             <ToastContainer />
             <div className="bg-white  w-100 rounded">
-                <h2 className="text-center p-4">Edit Working Hours</h2>
+                <h2 className="text-center p-4">{translates.EditWorkingHours}</h2>
                 <form action="" className="p-4 " onSubmit={handelSubmit}>
                     <div className="d-flex flex-column jusitfy-content-center align-items-center w-100 gap-3">
                         <div className="d-flex  justify-content-between  align-items-center w-50">
                             <label htmlFor={`startHour`} className="w-25">
-                                Start Hour
+                                {translates.starthour}
                             </label>
                             <input
                                 type="time"
@@ -85,7 +87,7 @@ const EditWorkingHour = () => {
                         </div>
                         <div className="d-flex  justify-content-between  align-items-center w-50">
                             <label htmlFor={`endHour`} className="w-25">
-                                End Hour
+                                {translates.endhour}
                             </label>
                             <input
                                 type="time"
@@ -101,7 +103,7 @@ const EditWorkingHour = () => {
                             />
                         </div>
                         <button type="submit" className="btn btn-primary">
-                            Save
+                            {translates.save}
                         </button>
                     </div>
                 </form>

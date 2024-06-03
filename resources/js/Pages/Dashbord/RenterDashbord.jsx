@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import "../../../css/app.css";
 import { FaRegImages } from "react-icons/fa6";
 import ImageModel from "../../Layout/Dialog/ImageModel";
 import '../../../css/DialogStyle/Model.css'
 import { Outlet } from "react-router-dom";
+import { TranslateContext } from "../../Context/Translate";
 const RenterDashbord = ({ id }) => {
+    const {translates}=useContext(TranslateContext)
     const [renters, setRenters] = useState([]);
     const [selectedImage, setSelectedImage] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -37,22 +39,22 @@ const RenterDashbord = ({ id }) => {
             <div className="container text-center  p-10">
                 <div className="row">
                     <div className="col ">
-                        <h1 className="fs-1">Renters List</h1>
-                        <p className="">Your all Renters are listed bellow</p>
+                        <h1 className="fs-1">{translates.renterslist}</h1>
+                        <p className="">{translates.rentersbelow}</p>
                     </div>
                     <div className="col ">
                         <form class="d-flex" role="search">
                             <input
                                 class="form-control me-2"
                                 type="search"
-                                placeholder="Search"
+                                placeholder={translates.Search} 
                                 aria-label="Search"
                             />
                             <button
                                 class="btn btn-outline-success"
                                 type="submit"
                             >
-                                Search
+                                {translates.Search}
                             </button>
                         </form>
                     </div>
@@ -65,7 +67,7 @@ const RenterDashbord = ({ id }) => {
                                 to="/profile/booking"
                                 className={"activeLinkPrim"}
                             >
-                                All Bookings
+                                {translates.AllBookings}
                             </NavLink>
                         </button>
                     </div>
@@ -93,10 +95,10 @@ const RenterDashbord = ({ id }) => {
                                      
                                       <div className="renterInfoImg">
                                             <p className="fw-bold  mt-0">
-                                                Rental Count :
+                                                {translates.RentalCount} :
                                                 {item.rental_count>1?`${item.rental_count} times`:`${item.rental_count} time`}
                                             </p>
-                                            <p className="fw-bold  mt-0">Points : {item.points}</p>
+                                            <p className="fw-bold  mt-0">{translates.Points} : {item.points}</p>
                                         </div>
                                     <div className="renterInfoImg d-flex justify-content-start align-items-start">
                                       
@@ -111,7 +113,7 @@ const RenterDashbord = ({ id }) => {
 
             </label>
                                         </div>
-                                        <p className="mt-4 fw-bold">Expired date : {item.expireddate}</p>
+                                        <p className="mt-4 fw-bold">{translates.Expireddate} : {item.expireddate}</p>
 
                                     </div>
                                     <div className=" d-flex  align-items-start">
@@ -120,7 +122,7 @@ const RenterDashbord = ({ id }) => {
                                 to={`/dashbord/RenterDashbord/bookings/${item.id}`}
                                 className={"activeLinkPrim"}
                             >
-                                Bookings
+                                {translates.Bookings}
                             </NavLink> </button>
 
                                     </div>
@@ -134,7 +136,7 @@ const RenterDashbord = ({ id }) => {
                 ) : (
                     <div className="d-flex flex-column justidy-content-center align-items-center mt-5 ">
                         <p className="fs-4 p-5 text-black">
-                            There isn't Renters From your company
+                            There isn't Renters booking any car From your company
                         </p>
                         <div className="">
                             <i class="bi bi-person-fill-slash expensesIcon"></i>

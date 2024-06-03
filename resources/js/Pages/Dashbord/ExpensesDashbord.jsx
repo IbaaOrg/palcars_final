@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../../../css/app.css";
+import { TranslateContext } from "../../Context/Translate";
 function ExpensesDashbord() {
+    const {translates}=useContext(TranslateContext)
     const [data, setData] = useState([]);
     const [totla, setTotal] = useState(0);
     const getData = async () => {
@@ -26,7 +28,7 @@ function ExpensesDashbord() {
     }, []);
     return (
         <div className="d-flex flex-column justify-content-center align-items-center mt-5 mx-5">
-            <h2 className="fs-4 fw-bold">Expenses From all bookings</h2>
+            <h2 className="fs-4 fw-bold">{translates.expensesfrom}</h2>
 
             {data.length > 0 ? (
                 <div className="w-100  mt-4 rounded bg-white px-3">
@@ -38,13 +40,13 @@ function ExpensesDashbord() {
                             >
                                 <div className="imgUserContainer m-2 ">
                                     <h1>
-                                        Booking #
+                                        {translates.Booking} #
                                         <span className="fw-bold text-primary">
                                             {index + 1}
                                         </span>
                                     </h1>
                                     <h2 className=" ">
-                                        From <span className="fw-bold text-primary">
+                                        {translates.From} <span className="fw-bold text-primary">
                                             {item.user_id.name}
                                         </span>
                                     </h2>
@@ -57,10 +59,10 @@ function ExpensesDashbord() {
                                     </div>
                                 </div>
                                 <div className="d-flex ">
-                                    <p>From : {item.start_date}</p>
-                                    <p>To : {item.end_date}</p>
+                                    <p>{translates.From} : {item.start_date}</p>
+                                    <p>{translates.To} : {item.end_date}</p>
                                 </div>
-                                <p>Method : {item.method.method}</p>
+                                <p>{translates.Method} : {item.method.method}</p>
                                 <p>{Math.round(item.final_amount)} ₪</p>
                             </div>
                             <div className="px-4">
@@ -70,13 +72,13 @@ function ExpensesDashbord() {
                     ))}
                     <p className="fs-5 fw-bold">
                         {" "}
-                        Total Profit : {Math.round(totla)} ₪
+                        {translates.TotalProfit} : {Math.round(totla)} ₪
                     </p>
                 </div>
             ) : (
                 <div className="d-flex flex-column justidy-content-center align-items-center mt-5 ">
                     <p className="fs-4 p-5 text-black">
-                        There isn't exist Expenses for your company
+                        {translates.notexpenses}
                     </p>
                     <div className="">
                         <i class="bi bi-cash-coin expensesIcon "></i>

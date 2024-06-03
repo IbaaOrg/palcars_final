@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../../../css/app.css";
 import { ToastContainer, toast } from "react-toastify";
 import { Bounce, Zoom } from "react-toastify";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { TranslateContext } from "../../Context/Translate";
 
 const WorkingHourDashbord = () => {
+    const {translates}=useContext(TranslateContext)
     const [workingHour, setWorkingHour] = useState({
         day: "",
         start_hour: "",
@@ -145,7 +147,7 @@ const WorkingHourDashbord = () => {
         <div className="d-flex flex-column justify-content-center align-items-center">
             <ToastContainer />
             <div className="d-flex flex-column">
-                <p className="fs-5 p-3">Choose the days that you work :</p>
+                <p className="fs-5 p-3">{translates.chooseday}</p>
                 <div className="d-flex flex-wrap workingHours">
                     {Object.keys(showForms).map((day, index) => {
                         const workingDay = workingHours.find((wh) => wh.day === day);
@@ -190,7 +192,7 @@ const WorkingHourDashbord = () => {
                                         {showForms[day] ? (
                                             <div>
                                                 <label htmlFor={`startHour${day}`}>
-                                                    Start Hour
+                                                    {translates.starthour}
                                                 </label>
                                                 <input
                                                     type="time"
@@ -208,7 +210,7 @@ const WorkingHourDashbord = () => {
                                             </div>
                                         ) : (
                                             <div className="d-flex flex-column">
-                                                <label>Start Hour</label>
+                                                <label>{translates.endhour}</label>
                                                 <label>
                                                     {workingDay && formatTime(workingDay.start_hour)}
                                                 </label>
@@ -217,7 +219,7 @@ const WorkingHourDashbord = () => {
                                         {showForms[day] ? (
                                             <div>
                                                 <label htmlFor={`endHour${day}`}>
-                                                    End Hour
+                                                    {translates.endhour}
                                                 </label>
                                                 <input
                                                     type="time"
@@ -235,7 +237,7 @@ const WorkingHourDashbord = () => {
                                             </div>
                                         ) : (
                                             <div className="d-flex flex-column">
-                                                <label>End Hour</label>
+                                                <label>{translates.endhour}</label>
                                                 <label>
                                                     {workingDay && formatTime(workingDay.end_hour)}
                                                 </label>
@@ -246,7 +248,7 @@ const WorkingHourDashbord = () => {
                                         type="submit"
                                         className="btn btn-primary mt-2 w-25 m-auto"
                                     >
-                                        {showForms[day] ? "Save" : "Edit"}
+                                        {showForms[day] ? `${translates.save}` : `${translates.Update}`}
                                     </button>
                                 </div>
                             </form>

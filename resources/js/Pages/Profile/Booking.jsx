@@ -4,8 +4,10 @@ import '../../../css/ReportStyle/Booking.css'
 import {  useNavigate } from 'react-router-dom';
 import { UserContext } from '../../Context/User';
 import Loading from '../../Componants/UI/Loading';
+import { TranslateContext } from './../../Context/Translate';
 
 function Booking() {
+  const {translates}=useContext(TranslateContext)
   const { user } = useContext(UserContext);
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -90,31 +92,31 @@ function Booking() {
       </div>
     ) : (
       <div className='d-flex flex-column align-items-center mainBooking'>
-        {user.role === "Renter" ? <h3 className='fw-bold fs-4 py-3'>My Booking</h3> : <h3 className='fw-bold fs-4 py-3'>Booking from my company</h3>}
+        {user.role === "Renter" ? <h3 className='fw-bold fs-4 py-3'>{translates.MyBooking}</h3> : <h3 className='fw-bold fs-4 py-3'>{translates.BookingCompany}</h3>}
         {bookings.length > 0 ? Object.entries(bookingByMonth).map(([monthYearKey, bookings]) => (
           <div key={monthYearKey}>
-            <h3 className='fs-5'>In <span className='fw-bold'>{monthYearKey}</span></h3>
+            <h3 className='fs-5'>{translates.In} <span className='fw-bold'>{monthYearKey}</span></h3>
             {bookings.map((item, index) => (
               <div key={item.id} id={item.id} className='minorBooking d-flex flex-wrap border py-2 px-4 m-3 d-flex align-items-center justify-content-between gap-5 w-100' onClick={handleBooking}>
-                <span>Booking <span className='text-primary fw-bold'>#{index + 1}</span></span>
+                <span>{translates.booking} <span className='text-primary fw-bold'>#{index + 1}</span></span>
                 {user.role === 'Renter' ? (
                   <p>
-                    <span className="text-primary fw-bold">From: </span>
+                    <span className="text-primary fw-bold">{translates.From}: </span>
                     {item.car.owner ? item.car.owner.name : 'Unknown Owner'} Company
                   </p>
                 ) : (
                   <p>
-                    <span className="text-primary fw-bold">From: </span>
+                    <span className="text-primary fw-bold">{translates.From}: </span>
                     {item.user_id.name ? item.user_id.name : 'Unknown Owner'}
                   </p>
                 )}
                 <span>
-                  <span className="text-primary fw-bold">Total Price: </span>
-                  {user.points>0  &&(Math.ceil(item.amount) - Math.ceil(Math.ceil(item.amount) *  discountVal)) } ₪                </span>
+                  <span className="text-primary fw-bold">{translates.TotalPrice}: </span>
+                  {user.points>0  ?(Math.ceil(item.amount) - Math.ceil(Math.ceil(item.amount) *  discountVal)): Math.ceil(item.amount) } ₪                </span>
               </div>
             ))}
           </div>
-        )) : user.role === "Renter" ? <div className='py-3'>You didn't Book any car</div> : <div className='py-3'>Your cars currently have no Bookings.</div>}
+        )) : user.role === "Renter" ? <div className='py-3'>{translates.notBook}</div> : <div className='py-3'>{translates.carsBooking}</div>}
       </div>
     )
   );

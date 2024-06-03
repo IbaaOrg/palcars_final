@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import "../../../css/app.css";
 import { FaRegImages } from "react-icons/fa6";
@@ -9,8 +9,10 @@ import { useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { Zoom, Bounce } from "react-toastify";
+import { TranslateContext } from "../../Context/Translate";
 
 function BookingsDashbord() {
+    const {translates}=useContext(TranslateContext);
     const [renters, setRenters] = useState([]);
     const [selectedImage, setSelectedImage] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -140,9 +142,9 @@ function BookingsDashbord() {
             <div className="container text-center  p-10">
                 <div className="row">
                     <div className="col ">
-                        <h1 className="fs-1">Renter Bills List</h1>
+                        <h1 className="fs-1">{translates.RenterBillsList}</h1>
                         <p className="">
-                            Your all Renter Bills are listed below
+                           {translates.billbelow}
                         </p>
                     </div>
                     <div className="col ">
@@ -150,7 +152,7 @@ function BookingsDashbord() {
                             <input
                                 className="form-control me-2"
                                 type="search"
-                                placeholder="Search"
+                                placeholder={translates.Search} 
                                 aria-label="Search"
                                 value={searchTerm}
                                 onChange={handleChange}
@@ -160,7 +162,7 @@ function BookingsDashbord() {
                                 type="submit"
                                 onClick={handleSearch}
                             >
-                                Search
+                                {translates.Search}
                             </button>
                         </form>
                     </div>
@@ -184,15 +186,15 @@ function BookingsDashbord() {
                                     </div>
 
                                     <p className="fw-bold  mt-4">
-                                        Booking date : {item.start_date}
+                                        {translates.Pickupdate} : {item.start_date}
                                     </p>
 
                                     <p className="fw-bold  mt-4">
-                                        Expired date : {item.end_date}
+                                        {translates.Dropoffdate} : {item.end_date}
                                     </p>
 
                                     <p className="fw-bold  mt-4">
-                                        Car Number : {item.car.car_number}
+                                       {translates.CarNumber} : {item.car.car_number}
                                     </p>
                                     <p className="fw-bold  mt-4">
                                         {item.final_amount} ₪
@@ -203,7 +205,7 @@ function BookingsDashbord() {
                                             id={item.id}
                                             onClick={deleteOrder}
                                         >
-                                            Cancel Order
+                                            {translates.CancelOrder}
                                         </button>
                                     </div>
                                 </div>

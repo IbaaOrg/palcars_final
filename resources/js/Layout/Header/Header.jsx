@@ -328,19 +328,19 @@ function Header({ islogined }) {
                                                     navigator("/profile")
                                                 }
                                             >
-                                                {"My Profile"}
+                                                {translates.MyProfile}
                                             </span>
                                         </li>
                                     </ul>
                                 </div>
                                 {user.role === "Company" ? (
-                                    <NavLink
+                                    <Link
                                         to="/dashbord"
-                                        className="btn btn-primary dashbord ml-5 "
+                                        className=" dashbord ml-5 fw-bold"
                                     >
                                         {" "}
                                         {translates.Dashbord}
-                                    </NavLink>
+                                    </Link>
                                 ) : (
                                     <div></div>
                                 )}
@@ -349,7 +349,7 @@ function Header({ islogined }) {
                                     className="btn btn-outline-primary"
                                     onClick={out}
                                 >
-                                    Logout
+                                    {translates.LogOut}
                                 </button>
                             </>
                         ) : (

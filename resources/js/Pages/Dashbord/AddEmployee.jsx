@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "../../../css/app.css";
 import { useRef } from "react";
 import Loading from "./../../Componants/UI/Loading";
+import { TranslateContext } from "../../Context/Translate";
 const AddEmployee = () => {
+    const {translates}=useContext(TranslateContext)
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
@@ -69,7 +71,7 @@ const AddEmployee = () => {
         <div className="w-75 d-flex justify-content-center align-items-center m-auto mt-5">
             <div className="bg-white w-100  border rounded px-3 py-2">
                 <form className=" w-75 m-auto" onSubmit={addEmployee}>
-                    <h2 className="text-center fs-4  p-3">Add New Employee</h2>
+                    <h2 className="text-center fs-4  p-3">{translates.AddNewEmployee}</h2>
                     {error && (
                             <div
                                 className="alert alert-danger w-100"
@@ -83,14 +85,14 @@ const AddEmployee = () => {
                                 className="alert alert-success w-100"
                                 role="100"
                             >
-                                Emplyee Added Successfully
+                                Employee Added Successfully
                             </div>
                         )}
                     <div className="d-flex flex-wrap justify-content-between gap-2 ">
                        
                         <div class="employeeItem">
                             <label for="exampleInputEmail1" className="py-2">
-                                Full Name
+                                {translates.FullName}
                             </label>
                             <input
                                 type="text"
@@ -105,7 +107,7 @@ const AddEmployee = () => {
                         </div>
                         <div class=" employeeItem">
                             <label for="exampleInputEmail2" className="py-2">
-                                Email address
+                                {translates.Emailaddress}
                             </label>
                             <input
                                 type="email"
@@ -121,7 +123,7 @@ const AddEmployee = () => {
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail3 " className="py-2">
-                            Phone Number
+                            {translates.PhoneNumber}
                         </label>
                         <input
                             type="text"
@@ -136,7 +138,7 @@ const AddEmployee = () => {
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail4 " className="py-2">
-                            Address
+                            {translates.Address}
                         </label>
                         <input
                             type="text"
@@ -151,14 +153,14 @@ const AddEmployee = () => {
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail5 " className="py-2">
-                            Job Title
+                           {translates.JobTitle}
                         </label>
                         <input
                             type="text"
                             class="form-control"
                             id="exampleInputEmail5"
                             aria-describedby="emailHelp"
-                            placeholder="Enter job title "
+                            placeholder={translates.enterjobtitle}
                             name="job_title"
                             value={jobTitle}
                             onChange={(e) => setJobTitle(e.target.value)}
@@ -166,14 +168,14 @@ const AddEmployee = () => {
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1 " className="py-2">
-                            Start date in compnay
+                           {translates.StartDate}
                         </label>
                         <input
                             type="date"
                             class="form-control"
                             id="exampleInputEmail1"
                             aria-describedby="emailHelp"
-                            placeholder="Enter start date"
+                            placeholder={translates.enterstartdate}
                             name="start_date"
                             value={startDate}
                             max={maxToday()}
@@ -182,7 +184,7 @@ const AddEmployee = () => {
                     </div>
                     <div className="d-flex justify-content-end py-3">
                         <button type="submit" className="btn btn-primary">
-                            {loading ? "loading..." : "Save"}
+                            {loading ? "loading..." : `${translates.save}`}
                         </button>
                     </div>
                 </form>

@@ -7,7 +7,6 @@ import CommetInput from '../../Layout/Comments/CommetInput'
 import MessageInput from '../../Layout/Message/MessageInput'
 import { TranslateContext } from '../../Context/Translate';
 function ChatsDashbord() {
-const {translates}=useContext(TranslateContext)
 
   const [data, setData] = useState([]);
   const[dataSearch,setdataSearch]=useState([]);
@@ -190,8 +189,8 @@ const handleSendMessage = () => {
       <div className='col-4 message_list_list' style={{ maxHeight: '800px', overflowY: 'scroll', overflowX: 'hidden' }}>
       <div className="m-2">
            <form class="d-flex" role="search">
-           <input class="form-control me-2 " type="search" placeholder={translates.SearchTitle} aria-label="Search" value={searchTerm} onChange={handleChange} />
-              <button class="btn btn-outline-success" type="submit" onClick={handleSearch}>{translates.Search}</button>
+           <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search" value={searchTerm} onChange={handleChange} />
+              <button class="btn btn-outline-success" type="submit" onClick={handleSearch}>Search</button>
         </form>
       </div>
      

@@ -1,12 +1,14 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useState, useEffect, useContext } from 'react'
 import { Form, FormGroup, FormLabel, FormControl, Button } from 'react-bootstrap';
 import axios from 'axios';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 
 
 import { useParams } from 'react-router-dom';
+import { TranslateContext } from '../../../Context/Translate';
 
 function EditCar() {
+  const {translates}=useContext(TranslateContext)
    const { id } = useParams(); // This will give you the value of "id" from the URL
   const [type, setType] = useState(null)
   const [colors, setColors] = useState(null)
@@ -230,7 +232,7 @@ function EditCar() {
   return (
     <div className='row p-4'>
     
-      <h1 className='p-1 m-2 badge text-bg-primary text-wrap fs-4'>Edit Car #{id}</h1>
+      <h1 className='p-1 m-2 badge text-bg-primary text-wrap fs-4'>{translates.EditCar} #{id}</h1>
       
 
 
@@ -252,30 +254,29 @@ function EditCar() {
               <div className='row'>
 
                 <FormGroup className='col'>
-                  <FormLabel>Car Number</FormLabel>
+                  <FormLabel>{translates.CarNumber}</FormLabel>
                   {carforcompany&&(
 
-                  <FormControl type="text" placeholder="Enter Car Number" disabled name="car_number" id="car_number" value={car_number}/>
+                  <FormControl type="text" placeholder={translates.entercarnumber} disabled name="car_number" id="car_number" value={car_number}/>
                   )}
                 </FormGroup>
 
                 <FormGroup className='col'>
-                  <FormLabel>Make</FormLabel>
-                  <FormControl type="text" placeholder="Enter Make" onChange={(e)=>{setMake(e.target.value)}} value={make} name="make" id="make" />
+                  <FormLabel>{translates.Make}</FormLabel>
+                  <FormControl type="text" placeholder={translates.entermake} onChange={(e)=>{setMake(e.target.value)}} value={make} name="make" id="make" />
                 </FormGroup>
               </div>
               <div className='row mt-3'>
 
                 <FormGroup className='col'>
-                  <FormLabel>Model</FormLabel>
-                  <FormControl type="text" placeholder="Enter Car Model" onChange={(e) => { setModel(e.target.value) }} value={model} name="model" id="model" />
+                  <FormLabel>{translates.Model}</FormLabel>
+                  <FormControl type="text" placeholder={translates.entercarmodel} onChange={(e) => { setModel(e.target.value) }} value={model} name="model" id="model" />
                 </FormGroup>
                 {/* SUV,Hatchback,Sedan,Convertible,Crossover,Station Wagon,Minivan,Pickup trucks */}
                 <FormGroup className='col'>
-                  <FormLabel>Description</FormLabel>
+                  <FormLabel>{translates.Description}</FormLabel>
                   <div class="form-floating">
                     <textarea class="form-control" placeholder="Leave a comment here" onChange={(e) => { setDescription(e.target.value) }} value={description}  name="description" id="description"></textarea>
-                    <label for="floatingTextarea">Description</label>
                   </div>            </FormGroup>
 
 
@@ -284,7 +285,7 @@ function EditCar() {
 
               <div className='row mt-3'>
                 <FormGroup className='col'>
-                  <FormLabel>Year</FormLabel>
+                  <FormLabel>{translates.Year}</FormLabel>
                   <FormControl as="select" onChange={(e) => { setYear(e.target.value) }} name="year" value={year} id="year">
                     {years.map((year, index) => (
                       <option key={index} value={year}>
@@ -295,7 +296,7 @@ function EditCar() {
                 </FormGroup>
 
                 <FormGroup className='col'>
-                  <FormLabel>Seats</FormLabel>
+                  <FormLabel>{translates.Seats}</FormLabel>
                   <FormControl as="select" onChange={(e) => { setSeats(e.target.value) }} name="seats" value={seats} id="seats">
                     {numbers.map((number, index) => (
                       <option key={index} value={number}>
@@ -306,7 +307,7 @@ function EditCar() {
                 </FormGroup>
 
                 <FormGroup className='col'>
-                  <FormLabel>Doors</FormLabel>
+                  <FormLabel>{translates.Doors}</FormLabel>
                   <FormControl as="select" onChange={(e) => { setdDoors(e.target.value) }} name="doors" value={doors} id="doors">
                     {numbersDoors.map((number, index) => (
                       <option key={index} value={number}>
@@ -318,7 +319,7 @@ function EditCar() {
 
 
                 <FormGroup className='col'>
-                  <FormLabel>Bags</FormLabel>
+                  <FormLabel>{translates.Bags}</FormLabel>
                   <FormControl as="select" onChange={(e) => { setBags(e.target.value) }} name="bags" value={bags} id="bags">
                     {numbersBags.map((number, index) => (
                       <option key={index} value={number}>
@@ -331,19 +332,19 @@ function EditCar() {
               <div className='row mt-4'>
                 <div className='col'>
 
-                  <label for="select" className=' mr-3'>Catogory</label>
+                  <label for="select" className=' mr-3'>{translates.Category}</label>
 
                   <select class="select-input" onChange={(e) => { setCatrgory(e.target.value) }} name="catrgory" value={catrgory} id="catrgory">
-                    <option value="" class="dropdown-item" href="#">Select Catogry</option>
-                    <option value="SUV" class="dropdown-item" href="#">SUV</option>
+                    <option value="" class="dropdown-item" href="#">{translates.selectcategory}</option>
+                    <option value="SUV" class="dropdown-item" href="#">{translates.SUV}</option>
 
-                    <option value="Hatchback" class="dropdown-item" href="#">Hatchback</option>
-                    <option value="Sedan" class="dropdown-item" href="#">Sedan</option>
-                    <option value="Convertible" class="dropdown-item" href="#">Convertible</option>
-                    <option value="Crossover" class="dropdown-item" href="#">Crossover</option>
-                    <option value="Station Wagon" class="dropdown-item" href="#">Station Wagon</option>
-                    <option value="Minivan" class="dropdown-item" href="#">Minivan</option>
-                    <option value="Pickup trucks" class="dropdown-item" href="#">Pickup trucks </option>
+                    <option value="Hatchback" class="dropdown-item" href="#">{translates.Hatchback}</option>
+                    <option value="Sedan" class="dropdown-item" href="#">{translates.Sedan}</option>
+                    <option value="Convertible" class="dropdown-item" href="#">{translates.Convertible}</option>
+                    <option value="Crossover" class="dropdown-item" href="#">{translates.Crossover}</option>
+                    <option value="Station Wagon" class="dropdown-item" href="#">{translates.StationWagon}</option>
+                    <option value="Minivan" class="dropdown-item" href="#">{translates.Minivan}</option>
+                    <option value="Pickup trucks" class="dropdown-item" href="#">{translates.Pickuptrucks} </option>
 
 
 
@@ -351,14 +352,14 @@ function EditCar() {
                 </div>
                 {/* gas,diesel,electricity */}
                 <div className='col'>
-                  <label for="select" className=' mr-3'>Fuel Type</label>
+                  <label for="select" className=' mr-3'>{translates.FuelType}</label>
 
                   <select class="select-input " onChange={(e) => { setFuel_type(e.target.value) }} name="fuel_type" value={fuel_type} id="fuel_type">
-                    <option value="" class="dropdown-item" href="#">Select fuel type</option>
-                    <option value="gas" class="dropdown-item" href="#">gas</option>
+                    <option value="" class="dropdown-item" href="#">{translates.Selectfueltype}</option>
+                    <option value="gas" class="dropdown-item" href="#">{translates.Gas}</option>
 
-                    <option value="diesel" class="dropdown-item" href="#">diesel</option>
-                    <option value="electricity" class="dropdown-item" href="#">electricity</option>
+                    <option value="diesel" class="dropdown-item" href="#">{translates.Deisel}</option>
+                    <option value="electricity" class="dropdown-item" href="#">{translates.Electrecity}</option>
                   </select>
                 </div>
                 {type === "electricity" ? (
@@ -366,26 +367,26 @@ function EditCar() {
                 ) : (
 
 
-                  <FormGroup className='col'>
-                    <FormLabel>Fuel Full</FormLabel>
-                      <FormControl type="text" placeholder="Enter fuel full" onChange={(e) => { setFuel_full(e.target.value) }} name="fuel_full" value={fuel_full} id="fuel_full" />
+                  <FormGroup className='d-flex gap-1 col '>
+                    <FormLabel className='col-3'>{translates.FuelFull}</FormLabel>
+                      <FormControl className='w-50' type="text" placeholder={translates.enterfuelfull} onChange={(e) => { setFuel_full(e.target.value) }} name="fuel_full" value={fuel_full} id="fuel_full" />
                   </FormGroup>
                 )}
 
                 {/* Automatic,Manual */}
                 <div className='col'>
 
-                  <label for="select" className=' mr-3'>Gear</label>
+                  <label for="select" className=' mr-3'>{translates.Gear}</label>
 
                   <select class="select-input" onChange={(e) => { setSteering(e.target.value) }} name="steering" value={steering} id="steering">
-                    <option value="" class="dropdown-item" href="#">Select Gear </option>
-                    <option value="Automatic" class="dropdown-item" href="#">Automatic </option>
+                    <option value="" class="dropdown-item" href="#">{translates.SelectGear} </option>
+                    <option value="Automatic" class="dropdown-item" href="#">{translates.Automatic} </option>
 
-                    <option value="Manual" class="dropdown-item" href="#">Manual </option>
+                    <option value="Manual" class="dropdown-item" href="#">{translates.Manual} </option>
                   </select>
                 </div>
                 <div>
-                  <label for="select" className=' mr-3'>Color Car</label>
+                  <label for="select" className=' mr-3'>{translates.ColorCar}</label>
 
                   {colors && (
 
@@ -405,7 +406,7 @@ function EditCar() {
               */}
               <div class="mb-3">
                 <form onSubmit={addImage}>
-                  <label for="formFile" class="form-label m-2 p-2 text-center">Images</label>
+                  <label for="formFile" class="form-label m-2 p-2 text-center">{translates.Images}</label>
                   {/* <input class="form-control" type="file" onChange={show} id="formFile" /> */}
                   <div className=' mt-4 d-flex justify-content-end'>
                   {/*   <button type='submit' className="btn border border-success btn-success " >Edit Image</button> */}

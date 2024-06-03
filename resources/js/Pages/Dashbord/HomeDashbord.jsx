@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../../../css/app.css";
 import imgCar from "../../../../public/image/City.png";
 import Clock from "../../Componants/UI/Clock";
 import Time from "../../Componants/UI/DateToday";
 import Date from "../../Componants/UI/DateToday";
 import DateToday from "./../../Componants/UI/DateToday";
+import { TranslateContext, useTranslateContext } from "../../Context/Translate";
 function HomeDashbord() {
+    const { language } = useTranslateContext;
+    const {translates}=useContext(TranslateContext);
     const [data, setData] = useState(0);
     const [name, setName] = useState('');
     const [locations, setLocations] = useState(0);
@@ -113,18 +116,17 @@ function HomeDashbord() {
     }, []);
     return (
         <div>
-            <div className="row d-flex flex-wrap justify-content-between  align-items-center p-5  m-2  mt-4 bg-white  rounded">
+        <div className={`row d-flex flex-wrap justify-content-between align-items-center p-1 m-2 mt-3 bg-white rounded ${language === "ar" ? "rtlimg " : "ltr"}`}>
                 <div className=" info fs-4 ">
-                    <p className="fw-bold fs-4">
-                        Welcome <span className="text-primary">{name}</span>{" "}
+                    <p className={`fw-bold fs-4 ${language === "ar"?"rtl":"ltr"}`}>
+                        {translates.Welcome} <span className="text-primary">{name}</span>{" "}
                         Company
                     </p>
                     <p className="">
-                        "Here you can add and manage information about your
-                        company."{" "}
+                        {translates.addandmanage}
                     </p>
                 </div>
-                <div className="containerImg">
+                <div className={language === "ar"?"containerImgle":"containerImg"}>
                     <img src={imgCar} />
                 </div>
             </div>
@@ -139,7 +141,7 @@ function HomeDashbord() {
                         <div className="fs-1 text-primary text-center">
                             {data}
                         </div>
-                        <h1 className="fs-2 text-primary text-center">Cars</h1>
+                        <h1 className="fs-2 text-primary text-center">{translates.Vehicles}</h1>
                     </div>
                 </div>
                 <div className="col  rounded bg-primary m-2 position-relative caricondiv px-4 py-2">
@@ -147,14 +149,14 @@ function HomeDashbord() {
                     <div className="fs-1 text-white text-center">
                         {employees}
                     </div>
-                    <h1 className="fs-2 text-white text-center">Employees</h1>
+                    <h1 className="fs-2 text-white text-center">{translates.Employees}</h1>
                 </div>
                 <div className="col rounded bg-white  m-2 position-relative caricondiv border px-4 py-2">
                     <i class="bi bi-person-fill-check caricon text-primary position-absolute top-0 end-0 px-3"></i>
                     <div className="fs-1 text-primary text-center">
                         {renters}
                     </div>
-                    <h1 className="fs-2 text-primary text-center">Renters</h1>
+                    <h1 className="fs-2 text-primary text-center">{translates.Renters}</h1>
                 </div>
             </div>
             <div className="row p-4 m-2 gap-4">
@@ -163,21 +165,21 @@ function HomeDashbord() {
                     <div className="fs-1 text-white text-center">
                         {locations}
                     </div>
-                    <h1 className="fs-2 text-white text-center">Locations</h1>
+                    <h1 className="fs-2 text-white text-center">{translates.Locations}</h1>
                 </div>
                 <div className="col  rounded bg-white m-2 position-relative caricondiv px-4 py-2 border">
                     <i className="bi bi-currency-dollar m-1 caricon text-primary position-absolute top-0 end-0 px-2"></i>
                     <div className="fs-1 text-primary text-center">
                         {Bookings}
                     </div>
-                    <h1 className="fs-2 text-primary text-center">Expenses</h1>
+                    <h1 className="fs-2 text-primary text-center">{translates.Expenses}</h1>
                 </div>
                 <div className="col rounded bg-primary m-2 position-relative caricondiv px-4 py-2">
                     <i className="bi  bi-check m-1 caricon text-white position-absolute top-0 end-0 px-2"></i>
                     <div className="fs-1 text-white text-center">
                         {Bookings}
                     </div>
-                    <h1 className="fs-2 text-white text-center">Bookings</h1>
+                    <h1 className="fs-2 text-white text-center">{translates.Bookings}</h1>
                 </div>
             </div>
         </div>

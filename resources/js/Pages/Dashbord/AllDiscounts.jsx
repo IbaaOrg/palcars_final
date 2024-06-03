@@ -94,8 +94,8 @@ function AllDiscounts() {
                       <div className="col ">
                       <form className="d-flex" role="search">
                                 <input
-                                    className="form-control me-2" type="search" placeholder={translates.SearchTitle} aria-label="Search" value={searchTerm} onChange={handleChange} />
-                                <button className="btn btn-outline-success" type="submit" onClick={handleSearch} > {translates.Search} </button>
+                                    className="form-control me-2" type="search" placeholder="Search about title" aria-label="Search" value={searchTerm} onChange={handleChange} />
+                                <button className="btn btn-outline-success" type="submit" onClick={handleSearch} > Search </button>
                             </form>
                       </div>
                       <div className="col">
