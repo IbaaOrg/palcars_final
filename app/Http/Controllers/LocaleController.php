@@ -20,9 +20,10 @@ class LocaleController extends Controller
 
         // Define the keys for translation
         $keys = [
-            'Home', 'Cars', 'About', 'ContactUs', 'Register', 'Login', 'Arabic', 'English',
+            'WelcomeAbout','WelcomeEnd','mission','missionabout','chooseus','chooseAbout',  'chooseitemone','chooseitemtwo', 'chooseitemthree','chooseitemfour','chooseitemfive','ourteam','sendemail','socialmedia','officelocation','comment','Comment','MyComments','commentcar','Since','mynotes','notnotes','nonotes','notee','notesfrom','thenote','nocomment','notcomment','On','rating','please',
+            'DrivinglicensePhoto','Home', 'Cars', 'About', 'ContactUs', 'Register', 'Login', 'Arabic', 'English',
             'Search', 'Dashbord', 'Vehicles', 'AddVehicles', 'EditVehicles', 'VehiclesList',
-            'Filter', 'ID', 'CarNumber', 'Make', 'Model', 'Catrgory', 'Description', 'Year',
+            'Filter', 'ID', 'CarNumber', 'Make', 'Model', 'Catrgory', 'Description', 'Year','moredetials',
             'Seats', 'Doors', 'Bags', 'FuelType', 'FuelFull', 'Operation', 'View', 'Update','Code','PhoneNumber','enteraddress','donelocation','Information','Reviews','EditProfile','BookingCompany','MyBooking',
             'Delete', 'Chats', 'UserName', 'Account', 'Email', 'Phone', 'Birthdate','JobTitle','UpdateEmployeeInfo','Emailaddress','Enteremail','renterslist','pickupdropoff','pickup','MyProfile','In','booking','TotalPrice','notBook','carsBooking',
             'EditProfile', 'Information', 'Booking', 'Messages', 'Faviorites', 'pickup','employeelist','belowlist','AddEmployee','AddNewEmployee','Points','Expireddate','TotalProfit','Location','City','UpdateLocation','locationsuccesed','ChooseType',
@@ -33,7 +34,9 @@ class LocaleController extends Controller
             'OurTeams','join','Inviteafrind','AboutPalCars','enterlocation','returncar','pickupdate','pickuptime','dropoffdate','dropofftime','SignUpWithGoogle','pickupdropoff','Specialoffers','viewdeals','Sitestatistics','Cities','Users','Categoriesofcar','enterfuelfull','EditCar','StartTime','EndTime'
             ,'Day','Hour','Second','Minute','Save','save','map','descmap','reset','Make','entermake','model','entermodel','type','SUV',  'Sedan','Convertible','Crossover','Minivan','Pickuptrucks','StationWagon','Hatchback','Gas','Deisel','Electrecity','selectgear','selectfueltype','choosecolor','chooseday','Save'
             ,    'Fueltype','Gear','Manual','Automatic','Capacity','person','priceperday','Min','Max','Rent','listed','Status','Category','Cancel','AddCar','ManufacturingCompany','ColorCar','fourimage','imageandprice','image','price','Images','notworkinghours', 'AddWorkingHours' ,'Prices','imageselected','SelectCompany','selectcategory'
-,'forgetPassword','account','signnow','valid','photolicense','givepoint','yes','no','RentedVehicles','maintainedvehicles','WorkingHours','Employees','Renters','Chats','Expenses','Locations','Discounts','Notes','addandmanage','Welcome'  ,'Bookings' ,'todaydate','entercarnumber','entercarmodel'   ];
+,'forgetPassword','account','signnow','valid','photolicense','givepoint','yes','no','RentedVehicles','maintainedvehicles','WorkingHours','Employees','Renters','Chats','Expenses','Locations','Discounts','Notes','addandmanage','Welcome'  ,'Bookings' ,'todaydate','entercarnumber','entercarmodel'
+,
+   ];
 
         // Fetch data from language files
         $data = [];

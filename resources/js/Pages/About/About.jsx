@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "../../../css/AboutStyle/About.css";
 import videoSource from "../../../../public/image/bgabout1.mp4"; // Local video (replace with your video filename)
 import man from "../../../../public/image/man.jpg";
@@ -6,8 +6,10 @@ import woman from "../../../../public/image/woman.jpg";
 import about from "../../../../public/image/undraw_navigator_a479 (1).png";
 import valus from "../../../../public/image/undraw_Stock_prices_re_js33 (1).png";
 import { Nav } from "react-bootstrap";
+import { TranslateContext } from './../../Context/Translate';
 
 function About() {
+    const {translates}=useContext(TranslateContext)
     return (
         <>
             <div className="video-background">
@@ -21,20 +23,12 @@ function About() {
                 <div className="d-flex  p-2 container aboutmain">
                     <div className="col">
                         <h3 className=" fs-1 d-flex align-top justify-center">
-                            About Us
+                            {translates.About}
                         </h3>
                         <p className=" fs-5 text-start">
-                            Welcome to PalCars Car Rental, your ultimate
-                            destination for convenient and reliable car rentals
-                            across all cities in Palestine. Whether you're a
-                            local resident or a tourist exploring our beautiful
-                            country, we're here to provide you with top-notch
-                            car rental services that meet your needs.
+                            {translates.WelcomeAbout}
                             <br />
-                            The first and only website and mobile app in the
-                            state of palestine for car rental and to facilitate
-                            communication between rental companies between the
-                            govenorates
+                            {translates.WelcomeEnd}
                         </p>
                     </div>
                     <div className="col">
@@ -47,48 +41,31 @@ function About() {
                     </div>
                     <div className="col">
                         <h3 className=" fs-1 d-flex align-center justify-center">
-                            Our Mission
+                            {translates.mission}
                         </h3>
                         <p className=" fs-5 text-start">
-                            At Palestine Car Rental, our mission is to make car
-                            rental easy, accessible, and affordable for
-                            everyone. We aim to provide a seamless booking
-                            experience, exceptional customer service, and a wide
-                            range of vehicles to choose from.
+                           {translates.chooseAbout}
                         </p>
                         <h3 className=" fs-1 d-flex align-center justify-center">
-                            Why Choose Us?
+                            {translates.chooseus}
                         </h3>
                         <p className=" fs-5 text-start">
-                            1-Wide Selection of Vehicles: From compact cars for
-                            city trips to spacious SUVs for family vacations, we
-                            offer a diverse fleet of vehicles to suit your
-                            preferences and needs.
+                           {translates.chooseitemone}
                             <br />
-                            2-Convenient Booking: Our user-friendly website and
-                            app allow you to book your rental car with just a
-                            few clicks. Choose your pickup location, select your
-                            dates, and find the perfect car for your journey.
+                            {translates.chooseitemtwo}
                             <br />
-                            3-Competitive Prices: We offer competitive rental
-                            rates and regular promotions to ensure that you get
-                            the best value for your money.
+                           {translates.chooseitemthree}
                             <br />
-                            4-24/7 Customer Support: Our dedicated customer
-                            support team is available 24/7 to assist you with
-                            any inquiries or issues you may have during your
-                            rental period.
+                            {translates.chooseitemfour}
                             <br />
-                            5-Secure Online Payments: Our online payment system
-                            is safe and secure, giving you peace of mind when
-                            booking your rental car.
+                           {translates.chooseitemfive}
                             <br />
                         </p>
                     </div>
                 </div>
 
                 <h2 className="d-flex justify-center text-black bg-body-tertiary  fs-4 p-4 w-100 ">
-                    Our Team
+                    {translates.ourteam}
                 </h2>
 
                 <div className=" p-3  d-flex justify-center gap-5">
@@ -106,7 +83,7 @@ function About() {
                                     href="#"
                                     className="py-2 text-black bg-body-tertiary d-flex justify-center"
                                 >
-                                    Send Email
+                                    {translates.sendemail}
                                 </a>
                             </div>
                         </div>
@@ -129,7 +106,7 @@ function About() {
                                     href="#"
                                     className="py-2 text-black  bg-body-tertiary  d-flex justify-center"
                                 >
-                                    Send Email
+                                    {translates.sendemail}
                                 </a>
                             </div>
                         </div>
@@ -150,7 +127,7 @@ function About() {
                                     href="#"
                                     className="py-2 text-black bg-body-tertiary  d-flex justify-center"
                                 >
-                                    Send Email
+                                    {translates.sendemail}
                                 </a>
                             </div>
                         </div>

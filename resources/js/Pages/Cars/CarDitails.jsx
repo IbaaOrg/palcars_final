@@ -15,8 +15,10 @@ import "../../../css/Commentstye/Rating.css";
 import ResetPassword from "./../../Auth/Login/ResetPassword";
 import { UserContext } from "../../Context/User";
 import { IoCloseCircleOutline } from "react-icons/io5";
+import { TranslateContext } from "../../Context/Translate";
 
 function CarDitails() {
+    const {translates}=useContext(TranslateContext)
     const { id } = useParams(); // This will give you the value of "id" from the URL
     const [loading, setLoading] = useState(true);
     const [view, setView] = useState(null);
@@ -174,31 +176,31 @@ function CarDitails() {
 
                                 <ul className="list-group list-group-flush">
                                     <li className="list-group-item">
-                                        Car Number : {car.car_number}
+                                        {translates.CarNumber} : {car.car_number}
                                     </li>
                                     <li className="list-group-item">
-                                        Cartogery : {car.catrgory}
+                                        {translates.Category} : {car.catrgory}
                                     </li>
                                     <li className="list-group-item">
-                                        seats : {car.seats}
+                                        {translates.Seats} : {car.seats}
                                     </li>
                                     <li className="list-group-item">
-                                        Gear : {car.steering}
+                                        {translates.Gear} : {car.steering}
                                     </li>
                                     <li className="list-group-item">
-                                        Year : {car.year}
+                                        {translates.Year} : {car.year}
                                     </li>
                                     <li className="list-group-item">
-                                        Door : {car.doors}
+                                        {translates.Doors} : {car.doors}
                                     </li>
                                     <li className="list-group-item">
-                                        Fuel Type : {car.fuel_type}
+                                        {translates.FuelType} : {car.fuel_type}
                                     </li>
                                     <li className="list-group-item">
-                                        Car Color : {car.car_color.color}
+                                        {translates.ColorCar} : {car.car_color.color}
                                     </li>
                                     <li className="list-group-item d-flex align-items-center">
-                                        Price :
+                                        {translates.priceperday} :
                                         <span className=" text-success d-flex">
                                             {" "}
                                             {car.prices[0].price !==
@@ -239,14 +241,14 @@ function CarDitails() {
                                     className="btn commentbtn mx-3"
                                     onClick={openBill}
                                 >
-                                    Rent Now
+                                    {translates.Rent}
                                 </button>
                             </div>
                         </div>
                     </div>
                     <div className="commentsbox">
                         <h1 className="reviews">
-                            Reviews{" "}
+                            {translates.Reviews}
                             <span className="reviewcount">
                                 {comments.length}
                             </span>
@@ -280,7 +282,7 @@ function CarDitails() {
                                                         comment.owner_of_comment
                                                             .name
                                                     }{" "}
-                                                    comment :
+                                                    {translates.comment} :
                                                 </h4>
                                                 {comment.owner_of_comment
                                                     .name === user.name && (
@@ -314,7 +316,7 @@ function CarDitails() {
                                             </div>
                                         </div>
                                         <div className="d-flex gap-2 py-3 comment_rating">
-                                            <h2> rating : </h2>
+                                            <h2> {translates.rating} : </h2>
                                             <div className="d-flex">
                                                 {[...Array(5)].map(
                                                     (_, index) => {

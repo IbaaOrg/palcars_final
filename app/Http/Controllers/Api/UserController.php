@@ -254,6 +254,7 @@ class UserController extends Controller
             'name' => $request->input('name') ?? $user->name,
             'phone' => $request->input('phone') ?? $user->phone,
             'password' => $request->input('password') ?? $user->password,
+            'expireddate' => $request->input('expireddate') ?? $user->expireddate,
         ];
     
         // Process photo_user

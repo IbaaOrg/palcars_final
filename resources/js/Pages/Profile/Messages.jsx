@@ -111,11 +111,15 @@ function Messages() {
                 setResever(res.data);
                 console.log(res.data);
                 //onSuccess(res.data)
+                setData((prevData) =>
+                    prevData.map((user) =>
+                        user.id === userId ? { ...user, unread_messages_count: 0 } : user
+                    )
+                );
             }
             all_send_message();
             all_received_message();
             setMessage("");
-            user.unread_messages_count=0;
         } catch (e) {
             console.log(e);
             // onError()
@@ -176,35 +180,7 @@ function Messages() {
         send_message(message);
         setMessage(""); // Reset the input field after sending the message
     };
-    const messageCount = async () => {
-        const senderId = user.id; // تأكد من تعيين قيمة `reseverid` بشكل صحيح
-        console.log(senderId);
-        const token = localStorage.getItem("token");
-        try {
-            const response = await axios.get(
-                `/messagecount/${senderId}`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            );
-            const res = response.data;
-            console.log(res);
-            if (res.status === true) {
-                setMc(res.data);
-            
-                
-                console.log("res.data", res.data); 
-            }
-        } catch (e) {
-            if (e.response) {
-                console.log(e.response.data.message);
-            } else {
-                console.log("An error occurred:", e);
-            }
-        }
-    };
+   
 
     // useEffect(() => {
     //     // Assuming 'data' contains the list of users
@@ -260,7 +236,7 @@ function Messages() {
                                     {user.name}
                                 </span>
     {/* <span class="badge  rounded-circle bg-danger">+  {mc} </span> */}
-     <span className={`badge rounded-circle ${user.unread_messages_count > 0 ? 'bg-danger' : ''}`}>+{user.unread_messages_count}</span>
+     <span className={`badge rounded-circle ${user.unread_messages_count > 0 ? 'bg-danger' : ''}`}>{user.unread_messages_count}</span>
     {/* className={`badge rounded-circle {mc}<0 'bg-danger' : 'bg-white'}` */}
                             </li>
                         </ul>

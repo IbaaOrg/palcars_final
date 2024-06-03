@@ -1,5 +1,47 @@
 <?php
 return [
+    'WelcomeAbout'=>"Welcome to PalCars Car Rental, your ultimate destination for convenient and reliable car rentals across all cities in Palestine. Whether you're a local resident or a tourist exploring our beautiful country, we're here to provide you with top-notch car rental services that meet your needs.",
+    'WelcomeEnd'=>'The first and only website in the state of palestine for car rental and to facilitate communication between rental companies between the govenorates',
+    'mission'=>'Our Mission',
+    'missionabout'=>'At Palestine Car Rental, our mission is to make car rental easy, accessible, and affordable for everyone. We aim to provide a seamless booking experience, exceptional customer service, and a wide range of vehicles to choose from.',
+    'chooseus'=>'Why Choose Us?',
+    'chooseabout'=>' At Palestine Car Rental, our mission is to make car
+    rental easy, accessible, and affordable for
+    everyone. We aim to provide a seamless booking
+    experience, exceptional customer service, and a wide
+    range of vehicles to choose from.',
+    'chooseitemone'=>' 1-Wide Selection of Vehicles',
+    'chooseitemtwo'=>'2-Convenient Booking: Our user-friendly website and
+    app allow you to book your rental car with just a
+    few clicks.',
+    'Comment'=>'Comment',
+    'MyComments'=>'My Comments',
+    'commentcar'=>'Comments on my cars',
+    'Since'=>'Since',
+    'On'=>'On',
+    'notcomment'=>"You didn't add comment",
+    'nocomment'=>'Your cars currently have no comments.',
+    'mynotes'=>'My Notes',
+    'notesfrom'=>'Notes from me',
+    'thenote'=>'The Note',
+    'notee'=>'Note',
+    'notnotes'=>"You don't have any notes.",
+    'nonotes'=>"You didn't add note",
+    'comment'=>'comment',
+    'rating'=>'rating',
+    'please'=>'please login or register account to write Comment',
+    'chooseitemthree'=>'3-Competitive Prices: We offer competitive rental
+    rates and regular promotions to ensure that you get
+    the best value for your money.',
+    'chooseitemfour'=>'4-24/7 Customer Support: Our dedicated customer
+    support team is available 24/7 to assist you with
+    any inquiries',
+    'chooseitemfive'=>'5-Secure Online Information',
+    'ourteam'=>'Our Team',
+    'sendemail'=>'Send Email',
+    'moredetials'=>'Show More Details',
+    'socialmedia'=>'Social Media',
+    'officelocation'=>'Our Office Location',
     'Renter'=>'Renter',
     'Company'=>'Company',
     'Home'=>'Home',
@@ -49,6 +91,7 @@ return [
     'Operation'=>'Operation',
     'Status'=>'Status',
     'StartTime'=>'Start Time',
+    'DrivinglicensePhoto'=>'Drivinglicense Photo',
     'EndTime'=>'End Time',
     'UpdateLocation'=>'Update Location Information ',
     'locationsuccesed'=>'Location Updated Successfully',
