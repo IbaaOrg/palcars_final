@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { TranslateContext } from '../../Context/Translate';
 
 const ViewDiscount = () => {
+    const {translates}=useContext(TranslateContext)
     const {id}=useParams();
     const [detials,setDetials]=useState({})
     const getDetials=async()=>{
@@ -41,12 +43,12 @@ const ViewDiscount = () => {
 
            
             <ul className="list-group list-group-flush pt-5 mt-4">
-                <li className="list-group-item">Car Number : {detials.car&&detials.car.car_number}</li>
-                <li className="list-group-item">Disount Value : {detials&&detials.type==='fixed'?`${detials&&detials.value} ₪ `:`${detials&&detials.value} %`}</li>
-                <li className="list-group-item">Price Before Discount : {detials.car&&detials.car.prices&&detials.car.prices[0]&&detials.car.prices[0].price} ₪ / day</li>
-                <li className="list-group-item">Price After Discount : {detials.car&&detials.car.prices&&detials.car.prices[0]&&detials.car.prices[0].price_after_discount} ₪ / day</li>
+                <li className="list-group-item">{translates.CarNumber} : {detials.car&&detials.car.car_number}</li>
+                <li className="list-group-item">{translates.DiscountValue} : {detials&&detials.type==='fixed'?`${detials&&detials.value} ₪ `:`${detials&&detials.value} %`}</li>
+                <li className="list-group-item">{translates.PriceBeforeDiscount} : {detials.car&&detials.car.prices&&detials.car.prices[0]&&detials.car.prices[0].price} ₪ / {translates.day}</li>
+                <li className="list-group-item">{translates.PriceAfterDiscount} : {detials.car&&detials.car.prices&&detials.car.prices[0]&&detials.car.prices[0].price_after_discount} ₪ / {translates.day}</li>
 
-                <li className="list-group-item">Expired Date : {detials&&detials.expired_date}</li>
+                <li className="list-group-item">{translates.ExpiredDate} : {detials&&detials.expired_date}</li>
              
 
 

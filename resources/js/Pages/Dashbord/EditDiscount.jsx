@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { CiEdit } from "react-icons/ci";
 import { useRef } from 'react';
+import { TranslateContext } from '../../Context/Translate';
 const EditDiscount = () => {
+    const {translates}=useContext(TranslateContext)
     const {id}=useParams();
     const [discount,setDiscount]=useState({});
     const [done,setDone]=useState(false);
@@ -78,7 +80,7 @@ form.current={...form.current,[e.target.name]:e.target.value}
             onSubmit={updateDiscount}
         >
             <h2 className="text-center fs-4 p-3">
-                Update Discount Information 
+               {translates.UpdateDiscountInformation}
             </h2>
             {error && (
                 <div className="alert alert-danger w-100" role="alert">
@@ -87,12 +89,12 @@ form.current={...form.current,[e.target.name]:e.target.value}
             )}
             {done && (
                 <div className="alert alert-success w-100" role="100">
-                    Discount Updated Successfully
+                    {translates.DiscountUpdatedSuccessfully}
                 </div>
             )}
             <div className="employeeItem d-flex flex-column justify-content-center ">
                 <label htmlFor="exampleInputEmail1" className="py-2">
-                    Discount Value
+                    {translates.DiscountValue}
                 </label>
                 {!showDiscountValue ? (
                     <p
@@ -143,16 +145,16 @@ form.current={...form.current,[e.target.name]:e.target.value}
                                 onChange={set}
                             >
                                 <option value="" disabled className="text-muted">
-                                    Choose Type ...
+                                    {translates.ChooseType} ...
                                 </option>
-                                <option value="fixed">Fixed</option>
-                                <option value="percentage">Percentage</option>
+                                <option value="fixed">{translates.fixed}</option>
+                                <option value="percentage">{translates.percentage}</option>
                             </select>
                 )}
             </div>
             <div className="employeeItem">
                 <label htmlFor="exampleInputEmail3" className="py-2">
-Expired Date                </label>
+{translates.ExpiredDate}                </label>
                 {!showExpiredDate ? (
                     <p
                         className="d-flex justify-content-start gap-2 border  w-70 ms-0 p-1"

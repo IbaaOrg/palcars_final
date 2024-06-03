@@ -88,21 +88,20 @@ function AllDiscounts() {
               <div className="container text-center  p-10">
                   <div className="row">
                       <div className="col">
-                          <h1 className='fs-1'>Discounts List</h1>
-                              <p className=''>Your all Discounts are listed bellow</p>
+                          <h1 className='fs-1'>{translates.DiscountsList}</h1>
+                              <p className=''>{translates.DiscountsDetails}</p>
                       </div>
                       <div className="col ">
                       <form className="d-flex" role="search">
                                 <input
-                                    className="form-control me-2" type="search" placeholder={translates.Search} aria-label="Search" value={searchTerm} onChange={handleChange} />
-                                <button className="btn btn-outline-success" type="submit" onClick={handleSearch} > {translates.Search} </button>
+                                    className="form-control me-2" type="search" placeholder="Search about title" aria-label="Search" value={searchTerm} onChange={handleChange} />
+                                <button className="btn btn-outline-success" type="submit" onClick={handleSearch} > Search </button>
                             </form>
                       </div>
                       <div className="col">
-                          <button type="button" class="btn btn-light">Filter</button>
 
                           <button type="button" class="btn btn-primary Addvehicle" >
-                                  <NavLink to="/dashbord/addDiscount">Add Discount</NavLink>
+                                  <NavLink to="/dashbord/addDiscount">{translates.AddDiscount}</NavLink>
                           </button>
 
                       </div>
@@ -112,13 +111,13 @@ function AllDiscounts() {
                       <table class="table">
                           <thead>
                               <tr>
-                                  <th scope="col">Title</th>
-                                  <th scope="col">Expired Date</th>
-                                  <th scope="col">Type</th>
+                                  <th scope="col">{translates.Title}</th>
+                                  <th scope="col">{translates.ExpiredDate}</th>
+                                  <th scope="col">{translates.Type}</th>
 
-                                  <th scope="col">Value</th>
-                                  <th scope="col">Car</th>
-                                      <th scope="col">Oprations</th>
+                                  <th scope="col">{translates.Value}</th>
+                                  <th scope="col">{translates.Car}</th>
+                                      <th scope="col">{translates.Oprations}</th>
 
                                 
 
@@ -139,9 +138,9 @@ function AllDiscounts() {
                                      
 
                                       <td className=' p-1 d-flex justify-content-center gap-2'>
-                                          <button  className='btn btn-success' onClick={()=>viewDiscount(data.id)}>View</button>
-                                          <button  className='btn btn-primary' onClick={()=>editDiscount(data.id)}>Update</button>
-                                          <button id={data.id} className='btn btn-danger' onClick={deleteDiscount}>Delete</button>
+                                          <button  className='btn btn-success' onClick={()=>viewDiscount(data.id)}>{translates.View}</button>
+                                          <button  className='btn btn-primary' onClick={()=>editDiscount(data.id)}>{translates.Update}</button>
+                                          <button id={data.id} className='btn btn-danger' onClick={deleteDiscount}>{translates.Delete}</button>
 
 
                                       </td>
