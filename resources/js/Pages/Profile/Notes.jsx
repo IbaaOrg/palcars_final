@@ -5,8 +5,10 @@ import Loading from './../../Componants/UI/Loading';
 import '../../../css/ReportStyle/Booking.css';
 import { useNavigate } from 'react-router-dom';
 import { data } from 'jquery';
+import { TranslateContext } from '../../Context/Translate';
 
 function Notes() {
+  const {translates}=useContext(TranslateContext)
     const {user}=useContext(UserContext);
     const [note,setNote]=useState([]);
     const[loading,setLoading]=useState(false);
@@ -60,17 +62,17 @@ return (
 
  loading?<Loading/>:(
     <div className='d-flex flex-column align-items-center mainBooking'>
-    {user.role==="Renter"?<h3 className='fw-bold fs-4 py-3 '>My Notes</h3>:<h3 className='fw-bold fs-4 py-3 '>Notes from me</h3>}
+    {user.role==="Renter"?<h3 className='fw-bold fs-4 py-3 '>{translates.mynotes}</h3>:<h3 className='fw-bold fs-4 py-3 '>{translates.notesfrom}</h3>}
     {note.length>0 ?note.map((item, index) => (
 <div key={item.id}  className='minorBooking d-flex flex-wrap border py-2 px-4 m-3 d-flex align-items-center justify-content-between gap-1 '>
-  <span>Note <span className='text-primary fw-bold'>#{index + 1}</span></span>
+  <span>{translates.notee} <span className='text-primary fw-bold'>#{index + 1}</span></span>
   {user.role === "Renter"?<> 
  <p>
-    <span className="text-primary fw-bold">The Note : </span>
+    <span className="text-primary fw-bold">{translates.thenote} : </span>
     {item.note ? <span>{item.note} </span>: 'Unknown Car'} 
   </p>
   <p>
-    <span className="text-primary fw-bold">From : </span>
+    <span className="text-primary fw-bold">{translates.From} : </span>
     {item.sender.name? item.sender.name  : 'Unknown Owner'
     }  
   </p></>: <> 
@@ -82,7 +84,7 @@ return (
   {
     user.role === "Company"?<>
     <p>
-    <span className="text-primary fw-bold">The Note : </span>
+    <span className="text-primary fw-bold">{translates.thenote} : </span>
     {item.note ? <span>{item.note} </span>: 'Unknown Car'
     } 
   </p>
@@ -102,11 +104,11 @@ return (
   
 
 <span>
-    <span className="text-primary fw-bold">Since : </span>
+    <span className="text-primary fw-bold">{translates.Since} : </span>
     {item.timeago}
   </span>
 </div>
-)): user.role==="Renter"?<div className=' py-3'> You don't have any notes.</div>:<div className=' py-3' >You didn't add note</div>
+)): user.role==="Renter"?<div className=' py-3'> {translates.notnotes}</div>:<div className=' py-3' >{translates.nonotes}</div>
 }
   </div>
     )

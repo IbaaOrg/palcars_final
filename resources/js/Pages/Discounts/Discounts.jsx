@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import CarCard from "./../Cars/CarCard";
 import { useNavigate } from "react-router-dom";
+import { TranslateContext } from "../../Context/Translate";
 
 function Discounts() {
+    const {translates}=useContext(TranslateContext)
     const [data, setDate] = useState(null);
     const [carid, setCarID] = useState(null);
     const [cars, setCars] = useState(null);
@@ -65,7 +67,7 @@ function Discounts() {
                                 </div>
                             </div>
                             <div className="alert alert-warning" role="alert">
-                                Expired Date : {d.expired_date}
+                                {translates.Expireddate} : {d.expired_date}
                             </div>
                             <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger fs-5">
                                 {d.value}
@@ -78,7 +80,7 @@ function Discounts() {
                                 className="btn btn-danger"
                                 onClick={() => navigateToDetails(d.car.id)}
                             >
-                                Show More Details{" "}
+                                {translates.moredetials}
                             </button>
                         </div>
                     ))}

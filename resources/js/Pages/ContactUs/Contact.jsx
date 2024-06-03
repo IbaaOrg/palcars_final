@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "../../../css/ContactStyle/Contact.css";
 import { FaLocationDot } from "react-icons/fa6";
 import { FaPhone } from "react-icons/fa6";
@@ -8,15 +8,17 @@ import { FaSquareFacebook } from "react-icons/fa6";
 import { ImLinkedin } from "react-icons/im";
 import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { TranslateContext } from './../../Context/Translate';
 function Contact() {
+    const {translates}=useContext(TranslateContext)
     return (
         <div className=" d-flex flex-column justify-centent-center align-items-center">
             <div className="bg-white ">
                 <h2 className="Mainheaading text-primary text-center">
-                    Contact Us
+                    {translates.ContactUs}
                 </h2>
                 <div className="d-flex flex-column  justify-content-center  gap-5 maincontct mt-1  mb-5">
-                    <h2 className="fs-4 fw-bold text-center">Social Media</h2>
+                    <h2 className="fs-4 fw-bold text-center">{translates.socialmedia}</h2>
                     <div className="d-flex gap-5">
                         <div className="d-flex flex-column align-items-center ">
                             <GrInstagram size={45} />
@@ -48,7 +50,7 @@ function Contact() {
                                 />
                             </div>
                             <div className="h-50">
-                                <h3 className="fs-4">Our Office Location</h3>
+                                <h3 className="fs-4">{translates.officelocation}</h3>
                                 <p className="d-flex flex-column align-items-center text-slate pt-2">
                                     Ein Sara, <span>Hebron</span>{" "}
                                 </p>
@@ -63,7 +65,7 @@ function Contact() {
                             </div>
                             <div className="h-50">
                                 <h3 className="text-center fs-4">
-                                    Phone Number
+                                    {translates.PhoneNumber}
                                 </h3>
                                 <p className="d-flex flex-column align-items-center pt-2">
                                     <span>+972592817970</span>
@@ -81,7 +83,7 @@ function Contact() {
                             </div>
                             <div className="h-50 d-flex flex-column ">
                                 <h3 className="fs-4 text_center align-self-center">
-                                    Email
+                                    {translates.Email}
                                 </h3>
                                 <p className="d-flex flex-column align-items-start text-slate">
                                     <span>ebaahmad12@gmail.com</span>
