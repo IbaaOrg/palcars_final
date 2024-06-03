@@ -111,7 +111,6 @@ class MessageController extends Controller
        $user = Auth::user();
         // Retrieve all messages received by the current user
         $receivedMessages = Message::where('reciever_id', $user->id)->get();
-
         // Return the received messages as a JSON response
         return $this->success(MessageResource::collection($receivedMessages));
     }
@@ -149,13 +148,30 @@ class MessageController extends Controller
         $receivedMessages = Message::where('user_id', $senderId)
                                    ->where('reciever_id', $user->id) 
                                    ->get();
-    
+    // Mark all messages as seen
+    $receivedMessages->each(function ($message) {
+        $message->seen = 1;
+        $message->save();
+    });
+
         // Return the received messages as a JSON response
         return response()->json([
             'status' => true,
             'data' => MessageResource::collection($receivedMessages)
         ]);
     }
-    
+    public function countUnreadMessages($recipientId)
+{
+    // احسب عدد الرسائل غير المقروءة للمستخدم الحالي
+    $unreadMessagesCount = Message::where('user_id', $recipientId)
+                                  ->where('seen', 0)
+                                  ->count();
+
+                                  return response()->json([
+                                    'status' => true,
+                                    'data' => $unreadMessagesCount
+                                ]);
+
+}
     
 }

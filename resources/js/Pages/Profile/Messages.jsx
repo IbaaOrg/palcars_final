@@ -17,6 +17,7 @@ function Messages() {
     const [chatSender, setChatSender] = useState(null);
     const [allChatSender, setallChatSender] = useState([]);
     const [message, setMessage] = useState("");
+    const [mc, setMc] = useState(0);
     const send_message = async () => {
         const formData = new FormData();
         formData.append("message", message);
@@ -112,6 +113,7 @@ function Messages() {
             all_send_message();
             all_received_message();
             setMessage("");
+            user.unread_messages_count=0;
         } catch (e) {
             console.log(e);
             // onError()
@@ -140,7 +142,10 @@ function Messages() {
         get_users();
         all_send_message();
         all_received_message();
-    }, []);
+        // data.forEach(user => {
+        //     messageCount(user.id);
+        // });
+    }, [user.unread_messages_count]);
     const [searchTerm, setSearchTerm] = useState(""); // الحالة المحلية لتخزين قيمة حقل البحث
     const handleChange = (e) => {
         setSearchTerm(e.target.value); // تحديث القيمة عند تغييرها في حقل البحث
@@ -169,6 +174,48 @@ function Messages() {
         send_message(message);
         setMessage(""); // Reset the input field after sending the message
     };
+    const messageCount = async () => {
+        const senderId = user.id; // تأكد من تعيين قيمة `reseverid` بشكل صحيح
+        console.log(senderId);
+        const token = localStorage.getItem("token");
+        try {
+            const response = await axios.get(
+                `/messagecount/${senderId}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            const res = response.data;
+            console.log(res);
+            if (res.status === true) {
+                setMc(res.data);
+            
+                
+                console.log("res.data", res.data); 
+            }
+        } catch (e) {
+            if (e.response) {
+                console.log(e.response.data.message);
+            } else {
+                console.log("An error occurred:", e);
+            }
+        }
+    };
+
+    // useEffect(() => {
+    //     // Assuming 'data' contains the list of users
+    //     data.forEach(user => {
+    //         messageCount(user.id);
+    //     });
+    // }, []);
+
+    // useEffect(() => {
+    //     // طباعة قيمة mc بعد تحديثها
+    //     console.log("message count", mc);
+    // }, [mc]); // استدعاء useEffect عندما تتغير قيمة mc
+
     return (
         <div className="d-flex  justify-content-between">
             <div className=" message_list_list">
@@ -192,7 +239,7 @@ function Messages() {
                     </form>
                 </div>
                 <div className="searchContent">
-                {data.map((user) => (
+                {data.map((user,index) => (
                     <div>
                         <ul class="user-list">
                             <li class="user-list-item d-flex justify-content-center align-items-center">
@@ -205,10 +252,14 @@ function Messages() {
                                     class="user-name col-8 d-flex justify-content-start ms-4"
                                     onClick={() => {
                                         get_user(user.id);
+                                        // messageCount(user.id);
                                     }}
                                 >
                                     {user.name}
                                 </span>
+    {/* <span class="badge  rounded-circle bg-danger">+  {mc} </span> */}
+     <span className={`badge rounded-circle ${user.unread_messages_count > 0 ? 'bg-danger' : ''}`}>+{user.unread_messages_count}</span>
+    {/* className={`badge rounded-circle {mc}<0 'bg-danger' : 'bg-white'}` */}
                             </li>
                         </ul>
                     </div>
@@ -223,18 +274,6 @@ function Messages() {
                             </div>
                         )}
                     </div>
-                    {/* {Array.isArray(allChat) && allChat.map((message, index) => (
-  <p key={index} className="p-3 mb-2 bg-success text-white rounded text-right !important">
-    {message.message}
-    <small className="text-dark">{" "+message.timeago}</small>
-  </p>
-))}
-          {Array.isArray(allChatSender) && allChatSender.map((message, index) => (
- <p key={index} className="p-3 mb-2 bg-primary text-white rounded text-left !important">
- {message.message}
- <small className="text-dark">{" "+message.timeago}</small>
-</p>
-))} */}
                 <div className="chat-content">    {Array.isArray(allMessages) &&
                         allMessages
                             .sort(

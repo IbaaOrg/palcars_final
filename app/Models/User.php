@@ -107,8 +107,8 @@ class User extends AuthenticatableUser implements Authenticatable
     public function favorites(){
         return $this->hasMany(Favorite::class);
     }
-    public function messages(){
-        return $this->hasMany(Message::class);
+    public function sentMessages(){
+        return $this->hasMany(Message::class, 'user_id');
 
     }
     public function locations(){

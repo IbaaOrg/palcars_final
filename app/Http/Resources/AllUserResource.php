@@ -27,6 +27,7 @@ class AllUserResource extends JsonResource
             'birthdate'=>$this->role=='Renter' ? ($this->birthdate ? $this->birthdate : null) : null,
             'role'=>$this->role,
             'points'=>$this->points,
+            'unread_messages_count' => $this->unread_messages_count,
             'created_at'=>$this->created_at->format('Y-m-d H:i:s'),
             'updated_at'=>$this->updated_at->format('Y-m-d H:i:s'),
 

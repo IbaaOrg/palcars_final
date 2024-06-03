@@ -198,16 +198,31 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
+    // public function index(Request $request)
+    // {
+    //     //
+    //     $unreadMessagesCount = Message::where('reciever_id', $recipientId)
+    //     ->where('seen', 0)
+    //     ->count();
+    //         // User is authenticated
+    //         return $this->success(AllUserResource::collection(User::all()));
+
+       
+    // }
     public function index(Request $request)
-    {
-        //
-       
-            // User is authenticated
-            return $this->success(AllUserResource::collection(User::all()));
+{
+    // تحديد معرّف المستخدم الحالي
+    $currentUserId = auth()->id();
 
-       
-    }
+    // جلب المستخدمين مع عدد الرسائل غير المقروءة التي أرسلوها إلى المستخدم الحالي
+    $users = User::withCount(['sentMessages as unread_messages_count' => function($query) {
+        $query->where('seen', 0);
+    }])->get();
 
+    // إرجاع المستخدمين مع عدد الرسائل غير المقروءة
+    return $this->success(AllUserResource::collection($users));
+}
+    
     /**
      * Store a newly created resource in storage.
      */

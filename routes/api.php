@@ -242,4 +242,5 @@ Route::get('/CarsCount',[CarController::class,'CarsCount']);
 Route::middleware('auth:sanctum','company')->get('/showLocation/{id}',[LocationController::class,'show']);
 Route::middleware('auth:sanctum','company')->get('/showOneDiscount/{id}',[DiscountController::class,'show']);
 Route::post('/login-email', [UserController::class, 'loginWithEmail']);
+Route::middleware('auth:sanctum','renterorcompany')->get('/messagecount/{id}', [MessageController::class, 'countUnreadMessages']);//
 ?>
