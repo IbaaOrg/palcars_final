@@ -1,14 +1,15 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useState, useEffect, useContext } from 'react'
 import { Form, FormGroup, FormLabel, FormControl, Button } from 'react-bootstrap';
 import axios from 'axios';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import '../../../../css/app.css'
 import Select from "react-select";
+import { TranslateContext } from '../../../Context/Translate';
 
 
 
 function AddCar() {
-
+  const {translates}=useContext(TranslateContext);
   const [type,setType] = useState(null)
   const [colors, setColors] = useState(null)
   const [color, setColor] = useState('')
@@ -310,24 +311,24 @@ useEffect(() => {
     <div className='row p-4'>
       {alert && (
        <div className='alert alert-danger'>
-        you can only inert 4 images
+        {translates.fourimage}
         </div>
       )}
      {next?(
      
    
         <div className=' container col-8'>
-          <h1 className='p-1 m-2 badge text-bg-primary text-wrap fs-4'>Add Images and Price </h1>
+          <h1 className='p-1 m-2 badge text-bg-primary text-wrap fs-4'>{translates.imageandprice} </h1>
 
           <div class="mb-3">
           <form onSubmit={addImage}>
          
 
-  <label for="formFile" class="form-label">Add Images</label>
+  <label for="formFile" class="form-label">{translates.image}</label>
               <input class="form-control" type="file" accept="image/*" multiple onChange={handleChangeImages} id="formFile" name="photo"/>
-              <label for="formFile" class="form-label">Add Price</label>
+              <label for="formFile" class="form-label">{translates.price}</label>
 
-              <input class="form-control" type="text" id="price" name="price" placeholder='Price ₪' onChange={set1}/>
+              <input class="form-control" type="text" id="price" name="price" placeholder={translates.Prices} onChange={set1}/>
             
             {errorImage&&(
                  <div class="alert alert-danger mt-2" role="alert">
@@ -373,7 +374,7 @@ useEffect(() => {
       ):(
         <div>
        
-            <h1 className='p-1 m-2 badge text-bg-primary text-wrap fs-4'>Add Car </h1>
+            <h1 className='p-1 m-2 badge text-bg-primary text-wrap fs-4'>{translates.AddCar }</h1>
 
   
       <div className='col'></div>  
@@ -384,12 +385,12 @@ useEffect(() => {
           <div className='row'>
 
             <FormGroup className='col'>
-              <FormLabel>Car Number</FormLabel>
-              <FormControl type="text" placeholder="Enter Car Number" onChange={set} name="car_number" id="car_number" />
+              <FormLabel>{translates.CarNumber}</FormLabel>
+              <FormControl type="text" placeholder={translates.entercarnumber} onChange={set} name="car_number" id="car_number" />
             </FormGroup>
 
             <FormGroup className='col'>
-              <FormLabel>Manufacturing Company</FormLabel>
+              <FormLabel>{translates.ManufacturingCompany}</FormLabel>
               <Form ref={formRef}>
       <Form.Control
         as="select"
@@ -398,9 +399,9 @@ useEffect(() => {
         className="bg-white"
         onChange={handleChange}
         value={selectedOption || ""}
-        placeholder="Select Company"
+        placeholder={translates.SelectCompany}
       >
-        <option value="">Select Company</option>
+        <option value="">{translates.SelectCompany}</option>
         {options.map(option => (
           <option key={option.value} value={option.value}>
             {option.label}
@@ -413,15 +414,14 @@ useEffect(() => {
           <div className='row mt-3'>
 
             <FormGroup  className='col'>
-              <FormLabel>Model</FormLabel>
-              <FormControl type="text" placeholder="Enter Car Model" onChange={set} name="model" id="model"/>
+              <FormLabel>{translates.Model}</FormLabel>
+              <FormControl type="text" placeholder={translates.entercarmodel}onChange={set} name="model" id="model"/>
             </FormGroup>
             {/* SUV,Hatchback,Sedan,Convertible,Crossover,Station Wagon,Minivan,Pickup trucks */}
             <FormGroup  className='col'>
-              <FormLabel>Description</FormLabel>
+              <FormLabel>{translates.Description}</FormLabel>
               <div class="form-floating">
-                <textarea class="form-control" placeholder="Leave a comment here"  onChange={set} name="description" id="description"></textarea>
-                <label for="floatingTextarea">Description</label>
+                <textarea class="form-control" placeholder="Leave a comment here..."  onChange={set} name="description" id="description"></textarea>
               </div>            </FormGroup>
 
 
@@ -430,7 +430,7 @@ useEffect(() => {
 
           <div className='row mt-3'>
             <FormGroup className='col'>
-              <FormLabel>Year</FormLabel>
+              <FormLabel>{translates.Year}</FormLabel>
               <FormControl as="select" onChange={set} name="year" id="year">
                 {years.map((year, index) => (
                   <option key={index} value={year}>
@@ -441,7 +441,7 @@ useEffect(() => {
             </FormGroup>
 
             <FormGroup   className='col'>
-              <FormLabel>Seats</FormLabel>
+              <FormLabel>{translates.Seats}</FormLabel>
               <FormControl as="select" onChange={set} name="seats" id="seats">
                 {numbers.map((number, index) => (
                   <option key={index} value={number}>
@@ -452,7 +452,7 @@ useEffect(() => {
             </FormGroup>
 
             <FormGroup   className='col'>
-              <FormLabel>Doors</FormLabel>
+              <FormLabel>{translates.Doors}</FormLabel>
               <FormControl as="select" onChange={set} name="doors" id="doors">
                 {numbersDoors.map((number, index) => (
                   <option key={index} value={number}>
@@ -464,7 +464,7 @@ useEffect(() => {
 
 
             <FormGroup  className='col'>
-              <FormLabel>Bags</FormLabel>
+              <FormLabel>{translates.Bags}</FormLabel>
               <FormControl as="select" onChange={set} name="bags" id="bags">
                 {numbersBags.map((number, index) => (
                   <option key={index} value={number}>
@@ -478,19 +478,19 @@ useEffect(() => {
             <div className="d-flex col-6 gap-4">
             <div className='col-6 d-flex'>
           
-          <label for="select" className=' mr-3'>Catogory</label>
+          <label for="select" className=' mr-3'>{translates.Category}</label>
 
           <select class="select-input" onChange={set} name="catrgory" id="catrgory">
-              <option value="" class="dropdown-item" href="#">Select Catogry</option>
-            <option value="SUV" class="dropdown-item" href="#">SUV</option>
+              <option value="" class="dropdown-item" href="#">{translates.selectcategory}</option>
+            <option value="SUV" class="dropdown-item" href="#">{translates.SUV}</option>
 
-              <option value="Hatchback" class="dropdown-item" href="#">Hatchback</option>
-              <option value="Sedan" class="dropdown-item" href="#">Sedan</option>
-              <option value="Convertible" class="dropdown-item" href="#">Convertible</option>
-              <option value="Crossover" class="dropdown-item" href="#">Crossover</option>
-              <option value="Station Wagon" class="dropdown-item" href="#">Station Wagon</option>
-              <option value="Minivan" class="dropdown-item" href="#">Minivan</option>
-              <option value="Pickup trucks" class="dropdown-item" href="#">Pickup trucks </option>
+              <option value="Hatchback" class="dropdown-item" href="#">{translates.Hatchback}</option>
+              <option value="Sedan" class="dropdown-item" href="#">{translates.Sedan}</option>
+              <option value="Convertible" class="dropdown-item" href="#">{translates.Convertible}</option>
+              <option value="Crossover" class="dropdown-item" href="#">{translates.Crossover}</option>
+              <option value="Station Wagon" class="dropdown-item" href="#">{translates.StationWagon}</option>
+              <option value="Minivan" class="dropdown-item" href="#">{translates.Minivan}</option>
+              <option value="Pickup trucks" class="dropdown-item" href="#">{translates.Pickuptrucks} </option>
 
 
 
@@ -499,13 +499,13 @@ useEffect(() => {
           {/* Automatic,Manual */}
           <div  className='col-6 d-flex'>
              
-             <label for="select" className=' mr-3'>Gear </label>
+             <label for="select" className=' mr-3'>{translates.Gear} </label>
 
              <select class="select-input" onChange={set} name="steering" id="steering">
-                 <option value="" class="dropdown-item" href="#">Select Gear  </option>
-               <option value="Automatic" class="dropdown-item" href="#">Automatic </option>
+                 <option value="" class="dropdown-item" href="#">{translates.selectgear} </option>
+               <option value="Automatic" class="dropdown-item" href="#">{translates.Automatic} </option>
 
-                 <option value="Manual" class="dropdown-item" href="#">Manual </option>
+                 <option value="Manual" class="dropdown-item" href="#">{translates.Manual} </option>
                </select>
            </div>
             </div>
@@ -513,14 +513,14 @@ useEffect(() => {
            
             {/* gas,diesel,electricity */}
             <div className='col-5 d-flex'>
-              <label for="select" className=' mr-3'>Fuel type</label>
+              <label for="select" className=' mr-3'>{translates.FuelType}</label>
 
               <select class="select-input " onChange={(e) => { setType(e.target.value) }} name="fuel_type" id="fuel_type">
-                <option value="" class="dropdown-item" href="#">Select fuel type</option>
-                <option value="gas" class="dropdown-item" href="#">gas</option>
+                <option value="" class="dropdown-item" href="#">{translates.selectfueltype}</option>
+                <option value="gas" class="dropdown-item" href="#">{translates.Gas}</option>
 
-                  <option value="diesel" class="dropdown-item" href="#">diesel</option>
-                  <option value="electricity" class="dropdown-item" href="#">electricity</option>
+                  <option value="diesel" class="dropdown-item" href="#">{translates.Deisel}</option>
+                  <option value="electricity" class="dropdown-item" href="#">{translates.Electrecity}</option>
                 </select>
             </div>
             {type === "electricity"?(
@@ -529,19 +529,19 @@ useEffect(() => {
 
             
             <FormGroup className=' d-flex'>
-              <FormLabel className='col-3' for="fuel_full">Fuel Full</FormLabel>
-              <FormControl type="text" placeholder="Enter fuel full" onChange={set} name="fuel_full" id="fuel_full" />
+              <FormLabel className='col-3' for="fuel_full">{translates.FuelFull}</FormLabel>
+              <FormControl type="text" placeholder={translates.enterfuelfull} onChange={set} name="fuel_full" id="fuel_full" />
             </FormGroup>
  )}
        </div>     
           
             <div>
-              <label for="select" className=' mr-3'>Color Car</label>
+              <label for="select" className=' mr-3'>{translates.ColorCar}</label>
 
             {colors&&(
            
                       <select class="select-input mt-4" onChange={ setcolorid}>
-                        <option  >Choose Color</option>
+                        <option  >{translates.choosecolor}</option>
 
                 {colors.map(color=> (
                   <option key={color.id} value={color.id} id={color.id} >{color.color}</option>

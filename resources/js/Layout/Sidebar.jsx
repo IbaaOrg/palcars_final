@@ -44,7 +44,7 @@ function Sidebar() {
                 >
                     <div>
                         <i className="bi bi-car-front  fs-4 me-2"></i>
-                        <span className="fs-5">Vehicles</span>
+                        <span className="fs-5">{translates.Vehicles}</span>
                     </div>
 
                     <div className=" text-end">
@@ -63,21 +63,21 @@ function Sidebar() {
                             className="toggle-btn list-group-item list-group-item-action py-1 border d-flex flex-wrap align-items-center"
                         >
                             <i className="bi bi-plus  fs-3 me-1"></i>
-                            <span className="">Add Vehicles</span>
+                            <span className="">{translates.AddVehicles}</span>
                         </NavLink>
                         <NavLink
                             to={"rented"}
                             className="toggle-btn list-group-item list-group-item-action py-3 border d-flex  flex-wrap align-items-center gap-2"
                         >
                             <MdCarCrash size={20} className="" />
-                            <span className="">Rented Vehicles</span>
+                            <span className="">{translates.RentedVehicles}</span>
                         </NavLink>
                         <NavLink
                             to={"maintend"}
                             className="toggle-btn list-group-item list-group-item-action py-3 border d-flex flex-wrap  align-items-center gap-2"
                         >
                             <BiSolidCarMechanic size={20} />
-                            <span className="">maintained vehicles</span>
+                            <span className="">{translates.maintainedvehicles}</span>
                         </NavLink>
                     </nav>
                 )}
@@ -86,7 +86,7 @@ function Sidebar() {
                     className="main-btn  list-group-item list-group-item-action py-2 d-flex  flex-wrap gap-1 align-items-center"
                 >
                     <Ri24HoursLine size={25} />
-                    <span className="fs-5">Working Hours</span>
+                    <span className="fs-5">{translates.WorkingHours}</span>
                 </NavLink>
 
                 <NavLink
@@ -94,14 +94,14 @@ function Sidebar() {
                     className="main-btn  list-group-item list-group-item-action py-2"
                 >
                     <i className="bi bi-people fs-4 me-2"></i>
-                    <span className="fs-5">Employees</span>
+                    <span className="fs-5">{translates.Employees}</span>
                 </NavLink>
                 <NavLink
                     to={"RenterDashbord"}
                     className="main-btn  list-group-item list-group-item-action py-2"
                 >
                     <i className="bi bi-people fs-4 me-2"></i>
-                    <span className="fs-5">Renters</span>
+                    <span className="fs-5">{translates.Renters}</span>
                 </NavLink>
                 <NavLink
                     to={"ChatsDashbord"}
@@ -109,7 +109,7 @@ function Sidebar() {
                 >
                     <i className="bi bi-chat-left-text fs-4 me-2"></i>
 
-                    <span className="fs-5">Chats</span>
+                    <span className="fs-5">{translates.Chats}</span>
                 </NavLink>
 
                 <NavLink
@@ -117,7 +117,7 @@ function Sidebar() {
                     className="main-btn  list-group-item list-group-item-action py-2"
                 >
                     <i className="bi bi-cash-coin fs-4 me-2"></i>
-                    <span className="fs-5">Expenses</span>
+                    <span className="fs-5">{translates.Expenses}</span>
                 </NavLink>
                 {/*  <NavLink to={"ExpensesDashbord"} className='main-btn  list-group-item list-group-item-action py-2'>
                   <i className='bi bi-cash-coin fs-4 me-2'></i>
@@ -128,21 +128,21 @@ function Sidebar() {
                     className="main-btn  list-group-item list-group-item-action py-2"
                 >
                     <i className="bi bi-geo-alt fs-4 me-2"></i>
-                    <span className="fs-5">Locations</span>
+                    <span className="fs-5">{translates.Locations}</span>
                 </NavLink>
                 <NavLink
                     to={"DiscountsDashbord"}
                     className="main-btn  list-group-item list-group-item-action py-2"
                 >
                     <i className="bi bi-percent fs-4 me-2"></i>
-                    <span className="fs-5">Discounts</span>
+                    <span className="fs-5">{translates.Discounts}</span>
                 </NavLink>
                 <NavLink
                     to={"NotesDashboard"}
                     className="main-btn  list-group-item list-group-item-action py-2"
                 >
                     <i className="bi bi-journal-medical  fs-4 me-2"></i>
-                    <span className="fs-5">Notes</span>
+                    <span className="fs-5">{translates.Notes}</span>
                 </NavLink>
             </div>
         </div>

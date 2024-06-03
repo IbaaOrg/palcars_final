@@ -23,17 +23,17 @@ class LocaleController extends Controller
             'Home', 'Cars', 'About', 'ContactUs', 'Register', 'Login', 'Arabic', 'English',
             'Search', 'Dashbord', 'Vehicles', 'AddVehicles', 'EditVehicles', 'VehiclesList',
             'Filter', 'ID', 'CarNumber', 'Make', 'Model', 'Catrgory', 'Description', 'Year',
-            'Seats', 'Doors', 'Bags', 'FuelType', 'FuelFull', 'Operation', 'View', 'Update',
-            'Delete', 'Chats', 'UserName', 'Account', 'Email', 'Phone', 'Birthdate',
-            'EditProfile', 'Information', 'Booking', 'Messages', 'Faviorites', 'pickup',
-            'dropoff', 'location', 'date', 'time', 'FullName', 'Password', 'PhotoUser',
-            'Birthdate', 'SignUp', 'LogOut', 'SignInWithGoogle', 'Enteryouremail', 'Enteryourpassword',
-            'Company','Renter','choose','Enteryourname','Phone','Enteryourphone','PhotoUser','PhotoDrivinglicense','Enteryourbirthdate','description'=>'description','enter'=>'enter'
-            ,'Discountsanddeals','BrowseNow','AllCars','ContactWithCompany','vision','Howitworks','Features','Partenership','BussinessRelation','Socials','Deals','Community','Blog',
-            'OurTeams','join','Inviteafrind','AboutPalCars','enterlocation','returncar','pickupdate','pickuptime','dropoffdate','dropofftime','SignUpWithGoogle','pickupdropoff','Specialoffers','viewdeals','Sitestatistics','Cities','Users','Categoriesofcar'
-            ,'Day','Hour','Second','Minute','Save','map','descmap','reset','Make','entermake','model','entermodel','type','SUV',  'Sedan','Convertible','Crossover','Minivan','Pickuptrucks','StationWagon','Hatchback','Gas','Deisel','Electrecity'
-            ,    'Fueltype','Gear','Manual','Automatic','Capacity','person','priceperday','Min','Max','Rent'
-,'forgetPassword','account','signnow','valid','photolicense','givepoint','yes','no'        ];
+            'Seats', 'Doors', 'Bags', 'FuelType', 'FuelFull', 'Operation', 'View', 'Update','Code','PhoneNumber','enteraddress','donelocation','Information','Reviews','EditProfile','BookingCompany','MyBooking',
+            'Delete', 'Chats', 'UserName', 'Account', 'Email', 'Phone', 'Birthdate','JobTitle','UpdateEmployeeInfo','Emailaddress','Enteremail','renterslist','pickupdropoff','pickup','MyProfile','In','booking','TotalPrice','notBook','carsBooking',
+            'EditProfile', 'Information', 'Booking', 'Messages', 'Faviorites', 'pickup','employeelist','belowlist','AddEmployee','AddNewEmployee','Points','Expireddate','TotalProfit','Location','City','UpdateLocation','locationsuccesed','ChooseType',
+            'dropoff', 'location', 'date', 'time', 'FullName', 'Password', 'PhotoUser','EditWorkingHours','Address','StartDate','enterjobtitle','rentersbelow','Bookings','notrenters','Booking','From','To','Method','AddLocation','Cityoflocation','savechange',
+            'Birthdate', 'SignUp', 'LogOut', 'SignInWithGoogle', 'Enteryouremail', 'Enteryourpassword','starthour','endhour','InformationUpdated','AllBookings','RentalCount','RenterBillsList','expensesfrom','locationsbelow','LocationType','DifferentLocation',
+            'Company','Renter','choose','Enteryourname','Phone','Enteryourphone','PhotoUser','PhotoDrivinglicense','Enteryourbirthdate','description'=>'description','enter'=>'enter','Pickupdate','Dropoffdate','locationslist','enterlocation','ChooseCity'
+            ,'Discountsanddeals','BrowseNow','AllCars','ContactWithCompany','vision','Howitworks','Features','Partenership','BussinessRelation','Socials','Deals','Community','Blog','billbelow','CancelOrder','notexpenses','LocationName','Dropoff','donelocation',
+            'OurTeams','join','Inviteafrind','AboutPalCars','enterlocation','returncar','pickupdate','pickuptime','dropoffdate','dropofftime','SignUpWithGoogle','pickupdropoff','Specialoffers','viewdeals','Sitestatistics','Cities','Users','Categoriesofcar','enterfuelfull','EditCar','StartTime','EndTime'
+            ,'Day','Hour','Second','Minute','Save','save','map','descmap','reset','Make','entermake','model','entermodel','type','SUV',  'Sedan','Convertible','Crossover','Minivan','Pickuptrucks','StationWagon','Hatchback','Gas','Deisel','Electrecity','selectgear','selectfueltype','choosecolor','chooseday','Save'
+            ,    'Fueltype','Gear','Manual','Automatic','Capacity','person','priceperday','Min','Max','Rent','listed','Status','Category','Cancel','AddCar','ManufacturingCompany','ColorCar','fourimage','imageandprice','image','price','Images','notworkinghours', 'AddWorkingHours' ,'Prices','imageselected','SelectCompany','selectcategory'
+,'forgetPassword','account','signnow','valid','photolicense','givepoint','yes','no','RentedVehicles','maintainedvehicles','WorkingHours','Employees','Renters','Chats','Expenses','Locations','Discounts','Notes','addandmanage','Welcome'  ,'Bookings' ,'todaydate','entercarnumber','entercarmodel'   ];
 
         // Fetch data from language files
         $data = [];

@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { TranslateContext } from "../../Context/Translate";
 
 function LocationsDashbord() {
+    const {translates}=useContext(TranslateContext)
     const navigate = useNavigate();
     const [citys, setCitys] = useState(null);
     const [user, setUser] = useState(null);
@@ -146,10 +148,9 @@ function LocationsDashbord() {
                     <div className=" d-flex justify-around">
                         <div>
                             <label for="select" className=" mr-3">
-                                {" "}
                                 {!showdropoff
-                                    ? "Pick up and Dropoff"
-                                    : "Pick up"}{" "}
+                                    ? `${translates.pickupdropoff}`
+                                    : `${translates.pickup}`}
                             </label>
 
                             <select
@@ -157,7 +158,7 @@ function LocationsDashbord() {
                                 id="select"
                                 onChange={setlocation}
                             >
-                                <option>Choose City..</option>
+                                <option>{translates.ChooseCity}</option>
                                 {citys.map((city) => (
                                     <option
                                         key={city.id}
@@ -173,14 +174,14 @@ function LocationsDashbord() {
                                     for="exampleFormControlInput1"
                                     className=" mr-3"
                                 >
-                                    Location{" "}
+                                    {translates.Location}
                                 </label>
 
                                 <input
                                     type="text"
                                     class="form-control"
                                     id="exampleFormControlInput1"
-                                    placeholder="location..."
+                                    placeholder={translates.enterlocation}
                                     onChange={(e) => {
                                         setLocationname(e.target.value);
                                     }}
@@ -190,7 +191,7 @@ function LocationsDashbord() {
                         {showdropoff && (
                             <div>
                                 <label for="select" className=" mr-3">
-                                    Drop off
+                                    {translates.Dropoff}
                                 </label>
 
                                 <select
@@ -198,7 +199,7 @@ function LocationsDashbord() {
                                     id="select"
                                     onChange={setlocation2}
                                 >
-                                                                    <option>Choose City..</option>
+                                                                    <option>{translates.ChooseCity}</option>
 
                                     {citys.map((city) => (
                                         <option
@@ -215,14 +216,14 @@ function LocationsDashbord() {
                                         for="exampleFormControlInput1"
                                         className=" mr-3"
                                     >
-                                        Location{" "}
+                                        {translates.Location}
                                     </label>
 
                                     <input
                                         type="text"
                                         class="form-control"
                                         id="exampleFormControlInput1"
-                                        placeholder="location..."
+                                        placeholder={translates.enterlocation}
                                         onChange={(e) => {
                                             setLocationname2(e.target.value);
                                         }}
@@ -240,19 +241,19 @@ function LocationsDashbord() {
                         onChange={toggle}
                     />
                     <label class="form-check-label" for="gridCheck">
-                        Deffrent Location
+                   {translates.DifferentLocation}
                     </label>
                 </div>
                 <div>
                     {seccsses && (
                         <div class="alert alert-success" role="alert">
-                            Done added location
+                            {translates.donelocation}
                         </div>
                     )}
                 </div>
                 <div className=" d-flex justify-end">
                     <button className="btn btn-success" onClick={addlocation}>
-                        Save Change
+                       {translates.savechange}
                     </button>
                 </div>
             </div>

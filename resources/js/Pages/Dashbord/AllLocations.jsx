@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import Loading from "../../Componants/UI/Loading";
 import Discounts from "./../Discounts/Discounts";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { TranslateContext } from "../../Context/Translate";
 
 function AllLocations() {
+    const {translates}=useContext(TranslateContext);
     const [loading, setLoading] = useState(false);
     const [locations, setLocations] = useState([]);
     const [deleted,setDeleted]=useState(null);
@@ -81,16 +83,16 @@ function AllLocations() {
                 <div className="container text-center  p-10">
                     <div className="row">
                         <div className="col">
-                            <h1 className="fs-1">Locations List</h1>
+                            <h1 className="fs-1">{translates.locationslist}</h1>
                             <p className="">
-                                Your all Locations are listed bellow
+                                {translates.locationsbelow}
                             </p>
                         </div>
                         <div className="col ">
                         <form className="d-flex" role="search">
                                 <input
-                                    className="form-control me-2" type="search" placeholder="Search" aria-label="Search" value={searchTerm} onChange={handleChange} />
-                                <button className="btn btn-outline-success" type="submit" onClick={handleSearch} > Search </button>
+                                    className="form-control me-2" type="search" placeholder={translates.Search}  aria-label="Search" value={searchTerm} onChange={handleChange} />
+                                <button className="btn btn-outline-success" type="submit" onClick={handleSearch} > {translates.Search} </button>
                             </form>
                         </div>
                         <div className="col">
@@ -101,7 +103,7 @@ function AllLocations() {
                                 class="btn btn-primary Addvehicle"
                             >
                                 <NavLink to="/dashbord/addLocation">
-                                    Add Location
+                                    {translates.AddLocation}
                                 </NavLink>
                             </button>
                         </div>
@@ -110,12 +112,12 @@ function AllLocations() {
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col">Location</th>
+                                    <th scope="col">{translates.Location}</th>
 
-                                    <th scope="col">City</th>
+                                    <th scope="col">{translates.City}</th>
 
-                                    <th scope="col">Type</th>
-                                    <th scope="col">Oprations</th>
+                                    <th scope="col">{translates.type}</th>
+                                    <th scope="col">{translates.Oprations}</th>
 
                                 </tr>
                             </thead>
@@ -130,8 +132,8 @@ function AllLocations() {
                                             <td>{data.type}</td>
                                             
                                       <td className=' p-1 d-flex justify-content-center gap-3'>
-                                          <button  className='btn btn-primary' id={data.id} onClick={updateLocation}>Update</button>
-                                          <button type="button" id={data.id} className='btn btn-danger' onClick={deleteLocation}>Delete</button>
+                                          <button  className='btn btn-primary' id={data.id} onClick={updateLocation}>{translates.Update}</button>
+                                          <button type="button" id={data.id} className='btn btn-danger' onClick={deleteLocation}>{translates.Delete}</button>
                                       </td>
                                         </tr>
                                     ))}

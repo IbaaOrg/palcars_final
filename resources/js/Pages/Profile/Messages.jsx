@@ -6,7 +6,9 @@ import CommetInput from "../../Layout/Comments/CommetInput";
 import MessageInput from "../../Layout/Message/MessageInput";
 import Input from "postcss/lib/input";
 import { UserContext } from "../../Context/User";
+import { TranslateContext } from "../../Context/Translate";
 function Messages() {
+    const {translates}=useContext(TranslateContext);
   const {user}=useContext(UserContext);
     const [data, setData] = useState([]);
     const [dataSearch, setdataSearch] = useState([]);
@@ -177,7 +179,7 @@ function Messages() {
                         <input
                             class="form-control me-2 "
                             type="search"
-                            placeholder="Search"
+                            placeholder={translates.Search} 
                             aria-label="Search"
                             value={searchTerm}
                             onChange={handleChange}
@@ -187,7 +189,7 @@ function Messages() {
                             type="submit"
                             onClick={handleSearch}
                         >
-                            Search
+                            {translates.Search}
                         </button>
                     </form>
                 </div>

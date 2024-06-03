@@ -1,9 +1,11 @@
-import React, { useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { CiEdit } from "react-icons/ci";
+import { TranslateContext } from "../../Context/Translate";
 
 const EditLocation = () => {
+    const {translates}=useContext(TranslateContext)
     const { id } = useParams();
     const [error, setError] = useState("");
     const [done, setDone] = useState(false);
@@ -94,7 +96,7 @@ const EditLocation = () => {
                     onSubmit={updateLocation}
                 >
                     <h2 className="text-center fs-4 p-3">
-                        Update Location Information 
+                        {translates.UpdateLocation}
                     </h2>
                     {error && (
                         <div className="alert alert-danger w-100" role="alert">
@@ -103,12 +105,12 @@ const EditLocation = () => {
                     )}
                     {done && (
                         <div className="alert alert-success w-100" role="100">
-                            Location Updated Successfully
+                            {translates.locationsuccesed}
                         </div>
                     )}
                     <div className="employeeItem d-flex flex-column justify-content-center ">
                         <label htmlFor="exampleInputEmail1" className="py-2">
-                            Location Name
+                            {translates.LocationName}
                         </label>
                         {!showLocationName ? (
                             <p
@@ -129,14 +131,14 @@ const EditLocation = () => {
                                 id="exampleInputEmail1"
                                 aria-describedby="emailHelp"
                                 name="location"
-                                placeholder="Enter Location"
+                                placeholder={translates.enterlocation}
                                 onChange={set}
                             />
                         )}
                     </div>
                     <div className="employeeItem">
                         <label htmlFor="exampleInputEmail2" className="py-2">
-                            Location Type
+                            {translates.LocationType}
                         </label>
                         {!showLocationType ? (
                             <p
@@ -158,7 +160,7 @@ const EditLocation = () => {
                             onChange={set}
                      >
                             <option selected className="text-muted">
-                                Choose Type ...
+                                {translates.ChooseType }
                             </option>
                             <option value={"pickup"}>Pickup</option>
                             <option value={"dropoff"}>Drop off</option>
@@ -169,7 +171,7 @@ const EditLocation = () => {
                     </div>
                     <div className="employeeItem">
                         <label htmlFor="exampleInputEmail3" className="py-2">
-                            City Of Location
+                            {translates.Cityoflocation}
                         </label>
                         {!showLocationCity ? (
                             <p
@@ -191,7 +193,7 @@ const EditLocation = () => {
                                 onChange={set}
                          >
                                 <option selected className="text-muted">
-                                    Choose City ...
+                                    {translates.ChooseCity}
                                 </option>
                                 {cities.map((item)=>(
                                 <option value={item.id}>{item.city}</option>))}
@@ -202,7 +204,7 @@ const EditLocation = () => {
                     </div>
                     <div className="d-flex justify-content-end py-3">
                         <button type="submit" className="btn btn-primary">
-                            {loading ? "loading..." : "Save"}
+                            {loading ? "loading..." : `${translates.save}`}
                         </button>
                     </div>
                 </form>

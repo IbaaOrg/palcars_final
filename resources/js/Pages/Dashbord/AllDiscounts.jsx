@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import Loading from '../../Componants/UI/Loading';
 import Discounts from './../Discounts/Discounts';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import axios from 'axios';
+import { TranslateContext } from '../../Context/Translate';
 
 function AllDiscounts() {
+    const {translates}=useContext(TranslateContext)
         const [loading, setLoading] = useState(false);
     const [discounts, setDiscounts] = useState([]);
     const [deleted,setDeleted]=useState(null);
@@ -92,8 +94,8 @@ function AllDiscounts() {
                       <div className="col ">
                       <form className="d-flex" role="search">
                                 <input
-                                    className="form-control me-2" type="search" placeholder="Search about title" aria-label="Search" value={searchTerm} onChange={handleChange} />
-                                <button className="btn btn-outline-success" type="submit" onClick={handleSearch} > Search </button>
+                                    className="form-control me-2" type="search" placeholder={translates.Search} aria-label="Search" value={searchTerm} onChange={handleChange} />
+                                <button className="btn btn-outline-success" type="submit" onClick={handleSearch} > {translates.Search} </button>
                             </form>
                       </div>
                       <div className="col">

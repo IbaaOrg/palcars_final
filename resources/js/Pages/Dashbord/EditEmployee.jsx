@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { CiEdit } from "react-icons/ci";
+import { TranslateContext } from "../../Context/Translate";
 
 const EditEmployee = () => {
+    const {translates}=useContext(TranslateContext)
     const { id } = useParams();
     const [employee, setEmployee] = useState({});
     const [token,setToken] = useState(localStorage.getItem("token"));
@@ -113,7 +115,7 @@ const EditEmployee = () => {
             <div className="bg-white w-100  border rounded px-3 py-2">
                 <form className="w-75 m-auto" onSubmit={updateEmployee}>
                     <h2 className="text-center fs-4 p-3">
-                        Update Employee Information 
+                        {translates.UpdateEmployeeInfo}
                     </h2>
                     {error && (
                         <div className="alert alert-danger w-100" role="alert">
@@ -122,13 +124,13 @@ const EditEmployee = () => {
                     )}
                     {done && (
                         <div className="alert alert-success w-100" role="100">
-                            Employee Updated Successfully
+                           {translates.InformationUpdated}
                         </div>
                     )}
                     <div className="d-flex flex-wrap justify-content-between gap-2">
                         <div className="employeeItem d-flex flex-column justify-content-start">
                             <label htmlFor="exampleInputEmail1" className="py-2">
-                                Full Name
+                               {translates.FullName}
                             </label>
                            {!showName?<p className="d-flex justify-content-start gap-2 border w-50 ms-0 p-1" id="fullName">
                                     {employee.full_name}
@@ -147,7 +149,7 @@ const EditEmployee = () => {
                         </div>
                         <div className="employeeItem">
                             <label htmlFor="exampleInputEmail2" className="py-2">
-                                Email address
+                                {translates.Emailaddress}
                             </label>
                             {!showEmail?<p className="d-flex justify-content-start gap-2 border  w-60 ms-0 p-1" id="email">
                                 {employee.email}
@@ -158,7 +160,7 @@ const EditEmployee = () => {
                                 class="form-control w-60 ms-0"
                                 id="exampleInputEmail2"
                                 aria-describedby="emailHelp"
-                                placeholder="Enter email"
+                                placeholder={translates.Enteremail}
                                 name="email"
                                 onChange={(e) => setEmail(e.target.value)}
                             />}
@@ -167,7 +169,7 @@ const EditEmployee = () => {
                     <div className="d-flex flex-wrap justify-content-between gap-2">
                         <div className="employeeItem">
                             <label htmlFor="exampleInputEmail3" className="py-2">
-                                Phone Number
+                                {translates.PhoneNumber}
                             </label>
                             {!showPhone?<p className="d-flex justify-content-start gap-2 border  w-50 ms-0 p-1" id="phone">
                                 {employee.phone}
@@ -185,7 +187,7 @@ const EditEmployee = () => {
                         </div>
                         <div className="employeeItem">
                             <label htmlFor="exampleInputEmail4" className="py-2">
-                                Address
+                                {translates.Address}
                             </label>
                             {!showLocation?<p className="d-flex justify-content-start gap-2 border w-50 ms-0 p-1" id="location">
                                 {employee.location}
@@ -195,7 +197,7 @@ const EditEmployee = () => {
                             class="form-control w-50 ms-0"
                             id="exampleInputEmail4"
                             aria-describedby="emailHelp"
-                            placeholder="Enter address "
+                            placeholder={translates.enteraddress}
                             name="location"
                             onChange={(e) => setLocation(e.target.value)}
                         />}
@@ -204,7 +206,7 @@ const EditEmployee = () => {
                     <div className="d-flex flex-wrap justify-content-between gap-2">
                         <div className="employeeItem">
                             <label htmlFor="exampleInputEmail5" className="py-2">
-                                Job Title
+                                {translates.JobTitle}
                             </label>
                             {!showJobTitle?<p className="d-flex justify-content-start gap-2 border w-50 ms-0 p-1" id="jobTitle">
                                 {employee.job_title}
@@ -214,14 +216,14 @@ const EditEmployee = () => {
                             class="form-control w-50 ms-0 "
                             id="exampleInputEmail5"
                             aria-describedby="emailHelp"
-                            placeholder="Enter job title "
+                            placeholder={translates.enterjobtitle}
                             name="job_title"
                             onChange={(e) => setJobTitle(e.target.value)}
                         />}
                         </div>
                         <div className="employeeItem">
                             <label htmlFor="exampleInputEmail1" className="py-2">
-                                Start date in company
+                                {translates.StartDate }
                             </label>
                            {!showStartDate? <p className="d-flex justify-content-start gap-2   border w-50 ms-0 p-1" id="startDate">
                                 {employee.start_date}
@@ -240,7 +242,7 @@ const EditEmployee = () => {
                     </div>
                     <div className="d-flex justify-content-end py-3">
                         <button type="submit" className="btn btn-primary">
-                            {loading ? "loading..." : "Save"}
+                            {loading ? "loading..." : `${translates.save}`}
                         </button>
                     </div>
                 </form>

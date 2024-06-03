@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import Loading from "../../Componants/UI/Loading";
+import { TranslateContext } from "../../Context/Translate";
 function EmployeeDashbord() {
+    const {translates}=useContext(TranslateContext)
     const navigate = useNavigate();
     const [employees, setEmployees] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -47,37 +49,34 @@ function EmployeeDashbord() {
             <div className="container text-center  p-10">
                 <div className="row">
                     <div className="col">
-                        <h1 className="fs-1">Employees List</h1>
-                        <p className="">Your all Employees are listed bellow</p>
+                        <h1 className="fs-1">{translates.employeelist}</h1>
+                        <p className="">{translates.belowlist}</p>
                     </div>
                     <div className="col ">
                         <form class="d-flex" role="search">
                             <input
                                 class="form-control me-2"
                                 type="search"
-                                placeholder="Search"
+                                placeholder={translates.Search} 
                                 aria-label="Search"
                             />
                             <button
                                 class="btn btn-outline-success"
                                 type="submit"
                             >
-                                Search
+                                {translates.Search}
                             </button>
                         </form>
                     </div>
                     <div className="col">
-                        <button type="button" class="btn btn-light">
-                            Filter
-                        </button>
-
+                        
                         <button
                             type="button"
                             class="btn btn-primary Addvehicle"
                         >
                             {" "}
                             <NavLink to="/dashbord/addEmployee">
-                                Add Employee
+                                {translates.AddEmployee}
                             </NavLink>
                         </button>
                     </div>
@@ -86,15 +85,15 @@ function EmployeeDashbord() {
                     <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col">Full Name</th>
-                                <th scope="col">Email </th>
-                                <th scope="col">Phone</th>
+                                <th scope="col">{translates.FullName}</th>
+                                <th scope="col">{translates.Email} </th>
+                                <th scope="col">{translates.Phone}</th>
 
-                                <th scope="col">Address</th>
-                                <th scope="col">Job Title</th>
-                                <th scope="col">Start Date</th>
-                                <th scope="col">Code</th>
-                                <th scope="col">Operation</th>
+                                <th scope="col">{translates.Address}</th>
+                                <th scope="col">{translates.JobTitle}</th>
+                                <th scope="col">{translates.StartDate}</th>
+                                <th scope="col">{translates.Code}</th>
+                                <th scope="col">{translates.Operation}</th>
                             </tr>
                         </thead>
                         {employees && (
@@ -114,14 +113,14 @@ function EmployeeDashbord() {
                                             
                                             <button className="btn btn-primary mx-1"                                                 id={data.id}
  onClick={updateEmployee}>
-                                                Update
+                                                {translates.Update}
                                             </button>
                                             <button
                                                 id={data.id}
                                                 className="btn btn-danger mx-1"
                                                 onClick={deleteEmployee}
                                             >
-                                                Delete
+                                                {translates.Delete}
                                             </button>
                                         </td>
                                     </tr>

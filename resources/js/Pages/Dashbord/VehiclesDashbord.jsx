@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import axios from 'axios';
 
@@ -9,11 +9,12 @@ import Loading from '../../Componants/UI/Loading';
 import RecordButton from './../../Componants/UI/RecordButton';
 import { GrFormEdit } from "react-icons/gr";
 import { ToastContainer, Bounce, Zoom, toast } from "react-toastify";
+import { TranslateContext } from '../../Context/Translate';
 
 
 function VehiclesDashbord() {
 
-
+    const {translates}=useContext(TranslateContext);
     const [data, setData] = useState([]);
     const [message, setMessage] = useState(null);
     const [statusVal,setStatusVal]=useState(false);
@@ -203,19 +204,19 @@ function VehiclesDashbord() {
                 <div className="container text-center  p-10">
                     <div className="row">
                         <div className="col">
-                            <h1 className='fs-1'>Vehicles List</h1>
-                            <p className=''>Your all vehicles are listed bellow</p>
+                            <h1 className='fs-1'>{translates.VehiclesList}</h1>
+                            <p className=''>{translates.listed}</p>
                         </div>
                         <div className="col ">
                             <form className="d-flex" role="search">
                                 <input
-                                    className="form-control me-2" type="search" placeholder="Search" aria-label="Search" value={searchTerm} onChange={handleChange} />
-                                <button className="btn btn-outline-success" type="submit" onClick={handleSearch} > Search </button>
+                                    className="form-control me-2" type="search" placeholder={translates.Search}  aria-label="Search" value={searchTerm} onChange={handleChange} />
+                                <button className="btn btn-outline-success" type="submit" onClick={handleSearch} > {translates.Search} </button>
                             </form>
                         </div>
                         <div className="col">
                             <button type="button" class="btn btn-primary Addvehicle" >
-                                <NavLink to="/dashbord/addvehical">Add vehicle</NavLink>
+                                <NavLink to="/dashbord/addvehical">{translates.AddVehicles}</NavLink>
                             </button>
 
                         </div>
@@ -225,19 +226,19 @@ function VehiclesDashbord() {
                         <table className='table'>
                             <thead>
                                 <tr>
-                                    <th scope="tableitem">Car Number</th>
-                                    <th scope="tableitem">Make</th>
-                                    <th scope="tableitem">model</th>
-                                    <th scope="tableitem">catrgory</th>
-                                    <th scope="tableitem">description</th>
-                                    <th scope="tableitem">year</th>
-                                    <th scope="tableitem">seats</th>
-                                    <th scope="tableitem">doors</th>
-                                    <th scope="tableitem">bags</th>
-                                    <th scope="tableitem">fuel_type</th>
-                                    <th scope="tableitem">fuel_full</th>
-                                    <th scope="tableitem">status</th>
-                                    <th scope="tableitem">operation</th>
+                                    <th scope="tableitem">{translates.CarNumber}</th>
+                                    <th scope="tableitem">{translates.Make}</th>
+                                    <th scope="tableitem">{translates.Model}</th>
+                                    <th scope="tableitem">{translates.Category}</th>
+                                    <th scope="tableitem">{translates.Description}</th>
+                                    <th scope="tableitem">{translates.Year}</th>
+                                    <th scope="tableitem">{translates.Seats}</th>
+                                    <th scope="tableitem">{translates.Doors}</th>
+                                    <th scope="tableitem">{translates.Bags}</th>
+                                    <th scope="tableitem">{translates.FuelType}</th>
+                                    <th scope="tableitem">{translates.FuelFull}</th>
+                                    <th scope="tableitem">{translates.Status}</th>
+                                    <th scope="tableitem">{translates.Operation}</th>
 
 
                             </tr>
@@ -266,8 +267,8 @@ function VehiclesDashbord() {
                                                    <option value="maintained">maintained</option>
                                                </select>
                                                <div className="d-flex justify-content-center align-items-center gap-2">
-                                                   <button onClick={() => handleSaveClick(index, data.id)} className='btn border'>Save</button>
-                                                   <button onClick={handleCancelClick} className='btn border'>Cancel</button>
+                                                   <button onClick={() => handleSaveClick(index, data.id)} className='btn border'>{translates.save}</button>
+                                                   <button onClick={handleCancelClick} className='btn border'>{translates.Cancel}</button>
                                                </div>
                                            </div>
                                             ) : (<span className='d-flex justify-content-center cursor-auto'>
@@ -277,9 +278,9 @@ function VehiclesDashbord() {
 
                                         </td>
                                         <td className=' d-flex flex-column gap-2'>
-                                            <NavLink to={`viewvehical/${data.id}`} className='btn btn-success w-70'>View</NavLink>
-                                            <NavLink to={`editvehical/${data.id}`} className='btn btn-primary w-70'>Update</NavLink>
-                                            <button id={data.id} onClick={deleteVehical} className='btn btn-danger me-2'>Delete</button>
+                                            <NavLink to={`viewvehical/${data.id}`} className='btn btn-success w-70'>{translates.View}</NavLink>
+                                            <NavLink to={`editvehical/${data.id}`} className='btn btn-primary w-70'>{translates.Update}</NavLink>
+                                            <button id={data.id} onClick={deleteVehical} className='btn btn-danger me-2'>{translates.Delete}</button>
 
 
                                         </td>
