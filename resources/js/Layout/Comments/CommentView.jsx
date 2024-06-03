@@ -9,10 +9,8 @@ function CommentView({ id }) {
     //const { id } = useParams(); // This will give you the value of "id" from the URL
 
     const getComments = async () => {
-        console.log("get car By Id ");
         const token = localStorage.getItem("token");
 
-        console.log(idCar);
         try {
             const response = await axios.get(`/getReviewes/${idCar}`, {
                 headers: {
@@ -21,7 +19,6 @@ function CommentView({ id }) {
             });
             const data = response.data;
             setComments(data.data.comments);
-            console.log(data.data);
         } catch (error) {
             console.error(error);
         }

@@ -4,7 +4,6 @@ const get_faverates = async (onSuccess, onerror,category) => {
         const response = await axios.get(`/favorites`);
         const data = response.data;
         onSuccess(data)
-        console.log(data);
     } catch (error) {
         console.error(error);
     }

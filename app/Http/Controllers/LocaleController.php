@@ -33,8 +33,7 @@ class LocaleController extends Controller
             'OurTeams','join','Inviteafrind','AboutPalCars','enterlocation','returncar','pickupdate','pickuptime','dropoffdate','dropofftime','SignUpWithGoogle','pickupdropoff','Specialoffers','viewdeals','Sitestatistics','Cities','Users','Categoriesofcar'
             ,'Day','Hour','Second','Minute','Save','map','descmap','reset','Make','entermake','model','entermodel','type','SUV',  'Sedan','Convertible','Crossover','Minivan','Pickuptrucks','StationWagon','Hatchback','Gas','Deisel','Electrecity'
             ,    'Fueltype','Gear','Manual','Automatic','Capacity','person','priceperday','Min','Max','Rent'
-
-        ];
+,'forgetPassword','account','signnow','valid','photolicense','givepoint','yes','no'        ];
 
         // Fetch data from language files
         $data = [];

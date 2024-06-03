@@ -1,6 +1,6 @@
 import React, { useState, useRef, useContext } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import loginimage from '../../../../public/image/undraw_Login_re_4vu2__1_-removebg-preview.png'
+import loginimage from "../../../../public/image/undraw_Login_re_4vu2__1_-removebg-preview.png";
 import axios from "axios";
 import { BiShowAlt } from "react-icons/bi";
 import { IoEyeOffOutline } from "react-icons/io5";
@@ -17,7 +17,7 @@ import bg5 from "../../../../public/image/bg5.jpg";
 import { UserContext } from "../../Context/User.jsx";
 function Login(props) {
     const { translates } = useContext(TranslateContext);
-    const {setUserToken}=useContext(UserContext);
+    const { setUserToken } = useContext(UserContext);
     const navigate = useNavigate();
     const location = useLocation();
     const [error, setError] = useState(null);
@@ -42,54 +42,46 @@ function Login(props) {
         setSeccsses(null);
         setError(null);
         setIsLoading(true);
-        if(form.current.email.includes('@employee.ps')){
+        if (form.current.email.includes("@employee.ps")) {
             try {
-                const response = await axios.post("/login-email",
-                form.current,
-                );
-                const res = response.data
+                const response = await axios.post("/login-email", form.current);
+                const res = response.data;
                 if (res) {
-                    setSeccsses(res.data) 
+                    setSeccsses(res.data);
                     const token = res.data.token;
-                    localStorage.setItem("token", token)
+                    localStorage.setItem("token", token);
                     if (res.data.role === "Company") {
-                        setUserToken(token)
+                        setUserToken(token);
                         navigate("/dashbord");
                     }
                 }
-        
             } catch (e) {
-                setError(e.response.data.msg)
-            }finally{
+                setError(e.response.data.msg);
+            } finally {
                 setIsLoading(false);
-    
             }
-        }else {
-        try {
-            const response = await axios.post("/login",
-            form.current,
-            );
-            const res = response.data
-            if (res) {
-                setSeccsses(res.data) 
-                const token = res.data.token;
-                localStorage.setItem("token", token)
-                if (res.data.role === "Company") {
-                    setUserToken(token)
-                    navigate("/dashbord");
-                } else {
-                    setUserToken(token)
-                    navigate("/profile");
+        } else {
+            try {
+                const response = await axios.post("/login", form.current);
+                const res = response.data;
+                if (res) {
+                    setSeccsses(res.data);
+                    const token = res.data.token;
+                    localStorage.setItem("token", token);
+                    if (res.data.role === "Company") {
+                        setUserToken(token);
+                        navigate("/dashbord");
+                    } else {
+                        setUserToken(token);
+                        navigate("/profile");
+                    }
                 }
+            } catch (e) {
+                setError(e.response.data.msg);
+            } finally {
+                setIsLoading(false);
             }
-    
-        } catch (e) {
-            setError(e.response.data.msg)
-        }finally{
-            setIsLoading(false);
-
         }
-    }
     };
 
     const byGoogle = async () => {
@@ -101,16 +93,16 @@ function Login(props) {
     };
 
     return (
-        <div class="d-flex justify-content-around cont">
-                            <ToastContainer />
+        <div className="d-flex justify-content-around cont">
+            <ToastContainer />
 
-        <div>
-                <img src={loginimage} className="w-100"/>
-        </div>
-            <div class="form-container m-2">
-                <div class="social-buttons">
-                    <button class="social-button apple" onClick={byGoogle}>
-                        <svg class="icon" viewBox="0 0 24 24">
+            <div>
+                <img src={loginimage} className="w-100" />
+            </div>
+            <div className="form-container m-2">
+                <div className="social-buttons">
+                    <button className="social-button apple" onClick={byGoogle}>
+                        <svg className="icon" viewBox="0 0 24 24">
                             <path
                                 d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
                                 fill="#4285F4"
@@ -132,20 +124,20 @@ function Login(props) {
                         <span>{translates.SignInWithGoogle}</span>
                     </button>
                 </div>
-                <div class="line"></div>
+                <div className="line"></div>
                 {seccsses && (
-                    <div class="alert alert-success" role="alert">
+                    <div className="alert alert-success" role="alert">
                         {seccsses}
                     </div>
                 )}
                 {error && (
-                    <div class="alert alert-danger" role="alert">
+                    <div className="alert alert-danger" role="alert">
                         {error}
                     </div>
                 )}
                 <div></div>
-                <form class="form" onSubmit={log}>
-                    <div class="form-group">
+                <form className="form" onSubmit={log}>
+                    <div className="form-group">
                         <label for="email">
                             {translates.Email}
                             <span className=" text-red-600"> *</span>
@@ -160,9 +152,11 @@ function Login(props) {
                         />
                     </div>
 
-                    <div class="form-group">
+                    <div className="form-group">
                         <div className="d-flex">
-                            <label for="password">{translates.Password}</label>
+                            <label htmlFor="password">
+                                {translates.Password}
+                            </label>
                             <FaStarOfLife size={5} className="text-danger" />
                         </div>
                         <div className="password-input-container">
@@ -191,20 +185,23 @@ function Login(props) {
 
                     <input
                         type={"submit"}
-                        value={isLoading ? "Loading..." : "Login"}
-                        class="form-submit-btn"
+                        value={isLoading ? "Loading..." : `${translates.Login}`}
+                        className="form-submit-btn"
                         disabled={isLoading}
                     />
                 </form>
 
-                <NavLink class="forgot-password-link link " to="/forgetpassword">
-                   <span> Do you forget Password?</span>
+                <NavLink
+                    className="forgot-password-link link "
+                    to="/forgetpassword"
+                >
+                    <span> {translates.forgetPassword}</span>
                 </NavLink>
 
-                <p class="signup-link d-flex gap-2">
-                    <span>Don't have an account?</span>
-                    <NavLink class="signup-link link" to="/register">
-                        Sign up now
+                <p className="signup-link d-flex gap-2">
+                    <span>{translates.account}</span>
+                    <NavLink className="signup-link link" to="/register">
+                        {translates.signnow}
                     </NavLink>
                 </p>
             </div>

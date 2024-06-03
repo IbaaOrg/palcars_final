@@ -12,7 +12,6 @@ export const FavoriteContext = createContext();
                 Authorization : `Bearer ${token}`
             }
         })
-        console.log(response.data.data)
         setFavoriteList(response.data.data)
     }
     }

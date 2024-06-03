@@ -60,7 +60,7 @@ function ForgetPassword() {
                         <div className="form-group">
                             <div className="mb-3">
                                 <label
-                                    for="exampleFormControlInput1"
+                                    htmlFor="exampleFormControlInput1"
                                     className="form-label py-3"
                                 >
                                     Email address of your account :

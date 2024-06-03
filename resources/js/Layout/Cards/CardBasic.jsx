@@ -216,15 +216,15 @@ function CardBasic({ title }) {
 
     return (
         <div className=" container cardmain shadow">
-            <form class="row g-3">
+            <form className="row g-3">
                 {!toggle ? (
-                    <div class="col-md-12 mainlist">
-                        <label for="inputEmail4" class="form-label">
-                            Pickup and Dropoff 
+                    <div className="col-md-12 mainlist">
+                        <label htmlFor="inputEmail4" className="form-label">
+                            Pickup and Dropoff
                         </label>
                         <input
                             type="text"
-                            class="form-control"
+                            className="form-control"
                             id="inputEmail4"
                             placeholder={translates.enterlocation}
                             value={inputPickupDropoffValue}
@@ -254,13 +254,13 @@ function CardBasic({ title }) {
                         )}
                     </div>
                 ) : (
-                    <div class="col-md-6 mainlist">
-                        <label for="inputEmail5" class="form-label">
+                    <div className="col-md-6 mainlist">
+                        <label htmlFor="inputEmail5" className="form-label">
                             {translates.pickup}
                         </label>
                         <input
                             type="text"
-                            class="form-control "
+                            className="form-control "
                             id="inputEmail5"
                             placeholder={translates.enterlocation}
                             value={inputPickupValue}
@@ -356,61 +356,64 @@ function CardBasic({ title }) {
                     </div>
                 )}
 
-                <div class="col-12">
-                    <div class="form-check">
+                <div className="col-12">
+                    <div className="form-check">
                         <input
-                            class="form-check-input"
+                            className="form-check-input"
                             type="checkbox"
                             id="gridCheck"
                             onClick={difrentLocation}
                         />
-                        <label class="form-check-label " for="gridCheck">
+                        <label
+                            className="form-check-label "
+                            htmlFor="gridCheck"
+                        >
                             {translates.returncar}
                         </label>
                     </div>
                 </div>
-                <div class="col-3">
-                    <label for="startDate" className="form-label">
+                <div className="col-3">
+                    <label htmlFor="startDate" className="form-label">
                         {translates.pickupdate}
                     </label>
                     <input
                         type="date"
-                        class="form-control"
+                        className="form-control"
                         id="startDate"
                         min={todayDate()}
                         onChange={PickupDate}
                     />
                 </div>
-                <div class="col-3">
-                    <label for="startTime" className="form-label">
+                <div className="col-3">
+                    <label htmlFor="startTime" className="form-label">
                         {translates.pickuptime}
                     </label>
                     <input
                         type="time"
-                        class="form-control"
+                        className="form-control"
                         id="startTime"
                         onChange={PickupTime}
                     />
                 </div>
-                <div class="col-3">
-                    <label for="endDate" className="form-label">
+                <div className="col-3">
+                    <label htmlFor="endDate" className="form-label">
                         {translates.dropoffdate}
                     </label>
                     <input
                         type="date"
-                        class="form-control"
+                        className="form-control"
                         id="endDate"
                         min={pickupDate}
                         onChange={DropoffDate}
                     />
                 </div>
-                <div class="col-3">
-                    <label for="endTime" className="form-label">
+                <div className="col-3">
+                    <label htmlFor="endTime" className="form-label">
                         {translates.dropofftime}
                     </label>
                     <input
                         type="time"
-                        class="form-control"
+                        className="form-control"
                         id="endTime"
                         onChange={DropoffTime}
                     />

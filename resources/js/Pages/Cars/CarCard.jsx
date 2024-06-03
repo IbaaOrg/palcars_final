@@ -12,7 +12,7 @@ import Dialog from "../../Layout/Dialog/Dialog";
 import { UserContext } from "../../Context/User";
 import { TranslateContext } from "../../Context/Translate";
 const CarCard = ({ item, index, toggleFavorite, favoriteList }) => {
-    const {translates}=useContext(TranslateContext);
+    const { translates } = useContext(TranslateContext);
     const [isDialogOpen, setDialogOpen] = useState(false);
     const [ownerid, setOwnerid] = useState(null);
     const { user } = useContext(UserContext);
@@ -30,7 +30,9 @@ const CarCard = ({ item, index, toggleFavorite, favoriteList }) => {
     return (
         <div
             key={item.id}
-            className={"  bg-white p-3 rounded-md  my-4 cardMainCar  align-self-start"}
+            className={
+                "  bg-white p-3 rounded-md  my-4 cardMainCar  align-self-start"
+            }
         >
             <div className="card-body ">
                 <h2 className="card-title font-bold d-flex justify-content-between">
@@ -116,7 +118,8 @@ const CarCard = ({ item, index, toggleFavorite, favoriteList }) => {
                         to={`/cars/${item.id}`}
                         className="btn btn-primary px-3 "
                     >
-{translates.Rent}                    </Link>
+                        {translates.Rent}{" "}
+                    </Link>
                 </div>
             </div>
         </div>
