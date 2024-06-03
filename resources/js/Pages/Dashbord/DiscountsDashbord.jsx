@@ -1,8 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef, useContext } from 'react'
 import { Button } from 'react-bootstrap';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { TranslateContext } from '../../Context/Translate';
 
 function DiscountsDashbord() {
+  const {translates}=useContext(TranslateContext)
   const [data, setData] = useState([]);
   const [done, setDone] = useState(false)
   const [error, setError] = useState(null)
@@ -101,31 +103,31 @@ function DiscountsDashbord() {
       
         <form class="row g-3">
           <div class="col-md-6">
-            <label for="inputEmail4" class="form-label">Title</label>
-            <input type="text" class="form-control" id="note" name="note"  onChange={set} placeholder='Enter description of discount'/>
+            <label for="inputEmail4" class="form-label">{translates.Title}</label>
+            <input type="text" class="form-control" id="note" name="note"  onChange={set} placeholder={translates.EnterDescriptionOfDiscount}/>
           </div>
           <div class="col-md-6">
-            <label for="type" class="form-label">Type</label>
+            <label for="type" class="form-label">{translates.Type}</label>
             <select id="type" class="form-select" name="type" onChange={set} >
-              <option selected>Choose type</option>
-              <option>percentage</option>
-              <option>fixed</option>
+              <option selected>{translates.ChooseType}</option>
+              <option>{translates.percentage}</option>
+              <option>{translates.fixed}</option>
 
             </select>
           </div>
           <div class="col-12">
-            <label for="value" class="form-label">Value</label>
-            <input type="text" class="form-control" id="value" name="value" placeholder="20% or 20₪" onChange={set}/>
+            <label for="value" class="form-label">{translates.Value}</label>
+            <input type="text" class="form-control" id="value" name="value" placeholder={translates.exValue} onChange={set}/>
           </div>
           <div class="col-12">
-            <label for="expired_date" class="form-label">expired date</label>
+            <label for="expired_date" class="form-label">{translates.ExpiredDate}</label>
             <input type="datetime-local" class="form-control" id="expired_date" name="expired_date" placeholder="Apartment, studio, or floor" onChange={set}/>
           </div>
         
           <div class="col-md-12">
-            <label for="car_id" class="form-label">Car</label>
+            <label for="car_id" class="form-label">{translates.Car}</label>
             <select id="car_id" name="car_id" class="form-select" onChange={(e)=>{setCarId(e.target.value)}}>
-              <option selected>Choose Car Number</option>
+              <option selected>{translates.ChooseCarNumber}</option>
               {data.map(data => (
 
                 <option key={data.id} value={data.id}>{data.car_number} - {data.model}  </option>
@@ -137,7 +139,7 @@ function DiscountsDashbord() {
           </div>
          
         {done&&(<div className='alert alert-success mt-2 '>
-          information is valid
+          {translates.informationValid}
         </div>)}
         {error&&(<div className='alert alert-danger mt-2 '>
           {error}

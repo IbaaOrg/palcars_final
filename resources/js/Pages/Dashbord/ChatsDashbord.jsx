@@ -1,11 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import axios from 'axios';
 import { useState } from 'react';
 import '../../../css/app.css'
 import '../../../css/MessageStyle/message.css'
 import CommetInput from '../../Layout/Comments/CommetInput'
 import MessageInput from '../../Layout/Message/MessageInput'
+import { TranslateContext } from '../../Context/Translate';
 function ChatsDashbord() {
+const {translates}=useContext(TranslateContext)
 
   const [data, setData] = useState([]);
   const[dataSearch,setdataSearch]=useState([]);
@@ -188,8 +190,8 @@ const handleSendMessage = () => {
       <div className='col-4 message_list_list' style={{ maxHeight: '800px', overflowY: 'scroll', overflowX: 'hidden' }}>
       <div className="m-2">
            <form class="d-flex" role="search">
-           <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search" value={searchTerm} onChange={handleChange} />
-              <button class="btn btn-outline-success" type="submit" onClick={handleSearch}>Search</button>
+           <input class="form-control me-2 " type="search" placeholder={translates.SearchTitle} aria-label="Search" value={searchTerm} onChange={handleChange} />
+              <button class="btn btn-outline-success" type="submit" onClick={handleSearch}>{translates.Search}</button>
         </form>
       </div>
      
@@ -245,11 +247,11 @@ const handleSendMessage = () => {
           <input
             type="text"
             className="message-input"
-            placeholder="Write a Message..."
+            placeholder={translates.WriteMessage}
             value={message}
             onChange={(e)=>{setMessage(e.target.value)}}
           />
-            <button className="send-button" onClick={handleSendMessage}>Send</button>
+            <button className="send-button" onClick={handleSendMessage}>{translates.Send}</button>
         </div>
 
       </div>

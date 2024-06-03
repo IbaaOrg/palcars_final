@@ -1,7 +1,9 @@
 import React, { useContext,useRef,useState } from 'react'
 import { UserContext } from '../../Context/User'
+import { TranslateContext } from '../../Context/Translate'
 
 const AllRenterNotes = () => {
+  const {translates}=useContext(TranslateContext)
   const {user}= useContext(UserContext)
   const token=localStorage.getItem('token')
   const[renters,setRenters]=useState([]);
@@ -49,10 +51,10 @@ const AllRenterNotes = () => {
       <form class="row g-3 p-4">
         <div className='col-md-6 d-flex justify-content-start align-items-center '>  
             <img src={user.photo_user} alt="photo user" className='rounded-circle userPhoto'/>
-            <p><span className='text-primary fw-bold'>{user.name} Comapny</span> add note here :</p>
+            <p><span className='text-primary fw-bold'>{user.name} </span> {translates.addNote} </p>
         </div>
         <div class="col-md-11 mt-3 m-auto d-flex justify-content-start align-items-start gap-2">
-          <label for="inputEmail4" class="form-label">Note</label>
+          <label for="inputEmail4" class="form-label">{translates.Note}</label>
           <textarea name="note" id="" cols="128" rows="3" onChange={set} className='p-2'></textarea>
         </div>
      
@@ -72,7 +74,7 @@ const AllRenterNotes = () => {
       
         <div class="col-12 d-flex justify-end">
         
-          <button class="btn btn-primary m-1" onClick={addNote}>Send Note</button>
+          <button class="btn btn-primary m-1" onClick={addNote}>{translates.SendNote}</button>
 
         </div>
       </form>

@@ -1,7 +1,9 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { UserContext } from '../../Context/User'
 import axios from 'axios'
+import { TranslateContext } from '../../Context/Translate';
 const RenterNote = () => {
+  const {translates}=useContext(TranslateContext)
    const {user}= useContext(UserContext)
    const token=localStorage.getItem('token')
    const[renters,setRenters]=useState([]);
@@ -66,20 +68,20 @@ const RenterNote = () => {
       <form class="row g-3 p-4">
         <div className='col-md-6 d-flex justify-content-start align-items-center '>  
             <img src={user.photo_user} alt="photo user" className='rounded-circle userPhoto'/>
-            <p><span className='text-primary fw-bold'>{user.name} Comapny</span> add note here :</p>
+            <p><span className='text-primary fw-bold'>{user.name} </span> {translates.addNote}</p>
         </div>
         <div class="col-md-11 mt-3 m-auto  d-flex justify-content-start align-items-start gap-2">
-          <label for="inputEmail4" class="form-label">Note</label>
+          <label for="inputEmail4" class="form-label">{translates.Note}</label>
           <textarea name="note" id="" cols="128" rows="3" onChange={set} className='p-2'></textarea>
         </div>
      
     
       
         <div class="col-md-11 mt-3 m-auto  d-flex justify-content-start align-items-start gap-2">
-          <label for="user_id" class="form-label">User</label>
+          <label for="user_id" class="form-label">{translates.User}</label>
           <select id="user_id" name="user_id" class="form-select" onChange={(e) => setUserId(e.target.value)}
 >
-            <option selected>Choose User</option>
+            <option selected>{translates.ChooseUser}</option>
             {renters.map(data => (
 
 <option key={data.id} value={data.id}>{data.name}</option>
@@ -103,7 +105,7 @@ const RenterNote = () => {
                 )}
         <div class="   d-flex justify-end">
         
-          <button class="btn btn-primary m-1" onClick={addNote}>Send Note</button>
+          <button class="btn btn-primary m-1" onClick={addNote}>{translates.SendNote}</button>
 
         </div>
       </form>
