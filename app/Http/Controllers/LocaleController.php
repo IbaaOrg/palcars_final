@@ -26,7 +26,7 @@ class LocaleController extends Controller
             'Seats', 'Doors', 'Bags', 'FuelType', 'FuelFull', 'Operation', 'View', 'Update','EnterDescriptionOfDiscount','informationValid',
             'Delete', 'Chats', 'UserName', 'Account', 'Email', 'Phone', 'Birthdate','Send','ChooseType','exValue','SendNotes','SendNote',
             'EditProfile', 'Information', 'Booking', 'Messages', 'Faviorites', 'pickup','UpdateDiscountInformation','ToSpecificUser',
-            'dropoff', 'location', 'date', 'time', 'FullName', 'Password', 'PhotoUser','percentage','fixed','DiscountValue','day',
+            'dropoff', 'location', 'date', 'time', 'FullName', 'Password', 'PhotoUser','DiscountType','percentage','fixed','DiscountValue','day',
             'Birthdate', 'SignUp', 'LogOut', 'SignInWithGoogle', 'Enteryouremail', 'Enteryourpassword','DiscountUpdatedSuccessfully',
             'Company','Renter','choose','Enteryourname','Phone','Enteryourphone','PhotoUser','PhotoDrivinglicense','Enteryourbirthdate','description'=>'description','enter'=>'enter'
             ,'Discountsanddeals','BrowseNow','AllCars','ContactWithCompany','vision','Howitworks','Features','Partenership','BussinessRelation','Socials','Deals','Community','Blog',

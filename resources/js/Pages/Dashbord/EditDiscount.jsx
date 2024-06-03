@@ -122,7 +122,7 @@ form.current={...form.current,[e.target.name]:e.target.value}
             </div>
             <div className="employeeItem">
                 <label htmlFor="exampleInputEmail2" className="py-2">
-                    Discount Type
+                    {translates.DiscountType}
                 </label>
                 {!showDiscountType ? (
                     <p
