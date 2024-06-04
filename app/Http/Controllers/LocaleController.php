@@ -20,7 +20,7 @@ class LocaleController extends Controller
 
         // Define the keys for translation
         $keys = [
-            'Home', 'Cars','Car', 'About', 'ContactUs', 'Register', 'Login', 'Arabic', 'English','DiscountsList','DiscountsDetails','AddDiscount',
+            'Home', 'Cars','Car', 'About', 'ContactUs', 'Register', 'Login', 'nomaintained','Arabic', 'English','DiscountsList','DiscountsDetails','AddDiscount',
             'Search','SearchTitle', 'Dashbord', 'Vehicles', 'AddVehicles', 'EditVehicles', 'VehiclesList','Title','ExpiredDate','Value','Type',
             'Filter', 'ID', 'CarNumber', 'Make', 'Model', 'Catrgory', 'Description', 'Year','Oprations','WriteMessage','ChooseCarNumber',
             'Seats', 'Doors', 'Bags', 'FuelType', 'FuelFull', 'Operation', 'View', 'Update','EnterDescriptionOfDiscount','informationValid',
@@ -49,7 +49,7 @@ class LocaleController extends Controller
             ,'Day','Hour','Second','Minute','Save','save','map','descmap','reset','Make','entermake','model','entermodel','type','SUV',  'Sedan','Convertible','Crossover','Minivan','Pickuptrucks','StationWagon','Hatchback','Gas','Deisel','Electrecity','selectgear','selectfueltype','choosecolor','chooseday','Save'
             ,    'Fueltype','Gear','Manual','Automatic','Capacity','person','priceperday','Min','Max','Rent','listed','Status','Category','Cancel','AddCar','ManufacturingCompany','ColorCar','fourimage','imageandprice','image','price','Images','notworkinghours', 'AddWorkingHours' ,'Prices','imageselected','SelectCompany','selectcategory'
 ,'forgetPassword','account','signnow','valid','photolicense','givepoint','yes','no','RentedVehicles','maintainedvehicles','WorkingHours','Employees','Renters','Chats','Expenses','Locations','Discounts','Notes','addandmanage','Welcome'  ,'Bookings' ,'todaydate','entercarnumber','entercarmodel'
-,'ViewAllCars','NoComments','pleaseLogin',
+,'ViewAllCars','NoComments','pleaseLogin','VehiclesDetails','norentedcar','selectnumberofbag','selectnumberofdoor','selectnumberofseat'
    ];
 
         // Fetch data from language files

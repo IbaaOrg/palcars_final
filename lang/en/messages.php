@@ -3,9 +3,10 @@ return [
     'WelcomeAbout'=>"Welcome to PalCars Car Rental, your ultimate destination for convenient and reliable car rentals across all cities in Palestine. Whether you're a local resident or a tourist exploring our beautiful country, we're here to provide you with top-notch car rental services that meet your needs.",
     'WelcomeEnd'=>'The first and only website in the state of palestine for car rental and to facilitate communication between rental companies between the govenorates',
     'mission'=>'Our Mission',
+    'Welcome'=>'Welcome',
     'missionabout'=>'At Palestine Car Rental, our mission is to make car rental easy, accessible, and affordable for everyone. We aim to provide a seamless booking experience, exceptional customer service, and a wide range of vehicles to choose from.',
     'chooseus'=>'Why Choose Us?',
-    'chooseabout'=>' At Palestine Car Rental, our mission is to make car
+    'chooseAbout'=>' At Palestine Car Rental, our mission is to make car
     rental easy, accessible, and affordable for
     everyone. We aim to provide a seamless booking
     experience, exceptional customer service, and a wide
@@ -21,7 +22,9 @@ return [
     'On'=>'On',
     'notcomment'=>"You didn't add comment",
     'nocomment'=>'Your cars currently have no comments.',
+    'addandmanage'=>'"You can add and manage informations about your company ."',
     'mynotes'=>'My Notes',
+    'todaydate'=>'Today Date',
     'notesfrom'=>'Notes from me',
     'thenote'=>'The Note',
     'notee'=>'Note',
@@ -59,10 +62,15 @@ return [
     'AddVehicles'=>'Add Vehicles',
     'EditVehicles'=>'Edit Vehicles',
     'VehiclesList'=>'Vehicles List',
+    'VehiclesDetails'=>'Your all Vehicles are listed bellow',
+    'norentedcar'=>'No Rented cars in this time',
     'DiscountsList'=>'Discounts List',
     'DiscountsDetails'=>'Your all Discounts are listed bellow',
     'SearchTitle'=>'Search about title',
     'AddDiscount'=>'Add Discount',
+    'selectnumberofdoor'=>'Select number of doors',
+    'selectnumberofseat'=>'Select number of seats',
+    'selectnumberofbag'=>'Select number of bags',
     'Title'=>'Title',
     'Value'=>'Value',
     'Type'=>'Type',
@@ -115,6 +123,7 @@ return [
     'Seats'=>'Seats',
     'Doors'=>'Doors',
     'Bags'=>'Bags',
+    'nomaintained'=>'No Maintained cars in this time',
     'FuelType'=>'Fuel Type',
     'FuelFull'=>'Fuel Full',
     'Operation'=>'Operation',
