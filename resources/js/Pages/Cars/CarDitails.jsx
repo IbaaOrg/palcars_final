@@ -341,7 +341,7 @@ function CarDitails() {
                                 ))
                             ) : (
                                 <p className="py-2 fs-4">
-                                    No Comments on this car
+                                    {translates.NoComments}
                                 </p>
                             )}
                         </div>

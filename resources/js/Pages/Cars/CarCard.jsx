@@ -78,7 +78,7 @@ const CarCard = ({ item, index, toggleFavorite, favoriteList }) => {
                             />
                         </div>
                         <span className="col-9 justify-slef-center align-self-start pt-1">
-                            {item.owneruser.name} {translates.Company}
+                            {item.owneruser.name}
                         </span>
                     </div>
                 )}
@@ -109,7 +109,7 @@ const CarCard = ({ item, index, toggleFavorite, favoriteList }) => {
 
                 <div className=" text-start">
                     <p className=" fs-5">
-                        <b>{item.prices?.[0]?.price_after_discount}</b> ₪/day
+                        <b>{item.prices?.[0]?.price_after_discount}</b> ₪/{translates.day}
                     </p>
                 </div>
 

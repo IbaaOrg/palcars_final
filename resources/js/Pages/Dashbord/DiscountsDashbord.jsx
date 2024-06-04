@@ -110,8 +110,8 @@ function DiscountsDashbord() {
             <label for="type" class="form-label">{translates.Type}</label>
             <select id="type" class="form-select" name="type" onChange={set} >
               <option selected>{translates.ChooseType}</option>
-              <option>{translates.percentage}</option>
-              <option>{translates.fixed}</option>
+              <option>percentage</option>
+              <option>fixed</option>
 
             </select>
           </div>
