@@ -1,19 +1,13 @@
 import React, { useState, useRef, useContext } from "react";
-
 import "../../../css/LoginStyle/Login.css";
 import Logo from "../../../../public/logo1.png";
-// Example: Firestore
 import { auth, google } from "../../firebase";
-import axios from "axios";
 import { signInWithPopup } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import Signup from "../../NetWorking/Signup";
-import { object, string } from "yup";
 import { TranslateContext } from "../../Context/Translate";
 import { IoCamera } from "react-icons/io5";
-import { doc } from "firebase/firestore";
 import { FaStarOfLife } from "react-icons/fa";
-import { getAuth, updatePassword } from "firebase/auth";
 import { BiShowAlt } from "react-icons/bi";
 import { IoEyeOffOutline } from "react-icons/io5";
 import loginimage from "../../../../public/image/undraw_undraw_undraw_undraw_sign_up_ln1s_-1-_s4bc_-1-_ee41__1__3xti-removebg-preview.png";
@@ -25,13 +19,11 @@ function SignUpRenter() {
     const navigate = useNavigate();
     const [errors, setErrors] = useState(null);
     const [role, setRole] = useState("Renter");
-    const [valid, setValid] = useState(0);
+    const [valid, setValid] = useState(false);
     const [visibale, setVisible] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-
     const [seccsses, setSeccsses] = useState(null);
-
     const [preview, setPreview] = useState(null);
     const [previewd, setPreviewd] = useState(null);
     const [showDetials, setShowDetials] = useState(false);
@@ -40,7 +32,7 @@ function SignUpRenter() {
 
     const form = useRef({
         email: null,
-        name: null,
+        name: '',
         phone: null,
         password: null,
         valid: null,
@@ -48,47 +40,32 @@ function SignUpRenter() {
         PhotoDrivinglicense: null,
         birthdate: null,
     });
-
-    const validate = async () => {
-        let userSchema = object({
-            email: string().required().email(),
-            name: string().required().min(3).max(20),
-            password: string().required().min(8),
-            phone: string().min(10).max(10).required(),
-            PhotoDrivinglicense: string().required(),
-            expireddate: string().required(),
-            birthdate: string().required(),
-        });
-        try {
-            await userSchema.validate(form.current);
-            setSeccsses("User is valid!");
-            setErrors(null);
-            return true;
-        } catch (e) {
-            setErrors(e.errors);
-            setSeccsses(null);
-            return false;
-        }
-    };
-
+    const userImgRef = useRef(null);
+    const drivingImgRef = useRef(null);
     const show = (e) => {
         file.current = e.target.files[0];
         const reader = new FileReader();
         reader.onload = () => {
             setPreview(reader.result);
-            document.getElementById("user-img").src = reader.result;
+            if (userImgRef.current) {
+                userImgRef.current.src = reader.result;
+            }
         };
         reader.readAsDataURL(file.current);
     };
+    
     const showD = (e) => {
         filed.current = e.target.files[0];
         const reader = new FileReader();
         reader.onload = () => {
             setPreviewd(reader.result);
-            document.getElementById("driving-img").src = reader.result;
+            if (drivingImgRef.current) {
+                drivingImgRef.current.src = reader.result;
+            }
         };
         reader.readAsDataURL(filed.current);
     };
+    
 
     const set = (e) => {
         form.current = { ...form.current, [e.target.name]: e.target.value };
@@ -105,51 +82,6 @@ function SignUpRenter() {
             localStorage.setItem("token", res.user.accessToken);
         }
         if (localStorage.getItem("token")) navigate("/profile");
-    };
-
-    const reg = async (e) => {
-        e.preventDefault();
-
-        const validatedata = await validate();
-        setError(null);
-        const ckeckBoxValid =
-            document.getElementById("flexCheckChecked").checked;
-        if (!ckeckBoxValid) {
-            setError("Please confirm that you have a valid driving license.");
-            return;
-        }
-        const formData = new FormData();
-        formData.append("name", form.current.name);
-        formData.append("role", role);
-        formData.append("email", form.current.email);
-        formData.append("password", form.current.password);
-        formData.append("phone", form.current.phone);
-        formData.append("valid", valid ? 1 : 0);
-        formData.append("expireddate", form.current.expireddate);
-        formData.append("photo_drivinglicense", filed.current);
-        formData.append("birthdate", form.current.birthdate);
-
-        if (file.current) {
-            formData.append("photo_user", file.current);
-        }
-        setLoading(true);
-
-        await Signup(
-            formData,
-            (user) => {
-                if (user.role === "Company") {
-                    setUserToken(user.token);
-                    navigate("/dashbord");
-                } else {
-                    setUserToken(user.token);
-                    navigate("/profile");
-                }
-            },
-            (msg) => {
-                setError(msg);
-            }
-        );
-        setLoading(false);
     };
     const toggleDetials = () => {
         setShowDetials(!showDetials);
@@ -169,7 +101,51 @@ function SignUpRenter() {
         }
         return `${year}-${month}-${day}`;
     }
+    const reg = async (e) => {
+        e.preventDefault();
+        // const validatedata = await validate();
+        setError(null);
 
+        const formData = new FormData();
+        formData.append("name", form.current.name);
+        formData.append("role", role);
+        formData.append("email", form.current.email);
+        formData.append("password", form.current.password);
+        formData.append("phone", form.current.phone);
+        formData.append("valid", valid ? 1 : 0);
+        formData.append("expireddate", form.current.expireddate);
+        formData.append("photo_drivinglicense", filed.current);
+        formData.append("birthdate", form.current.birthdate);
+            if (file.current) {
+            formData.append("photo_user", file.current);
+        }
+        formData.append("active_points", form.current.active_points);
+
+        setLoading(true);
+
+        await Signup(
+            formData,
+            (user) => {
+                if (user.role === "Company") {
+                    setUserToken(user.token);
+                    navigate("/dashbord");
+                } else {
+                    setUserToken(user.token);
+                    navigate("/profile");
+                }
+                setSeccsses('User is Valid');
+                setError(null);
+            },
+            (msg) => {
+                setError(msg);
+                setSeccsses(null);
+            }
+        );
+
+        setLoading(false);
+    };
+
+    
     return (
         <div className="d-flex justify-content-around cont">
             <div>
@@ -192,12 +168,11 @@ function SignUpRenter() {
                                 fill="#FBBC05"
                             ></path>
                             <path
-                                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l2.85 2.22c.87-2.6 3.3-4.53 6.16-4.53z"
                                 fill="#EA4335"
                             ></path>
-                            <path d="M1 1h22v22H1z" fill="none"></path>
                         </svg>
-                        <span>{translates.SignUpWithGoogle}</span>
+                        <span className="buttonText">With Google</span>
                     </button>
                 </div>
                 <div className="line"></div>
@@ -206,23 +181,17 @@ function SignUpRenter() {
                         {seccsses}
                     </div>
                 )}
-
-                {error && !errors && (
-                    <div className="alert alert-danger" role="alert">
-                        {errors}
-                    </div>
-                )}
-                {/* {!error && errors && (
-                    <div class="alert alert-danger" role="alert">
-                        {error}
-                    </div>
-                )} */}
-                {error && errors && (
+                {error && (
                     <div className="alert alert-danger" role="alert">
                         {error}
                     </div>
                 )}
-                <form className="form" onSubmit={reg}>
+                <form
+                    action="submit"
+                    onSubmit={reg}
+                    className="signupForm"
+                    encType="multipart/form-data"
+                >
                     <div className="row">
                         <div className="form-group col">
                             <div className="d-flex">
@@ -244,15 +213,10 @@ function SignUpRenter() {
                             />
                         </div>
                         <div className="form-group col">
-                            <div className="d-flex">
-                                <label htmlFor="name">
-                                    {translates.FullName}
-                                </label>
-                                <FaStarOfLife
-                                    size={5}
-                                    className="text-danger"
-                                />
-                            </div>
+                            <label htmlFor="name">
+                                {translates.FullName}
+                                <span className=" text-red-600"> *</span>
+                            </label>
                             <input
                                 required=""
                                 onChange={set}
@@ -315,11 +279,6 @@ function SignUpRenter() {
                                     )}
                                 </div>
                             </div>
-                            {/*  {errors.password &&
-                                <div class=" text-red-600 mt-1">
-                                    {errors.password}
-                                </div>
-                            }   */}
                         </div>
                     </div>
                     <div className="row">
@@ -331,6 +290,7 @@ function SignUpRenter() {
                             <div className="cardImg">
                                 <img
                                     id="user-img"
+                                    ref={userImgRef}
                                     src="../image/user.png"
                                     alt=""
                                 />
@@ -346,9 +306,8 @@ function SignUpRenter() {
                                 />
                             </div>
                         </div>
-
-                        <div className=" form-group select-container col">
-                            <div className="form-group col ">
+                        <div className="form-group select-container col">
+                            <div className="form-group col">
                                 <div className="d-flex">
                                     <label htmlFor="password">
                                         {translates.PhotoDrivinglicense}
@@ -410,6 +369,12 @@ function SignUpRenter() {
                                                 className="text-danger"
                                             />
                                         </div>
+                                        <img
+                                            id="driving-img"
+                                            ref={drivingImgRef}
+                                            src=""
+                                            alt="Driving License Preview"
+                                        />
                                         <input
                                             type="file"
                                             id={"imgDriving"}
@@ -422,7 +387,6 @@ function SignUpRenter() {
                             </div>
                         </div>
                     </div>
-
                     <div>
                         <div className="d-flex">
                             <label htmlFor="birthdate">
@@ -437,7 +401,6 @@ function SignUpRenter() {
                             className="form-control"
                         />
                     </div>
-
                     <hr />
                     <input
                         type="submit"

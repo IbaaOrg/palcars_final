@@ -1032,15 +1032,15 @@ const Bill = () => {
                                 <div className="d-flex flex-column align-items-center justif-content-center  gap-2">
                                     <MdOutlinePriceCheck size={100} />
                                     <label className="fs-5 fw-bold">
-                                        Price After Discount:{" "}
+                                        Price After Discount:
                                     </label>
                                     <span className="fs-5 fw-bold p-3">
-                                        {user.points > 0 &&
+                                        {
                                             Math.ceil(totalPrice) -
                                                 Math.ceil(
                                                     Math.ceil(totalPrice) *
                                                         discountVal
-                                                )}{" "}
+                                                )}
                                         ₪
                                     </span>
                                 </div>
@@ -1240,7 +1240,7 @@ const Bill = () => {
                                     </div>
                                 </div>
                                 {selectedMethos === "cash" ? (
-                                    <div>cash</div>
+                                    <div>You have two days to come to our office and pay your retainer fee  </div>
                                 ) : (
                                     <></>
                                 )}

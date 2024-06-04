@@ -40,38 +40,36 @@ class UserController extends Controller
         return $this->success(new UserInfoResource($request->user()));
     }
     public function register(Request $request){
-      
-
+    
         $validator = Validator::make($request->all(), [
-            'name' => 'required|min:3|regex:/^[\pL\s\-]+$/u',
             'email' => 'required|email:rfc,dns|unique:users',
+            'name' => 'required|min:3|regex:/^[\pL\s\-]+$/u',
             'phone' => 'required|numeric|regex:/^05[0-9]{8}$/',
             'password' => 'required|string|min:8|regex:/[A-Z]/|regex:/[a-z]/|regex:/[0-9]/|regex:/[@$!%*?&-_]/',
             'photo_user' => 'nullable|image|mimes:jpeg,png,jpg,gif',
-            'valid'=>$request->role === 'Renter' ? 'required|in:1' : 'nullable',
-            'expireddate' => $request->role === 'Renter' ? 'required|date' : 'nullable' ,
+            'valid' => $request->role === 'Renter' ? 'required|in:1' : 'nullable',
+            'expireddate' => $request->role === 'Renter' ? 'required|date' : 'nullable',
             'photo_drivinglicense' => $request->role === 'Renter'?'required|image|mimes:jpeg,png,jpg,gif':'nullable|image|mimes:jpeg,png,jpg,gif',
-            'birthdate' => $request->role === 'Renter' ? 'required|date|before_or_equal:' . Carbon::now()->subYears(18)->format('Y-m-d') : 'nullable' ,
+            'birthdate' => $request->role === 'Renter' ? 'required|date|before_or_equal:' . Carbon::now()->subYears(18)->format('Y-m-d') : 'nullable',
             'description' => 'nullable',
-            'active_points'=>$request->role === 'Company' ? 'required|boolean':'nullable',
+            'active_points' => $request->role === 'Company' ? 'required|boolean' : 'nullable',
             'role' => 'required|in:Admin,Renter,Company',
         ], [
-            'name.required'=>__('Messages.name required'),
-            'name.min'=>__('Messages.name.min'),
-            'name.regex'=>'your name can only contain letters',
-            'password.regex'=>'The password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.',
-            'phone.regex'=>'The phone number must contain 10 digits start with (05)',
-            'valid.required'=>'Please confirm that you have a valid driving license.',
+            'name.required' => 'name is required',
+            'name.min' => 'name must be greater than 3 letters',
+            'name.regex' => 'your name can only contain letters',
+            'phone.regex' => 'The phone number must contain 10 digits start with (05)',
+            'password.regex' => 'The password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.',
+            'valid.required' => 'Please confirm that you have a valid driving license.',
             'birthdate.before_or_equal' => 'You must be 18 years old or older to register.',
             'active_points.required' => 'Active points must be specified for a company.',
-
         ]);
     
         if ($validator->fails()) {
             $msg = $validator->errors()->first();
             return $this->fail($msg, '400');
         }
-       
+    
         // Process photo_user
         if ($request->hasFile('photo_user')) {
             $file_user = $request->file('photo_user');
@@ -92,9 +90,7 @@ class UserController extends Controller
             // Set default photo_user if no image is uploaded
             $photo_drivinglicense = null;
         }
-       
-    
-    
+
         // Create new user
         $user = User::create([
             'name' => $request->name,
@@ -102,26 +98,19 @@ class UserController extends Controller
             'password' => $request->password,
             'phone' => $request->phone,
             'photo_user' => $photo_user,
-            'valid'=>$request->valid,
-            'expireddate'=>$request->expireddate,
+            'valid' => $request->valid,
+            'expireddate' => $request->expireddate,
             'photo_drivinglicense' => $photo_drivinglicense,
             'birthdate' => $request->birthdate,
             'description' => $request->description,
-            'active_points' =>  $request->active_points,
+            'active_points' =>  $request->role === 'Company' ? $request->active_points : 0,
             'role' => $request->role,
         ]);
-
-        $token=$user->createToken("TokenUser")->plainTextToken;
-        $user->token=$token; 
-
-      /* $jwtToken = JWT::encode(['id' => $user], 'your_secret_key', 'HS256');
-
-    // Update user with JWT token
-    $user->token=$jwtToken; */
-   /*  $user->update(['token' => $jwtToken]); */
-      
+    
+        $token = $user->createToken("TokenUser")->plainTextToken;
+        $user->token = $token;
+    
         return $this->success(new UserResource($user));
-
     }
   
     public function login(Request $request){

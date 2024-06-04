@@ -165,8 +165,8 @@ return $this->fail("these location doesn't have any car",404);
             'seats'=>'required|integer|min:1|max:10',
             'doors'=>'required|string|in:2,3,4',
             'bags'=>'nullable|integer|min:1|max:8', 
-            'fuel_type'=>'required|string|in:gas,diesel,electricity',
             'steering'=>'required|string|in:Automatic,Manual',
+            'fuel_type'=>'required|string|in:gas,diesel,electricity',
             'color_id'=>'required|exists:colors,id'        
         ]);
         if ($request->fuel_type === 'electricity') {
