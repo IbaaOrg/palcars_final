@@ -64,7 +64,6 @@ return [
     'SearchTitle'=>'Search about title',
     'AddDiscount'=>'Add Discount',
     'Title'=>'Title',
-    'ExpiredDate'=>'Expired Date',
     'Value'=>'Value',
     'Type'=>'Type',
     'Car'=>'Car',
@@ -341,5 +340,10 @@ return [
     depends on their points?',
     'yes'=>'Yes',
     'no'=>'No',
+    'ViewAllCars'=>'View All Cars',
+    'NoComments'=>'No Comments on this car',
+    'pleaseLogin'=>'please login or register account to write Comment',
+    'RentedVehicles'=>'Rented Vehicles',
+    'maintainedvehicles'=>'Maintained Vehicles',
 ];
 ?>

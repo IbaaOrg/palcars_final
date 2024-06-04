@@ -40,7 +40,7 @@ class LocaleController extends Controller
             'Filter', 'ID', 'CarNumber', 'Make', 'Model', 'Catrgory', 'Description', 'Year','moredetials',
             'Seats', 'Doors', 'Bags', 'FuelType', 'FuelFull', 'Operation', 'View', 'Update','Code','PhoneNumber','enteraddress','donelocation','Information','Reviews','EditProfile','BookingCompany','MyBooking',
             'Delete', 'Chats', 'UserName', 'Account', 'Email', 'Phone', 'Birthdate','JobTitle','UpdateEmployeeInfo','Emailaddress','Enteremail','renterslist','pickupdropoff','pickup','MyProfile','In','booking','TotalPrice','notBook','carsBooking',
-            'EditProfile', 'Information', 'Booking', 'Messages', 'Faviorites', 'pickup','employeelist','belowlist','AddEmployee','AddNewEmployee','Points','Expireddate','TotalProfit','Location','City','UpdateLocation','locationsuccesed','ChooseType',
+            'EditProfile', 'Information', 'Booking', 'Messages', 'Faviorites', 'pickup','employeelist','belowlist','AddEmployee','AddNewEmployee','Points','TotalProfit','Location','City','UpdateLocation','locationsuccesed','ChooseType',
             'dropoff', 'location', 'date', 'time', 'FullName', 'Password', 'PhotoUser','EditWorkingHours','Address','StartDate','enterjobtitle','rentersbelow','Bookings','notrenters','Booking','From','To','Method','AddLocation','Cityoflocation','savechange',
             'Birthdate', 'SignUp', 'LogOut', 'SignInWithGoogle', 'Enteryouremail', 'Enteryourpassword','starthour','endhour','InformationUpdated','AllBookings','RentalCount','RenterBillsList','expensesfrom','locationsbelow','LocationType','DifferentLocation',
             'Company','Renter','choose','Enteryourname','Phone','Enteryourphone','PhotoUser','PhotoDrivinglicense','Enteryourbirthdate','description'=>'description','enter'=>'enter','Pickupdate','Dropoffdate','locationslist','enterlocation','ChooseCity'
@@ -49,7 +49,7 @@ class LocaleController extends Controller
             ,'Day','Hour','Second','Minute','Save','save','map','descmap','reset','Make','entermake','model','entermodel','type','SUV',  'Sedan','Convertible','Crossover','Minivan','Pickuptrucks','StationWagon','Hatchback','Gas','Deisel','Electrecity','selectgear','selectfueltype','choosecolor','chooseday','Save'
             ,    'Fueltype','Gear','Manual','Automatic','Capacity','person','priceperday','Min','Max','Rent','listed','Status','Category','Cancel','AddCar','ManufacturingCompany','ColorCar','fourimage','imageandprice','image','price','Images','notworkinghours', 'AddWorkingHours' ,'Prices','imageselected','SelectCompany','selectcategory'
 ,'forgetPassword','account','signnow','valid','photolicense','givepoint','yes','no','RentedVehicles','maintainedvehicles','WorkingHours','Employees','Renters','Chats','Expenses','Locations','Discounts','Notes','addandmanage','Welcome'  ,'Bookings' ,'todaydate','entercarnumber','entercarmodel'
-,
+,'ViewAllCars','NoComments','pleaseLogin',
    ];
 
         // Fetch data from language files

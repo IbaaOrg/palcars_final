@@ -128,7 +128,7 @@ const CategoriesCar = () => {
             </Swiper>
             <div className="d-flex justify-content-center align-items-center">
                 <Link className="btn btn-primary rounded mt-5" to="/cars">
-                    View All Cars
+                    {translates.ViewAllCars}
                 </Link>
             </div>
         </div>

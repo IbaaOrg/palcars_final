@@ -293,7 +293,7 @@ className={`p-3 mb-2 d-flex align-items-center gap-3 rounded text-right ${
                         <input
                             type="text"
                             className="message-input"
-                            placeholder="Write a Message..."
+                            placeholder={translates.WriteMessage}
                             value={message}
                             onChange={(e) => {
                                 setMessage(e.target.value);
@@ -303,7 +303,7 @@ className={`p-3 mb-2 d-flex align-items-center gap-3 rounded text-right ${
                             className="send-button"
                             onClick={handleSendMessage}
                         >
-                            Send
+                            {translates.Send}
                         </button>
                     </div>
                 </div>
