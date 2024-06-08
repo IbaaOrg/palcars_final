@@ -72,7 +72,10 @@ function CardBasic({ title }) {
                     .includes(inputPickupValue.toLowerCase()) ||
                 location.city.city
                     .toLowerCase()
-                    .includes(inputPickupValue.toLowerCase())
+                    .includes(inputPickupValue.toLowerCase())||
+                    location.city.city_ar
+                    .toLowerCase()
+                    .includes(inputPickupValue) 
         );
         setFilterePickupLocations(pickuplocations);
     }, [inputPickupValue, arraypickup]);
@@ -84,7 +87,10 @@ function CardBasic({ title }) {
                     .includes(inputDropoffValue.toLowerCase()) ||
                 location.city.city
                     .toLowerCase()
-                    .includes(inputDropoffValue.toLowerCase())
+                    .includes(inputDropoffValue.toLowerCase())||
+                    location.city.city_ar
+                    .toLowerCase()
+                    .includes(inputDropoffValue)
         );
         setFilteredDropoffLocations(dropofflocations);
     }, [inputDropoffValue, arraydropoff]);
@@ -96,7 +102,10 @@ function CardBasic({ title }) {
                     .includes(inputPickupDropoffValue.toLowerCase()) ||
                 location.city.city
                     .toLowerCase()
-                    .includes(inputPickupDropoffValue.toLowerCase())
+                    .includes(inputPickupDropoffValue.toLowerCase())||
+                    location.city.city_ar
+                    .toLowerCase()
+                    .includes(inputPickupDropoffValue)
         );
         setFilteredPickupDropoffLocations(pickupdropofflocations);
     }, [inputPickupDropoffValue, arraypickupdropoff]);
