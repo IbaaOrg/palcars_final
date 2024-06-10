@@ -12,6 +12,18 @@ html {
 .fontSizeNav{
     font-size: var(--font-size-minor) !important;
 }
+/* Standard syntax */
+input {
+    appearance: none;
+  }
+  
+  /* Vendor prefixes */
+  input {
+    -webkit-appearance: none; /* For WebKit-based browsers (Chrome, Safari) */
+    -moz-appearance: none; /* For Mozilla-based browsers (Firefox) */
+    appearance: none; /* Standard */
+  }
+  
 .rtl {
     direction: rtl;
 }
@@ -528,7 +540,7 @@ border-radius: 8px;
     justify-content: center;
     align-items: start;
     padding: 150px 0;
-};
+}
 
 .profilebuttons {
     background-color: #dadada ;
