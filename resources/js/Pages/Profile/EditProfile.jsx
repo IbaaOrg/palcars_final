@@ -144,7 +144,7 @@ toast.success('Your Changes are save', {
             />
           </div>
         </div>}
-        <div class="mb-3">
+        {user.role=== "Renter" &&<div class="mb-3">
           <label for="exampleFormControlInput2" className="form-label d-flex gap-2 justify-content-center align-items-center">
             {translates.ExpiredDate} : {user.expireddate}  <CiEdit size={20} onClick={showEditexpireddate} className="cursor-pointer"/>
 
@@ -157,7 +157,7 @@ toast.success('Your Changes are save', {
             name="expireddate"
             onChange={set}
           />}
-        </div>
+        </div>}
         <div class="mb-3">
           <label for="exampleFormControlInput2" className="form-label d-flex gap-2 justify-content-center align-items-center">
             {translates.FullName} : {user.name}  <CiEdit size={20} onClick={showEditName} className="cursor-pointer"/>

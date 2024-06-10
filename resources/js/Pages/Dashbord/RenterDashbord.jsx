@@ -113,7 +113,7 @@ const RenterDashbord = ({ id }) => {
 
             </label>
                                         </div>
-                                        <p className="mt-4 fw-bold">{translates.Expireddate} : {item.expireddate}</p>
+                                        <p className="mt-4 fw-bold">{translates.ExpiredDate} : {item.expireddate}</p>
 
                                     </div>
                                     <div className=" d-flex  align-items-start">

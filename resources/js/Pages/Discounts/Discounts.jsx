@@ -67,7 +67,7 @@ function Discounts() {
                                 </div>
                             </div>
                             <div className="alert alert-warning" role="alert">
-                                {translates.Expireddate} : {d.expired_date}
+                                {translates.ExpiredDate} : {d.expired_date}
                             </div>
                             <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger fs-5">
                                 {d.value}

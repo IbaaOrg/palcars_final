@@ -40,25 +40,24 @@ function SignUp() {
         active_points: null,
     });
 
-    const validate = async () => {
-        let userSchema = object({
-            email: string().required().email(),
-            name: string().required().min(3).max(20),
-            password: string().required().min(8),
-            phone: string().min(10).max(10).required(),
-            description: string(),
-        });
-        try {
-            await userSchema.validate(form.current);
-            setSeccsses("User is valid!");
-            setErrors(null);
-            return true;
-        } catch (e) {
-            setErrors(e.errors);
-            setSeccsses(null);
-            return false;
-        }
-    };
+    // const validate = async () => {
+    //     let userSchema = object({
+    //         email: string().required().email(),
+    //         name: string().required().min(3).max(20),
+    //         password: string().required().min(8),
+    //         phone: string().min(10).max(10).required(),
+    //         description: string(),
+    //     });
+    //     try {
+    //         await userSchema.validate(form.current);
+    //         setErrors(null);
+    //         return true;
+    //     } catch (e) {
+    //         setErrors(e.errors);
+    //         setSeccsses(null);
+    //         return false;
+    //     }
+    // };
 
     const show = (e) => {
         file.current = e.target.files[0];
@@ -84,7 +83,7 @@ function SignUp() {
 
     const reg = async (e) => {
         e.preventDefault();
-        const validatedata = await validate();
+        // const validatedata = await validate();
         setError(null);
 
         const formData = new FormData();
@@ -111,9 +110,12 @@ function SignUp() {
                     setUserToken(user.token);
                     navigate("/profile");
                 }
+                setSeccsses('User is Valid');
+                setError(null);
             },
             (msg) => {
                 setError(msg);
+                setSeccsses(null);
             }
         );
 
@@ -187,18 +189,7 @@ function SignUp() {
                         {seccsses}
                     </div>
                 )}
-
-                {error && !errors && (
-                    <div className="alert alert-danger" role="alert">
-                        {errors}
-                    </div>
-                )}
-                {!error && errors && (
-                    <div className="alert alert-danger" role="alert">
-                        {error}
-                    </div>
-                )}
-                {error && errors && (
+                {error && (
                     <div className="alert alert-danger" role="alert">
                         {error}
                     </div>
