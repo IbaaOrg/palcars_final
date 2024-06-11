@@ -19,7 +19,6 @@ import "../../../css/FilterStyle/Filter.css";
 import { FaGasPump } from "react-icons/fa";
 import { BsPeopleFill } from "react-icons/bs";
 import { TranslateContext } from "../../Context/Translate";
-
 function Cars() {
     const { translates } = useContext(TranslateContext);
     const { favoriteList, setFavoriteList } = useContext(FavoriteContext);

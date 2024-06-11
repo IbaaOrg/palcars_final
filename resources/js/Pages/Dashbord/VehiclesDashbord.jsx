@@ -10,7 +10,8 @@ import RecordButton from './../../Componants/UI/RecordButton';
 import { GrFormEdit } from "react-icons/gr";
 import { ToastContainer, Bounce, Zoom, toast } from "react-toastify";
 import { TranslateContext } from '../../Context/Translate';
-
+//import { useMediaQuery } from 'react-responsive';
+import MediaQuery from 'react-responsive';
 
 function VehiclesDashbord() {
 
@@ -22,7 +23,14 @@ function VehiclesDashbord() {
     const [loading, setLoading] = useState(false);
     const [statuses, setStatuses] = useState([])
     const [statusInput, setStatusInput] = useState('');
-    const [editStatusId, setEditStatusId] = useState(null)
+    const [editStatusId, setEditStatusId] = useState(null);
+    // const isDesktopOrLaptop = useMediaQuery({
+    //     query: '(min-width: 1224px)'
+    // });
+    // const isTabletOrMobile = useMediaQuery({
+    //     query: '(max-width: 1224px)'
+    // });
+
     const deleteVehical = async (e) => {
         e.preventDefault();
         const token = localStorage.getItem("token")
@@ -205,8 +213,13 @@ function VehiclesDashbord() {
                     <div className="row">
                         <div className="col">
                             <h1 className='fs-1'>{translates.VehiclesList}</h1>
-                            <p className=''>{translates.listed}</p>
-                        </div>
+                            <p className=''>{translates.VehiclesDetails}</p>
+ <MediaQuery minWidth={1224}>
+                <p>أنت تشاهد على جهاز سطح المكتب أو اللابتوب</p>
+            </MediaQuery>
+  <MediaQuery maxWidth={1224}>
+                <p>أنت تشاهد على جهاز لوحي أو الهاتف المحمول</p>
+            </MediaQuery>                        </div>
                         <div className="col ">
                             <form className="d-flex" role="search">
                                 <input
