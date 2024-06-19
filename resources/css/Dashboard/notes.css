@@ -1,0 +1,25 @@
+
+@media screen and (min-device-width: 360px) and (max-device-width: 766px)
+ {
+   
+    #myDiv5 {
+        margin-top:79%; /* أو أي قيمة ترغب بها للهامش العلوي */
+        left: 3ch;
+        font-size: xx-small;
+        font-size: 0.4rem;
+        width: 100%;
+    }  
+h2{   font-size: 0.4rem;}
+p{   font-size: 0.9rem;}
+}
+
+@media screen and (min-device-width: 767px) and (max-device-width: 900px)
+{
+  #myDiv5 {
+     margin-top:30%; /* أو أي قيمة ترغب بها للهامش العلوي */
+     left: 3ch;
+     font-size: xx-small;
+     font-size: 0.8rem;
+ }   
+  
+}

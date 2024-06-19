@@ -1,0 +1,9 @@
+@media screen and (min-device-width: 360px) and (max-device-width: 915px)
+ {
+    #renterDiv {
+        margin-top:79%; /* أو أي قيمة ترغب بها للهامش العلوي */
+        left: 3ch;
+        font-size: xx-small;
+        font-size: 0.4rem;
+    } }
+    

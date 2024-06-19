@@ -1,0 +1,35 @@
+
+/* استعلام الوسائط لتغيير حجم الأيقونات على الشاشات الصغيرة */
+@media screen and (min-device-width: 360px) and (max-device-width: 915px)
+ {
+    .caricon {
+        font-size: 2rem; /* حجم الأيقونة للشاشات الصغيرة */
+    }
+    #myDiv2 {
+        margin-top:79%; /* أو أي قيمة ترغب بها للهامش العلوي */
+        left: 3ch;
+        font-size: xx-small;
+        font-size: 1.0rem;
+    }  
+    #paragraph{
+        font-size: 0.4rem;
+
+    }
+    .p{
+        font-size: 0.4rem;  
+    }
+}
+@media screen and (min-device-width: 767px) and (max-device-width: 900px)
+ {
+#myDiv2 {
+    margin-top:29%; /* أو أي قيمة ترغب بها للهامش العلوي */
+    left: 3ch;
+    font-size: xx-small;
+    font-size: 1.0rem;
+}  
+.sidbar{
+font-size: medium;
+
+}
+
+}

@@ -6,6 +6,7 @@ import Time from "../../Componants/UI/DateToday";
 import Date from "../../Componants/UI/DateToday";
 import DateToday from "./../../Componants/UI/DateToday";
 import { TranslateContext, useTranslateContext } from "../../Context/Translate";
+import '../../../css/DialogStyle/Dashboard.css'
 function HomeDashbord() {
     const { language } = useTranslateContext;
     const {translates}=useContext(TranslateContext);
@@ -115,7 +116,7 @@ function HomeDashbord() {
         getEmployees();
     }, []);
     return (
-        <div>
+        <div  id="myDiv2">
         <div className={`row d-flex flex-wrap justify-content-between align-items-center p-1 m-2 mt-3 bg-white rounded ${language === "ar" ? "rtlimg " : "ltr"}`}>
                 <div className=" info fs-4 ">
                     <p className={`fw-bold fs-4 ${language === "ar"?"rtl":"ltr"}`}>

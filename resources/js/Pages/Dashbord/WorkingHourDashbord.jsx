@@ -5,7 +5,7 @@ import { Bounce, Zoom } from "react-toastify";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { TranslateContext } from "../../Context/Translate";
-
+import '../../../css/Dashboard/workingHour.css'
 const WorkingHourDashbord = () => {
     const {translates}=useContext(TranslateContext)
     const [workingHour, setWorkingHour] = useState({

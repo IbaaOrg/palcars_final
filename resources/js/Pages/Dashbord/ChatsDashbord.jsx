@@ -185,8 +185,8 @@ const handleSendMessage = () => {
 
 };
   return (
-    <div className='row ' >
-      <div className='col-4 message_list_list' style={{ maxHeight: '800px', overflowY: 'scroll', overflowX: 'hidden' }}>
+    <div className='row ' id='myDiv6'>
+      <div className='col-4 message_list_list' id='listDiv' style={{ maxHeight: '800px', overflowY: 'scroll', overflowX: 'hidden' }}>
       <div className="m-2">
            <form class="d-flex" role="search">
            <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search" value={searchTerm} onChange={handleChange} />
@@ -217,21 +217,6 @@ const handleSendMessage = () => {
           
             
           </div>
-          {/* {Array.isArray(allChat) && allChat.map((message, index) => (
-  <p key={index} className="p-3 mb-2 bg-success text-white rounded text-right !important">
-    {message.message}
-    <small className="text-dark">{" "+message.timeago}</small>
-  </p>
-))}
-          {Array.isArray(allChatSender) && allChatSender.map((message, index) => (
- <p key={index} className="p-3 mb-2 bg-primary text-white rounded text-left !important">
- {message.message}
- <small className="text-dark">{" "+message.timeago}</small>
-
-</p>
-
-))} */}
-
 {Array.isArray(allMessages) && allMessages.sort((a, b) => new Date(a.created_at) - new Date(b.created_at)).map((message, index) => (
     <p key={index} className={`p-3 mb-2 rounded ${message.sender.id === reseverid ? 'bg-primary text-white text-right' : 'bg-success text-white text-left'}`}>
         {message.message}

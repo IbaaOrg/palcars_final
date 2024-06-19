@@ -1,0 +1,10 @@
+@media (max-width: 900px) {
+.navbar {
+    position: fixed;
+    top: 55px;
+}}
+@media (max-width: 667px) {
+    .navbar {
+     
+        top: 65px;
+    }}

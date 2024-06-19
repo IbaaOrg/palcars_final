@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { Bounce, Zoom } from "react-toastify";
 import { TranslateContext } from "../../Context/Translate";
+import '../../../css/Dashboard/workingHour.css'
 const AllWorkingHours = () => {
     const {translates}=useContext(TranslateContext)
     const [data, setData] = useState([]);
@@ -78,8 +79,8 @@ const AllWorkingHours = () => {
         }${minutes} ${suffix}`;
     };
     return (
-        <>
-            <div className="w-100 d-flex justify-content-center align-items-center pt-5">
+        <><div id="myDiv">
+            <div  className="w-100 d-flex justify-content-center align-items-center pt-5">
                 <ToastContainer />
                 <div
                     className="btn btn-primary m-auto"
@@ -120,7 +121,7 @@ const AllWorkingHours = () => {
                     </p>
                     <Ri24HoursFill size={190} className="text-black" />
                 </div>
-            )}
+            )}</div>
         </>
     );
 };

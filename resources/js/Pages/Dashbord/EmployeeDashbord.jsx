@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import Loading from "../../Componants/UI/Loading";
 import { TranslateContext } from "../../Context/Translate";
+import '../../../css/Dashboard/employee.css'
 function EmployeeDashbord() {
     const {translates}=useContext(TranslateContext)
     const navigate = useNavigate();
@@ -46,16 +47,16 @@ function EmployeeDashbord() {
     }, [deleted]);
     return (
         <div>
-            <div className="container text-center  p-10">
+            <div id="myDiv4" className="container text-center p-10">
                 <div className="row">
                     <div className="col">
-                        <h1 className="fs-1">{translates.employeelist}</h1>
+                        <h1 className="fs-4">{translates.employeelist}</h1>
                         <p className="">{translates.belowlist}</p>
                     </div>
                     <div className="col ">
                         <form class="d-flex" role="search">
                             <input
-                                class="form-control me-2"
+                                class="form-control "
                                 type="search"
                                 placeholder={translates.Search} 
                                 aria-label="Search"
@@ -72,7 +73,7 @@ function EmployeeDashbord() {
                         
                         <button
                             type="button"
-                            class="btn btn-primary Addvehicle"
+                            class="btn btn-primary fs-6 Addvehicle"
                         >
                             {" "}
                             <NavLink to="/dashbord/addEmployee">

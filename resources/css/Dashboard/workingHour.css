@@ -1,0 +1,53 @@
+
+/* القواعد الخاصة بشاشة الموبايل */
+@media screen and (min-device-width: 360px) and (max-device-width: 915px)
+{
+
+    #myDiv {
+        margin-top:43%; /* أو أي قيمة ترغب بها للهامش العلوي */
+        left: 3ch;
+        font-size: xx-small;
+        font-size: 0.7rem;
+    }  
+    /* تعديلات على حجم العناصر */
+    .form-check-label,
+    .form-control,
+    .btn {
+        font-size: 14px; /* تصغير حجم الخط */
+        padding: 3px 8px; /* تقليل التباعد */
+    }
+}
+
+
+@media screen and (min-device-width: 767px) and (max-device-width: 900px)
+{
+    /* تعديلات على حجم العناصر */
+     .form-check-label,
+     .form-control,
+     .btn {
+         font-size: 18px; /* تصغير حجم الخط */
+         padding: 8px 12px; /* تقليل التباعد */
+     } 
+
+  #myDiv {
+     margin-top:16%; /* أو أي قيمة ترغب بها للهامش العلوي */
+     left: 3ch;
+     font-size: xx-small;
+     font-size: 0.8rem;
+ }   
+  
+}
+@media screen and (min-device-width: 912px) and (max-device-width: 1024px)
+{  #myDiv {
+    margin-top:6%; /* أو أي قيمة ترغب بها للهامش العلوي */
+    left: 3ch;
+    font-size: xx-small;
+    font-size: 0.8rem;
+} 
+    /* تعديلات على حجم العناصر */
+    .form-check-label,
+    .form-control,
+    .btn {
+        font-size: 18px; /* تصغير حجم الخط */
+        padding: 8px 12px; /* تقليل التباعد */
+    } }

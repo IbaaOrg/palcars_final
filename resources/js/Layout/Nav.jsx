@@ -1,5 +1,6 @@
 import React from "react";
 import "bootstrap/js/dist/dropdown";
+import '../../css/DialogStyle/Nav.css'
 function Nav({ Toggle }) {
     return (
         <nav className="navbar navbar-expand-sm navbar-white bg-white">

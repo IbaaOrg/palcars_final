@@ -6,6 +6,7 @@ import ImageModel from "../../Layout/Dialog/ImageModel";
 import '../../../css/DialogStyle/Model.css'
 import { Outlet } from "react-router-dom";
 import { TranslateContext } from "../../Context/Translate";
+import '../../../css/Dashboard/renterDiv.css';
 const RenterDashbord = ({ id }) => {
     const {translates}=useContext(TranslateContext)
     const [renters, setRenters] = useState([]);
@@ -35,7 +36,7 @@ const RenterDashbord = ({ id }) => {
     };
 
     return (
-        <div>
+        <div id="renterDiv">
             <div className="container text-center  p-10">
                 <div className="row">
                     <div className="col ">

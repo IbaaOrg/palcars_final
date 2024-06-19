@@ -1,0 +1,206 @@
+@media(max-width:667px){
+    .header-container { 
+    font-size: 1.5rem;
+    size: 1px;
+    margin-top:11%; 
+    position: fixed;
+}.header-container h2 {
+    font-size: xx-small;
+}
+}
+/* القواعد العامة */
+.list-group-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #f8f9fa;
+    width: 250px;
+    border: 1px solid #ddd;
+    padding-top: 10px;
+    overflow-x: hidden; /* لمنع تمدد العناصر خارج النطاق الأفقي */
+    overflow-y: auto; /* لتمكين التمرير العمودي إذا كانت العناصر تتجاوز ارتفاع الشاشة */
+    max-height: 80vh;
+    width: 90vw; /* العرض النسبي للشاشة */
+    height: 90vh; /* الارتفاع النسبي للشاشة */
+}
+
+.list-group-item {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px; /* حجم الخط للشاشات الكبيرة */
+}
+
+@media (max-width: 768px) {
+    .list-group-item {
+        font-size: 14px; /* حجم الخط للهواتف المحمولة */
+        padding: 8px; /* التباعد بين الخيارات للهواتف المحمولة */
+    }
+}
+
+.hamburger {
+    display: none; /* إخفاء أيقونة الهامبرغر في الشاشات الكبيرة */
+    font-size: 30px;
+    cursor: pointer;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    text-align: center;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+/* القواعد الخاصة بشاشة الموبايل */
+@media (max-width: 700px) {
+    .sidebarMain h2 {
+        font-size: 1.2rem; /* تصغير حجم العنوان */
+        padding: 0.5rem 0; /* تقليل المسافة العمودية */
+        margin-top: 0; /* إزالة التباعد العلوي */
+        margin-bottom: 0.5px; /* تقليل التباعد السفلي */
+    }
+    
+    
+        .hamburger {
+            font-size: 1.0rem;
+    
+        }
+    
+    
+    .list-group-container {
+        display: none; /* إخفاء القائمة على شاشة الموبايل */
+    
+        overflow-x: hidden; /* لمنع تمدد العناصر خارج النطاق الأفقي */
+        overflow-y: auto; /* لتمكين التمرير العمودي إذا كانت العناصر تتجاوز ارتفاع الشاشة */
+        max-height: 80vh;
+        width: 90vw; /* العرض النسبي للشاشة */
+        height: 90vh; /* الارتفاع النسبي للشاشة */}
+
+    .hamburger {
+        display: block; /* عرض أيقونة الهامبرغر في الشاشات الصغيرة */
+    }
+
+    .list-group-container.show {
+        display: flex;
+        position: absolute;
+        top: 60px;
+        left: 10px;
+        background: white;
+        border: 1px solid #ddd;
+        z-index: 1000;
+        width: calc(100% - 20px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+    }
+    .list-group-item {
+        font-size: 14px; /* حجم الخط لتقليل حجم العناصر */
+    }
+    
+    .sidebarMain h2 {
+        font-size: 1.27rem; /* تقليل حجم الخط للعنوان */
+        padding: 0.5rem 0; /* تقليل المسافة العمودية */
+    }
+
+    .hamburger {
+        font-size: 1.5rem; /* تقليل حجم الخط لأيقونة الهامبرغر */
+    }
+}
+.header-container {
+    display: flex;  /* تفعيل Flexbox */
+    align-items: center;  /* محاذاة العناصر عموديًا في المنتصف */
+    justify-content: space-between;  /* وضع العناصر في الطرفين الأيمن والأيسر */
+    padding: 1px;  /* إضافة بعض الفراغ حول الحاوي */
+    background-color: #f8f9fa;  /* لون الخلفية (اختياري) */
+    width: 249px;
+}
+
+.hamburger {
+    cursor: pointer;  /* إظهار مؤشر اليد عند تمرير الفأرة */
+    font-size: 2rem;  /* يمكنك تعديل حجم الأيقونة */
+    margin-right: 10px;  /* إضافة مسافة صغيرة على اليمين */
+}
+
+.header-container h2 {
+    font-size: 1.2rem;  /* حجم الخط للعناوين */
+    margin: 0;  /* إزالة أي هوامش خارجية للعناوين */
+    text-align: left;  /* محاذاة النص إلى اليسار */
+    flex-grow: 0;  /* السماح للعناصر بالنمو لشغل المساحة المتبقية */
+}
+
+/* لعناصر الهامبرغر والعنوان */
+@media (max-width: 900px) {
+    .header-container {
+        position: fixed;
+        top: 55px; /* أو أي قيمة مناسبة لنزول الهامبرغر والعنوان إلى أسفل */
+        left: 0;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #ffffff;
+        z-index: 1000;
+        padding: 10px;
+        /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+
+    }
+ 
+    .hamburger {
+        cursor: pointer;
+        font-size: 1.5rem;
+        margin-left: 10px;
+        z-index: 3000;
+        position: fixed;
+    }
+
+    .header-container h2 {
+        font-size: 1.2rem;
+        margin: 0;
+        text-align: left;
+        flex-grow: 1;
+        margin-right: 10px;
+    }
+
+    .list-group-container.show {
+        display: block;
+        position: absolute;
+        top: 160px; /* لضمان ظهور القائمة تحت العنوان */
+        left: 0;
+        width: 100%;
+        background-color: white;
+        z-index: 999;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 10px;
+    }
+
+    .list-group-container {
+        display: none;
+    }
+
+    .sidebar {
+        padding-top: 200px; /* إتاحة مساحة أعلى المحتوى لتجنب التداخل */
+    }
+    .list-group-item {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+        font-size: 16px;
+    }
+
+    .header-container h2 {
+        font-size: 1rem;
+        padding: 0.5rem;
+    }
+
+    .hamburger {
+        font-size: 1.25rem;
+    }
+
+    .list-group-item {
+        font-size: 14px;
+        padding: 8px;
+    }
+}
+
+/* تعديل العناصر المتغيرة */
+.main-content {
+    margin-top: 200px; /* لضمان عدم تغطية العناصر المتغيرة بالهامبرغر والعنوان */
+    width: 100%; /* أخذ كامل عرض الشاشة */
+    padding: 10px; /* بعض الفراغات الداخلية */
+}

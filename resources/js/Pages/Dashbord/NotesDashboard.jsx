@@ -3,7 +3,7 @@ import { FaUsers } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import { TranslateContext } from '../../Context/Translate';
-
+import '../../../css/Dashboard/notes.css';
 const NotesDashboard = () => {
   const {translates}=useContext(TranslateContext)
   const navigate=useNavigate();
@@ -14,7 +14,7 @@ const NotesDashboard = () => {
     navigate('/dashbord/NotesDashboard/allusers')
   }
   return (
-    <div className='  mainrenternote'>
+    <div className='  mainrenternote'id='myDiv5'>
 
     <div className='card px-5 py-3 notesmain'> 
       <form class="row g-3">
