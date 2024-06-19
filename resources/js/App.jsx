@@ -82,7 +82,7 @@ import EditLocation from "./Pages/Dashbord/EditLocation";
 import ViewDiscount from "./Pages/Dashbord/ViewDiscount";
 import EditDiscount from "./Pages/Dashbord/EditDiscount";
 import BookingsDashbord from "./Pages/Dashbord/BookingsDashbord";
-
+import PrivacyPolicy from "./Pages/Dashbord/privacyPolicy";
 //LocationDashbord
 const App = () => {
     const { language } = useTranslateContext();
@@ -306,6 +306,7 @@ const App = () => {
 
                 <Route path={"/notfound"} element={<NotFound />} />
                 <Route path={"/forgetpassword"} element={<ForgetPassword />} />
+                <Route path={"/privacyPolicy"} element={<PrivacyPolicy/>} />
             </Routes>
             {showHeaderFooter && <Footer />}
         </div>

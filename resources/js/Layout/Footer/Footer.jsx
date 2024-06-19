@@ -6,6 +6,7 @@ import { ImLinkedin } from "react-icons/im";
 import { FaFacebookSquare } from "react-icons/fa";
 import { GrInstagram } from "react-icons/gr";
 import x from "../../../../public/image/x.png";
+import { NavLink } from 'react-router-dom';
 
 function Footer() {
     const { translates } = useContext(TranslateContext);
@@ -77,8 +78,24 @@ function Footer() {
                 <div className="d-flex justify-content-around subdiv2">
                     <p>&copy; 2024 PALCARS. جميع الحقوق محفوظة.</p>
                     <div className="d-flex justify-content-around">
-                        <p>Privacy & Policy </p>
-                        <p>Terms & Condition</p>
+                        <NavLink
+                    to={"privacyPolicy"}
+                    className="main-btn privacy-btn list-group-item list-group-item-action d-flex align-items-center justify-content-center mx-5 my-3"
+                    
+                    // onClick={closeList}
+                >
+                    {/* <i className="bi bi-journal-medical fs-4 me-2"></i> */}
+                    <span className="fs-6">{translates.PrivacyPolicy}</span>
+                </NavLink>
+                <NavLink
+                    to={""}
+                    className="main-btn privacy-btn list-group-item list-group-item-action d-flex align-items-center justify-content-center my-3"
+                    
+                    // onClick={closeList}
+                >
+                    {/* <i className="bi bi-journal-medical fs-4 me-2"></i> */}
+                    <span className="fs-6">{translates.TermsCondition}</span>
+                </NavLink>
                     </div>
                 </div>
             </div>

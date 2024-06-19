@@ -1,0 +1,27 @@
+/* PrivacyPolicy.css */
+
+/* تنسيق خاص للنقاط المظللة */
+.privacy-list {
+    list-style: none; /* إزالة النمط الافتراضي للنقاط */
+    padding-left: 0; /* إزالة الحشو من اليسار */
+}
+
+.privacy-list-item {
+    position: relative; /* تمكين وضع النقطة بشكل مطلق */
+    padding-left: 25px; /* توفير مساحة للنقطة */
+    margin-bottom: 10px; /* مسافة بين العناصر */
+    border: none; /* إزالة الحدود */
+    background-color: transparent; /* إزالة الخلفية */
+    font-size: 1.1rem;
+}
+
+.privacy-list-item::before {
+    content: '•'; /* استخدام رمز النقطة */
+    font-size: 1.5rem; /* حجم النقطة */
+    color: black; /* لون النقطة */
+    position: absolute; /* وضع النقطة بشكل مطلق */
+    left: 0; /* تحديد مكان النقطة على اليسار */
+    top: 50%; /* تحديد مكان النقطة على مستوى العنصر */
+    transform: translateY(-50%); /* محاذاة النقطة عموديًا إلى الوسط */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* إضافة تأثير ظل */
+}
